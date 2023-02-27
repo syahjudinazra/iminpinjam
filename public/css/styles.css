@@ -1,0 +1,14 @@
+
+.navbar-nav .nav-link.active, .navbar-nav .show>.nav-link {
+    color: white !important;
+    background-color: #f6323f !important;
+    font-weight: bold !important;
+}
+
+.fa-box:before {
+    color: #d1d1d1 !important;
+}
+
+.fa-tachometer-alt:before {
+    color: #d1d1d1 !important;
+}
