@@ -26,6 +26,11 @@
     <!-- MDB -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.1.0/mdb.min.css" rel="stylesheet"/>
 
+    <!--Bootstrap 5 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <!--Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+
 
 
 </head>
@@ -35,9 +40,7 @@
         @yield('container')
     </div>
 
-    <!-- DataTables -->
-
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
@@ -53,11 +56,26 @@
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('sb2admin/js/sb-admin-2.min.js')}}"></script>
 
-    <!-- Page level plugins -->
-    <script src="{{ asset('sb2admin/vendor/chart.js/Chart.min.js')}}"></script>
+    <script>
+        function edit_partner(el) {
+        var link = $(el) //refer `a` tag which is clicked
+        var modal = $("#edit_partner") //your modal
+        var tanggal = link.data('tanggal')
+        var serialnumber = link.data('serialnumber')
+        var device = link.data('device')
+        var customer = link.data('customer')
+        var telp = link.data('telp')
+        var pengiriman = link.data('pengiriman')
+        var kelengkapanpengiriman = link.data('kelengkapanpengiriman')
+        modal.find('#full_name').val(tanggal);
+        modal.find('#code').val(serialnumber);
+        modal.find('#code').val(device);
+        modal.find('#code').val(customer);
+        modal.find('#code').val(telp);
+        modal.find('#code').val(pengiriman);
+        modal.find('#code').val(kelengkapanpengiriman);
+        }
+    </script>
 
-    <!-- Page level custom scripts -->
-    <script src="{{ asset('sb2admin/js/demo/chart-area-demo.js')}}"></script>
-    <script src="{{ asset('sb2admin/js/demo/chart-pie-demo.js')}}"></script>
 </body>
 </html>
