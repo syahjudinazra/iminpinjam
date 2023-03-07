@@ -38,7 +38,7 @@ class PinjamController extends Controller
     {
         $validatedData = $request->validate([
             'tanggal' => 'required|max:255',
-            'gambar' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'gambar' => 'image|mimes:jpeg,png,jpg|max:2048',
             'serialnumber' => 'required|max:255',
             'device' => 'required|max:255',
             'customer' => 'required|max:255',
@@ -63,9 +63,13 @@ class PinjamController extends Controller
      * @param  \App\Models\Pinjam  $pinjam
      * @return \Illuminate\Http\Response
      */
-    public function show(Pinjam $pinjam)
+    public function show($id)
     {
-        //
+    // Find the data by id
+    $pinjam = Pinjam::findOrFail($id);
+
+    // Return the view with the data
+    return view('pinjam.index', compact('pinjam'));
     }
 
     /**
@@ -74,12 +78,10 @@ class PinjamController extends Controller
      * @param  \App\Models\Pinjam  $pinjam
      * @return \Illuminate\Http\Response
      */
-    public function edit(Pinjam $pinjam)
+    public function edit(Pinjam $pinjam, $id)
     {
-        return view('pinjam.index', [
-            'pinjam' => $pinjam
-
-        ]);
+        $pinjam = Pinjam::find($id);
+        return response()->json($pinjam);
     }
 
     /**
@@ -89,22 +91,20 @@ class PinjamController extends Controller
      * @param  \App\Models\Pinjam  $pinjam
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Pinjam $pinjam)
+    public function update(Request $request, $id)
     {
-        $validatedData = $request->validate([
-            'tanggal' => 'required|max:255',
-            'serialnumber' => 'required|max:255',
-            'device' => 'required|max:255',
-            'customer' => 'required|max:255',
-            'telp' => 'required|max:255',
-            'pengirim' => 'required|max:255',
-            'kelengkapankirim' => 'required|max:255',
-        ]);
+        $pinjam = Pinjam::find($id);
+        $pinjam->tanggal = $request->input('tanggal');
+        $pinjam->gambar = $request->input('gambar');
+        $pinjam->serialnumber = $request->input('serialnumber');
+        $pinjam->device = $request->input('device');
+        $pinjam->customer = $request->input('customer');
+        $pinjam->telp = $request->input('telp');
+        $pinjam->pengirim = $request->input('pengirim');
+        $pinjam->kelengkapankirim = $request->input('kelengkapankirim');
 
-        Pinjam::where('id', $pinjam->id)
-                  ->update($validatedData);
-
-        return redirect('/pinjam')->with('success', 'Data telah diupdate');
+        $pinjam->save();
+        return redirect('pinjam')->with('success', 'Data telah diubah');
     }
 
     /**
@@ -113,8 +113,15 @@ class PinjamController extends Controller
      * @param  \App\Models\Pinjam  $pinjam
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Pinjam $pinjam)
+    public function destroy(Pinjam $pinjam, $id)
     {
-        //
+        // Find the data by id
+        $pinjam = Pinjam::findOrFail($id);
+
+        // Delete the pinjam
+        $pinjam->delete();
+
+        // Redirect back with a success message
+        return redirect()->back()->with('success', 'Data has been deleted successfully!');
     }
 }

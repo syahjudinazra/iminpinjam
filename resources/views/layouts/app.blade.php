@@ -56,26 +56,27 @@
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('sb2admin/js/sb-admin-2.min.js')}}"></script>
 
-    <script>
-        function edit_partner(el) {
-        var link = $(el) //refer `a` tag which is clicked
-        var modal = $("#edit_partner") //your modal
-        var tanggal = link.data('tanggal')
-        var serialnumber = link.data('serialnumber')
-        var device = link.data('device')
-        var customer = link.data('customer')
-        var telp = link.data('telp')
-        var pengiriman = link.data('pengiriman')
-        var kelengkapanpengiriman = link.data('kelengkapanpengiriman')
-        modal.find('#full_name').val(tanggal);
-        modal.find('#code').val(serialnumber);
-        modal.find('#code').val(device);
-        modal.find('#code').val(customer);
-        modal.find('#code').val(telp);
-        modal.find('#code').val(pengiriman);
-        modal.find('#code').val(kelengkapanpengiriman);
-        }
-    </script>
+    {{-- <script>
+        $(document).on('click', '.edit-btn', function () {
+            var id = $(this).data('id');
+            $.ajax({
+                url: '/pinjam/' + id + '/edit',
+                method: 'GET',
+                success: function (data) {
+                    $('#edit-form').attr('action', '/pinjam/' + id);
+                    $('#edit-form').find('[name="tanggal"]').val(data.tanggal);
+                    $('#edit-form').find('[name="serialnumber"]').val(data.serialnumber);
+                    $('#edit-form').find('[name="device"]').val(data.device);
+                    $('#edit-form').find('[name="customer"]').val(data.customer);
+                    $('#edit-form').find('[name="telp"]').val(data.telp);
+                    $('#edit-form').find('[name="pengirim"]').val(data.pengirim);
+                    $('#edit-form').find('[name="kelengkapankirim"]').val(data.kelengkapankirim);
+                    $('#edit-form').find('[name="gambar"]').val(data.gambar);
+
+                }
+            });
+        });
+    </script> --}}
 
 </body>
 </html>

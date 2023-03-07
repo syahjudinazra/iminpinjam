@@ -27,5 +27,13 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->midd
 
 Route::resource('/product', ProductController::class);
 
-Route::resource('/pinjam', PinjamController::class);
+Route::resource('/pinjam', PinjamController::class)->except([
+    'show', 'edit', 'update', 'destroy',
+]);
+
+Route::get('/pinjam/{id}/edit', [PinjamController::class, 'edit'])->name('users.edit');
+Route::put('/pinjam/{id}', [PinjamController::class, 'update'])->name('users.update');;
+Route::get('/pinjam/{id}', [PinjamController::class, 'show'])->name('users.show');
+Route::delete('/pinjam/{id}', [PinjamController::class, 'destroy'])->name('users.destroy');
+
 Route::resource('/kembali', KembaliController::class);
