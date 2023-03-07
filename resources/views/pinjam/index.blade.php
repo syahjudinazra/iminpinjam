@@ -317,6 +317,48 @@
 @endforeach
 <!-- end delete data -->
 
+<!-- Move data -->
+            <div class="modal fade" id="moveModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ajukan Pengembalian</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                <form method="post" action="/kembali" enctype="multipart/form-data">
+                    @csrf
+                    <div class="modal-body">
+                          <div class="mb-3">
+                            <label for="tanggalkembali" class="form-label"><b>Tanggal Pengembalian</b></label>
+                            <input type="date" class="form-control" id="tanggalkembali" name="tanggalkembali">
+                          </div>
+                          <div class="mb-3">
+                            <label for="penerima" class="form-label"><b>Penerima</b></label>
+                            <input type="text" class="form-control" id="penerima" name="penerima" placeholder="Masukan Penerima">
+                          </div>
+                          <div class="mb-3">
+                            <label for="kelengkapankirim" class="form-label"><b>Kelengkapan Kirim</b></label>
+                            <textarea class="form-control" id="kelengkapankirim" name="kelengkapankirim" rows="3" placeholder="Contoh:Adaptor,Dus,Docking"></textarea>
+                          </div>
+                          <div class="mb-3">
+                            <label for="status" class="form-label"><b>Status</b></label>
+                            <input data-id="#" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="InActive">
+                          </div>
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success">Pindah</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+ </div>
+<!-- End Move data -->
+
+
 
         <div class="container-fluid mt-3">
             <table class="table table-striped table-hover">
@@ -348,7 +390,7 @@
 
                         <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal{{ $item->id }}"><i class="fa-solid fa-trash"></i></a>
 
-                        <a href="#" class="btn btn-success" data-toggle="modal" data-target="#"><i class="fa-solid fa-paper-plane"></i></a>
+                        <a href="#" class="btn btn-success" data-toggle="modal" data-target="#moveModal"><i class="fa-solid fa-paper-plane"></i></a>
 
 
                 </td>
