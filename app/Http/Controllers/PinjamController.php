@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ExportPinjam;
 use App\Models\Pinjam;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PinjamController extends Controller
 {
@@ -17,6 +19,24 @@ class PinjamController extends Controller
         $pinjam = Pinjam::all();
         return view('pinjam.index')->with('pinjam', $pinjam);
     }
+
+    public function exportUsers(Request $request){
+        return Excel::download(new ExportPinjam, 'DataPinjam.xlsx');
+    }
+
+    public function search()
+{
+    $pinjam = Pinjam::latest();
+    if (request()->has('search')) {
+        $pinjam->where('tanggal', 'Like', '%' . request()->input('search') . '%');
+        $pinjam->orWhere('serialnumber', 'Like', '%' . request()->input('search') . '%');
+        $pinjam->orWhere('device', 'Like', '%' . request()->input('search') . '%');
+        $pinjam->orWhere('customer', 'Like', '%' . request()->input('search') . '%');
+    }
+    $pinjam = $pinjam->paginate(5);
+    return view('pinjam.index',compact('pinjam'))
+        ->with('i', (request()->input('page', 1) - 1) * 5);
+}
 
     /**
      * Show the form for creating a new resource.

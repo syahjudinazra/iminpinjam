@@ -27,6 +27,11 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->midd
 
 Route::resource('/product', ProductController::class);
 
+
+
+Route::get('/export-users',[PinjamController::class,'exportUsers'])->name('export-users');
+Route::get('/pinjam/search', [PinjamController::class, 'search'])->name('search.index');
+
 Route::resource('/pinjam', PinjamController::class)->except([
     'show', 'edit', 'update', 'destroy',
 ]);

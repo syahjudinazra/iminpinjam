@@ -14,7 +14,8 @@ class KembaliController extends Controller
      */
     public function index()
     {
-        return view('kembali.index');
+        $kembali = Kembali::all();
+        return view('kembali.index')->with('kembali', $kembali);
     }
 
     /**
