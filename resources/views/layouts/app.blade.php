@@ -31,6 +31,7 @@
     <!--Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 
 
 </head>
@@ -56,27 +57,25 @@
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('sb2admin/js/sb-admin-2.min.js')}}"></script>
 
-    {{-- <script>
-        $(document).on('click', '.edit-btn', function () {
-            var id = $(this).data('id');
-            $.ajax({
-                url: '/pinjam/' + id + '/edit',
-                method: 'GET',
-                success: function (data) {
-                    $('#edit-form').attr('action', '/pinjam/' + id);
-                    $('#edit-form').find('[name="tanggal"]').val(data.tanggal);
-                    $('#edit-form').find('[name="serialnumber"]').val(data.serialnumber);
-                    $('#edit-form').find('[name="device"]').val(data.device);
-                    $('#edit-form').find('[name="customer"]').val(data.customer);
-                    $('#edit-form').find('[name="telp"]').val(data.telp);
-                    $('#edit-form').find('[name="pengirim"]').val(data.pengirim);
-                    $('#edit-form').find('[name="kelengkapankirim"]').val(data.kelengkapankirim);
-                    $('#edit-form').find('[name="gambar"]').val(data.gambar);
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+    <script>
+          $(function() {
+            $('.toggle-class').change(function() {
+                var status = $(this).prop('checked') == true ? 1 : 0;
+                var user_id = $(this).data('id');
 
-                }
-            });
-        });
-    </script> --}}
+                $.ajax({
+                    type: "GET",
+                    dataType: "json",
+                    url: '/changestatus',
+                    data: {'status': status, 'id': id},
+                    success: function(data){
+                    console.log(data.success)
+                    }
+                });
+            })
+        })
+    </script>
 
 </body>
 </html>

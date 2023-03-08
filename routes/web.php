@@ -31,6 +31,9 @@ Route::resource('/product', ProductController::class);
 
 Route::get('/export-users',[PinjamController::class,'exportUsers'])->name('export-users');
 Route::get('/pinjam/search', [PinjamController::class, 'search'])->name('search.index');
+Route::get('/pinjam/changestatus/{id}', [PinjamController::class, 'changestatus']);
+Route::post('/pinjam/move-data', [PinjamController::class, 'moveData'])->name('move-data');
+
 
 Route::resource('/pinjam', PinjamController::class)->except([
     'show', 'edit', 'update', 'destroy',
@@ -41,4 +44,9 @@ Route::put('/pinjam/{id}', [PinjamController::class, 'update'])->name('users.upd
 Route::get('/pinjam/{id}', [PinjamController::class, 'show'])->name('users.show');
 Route::delete('/pinjam/{id}', [PinjamController::class, 'destroy'])->name('users.destroy');
 
+
+
+
 Route::resource('/kembali', KembaliController::class);
+
+Route::get('/kembali/changestatus/{id}', [KembaliController::class, 'changestatus']);

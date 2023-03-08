@@ -18,6 +18,6 @@ class ExportPinjam implements FromCollection, WithHeadings
 
     public function headings(): array
     {
-        return ["No", "Tanggal", "Gambar", "Serial Number", "Tpe Device", "Customer", "No Telp", "Pengirim", "Kelengkapan Kirim"];
+        return ["No", "Tanggal", "Gambar", "Serial Number", "Tpe Device", "Customer", "No Telp", "Pengirim", "Kelengkapan Kirim", "tanggalkembali", "penerima", "kelengkapankembali", "status"];
     }
 }

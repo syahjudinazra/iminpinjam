@@ -18,6 +18,15 @@ class KembaliController extends Controller
         return view('kembali.index')->with('kembali', $kembali);
     }
 
+    public function changestatus(Request $request)
+    {
+        $kembali = Kembali::find($request->id);
+        $kembali->status = $request->status;
+        $kembali->save();
+
+        return response()->json(['success'=>'Status change successfully.']);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

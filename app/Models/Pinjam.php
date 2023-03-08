@@ -21,6 +21,10 @@ class Pinjam extends Model
         'telp',
         'pengirim',
         'kelengkapankirim',
+        'tanggalkembali',
+        'penerima',
+        'kelengkapankembali',
+        'status',
     ];
 
 }

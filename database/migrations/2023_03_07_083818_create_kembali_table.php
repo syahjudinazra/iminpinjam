@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('kembalis', function (Blueprint $table) {
             $table->id();
             $table->string('tanggal');
-            $table->string('gambar', 300);
+            $table->string('gambar', 300)->nullable();
             $table->string('serialnumber');
             $table->string('device');
             $table->string('customer');
@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('tanggalkembali');
             $table->string('penerima');
             $table->string('kelengkapankembali');
-            $table->string('status');
+            $table->boolean('status')->default('1');
             $table->timestamps();
         });
     }

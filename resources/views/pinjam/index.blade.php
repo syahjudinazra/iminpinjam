@@ -118,6 +118,22 @@
                             <label for="kelengkapankirim" class="form-label"><b>Kelengkapan Kirim</b></label>
                             <textarea class="form-control" id="kelengkapankirim" name="kelengkapankirim" rows="3" placeholder="Contoh:Adaptor,Dus,Docking"></textarea>
                           </div>
+                          <div class="mb-3">
+                            <label for="tanggalkembali" class="form-label"><b>Tanggal Kembali</b></label>
+                            <input type="text" class="form-control" id="tanggalkembali" name="tanggalkembali" value="-" readonly>
+                          </div>
+                          <div class="mb-3">
+                            <label for="penerima" class="form-label"><b>Nama Penerima</b></label>
+                            <input type="text" class="form-control" id="penerima" name="penerima" value="-" readonly>
+                          </div>
+                          <div class="mb-3">
+                            <label for="kelengkapankembali" class="form-label"><b>Kelengkapan Kembali</b></label>
+                            <input type="text" class="form-control" id="kelengkapankembali" name="kelengkapankembali" value="-" readonly>
+                          </div>
+                          <div class="mb-3">
+                            <label for="status" class="form-label"><b>Status</b></label><br>
+                            <input data-id="#" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Yes" data-off="No" value="1">
+                        </div>
                     </div>
                     <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -318,34 +334,35 @@
 <!-- end delete data -->
 
 <!-- Move data -->
-            <div class="modal fade" id="moveModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ajukan Pengembalian</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    </div>
-                <form method="post" action="/kembali" enctype="multipart/form-data">
+@foreach ($pinjam as $item)
+        <div class="modal fade" id="moveModal{{ $item->id }}" tabindex="-1" aria-labelledby="moveModalLabel{{ $item->id }}" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ajukan Pengembalian</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <form method="POST" action="{{ route('move-data') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
-                          <div class="mb-3">
+                        <div class="mb-3">
                             <label for="tanggalkembali" class="form-label"><b>Tanggal Pengembalian</b></label>
                             <input type="date" class="form-control" id="tanggalkembali" name="tanggalkembali">
-                          </div>
-                          <div class="mb-3">
+                        </div>
+                        <div class="mb-3">
                             <label for="penerima" class="form-label"><b>Penerima</b></label>
                             <input type="text" class="form-control" id="penerima" name="penerima" placeholder="Masukan Penerima">
-                          </div>
-                          <div class="mb-3">
-                            <label for="kelengkapankirim" class="form-label"><b>Kelengkapan Kirim</b></label>
-                            <textarea class="form-control" id="kelengkapankirim" name="kelengkapankirim" rows="3" placeholder="Contoh:Adaptor,Dus,Docking"></textarea>
-                          </div>
-                          <div class="mb-3">
-                            <label for="status" class="form-label"><b>Status</b></label>
-                            <input data-id="#" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="InActive">
-                          </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="kelengkapankembali" class="form-label"><b>Kelengkapan Kembali</b></label>
+                            <textarea class="form-control" id="kelengkapankembali" name="kelengkapankembali" rows="3" placeholder="Contoh:Adaptor,Dus,Docking"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="status" class="form-label"><b>Status</b></label><br>
+                            <input data-id="#" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Yes" data-off="No">
+                        </div>
                     </div>
                     <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -355,11 +372,10 @@
             </div>
         </div>
     </div>
- </div>
+    @endforeach
+
+
 <!-- End Move data -->
-
-
-
         <div class="container-fluid mt-3">
             <table class="table table-striped table-hover">
                 <thead class="table-dark">
@@ -383,16 +399,13 @@
                 <td>{{ $item->device }}</td>
                 <td>{{ $item->customer }}</td>
                 <td>
-
                         <a href="#" class="btn btn-warning" data-toggle="modal" data-target="#editModal{{ $item->id }}"><i class="fa-solid fa-pen-to-square"></i></a>
 
                         <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#viewModal{{ $item->id }}"><i class="fa-solid fa-eye"></i></a>
 
                         <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal{{ $item->id }}"><i class="fa-solid fa-trash"></i></a>
 
-                        <a href="#" class="btn btn-success" data-toggle="modal" data-target="#moveModal"><i class="fa-solid fa-paper-plane"></i></a>
-
-
+                        <a href="#" class="btn btn-success" data-toggle="modal" data-target="#moveModal{{ $item->id }}"><i class="fa-solid fa-paper-plane"></i></a>
                 </td>
             </tr>
             @endforeach
