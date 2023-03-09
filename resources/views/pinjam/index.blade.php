@@ -120,20 +120,31 @@
                           </div>
                           <div class="mb-3">
                             <label for="tanggalkembali" class="form-label"><b>Tanggal Kembali</b></label>
-                            <input type="text" class="form-control" id="tanggalkembali" name="tanggalkembali" value="-" readonly>
+                            <input type="text" class="form-control" id="tanggalkembali" name="tanggalkembali" readonly>
                           </div>
                           <div class="mb-3">
                             <label for="penerima" class="form-label"><b>Nama Penerima</b></label>
-                            <input type="text" class="form-control" id="penerima" name="penerima" value="-" readonly>
+                            <input type="text" class="form-control" id="penerima" name="penerima" readonly>
                           </div>
                           <div class="mb-3">
                             <label for="kelengkapankembali" class="form-label"><b>Kelengkapan Kembali</b></label>
-                            <input type="text" class="form-control" id="kelengkapankembali" name="kelengkapankembali" value="-" readonly>
+                            <input type="text" class="form-control" id="kelengkapankembali" name="kelengkapankembali" readonly>
                           </div>
-                          <div class="mb-3">
-                            <label for="status" class="form-label"><b>Status</b></label><br>
-                            <input data-id="#" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Yes" data-off="No" value="1">
-                        </div>
+                          <div class="mb3">
+                            <label for="status" class="form-label"><b>Status</b></label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="status" name="status" value="1">
+                            <label class="form-check-label" for="status">
+                              1
+                            </label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="status" name="status" value="0">
+                            <label class="form-check-label" for="status">
+                              0
+                            </label>
+                          </div>
                     </div>
                     <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -344,12 +355,92 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
                 </div>
-                <form method="POST" action="{{ route('move-data') }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('move-data', $item->id) }}" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
+                        {{-- <div class="mb-3">
+                            <label for="tanggal" class="form-label"><b>Tanggal</b></label>
+                            <input type="date" class="form-control" id="tanggal" name="tanggal" value="{{ $item->tanggal }}" readonly>
+                          </div>
+                          <div class="mb-3">
+                            <label for="gambar" class="form-label"><b>Gambar</b></label>
+                            <input class="form-control" type="file" id="gambar" name="gambar" value="{{ $item->gambar }}" readonly>
+                          </div>
+                          <div class="mb-3">
+                            <label for="serialnumber" class="form-label"><b>Serial Number</b></label>
+                            <input type="text" class="form-control" id="serialnumber" name="serialnumber" value="{{ $item->serialnumber }}" readonly>
+                          </div>
+                          <div class="form-group mb-3">
+                            <label for="device"><b>Tipe Device</b></label>
+                            <select class="form-control selectpicker" name="device" id="device" data-live-search="true" readonly>
+                                    <option value="Pilih Model">Pilih Model</option>
+                                    <option value="D1" data-tokens="D1" {{ $item->device == "D1" ? 'selected' : '' }} >D1</option>
+                                    <option value="D1 Moka" data-tokens="D1 Moka" {{ $item->device == "D1 Moka" ? 'selected' : '' }}>D1 Moka</option>
+                                    <option value="D1-Pro" data-tokens="D1-Pro" {{ $item->device == "D1-Pro" ? 'selected' : '' }}>D1-Pro</option>
+                                    <option value="D1w" data-tokens="D1w" {{ $item->device == "D1w" ? 'selected' : '' }}>D1w</option>
+                                    <option value="D2-401" data-tokens="D2-401" {{ $item->device == "D2-401" ? 'selected' : '' }}>D2-401</option>
+                                    <option value="D2-402" data-tokens="D2-402" {{ $item->device == "D2-402" ? 'selected' : '' }}>D2-402</option>
+                                    <option value="D2-Pro" data-tokens="D2-Pro" {{ $item->device == "D2-Pro" ? 'selected' : '' }}>D2-Pro</option>
+                                    <option value="D3 504 lama" data-tokens="D3 504 lama" {{ $item->device == "D3 504 lama" ? 'selected' : '' }}>D3 504 lama</option>
+                                    <option value="D3 505 lama" data-tokens="D3 505 lama" {{ $item->device == "D3 505 lama" ? 'selected' : '' }}>D3 505 lama</option>
+                                    <option value="D3 506 lama" data-tokens="D3 506 lama" {{ $item->device == "D3 506 lama" ? 'selected' : '' }}>D3 506 lama</option>
+                                    <option value="D3-504" data-tokens="D3-504" {{ $item->device == "D3-504" ? 'selected' : '' }}>D3-504</option>
+                                    <option value="D3-505" data-tokens="D3-505" {{ $item->device == "D3-505" ? 'selected' : '' }}>D3-505</option>
+                                    <option value="D3-506" data-tokens="D3-506" {{ $item->device == "D3-506" ? 'selected' : '' }} >D3-506</option>
+                                    <option value="D3-501 Moka" data-tokens="D3-501 Moka" {{ $item->device == "D3-501 Moka" ? 'selected' : '' }} >D3-501 Moka</option>
+                                    <option value="D3-503 Moka" data-tokens="D3-503 Moka" {{ $item->device == "D3-503 Moka" ? 'selected' : '' }} >D3-503 Moka</option>
+                                    <option value="D3 DS1" data-tokens="D3 DS1" {{ $item->device == "D3 DS1" ? 'selected' : '' }} >D3 DS1</option>
+                                    <option value="D3 DS1 Extention Display" data-tokens="D3 DS1 Extention Display" {{ $item->device == "D3 DS1 Extention Display" ? 'selected' : '' }} >D3 DS1 Extention Display</option>
+                                    <option value="D3 DS1 Extention Display TS" data-tokens="D3 DS1 Extention Display TS" {{ $item->device == "D3 DS1 Extention Display TS" ? 'selected' : '' }} >D3 DS1 Extention Display TS</option>
+                                    <option value="D4-502" data-tokens="D4-502" {{ $item->device == "D4-502" ? 'selected' : '' }} >D4-502</option>
+                                    <option value="D4-503" data-tokens="D4-503" {{ $item->device == "D4-503" ? 'selected' : '' }} >D4-503</option>
+                                    <option value="D4-503 White" data-tokens="D4-503 White" {{ $item->device == "D4-503 White" ? 'selected' : '' }} >D4-503 White</option>
+                                    <option value="D4-504" data-tokens="D4-504" {{ $item->device == "D4-504" ? 'selected' : '' }} >D4-504</option>
+                                    <option value="D4-504 White" data-tokens="D4-504 White" {{ $item->device == "D4-504 White" ? 'selected' : '' }} >D4-504 White</option>
+                                    <option value="D4-505" data-tokens="D4-505" {{ $item->device == "D4-505" ? 'selected' : '' }} >D4-505</option>
+                                    <option value="D4-505 DT" data-tokens="D4-505 DT" {{ $item->device == "D4-505 DT" ? 'selected' : '' }} >D4-505 DT</option>
+                                    <option value="D4 Falcon 1" data-tokens="D4 Falcon 1" {{ $item->device == "D4 Falcon 1" ? 'selected' : '' }} >D4 Falcon 1</option>
+                                    <option value="M2-202" data-tokens="M2-202" {{ $item->device == "M2-202" ? 'selected' : '' }} >M2-202</option>
+                                    <option value="M2-202 iSeller" data-tokens="M2-202 iSeller" {{ $item->device == "M2-202 iSeller" ? 'selected' : '' }} >M2-202 iSeller</option>
+                                    <option value="M2-203" data-tokens="M2-203" {{ $item->device == "M2-203" ? 'selected' : '' }}>M2-203</option>
+                                    <option value="M2-203 iSeller" data-tokens="M2-203 iSeller" {{ $item->device == "M2-203 iSeller" ? 'selected' : '' }}>M2-203 iSeller</option>
+                                    <option value="M2-203 White" data-tokens="M2-203 White" {{ $item->device == "M2-203 White" ? 'selected' : '' }}>M2-203 White</option>
+                                    <option value="M2 Pro" data-tokens="M2 Pro" {{ $item->device == "M2 Pro" ? 'selected' : '' }} >M2 Pro</option>
+                                    <option value="M2 Max" data-tokens="M2 Max" {{ $item->device == "M2 Max" ? 'selected' : '' }} >M2 Max</option>
+                                    <option value="M2 Swift 1S" data-tokens="M2 Swift 1S" {{ $item->device == "M2 Swift 1S" ? 'selected' : '' }} >M2 Swift 1S</option>
+                                    <option value="M2 Swift 1P" data-tokens="M2 Swift 1P" {{ $item->device == "M2 Swift 1P" ? 'selected' : '' }} >M2 Swift 1P</option>
+                                    <option value="M2 Swift PDA" data-tokens="M2 Swift PDA" {{ $item->device == "M2 Swift PDA" ? 'selected' : '' }} >M2 Swift PDA</option>
+                                    <option value="M2 Swift 1 Scanner" data-tokens="M2 Swift 1 Scanner" {{ $item->device == "M2 Swift 1 Scanner" ? 'selected' : '' }} >M2 Swift 1 Scanner</option>
+                                    <option value="M2 Swift 1 Printer" data-tokens="M2 Swift 1 Printer" {{ $item->device == "M2 Swift 1 Printer" ? 'selected' : '' }} >M2 Swift 1 Printer</option>
+                                    <option value="R1 201" data-tokens="R1 201" {{ $item->device == "R1 201" ? 'selected' : '' }} >R1 201</option>
+                                    <option value="R1 202" data-tokens="R1 202" {{ $item->device == "R1 202" ? 'selected' : '' }} >R1 202</option>
+                                    <option value="S1 701" data-tokens="S1 701" {{ $item->device == "S1 701" ? 'selected' : '' }} >S1 701</option>
+                                    <option value="K1 101" data-tokens="K1 101" {{ $item->device == "K1 101" ? 'selected' : '' }} >K1 101</option>
+                                    <option value="K2 201" data-tokens="K1 201" {{ $item->device == "K2 201" ? 'selected' : '' }} >K2 201</option>
+                                    <option value="X1 Scanner" data-tokens="X1 Scanner" {{ $item->device == "X1 Scanner" ? 'selected' : '' }} >X1 Scanner</option>
+                                </select>
+                          </div>
+                          <div class="mb-3">
+                            <label for="customer" class="form-label"><b>Customer</b></label>
+                            <input type="text" class="form-control" id="customer" name="customer" value="{{ $item->customer }}" readonly>
+                          </div>
+                          <div class="mb-3">
+                            <label for="telp" class="form-label"><b>No Telp</b></label>
+                            <input type="number" class="form-control" id="telp" name="telp" value="{{ $item->telp }}" readonly>
+                          </div>
+                          <div class="mb-3">
+                            <label for="pengirim" class="form-label"><b>Nama Pengirim</b></label>
+                            <input type="text" class="form-control" id="pengirim" name="pengirim" value="{{ $item->pengirim }}" readonly>
+                          </div>
+                          <div class="mb-3">
+                            <label for="kelengkapankirim" class="form-label"><b>Kelengkapan Kirim</b></label>
+                            <textarea class="form-control" id="kelengkapankirim" name="kelengkapankirim" rows="3" placeholder="Contoh:Adaptor,Dus,Docking" readonly>{{ $item->kelengkapankirim }}</textarea>
+                          </div> --}}
+
                         <div class="mb-3">
                             <label for="tanggalkembali" class="form-label"><b>Tanggal Pengembalian</b></label>
-                            <input type="date" class="form-control" id="tanggalkembali" name="tanggalkembali">
+                            <input type="date" class="form-control" id="tanggalkembali" name="tanggalkembali"
+                            value="{{ ($item->tanggalkembali) ? $item->tanggalkembali : old('tanggalkembali') }}">
                         </div>
                         <div class="mb-3">
                             <label for="penerima" class="form-label"><b>Penerima</b></label>
@@ -359,14 +450,24 @@
                             <label for="kelengkapankembali" class="form-label"><b>Kelengkapan Kembali</b></label>
                             <textarea class="form-control" id="kelengkapankembali" name="kelengkapankembali" rows="3" placeholder="Contoh:Adaptor,Dus,Docking"></textarea>
                         </div>
-                        <div class="mb-3">
-                            <label for="status" class="form-label"><b>Status</b></label><br>
-                            <input data-id="#" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Yes" data-off="No">
-                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="status" name="status" value="1" {{ $item->status == '1' ? "checked" : "" }}>
+                            <label class="form-check-label" for="status">
+                              1
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="status" name="status" value="0" {{ $item->status == '0' ? "checked" : "" }}>
+                            <label class="form-check-label" for="status">
+                              0
+                            </label>
+                          </div>
+
                     </div>
                     <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-success">Pindah</button>
+                    <a href="{{ route('move-data', $item->id) }}" class="btn btn-primary" id="">Pindah Data</a>
                     </div>
                 </form>
             </div>

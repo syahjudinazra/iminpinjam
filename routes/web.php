@@ -31,8 +31,9 @@ Route::resource('/product', ProductController::class);
 
 Route::get('/export-users',[PinjamController::class,'exportUsers'])->name('export-users');
 Route::get('/pinjam/search', [PinjamController::class, 'search'])->name('search.index');
-Route::get('/pinjam/changestatus/{id}', [PinjamController::class, 'changestatus']);
-Route::post('/pinjam/move-data', [PinjamController::class, 'moveData'])->name('move-data');
+// Route::get('/pinjam/changestatus/{id}', [PinjamController::class, 'changestatus']);
+
+Route::get('move-data', [PinjamController::class, 'moveData'])->name('move-data');
 
 
 Route::resource('/pinjam', PinjamController::class)->except([
@@ -45,8 +46,15 @@ Route::get('/pinjam/{id}', [PinjamController::class, 'show'])->name('users.show'
 Route::delete('/pinjam/{id}', [PinjamController::class, 'destroy'])->name('users.destroy');
 
 
+Route::get('/export-kembali',[KembaliController::class,'exportKembali'])->name('export-kembali');
 
+Route::resource('/kembali', KembaliController::class)->except([
+    'show', 'edit', 'update', 'destroy',
+]);
 
-Route::resource('/kembali', KembaliController::class);
+Route::get('/kembali/{id}/edit', [KembaliController::class, 'edit'])->name('kembali.edit');
+Route::put('/kembali/{id}', [KembaliController::class, 'update'])->name('kembali.update');
+Route::get('/kembali/{id}', [KembaliController::class, 'show'])->name('kembali.show');
+Route::delete('/kembali/{id}', [KembaliController::class, 'destroy'])->name('kembali.destroy');
 
-Route::get('/kembali/changestatus/{id}', [KembaliController::class, 'changestatus']);
+// Route::get('/kembali/changestatus/{id}', [KembaliController::class, 'changestatus']);

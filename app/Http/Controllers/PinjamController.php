@@ -40,35 +40,40 @@ class PinjamController extends Controller
         ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
-        // public function finish(Request $request, Pinjam $pinjam){
+        // public function moveData(Pinjam $pinjam)
+        // {
+        //     // Ambil data dari tabel sumber
+        //     $pinjam = DB::table('pinjams')->get();
 
-        //     $pinjam = DB::table('pinjams')->where('id', ''. $pinjam->id .'')->first();
+        //     // Simpan data ke tabel tujuan
+        //     foreach ($pinjam as $item) {
+        //         DB::table('kembalis')->insert([
+        //                'tanggal'     =>   $item->tanggal,
+        //                'gambar'     =>   $item->gambar,
+        //                'serialnumber'   =>   $item->serialnumber,
+        //                'device'   =>   $item->device,
+        //                'customer'   =>   $item->customer,
+        //                'telp'   =>   $item->telp,
+        //                'pengirim'   =>   $item->pengirim,
+        //                'kelengkapankirim'   =>   $item->kelengkapankirim,
+        //                'tanggalkembali'   =>   $item->tanggalkembali,
+        //                'penerima'   =>   $item->penerima,
+        //                'kelengkapankembali'   =>   $item->kelengkapankembali,
+        //                'status'   =>   $item->status,
+        //         ]);
+        //     }
 
-        //     DB::table('kembalis')->insert(
-        //         array(
-        //                'tanggal'     =>   $pinjam->tanggal,
-        //                'gambar'     =>   $pinjam->gambar,
-        //                'serialnumber'   =>   $pinjam->serialnumber,
-        //                'device'   =>   $pinjam->device,
-        //                'customer'   =>   $pinjam->customer,
-        //                'telp'   =>   $pinjam->telp,
-        //                'pengirim'   =>   $pinjam->pengirim,
-        //                'kelengkapankirim'   =>   $pinjam->kelengkapankirim,
-        //                'tanggalkembali'   =>   $pinjam->tanggalkembali,
-        //                'penerima'   =>   $pinjam->penerima,
-        //                'kelengkapankembali'   =>   $pinjam->kelengkapankembali,
-        //                'status'   =>   $pinjam->status,
+        //     // Hapus data dari tabel sumber
+        //     DB::table('pinjams')->truncate();
 
-        //         )
-        //    );
-        //    DB::table('pinjams')->where('id', $pinjam->id)->delete();
-        //     return redirect('/kembali')->with('success', 'Data telah dipindahkan');
+        //     // Redirect ke halaman yang diinginkan
+        //     return redirect('kembali')->with('success', 'Data telah dipindahkan');
         // }
 
-        public function moveData(Request $request, Pinjam $pinjam)
+        public function moveData(Request $request)
         {
-            // validate input
-            $request->validate([
+            // Validasi input
+            $validatedData = $request->validate([
                 'tanggal' => 'required|max:255',
                 'gambar' => 'image|mimes:jpeg,png,jpg|max:2048',
                 'serialnumber' => 'required|max:255',
@@ -81,24 +86,35 @@ class PinjamController extends Controller
                 'penerima' => 'max:255',
                 'kelengkapankembali' => 'max:255',
                 'status' => 'boolean',
+                // dan seterusnya
             ]);
 
-            // create a new record in destination table
-            $kembali = new Kembali;
-            $kembali->tanggalkembali = $request->input('tanggalkembali');
-            $kembali->penerima = $request->input('penerima');
-            $kembali->kelengkapankembali = $request->input('kelengkapankembali');
-            $kembali->status = $request->input('status');
-            $kembali->save();
+                // Buat data baru di tabel sumber
+        $newData = [
+            'tanggalkembali' => $validatedData['tanggalkembali'],
+            'penerima' => $validatedData['penerima'],
+            'kelengkapankembali' => $validatedData['kelengkapankembali'],
+            'status' => $validatedData['status'],
 
-            // move data to destination table
-            Pinjam::where('id', $pinjam->id)->update(['id' => $kembali->id]);
+        ];
+            $move_id = DB::table('pinjams')->insert($newData);
+            // Buat data baru di tabel tujuan
+            $newData = [
+                'move_id' => $move_id,
+                'tanggalkembali' => $validatedData['tanggalkembali'],
+                'penerima' => $validatedData['penerima'],
+                'kelengkapankembali' => $validatedData['kelengkapankembali'],
+                'status' => $validatedData['status'],
+                // dan seterusnya
+            ];
 
-            // delete original records
-            Pinjam::where('id', $pinjam->id)->delete();
+            DB::table('kembalis')->insert($newData);
 
-            return back('/kembali')->with('success', 'Data has been moved successfully and new user has been added!');
+            DB::table('pinjams')->truncate();
+            // Redirect ke halaman yang diinginkan
+            return redirect('kembali')->with('success', 'Data telah dipindahkan');
         }
+
 
     /**
      * Show the form for creating a new resource.

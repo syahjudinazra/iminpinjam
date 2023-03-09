@@ -2,18 +2,18 @@
 
 namespace App\Exports;
 
-use App\Models\Pinjam;
+use App\Models\Kembali;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class ExportPinjam implements FromCollection, WithHeadings
+class ExportKembali implements FromCollection, WithHeadings
 {
     /**
     * @return \Illuminate\Support\Collection
     */
     public function collection()
     {
-        return Pinjam::all();
+        return Kembali::all();
     }
 
     public function headings(): array

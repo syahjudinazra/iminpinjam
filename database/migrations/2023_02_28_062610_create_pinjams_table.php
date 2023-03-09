@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('pinjams', function (Blueprint $table) {
             $table->id();
+            $table->integer('move_id')->nullable();
             $table->string('tanggal');
             $table->string('gambar', 300)->nullable();
             $table->string('serialnumber');
@@ -23,10 +24,10 @@ return new class extends Migration
             $table->string('telp');
             $table->string('pengirim');
             $table->string('kelengkapankirim');
-            $table->string('tanggalkembali');
-            $table->string('penerima');
-            $table->string('kelengkapankembali');
-            $table->boolean('status')->default('1');
+            $table->string('tanggalkembali')->nullable();
+            $table->string('penerima')->nullable();
+            $table->string('kelengkapankembali')->nullable();
+            $table->enum('status', ['0', '1'])->nullable()->default('1');
             $table->timestamps();
         });
     }
