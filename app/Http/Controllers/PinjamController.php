@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pinjam;
+use App\Models\Kembali;
 use Illuminate\Http\Request;
 use App\Exports\ExportPinjam;
-use App\Models\Kembali;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Storage;
 
 class PinjamController extends Controller
 {
@@ -18,8 +19,14 @@ class PinjamController extends Controller
      */
     public function index()
     {
-        $pinjam = Pinjam::all();
-        return view('pinjam.index')->with('pinjam', $pinjam);
+        // $pinjam = Pinjam::all();
+        // return view('pinjam.index')->with('pinjam', $pinjam);
+
+        $pinjam = DB::table('pinjams')
+        ->where('status', '0')
+        ->get();
+
+        return view('pinjam.index', compact('pinjam'));
     }
 
     public function exportUsers(Request $request){
@@ -39,81 +46,6 @@ class PinjamController extends Controller
     return view('pinjam.index',compact('pinjam'))
         ->with('i', (request()->input('page', 1) - 1) * 5);
     }
-
-        // public function moveData(Pinjam $pinjam)
-        // {
-        //     // Ambil data dari tabel sumber
-        //     $pinjam = DB::table('pinjams')->get();
-
-        //     // Simpan data ke tabel tujuan
-        //     foreach ($pinjam as $item) {
-        //         DB::table('kembalis')->insert([
-        //                'tanggal'     =>   $item->tanggal,
-        //                'gambar'     =>   $item->gambar,
-        //                'serialnumber'   =>   $item->serialnumber,
-        //                'device'   =>   $item->device,
-        //                'customer'   =>   $item->customer,
-        //                'telp'   =>   $item->telp,
-        //                'pengirim'   =>   $item->pengirim,
-        //                'kelengkapankirim'   =>   $item->kelengkapankirim,
-        //                'tanggalkembali'   =>   $item->tanggalkembali,
-        //                'penerima'   =>   $item->penerima,
-        //                'kelengkapankembali'   =>   $item->kelengkapankembali,
-        //                'status'   =>   $item->status,
-        //         ]);
-        //     }
-
-        //     // Hapus data dari tabel sumber
-        //     DB::table('pinjams')->truncate();
-
-        //     // Redirect ke halaman yang diinginkan
-        //     return redirect('kembali')->with('success', 'Data telah dipindahkan');
-        // }
-
-        public function moveData(Request $request)
-        {
-            // Validasi input
-            $validatedData = $request->validate([
-                'tanggal' => 'required|max:255',
-                'gambar' => 'image|mimes:jpeg,png,jpg|max:2048',
-                'serialnumber' => 'required|max:255',
-                'device' => 'required|max:255',
-                'customer' => 'required|max:255',
-                'telp' => 'required|max:255',
-                'pengirim' => 'required|max:255',
-                'kelengkapankirim' => 'required|max:255',
-                'tanggalkembali' => 'max:255',
-                'penerima' => 'max:255',
-                'kelengkapankembali' => 'max:255',
-                'status' => 'boolean',
-                // dan seterusnya
-            ]);
-
-                // Buat data baru di tabel sumber
-        $newData = [
-            'tanggalkembali' => $validatedData['tanggalkembali'],
-            'penerima' => $validatedData['penerima'],
-            'kelengkapankembali' => $validatedData['kelengkapankembali'],
-            'status' => $validatedData['status'],
-
-        ];
-            $move_id = DB::table('pinjams')->insert($newData);
-            // Buat data baru di tabel tujuan
-            $newData = [
-                'move_id' => $move_id,
-                'tanggalkembali' => $validatedData['tanggalkembali'],
-                'penerima' => $validatedData['penerima'],
-                'kelengkapankembali' => $validatedData['kelengkapankembali'],
-                'status' => $validatedData['status'],
-                // dan seterusnya
-            ];
-
-            DB::table('kembalis')->insert($newData);
-
-            DB::table('pinjams')->truncate();
-            // Redirect ke halaman yang diinginkan
-            return redirect('kembali')->with('success', 'Data telah dipindahkan');
-        }
 
 
     /**
@@ -170,7 +102,7 @@ class PinjamController extends Controller
     // Find the data by id
     $pinjam = Pinjam::findOrFail($id);
 
-    // Return the view with the data
+    // // Return the view with the data
     return view('pinjam.index', compact('pinjam'));
     }
 
@@ -182,8 +114,10 @@ class PinjamController extends Controller
      */
     public function edit(Pinjam $pinjam, $id)
     {
-        $pinjam = Pinjam::find($id);
-        return response()->json($pinjam);
+        // $pinjam = Pinjam::find($id);
+        // return response()->json($pinjam);
+        $pinjam = Pinjam::findOrFail($id);
+        return view('pinjam.index', compact('pinjam'));
     }
 
     /**
@@ -195,22 +129,43 @@ class PinjamController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $pinjam = Pinjam::find($id);
-        $pinjam->tanggal = $request->input('tanggal');
-        // $pinjam->gambar = $request->input('gambar');
-        $pinjam->serialnumber = $request->input('serialnumber');
-        $pinjam->device = $request->input('device');
-        $pinjam->customer = $request->input('customer');
-        $pinjam->telp = $request->input('telp');
-        $pinjam->pengirim = $request->input('pengirim');
-        $pinjam->kelengkapankirim = $request->input('kelengkapankirim');
-        $pinjam->tanggalkembali = $request->input('tanggalkembali');
-        $pinjam->penerima = $request->input('penerima');
-        $pinjam->kelengkapankembali = $request->input('kelengkapankembali');
-        $pinjam->status = $request->input('status');
+        // $pinjam = Pinjam::find($id);
+        // $pinjam->tanggal = $request->input('tanggal');
+        // // $pinjam->gambar = $request->input('gambar');
+        // $pinjam->serialnumber = $request->input('serialnumber');
+        // $pinjam->device = $request->input('device');
+        // $pinjam->customer = $request->input('customer');
+        // $pinjam->telp = $request->input('telp');
+        // $pinjam->pengirim = $request->input('pengirim');
+        // $pinjam->kelengkapankirim = $request->input('kelengkapankirim');
+        // $pinjam->tanggalkembali = $request->input('tanggalkembali');
+        // $pinjam->penerima = $request->input('penerima');
+        // $pinjam->kelengkapankembali = $request->input('kelengkapankembali');
+        // $pinjam->status = $request->input('status');
 
+        // // Storage::putFile('path/to', $request->file('image'));
+        // $pinjam->save();
+
+        // return redirect('pinjam')->with('success', 'Data telah diubah');
+        $request->validate([
+            'tanggal' => 'required|max:255',
+            'gambar' => 'image|mimes:jpeg,png,jpg|max:2048',
+            'serialnumber' => 'required|max:255',
+            'device' => 'required|max:255',
+            'customer' => 'required|max:255',
+            'telp' => 'required|max:255',
+            'pengirim' => 'required|max:255',
+            'kelengkapankirim' => 'required|max:255',
+            'tanggalkembali' => 'max:255',
+            'penerima' => 'max:255',
+            'kelengkapankembali' => 'max:255',
+            'status' => 'boolean',
+        ]);
+
+        $path = $request->file('gambar')->store('public/images');
+        $pinjam = Pinjam::findOrFail($id);
+        $pinjam->path = $path;
         $pinjam->save();
-        return redirect('pinjam')->with('success', 'Data telah diubah');
     }
 
     /**

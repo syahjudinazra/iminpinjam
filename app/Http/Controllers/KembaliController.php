@@ -19,8 +19,14 @@ class KembaliController extends Controller
      */
     public function index()
     {
-        $kembali = Kembali::all();
-        return view('kembali.index')->with('kembali', $kembali);
+        // $kembali = Kembali::all();
+        // return view('kembali.index')->with('kembali', $kembali);
+
+        $pinjam = DB::table('pinjams')
+        ->where('status', '1')
+        ->get();
+
+        return view('pinjam.index', compact('pinjam'));
     }
 
     public function changestatus(Request $request)

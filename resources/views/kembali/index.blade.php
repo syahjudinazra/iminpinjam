@@ -13,9 +13,9 @@
                         <i class="fas fa-download fa-sm text-white-50"></i> Generate Excel</a>
                 </div>
 
-                <button type="button" class="btn btn-danger mb-2" data-toggle="modal" data-target="#exampleModal">
+                {{-- <button type="button" class="btn btn-danger mb-2" data-toggle="modal" data-target="#exampleModal">
                     <i class="fa-solid fa-plus"></i> Tambah Produk
-                </button>
+                </button> --}}
 
             @if (session()->has('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
