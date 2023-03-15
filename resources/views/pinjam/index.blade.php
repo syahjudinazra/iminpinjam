@@ -8,7 +8,13 @@
 
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">Pinjam Barang</h1>
+                    @if(request()->is('pinjam'))
+                    <h1 class="h3 mb-0 text-gray-800">Peminjaman Barang</h1>
+                    @endif
+                    @if(request()->is('kembali'))
+                    <h1 class="h3 mb-0 text-gray-800">Pengembalian Barang</h1>
+                    @endif
+
                     <a href="{{ route('export-users') }}" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm">
                         <i class="fas fa-download fa-sm text-white-50"></i> Generate Excel</a>
                 </div>
@@ -18,10 +24,6 @@
                 <i class="fa-solid fa-plus"></i> Tambah Produk
             </button>
             @endif
-
-            {{-- <button type="button" class="btn btn-danger mb-2" data-toggle="modal" data-target="#exampleModal">
-                <i class="fa-solid fa-plus"></i> Tambah Produk
-            </button> --}}
 
             @if (session()->has('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -145,9 +147,10 @@
 <div class="modal fade" id="editModal{{ $item->id }}" tabindex="-1" aria-labelledby="editModalLabel{{ $item->id }}" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form method="POST" action="{{ route('users.update', $item->id) }}">
+            <form method="POST" action="{{ route('users.update', $item->id) }}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
+
                 <div class="modal-header">
                     <h5 class="modal-title" id="editModalLabel{{ $item->id }}">Edit Data Pinjam</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -235,8 +238,8 @@
                       </div>
                       <div class="mb-3">
                         <label for="gambar" class="form-label"><b>Gambar</b></label><br>
-                        <img src="{{ asset($item->gambar) }}" width= '60' height='60'>
-                        <input class="form-control" type="file" id="gambar" name="gambar" value="{{ $item->gambar }}">
+                        <input class="form-control" type="file" id="gambar" name="gambar">
+                        {{-- <img src="{{ asset('storage/gambar/'.$item->gambar) }}" width= '60' height='60' class="img img-responsive"> --}}
                       </div>
                 </div>
                 <div class="modal-footer">
@@ -292,7 +295,7 @@
                   </div>
                   <div class="mb-3">
                     <label for="gambar" class="form-label"><b>Gambar</b></label><br>
-                    <img src="{{ asset($item->gambar) }}" width= '60' height='60' class="img img-responsive" id="gambar" name="gambar" />
+                    <img src="{{ url('/storage/gambar/'. $item->gambar ) }}" width= '60' height='60' class="img img-responsive" id="gambar" name="gambar">
                   </div>
             </div>
             <div class="modal-footer">
@@ -461,7 +464,7 @@
                   </div>
                   <div class="mb-3">
                     <label for="gambar" class="form-label"><b>Gambar</b></label><br>
-                    <img src="{{ asset($item->gambar) }}" width= '60' height='60' class="img img-responsive" id="gambar" name="gambar" />
+                    <img src="{{ url('/storage/gambar/'. $item->gambar ) }}" width= '60' height='60' class="img img-responsive" id="gambar" name="gambar">
                   </div>
            </div>
            <div class="modal-footer">
@@ -473,12 +476,12 @@
 @endforeach
 <!-- end view kembali data -->
 
-<!-- add edit Data -->
+<!-- add kembali edit Data -->
 @foreach ($pinjam as $item)
 <div class="modal fade" id="editkembaliModal{{ $item->id }}" tabindex="-1" aria-labelledby="editkembaliModalLabel{{ $item->id }}" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form method="POST" action="{{ route('users.update', $item->id) }}">
+            <form method="POST" action="{{ route('users.update', $item->id) }}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="modal-header">
@@ -563,7 +566,7 @@
                         <textarea class="form-control" id="kelengkapankirim" name="kelengkapankirim" rows="3" placeholder="Contoh:Adaptor,Dus,Docking">{{ $item->kelengkapankirim }}</textarea>
                       </div>
                       <div class="mb-3">
-                        <label for="tanggalkembali" class="form-label"><b>Tanggalkembali</b></label>
+                        <label for="tanggalkembali" class="form-label"><b>Tanggal Kembali</b></label>
                         <input type="date" class="form-control" id="tanggalkembali" name="tanggalkembali" value="{{ $item->tanggalkembali }}">
                       </div>
                       <div class="mb-3">
@@ -579,8 +582,9 @@
                         <input type="text" class="form-control" id="status" name="status" value="{{ $item->status }}" readonly>
                       </div>
                       <div class="mb-3">
-                        <label for="gambar" class="form-label"><b>Gambar</b></label>
-                        <input class="form-control" type="file" id="gambar" name="gambar" value="{{ $item->gambar }}">
+                        <label for="gambar" class="form-label"><b>Gambar</b></label><br>
+                        <input class="form-control" type="file" id="gambar" name="gambar">
+                        {{-- <img src="{{ asset('storage/gambar/'.$item->gambar) }}" width= '60' height='60' class="img img-responsive"> --}}
                       </div>
                 </div>
                 <div class="modal-footer">
@@ -599,7 +603,7 @@
                 <thead class="table-dark">
                   <th>No</th>
                   <th>Tanggal</th>
-                  {{-- <th>Gambar</th> --}}
+                  <th>Gambar</th>
                   <th>Serial Number</th>
                   <th>Tipe Device</th>
                   <th>Customer</th>
@@ -610,9 +614,9 @@
             <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $item->tanggal }}</td>
-                {{-- <td>
-                    <img src="{{ asset($item->gambar) }}" width= '60' height='60' class="img img-responsive" />
-                </td> --}}
+                <td>
+                    <img src="{{ url('/storage/gambar/'. $item->gambar ) }}" width= '60' height='60' class="img img-responsive" />
+                </td>
                 <td>{{ $item->serialnumber }}</td>
                 <td>{{ $item->device }}</td>
                 <td>{{ $item->customer }}</td>

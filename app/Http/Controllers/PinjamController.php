@@ -7,6 +7,7 @@ use App\Models\Kembali;
 use Illuminate\Http\Request;
 use App\Exports\ExportPinjam;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
 
@@ -66,31 +67,54 @@ class PinjamController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'tanggal' => 'required|max:255',
-            'gambar' => 'image|mimes:jpeg,png,jpg|max:2048',
-            'serialnumber' => 'required|max:255',
-            'device' => 'required|max:255',
-            'customer' => 'required|max:255',
-            'telp' => 'required|max:255',
-            'pengirim' => 'required|max:255',
-            'kelengkapankirim' => 'required|max:255',
-            'tanggalkembali' => 'max:255',
-            'penerima' => 'max:255',
-            'kelengkapankembali' => 'max:255',
-            'status' => 'boolean',
-        ]);
+        // $validatedData = $request->validate([
+        //     'tanggal' => 'required|max:255',
+        //     'gambar' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+        //     'serialnumber' => 'required|max:255',
+        //     'device' => 'required|max:255',
+        //     'customer' => 'required|max:255',
+        //     'telp' => 'required|max:255',
+        //     'pengirim' => 'required|max:255',
+        //     'kelengkapankirim' => 'required|max:255',
+        //     'tanggalkembali' => 'max:255',
+        //     'penerima' => 'max:255',
+        //     'kelengkapankembali' => 'max:255',
+        //     'status' => 'boolean',
+        // ]);
 
-        $validatedData = $request->all();
-        $fileName = time().$request->file('gambar')->getClientOriginalName();
-        $path = $request->file('gambar')->storeAs('images', $fileName, 'public');
-        $validatedData["gambar"] = '/storage/'.$path;
+        // $validatedData = $request->all();
+        // $fileName = time().$request->file('gambar')->getClientOriginalName();
+        // $path = $request->file('gambar')->storeAs('gambar', $fileName, 'public');
+        // $validatedData["gambar"] = '/storage/'.$path;
 
-        Pinjam::create($validatedData);
+        // Pinjam::create($validatedData);
 
-        return redirect('pinjam')->with('success', 'Data telah ditambahkan');
+        // return redirect('pinjam')->with('success', 'Data telah ditambahkan');
+
+        $pinjam = new Pinjam;
+        $pinjam->tanggal = $request->input('tanggal');
+        $pinjam->serialnumber = $request->input('serialnumber');
+        $pinjam->device = $request->input('device');
+        $pinjam->customer = $request->input('customer');
+        $pinjam->telp = $request->input('telp');
+        $pinjam->pengirim = $request->input('pengirim');
+        $pinjam->kelengkapankirim = $request->input('kelengkapankirim');
+        $pinjam->tanggalkembali = $request->input('tanggalkembali');
+        $pinjam->penerima = $request->input('penerima');
+        $pinjam->kelengkapankembali = $request->input('kelengkapankembali');
+        // $pinjam->status = $request->input('status');
+
+        if($request->hasFile('gambar')) {
+            $file = $request->file('gambar');
+            $extention = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extention;
+            $file->move('storage/gambar/', $filename);
+            $pinjam->gambar = $filename;
+        }
+
+        $pinjam->save();
+        return redirect()->back()->with('success', 'Data telah ditambahkan');
     }
-
     /**
      * Display the specified resource.
      *
@@ -129,43 +153,37 @@ class PinjamController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // $pinjam = Pinjam::find($id);
-        // $pinjam->tanggal = $request->input('tanggal');
-        // // $pinjam->gambar = $request->input('gambar');
-        // $pinjam->serialnumber = $request->input('serialnumber');
-        // $pinjam->device = $request->input('device');
-        // $pinjam->customer = $request->input('customer');
-        // $pinjam->telp = $request->input('telp');
-        // $pinjam->pengirim = $request->input('pengirim');
-        // $pinjam->kelengkapankirim = $request->input('kelengkapankirim');
-        // $pinjam->tanggalkembali = $request->input('tanggalkembali');
-        // $pinjam->penerima = $request->input('penerima');
-        // $pinjam->kelengkapankembali = $request->input('kelengkapankembali');
-        // $pinjam->status = $request->input('status');
 
-        // // Storage::putFile('path/to', $request->file('image'));
-        // $pinjam->save();
+        $pinjam = Pinjam::find($id);
+        $pinjam->tanggal = $request->input('tanggal');
+        $pinjam->serialnumber = $request->input('serialnumber');
+        $pinjam->device = $request->input('device');
+        $pinjam->customer = $request->input('customer');
+        $pinjam->telp = $request->input('telp');
+        $pinjam->pengirim = $request->input('pengirim');
+        $pinjam->kelengkapankirim = $request->input('kelengkapankirim');
+        $pinjam->tanggalkembali = $request->input('tanggalkembali');
+        $pinjam->penerima = $request->input('penerima');
+        $pinjam->kelengkapankembali = $request->input('kelengkapankembali');
+        $pinjam->status = $request->input('status');
 
-        // return redirect('pinjam')->with('success', 'Data telah diubah');
-        $request->validate([
-            'tanggal' => 'required|max:255',
-            'gambar' => 'image|mimes:jpeg,png,jpg|max:2048',
-            'serialnumber' => 'required|max:255',
-            'device' => 'required|max:255',
-            'customer' => 'required|max:255',
-            'telp' => 'required|max:255',
-            'pengirim' => 'required|max:255',
-            'kelengkapankirim' => 'required|max:255',
-            'tanggalkembali' => 'max:255',
-            'penerima' => 'max:255',
-            'kelengkapankembali' => 'max:255',
-            'status' => 'boolean',
-        ]);
+        if($request->hasFile('gambar')) {
+            $destination = 'storage/gambar/'. $pinjam->gambar;
+            if(File::exists($destination))
+            {
+                File::delete($destination);
+            }
 
-        $path = $request->file('gambar')->store('public/images');
-        $pinjam = Pinjam::findOrFail($id);
-        $pinjam->path = $path;
-        $pinjam->save();
+            $file = $request->file('gambar');
+            $extention = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extention;
+            $file->move('storage/gambar/', $filename);
+            $pinjam->gambar = $filename;
+        }
+
+        $pinjam->update();
+        return redirect()->back()->with('success', 'Data telah diubah');
+
     }
 
     /**

@@ -7,7 +7,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'IminPinjam') }}</title>
+    {{-- <link rel="shortcut icon" type="image/x-icon" href="{{asset('img/logoiminblack.PNG')}}"> --}}
 
         <!-- Custom fonts for this template-->
     <link href="{{ asset('sb2admin/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
@@ -58,23 +59,5 @@
     <script src="{{ asset('sb2admin/js/sb-admin-2.min.js')}}"></script>
 
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
-    <script>
-          $(function() {
-            $('.toggle-class').change(function() {
-                var status = $(this).prop('checked') == true ? 1 : 0;
-                var user_id = $(this).data('id');
-
-                $.ajax({
-                    type: "GET",
-                    dataType: "json",
-                    url: '/changestatus',
-                    data: {'status': status, 'id': id},
-                    success: function(data){
-                    console.log(data.success)
-                    }
-                });
-            })
-        })
-    </script>
 </body>
 </html>

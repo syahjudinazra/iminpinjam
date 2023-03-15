@@ -31,7 +31,6 @@ Route::resource('/product', ProductController::class);
 
 Route::get('/export-users',[PinjamController::class,'exportUsers'])->name('export-users');
 Route::get('/pinjam/search', [PinjamController::class, 'search'])->name('search.index');
-// Route::get('/pinjam/changestatus/{id}', [PinjamController::class, 'changestatus']);
 
 Route::get('move-data', [PinjamController::class, 'moveData'])->name('move-data');
 
@@ -41,7 +40,7 @@ Route::resource('/pinjam', PinjamController::class)->except([
 ]);
 
 Route::get('/pinjam/{id}/edit', [PinjamController::class, 'edit'])->name('users.edit');
-Route::put('/pinjam/{id}', [PinjamController::class, 'update'])->name('users.update');;
+Route::put('/pinjam/{id}', [PinjamController::class, 'update'])->name('users.update');
 Route::get('/pinjam/{id}', [PinjamController::class, 'show'])->name('users.show');
 Route::delete('/pinjam/{id}', [PinjamController::class, 'destroy'])->name('users.destroy');
 
@@ -57,4 +56,3 @@ Route::put('/kembali/{id}', [KembaliController::class, 'update'])->name('kembali
 Route::get('/kembali/{id}', [KembaliController::class, 'show'])->name('kembali.show');
 Route::delete('/kembali/{id}', [KembaliController::class, 'destroy'])->name('kembali.destroy');
 
-// Route::get('/kembali/changestatus/{id}', [KembaliController::class, 'changestatus']);
