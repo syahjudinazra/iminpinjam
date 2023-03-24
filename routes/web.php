@@ -1,8 +1,12 @@
 <?php
 
+use App\Http\Controllers\KanibalController;
 use App\Http\Controllers\KembaliController;
 use App\Http\Controllers\PinjamController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ServiceDoneController;
+use App\Http\Controllers\ServicePendingController;
+use App\Models\ServicePending;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -26,10 +30,10 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('auth')->name('home');
 
 Route::resource('/product', ProductController::class);
+Route::resource('/monitor', ProductController::class);
 
 
-
-Route::get('/export-users',[PinjamController::class,'exportUsers'])->name('export-users');
+Route::get('/export-users', [PinjamController::class, 'exportUsers'])->name('export-users');
 Route::get('/pinjam/search', [PinjamController::class, 'search'])->name('search.index');
 
 Route::get('move-data', [PinjamController::class, 'moveData'])->name('move-data');
@@ -45,7 +49,7 @@ Route::get('/pinjam/{id}', [PinjamController::class, 'show'])->name('users.show'
 Route::delete('/pinjam/{id}', [PinjamController::class, 'destroy'])->name('users.destroy');
 
 
-Route::get('/export-kembali',[KembaliController::class,'exportKembali'])->name('export-kembali');
+Route::get('/export-kembali', [KembaliController::class, 'exportKembali'])->name('export-kembali');
 
 Route::resource('/kembali', KembaliController::class)->except([
     'show', 'edit', 'update', 'destroy',
@@ -56,3 +60,33 @@ Route::put('/kembali/{id}', [KembaliController::class, 'update'])->name('kembali
 Route::get('/kembali/{id}', [KembaliController::class, 'show'])->name('kembali.show');
 Route::delete('/kembali/{id}', [KembaliController::class, 'destroy'])->name('kembali.destroy');
 
+Route::resource('/servicedone', ServiceDoneController::class)->except([
+    'show', 'edit', 'update', 'destroy',
+]);
+
+Route::get('/servicedone/{id}/edit', [ServiceDoneController::class, 'edit'])->name('servicedone.edit');
+Route::put('/servicedone/{id}', [ServiceDoneController::class, 'update'])->name('servicedone.update');
+Route::get('/servicedone/{id}', [ServiceDoneController::class, 'show'])->name('servicedone.show');
+Route::delete('/servicedone/{id}', [ServiceDoneController::class, 'destroy'])->name('servicedone.destroy');
+
+Route::resource('/servicepending', ServicePendingController::class)->except([
+    'show', 'edit', 'update', 'destroy',
+]);
+
+Route::get('/servicepending/{id}/edit', [ServicePendingController::class, 'edit'])->name('servicepending.edit');
+Route::put('/servicepending/{id}', [ServicePendingController::class, 'update'])->name('servicepending.update');
+Route::get('/servicepending/{id}', [ServicePendingController::class, 'show'])->name('servicepending.show');
+Route::delete('/servicepending/{id}', [ServicePendingController::class, 'destroy'])->name('servicepending.destroy');
+
+Route::get('/servicepending/finish/{id}', [ServicePendingController::class, 'finish']);
+
+Route::resource('/kanibal', KanibalController::class)->except([
+    'show', 'edit', 'update', 'destroy',
+]);
+
+Route::get('/kanibal/{id}/edit', [KanibalController::class, 'edit'])->name('kanibal.edit');
+Route::put('/kanibal/{id}', [KanibalController::class, 'update'])->name('kanibal.update');
+Route::get('/kanibal/{id}', [KanibalController::class, 'show'])->name('kanibal.show');
+Route::delete('/kanibal/{id}', [KanibalController::class, 'destroy'])->name('kanibal.destroy');
+
+Route::get('/kanibal/finish/{id}', [KanibalController::class, 'finish']);

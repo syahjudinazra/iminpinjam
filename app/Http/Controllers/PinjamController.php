@@ -24,28 +24,29 @@ class PinjamController extends Controller
         // return view('pinjam.index')->with('pinjam', $pinjam);
 
         $pinjam = DB::table('pinjams')
-        ->where('status', '0')
-        ->get();
+            ->where('status', '0')
+            ->get();
 
         return view('pinjam.index', compact('pinjam'));
     }
 
-    public function exportUsers(Request $request){
+    public function exportUsers(Request $request)
+    {
         return Excel::download(new ExportPinjam, 'DataPinjam.xlsx');
     }
 
     public function search()
     {
-    $pinjam = Pinjam::latest();
-    if (request()->has('search')) {
-        $pinjam->where('tanggal', 'Like', '%' . request()->input('search') . '%');
-        $pinjam->orWhere('serialnumber', 'Like', '%' . request()->input('search') . '%');
-        $pinjam->orWhere('device', 'Like', '%' . request()->input('search') . '%');
-        $pinjam->orWhere('customer', 'Like', '%' . request()->input('search') . '%');
-    }
-    $pinjam = $pinjam->paginate(5);
-    return view('pinjam.index',compact('pinjam'))
-        ->with('i', (request()->input('page', 1) - 1) * 5);
+        $pinjam = Pinjam::latest();
+        if (request()->has('search')) {
+            $pinjam->where('tanggal', 'Like', '%' . request()->input('search') . '%');
+            $pinjam->orWhere('serialnumber', 'Like', '%' . request()->input('search') . '%');
+            $pinjam->orWhere('device', 'Like', '%' . request()->input('search') . '%');
+            $pinjam->orWhere('customer', 'Like', '%' . request()->input('search') . '%');
+        }
+        $pinjam = $pinjam->paginate(5);
+        return view('pinjam.index', compact('pinjam'))
+            ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
 
@@ -104,10 +105,10 @@ class PinjamController extends Controller
         $pinjam->kelengkapankembali = $request->input('kelengkapankembali');
         // $pinjam->status = $request->input('status');
 
-        if($request->hasFile('gambar')) {
+        if ($request->hasFile('gambar')) {
             $file = $request->file('gambar');
             $extention = $file->getClientOriginalExtension();
-            $filename = time().'.'.$extention;
+            $filename = time() . '.' . $extention;
             $file->move('storage/gambar/', $filename);
             $pinjam->gambar = $filename;
         }
@@ -123,11 +124,11 @@ class PinjamController extends Controller
      */
     public function show($id)
     {
-    // Find the data by id
-    $pinjam = Pinjam::findOrFail($id);
+        // Find the data by id
+        $pinjam = Pinjam::findOrFail($id);
 
-    // // Return the view with the data
-    return view('pinjam.index', compact('pinjam'));
+        // // Return the view with the data
+        return view('pinjam.index', compact('pinjam'));
     }
 
     /**
@@ -167,23 +168,21 @@ class PinjamController extends Controller
         $pinjam->kelengkapankembali = $request->input('kelengkapankembali');
         $pinjam->status = $request->input('status');
 
-        if($request->hasFile('gambar')) {
-            $destination = 'storage/gambar/'. $pinjam->gambar;
-            if(File::exists($destination))
-            {
+        if ($request->hasFile('gambar')) {
+            $destination = 'storage/gambar/' . $pinjam->gambar;
+            if (File::exists($destination)) {
                 File::delete($destination);
             }
 
             $file = $request->file('gambar');
             $extention = $file->getClientOriginalExtension();
-            $filename = time().'.'.$extention;
+            $filename = time() . '.' . $extention;
             $file->move('storage/gambar/', $filename);
             $pinjam->gambar = $filename;
         }
 
         $pinjam->update();
         return redirect()->back()->with('success', 'Data telah diubah');
-
     }
 
     /**
