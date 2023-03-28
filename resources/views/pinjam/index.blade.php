@@ -14,7 +14,7 @@
                 <h1 class="h3 mb-0 text-gray-800">Pengembalian Barang</h1>
             @endif
 
-            <a href="{{ route('export-users') }}" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm">
+            <a href="{{ route('export-pinjam') }}" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm">
                 <i class="fas fa-download fa-sm text-white-50"></i> Generate Excel</a>
         </div>
 
@@ -31,6 +31,20 @@
             </div>
         @endif
 
+        <form method="GET" action="{{ route('search.index') }}"
+            class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
+            style="float: right">
+            <div class="input-group" style="flex-wrap: nowrap;">
+                <div class="form-outline ">
+                    <input type="search" id="form1" name="search" class="form-control"
+                        value="{{ request()->input('search') }}" />
+                    <label class="form-label" for="form1">Search</label>
+                </div>
+                <button type="submit" class="btn btn-danger d-inline">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </form>
 
         <!-- Tambah Data -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -79,7 +93,8 @@
                                     <option value="D3 DS1" data-tokens="D3 DS1">D3 DS1</option>
                                     <option value="D3 DS1 Extention Display" data-tokens="D3 DS1 Extention Display">D3 DS1
                                         Extention Display</option>
-                                    <option value="D3 DS1 Extention Display TS" data-tokens="D3 DS1 Extention Display TS">D3
+                                    <option value="D3 DS1 Extention Display TS" data-tokens="D3 DS1 Extention Display TS">
+                                        D3
                                         DS1 Extention Display TS</option>
                                     <option value="D4-502" data-tokens="D4-502">D4-502</option>
                                     <option value="D4-503" data-tokens="D4-503">D4-503</option>
@@ -183,7 +198,8 @@
                                 <select class="form-control selectpicker" name="device" id="device"
                                     data-live-search="true" required>
                                     <option value="Pilih Model">Pilih Model</option>
-                                    <option value="D1" data-tokens="D1" {{ $item->device == 'D1' ? 'selected' : '' }}>
+                                    <option value="D1" data-tokens="D1"
+                                        {{ $item->device == 'D1' ? 'selected' : '' }}>
                                         D1</option>
                                     <option value="D1 Moka" data-tokens="D1 Moka"
                                         {{ $item->device == 'D1 Moka' ? 'selected' : '' }}>D1 Moka</option>

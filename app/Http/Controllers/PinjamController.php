@@ -3,13 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pinjam;
-use App\Models\Kembali;
 use Illuminate\Http\Request;
 use App\Exports\ExportPinjam;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Maatwebsite\Excel\Facades\Excel;
-use Illuminate\Support\Facades\Storage;
 
 class PinjamController extends Controller
 {
@@ -20,17 +18,17 @@ class PinjamController extends Controller
      */
     public function index()
     {
-        // $pinjam = Pinjam::all();
-        // return view('pinjam.index')->with('pinjam', $pinjam);
 
         $pinjam = DB::table('pinjams')
             ->where('status', '0')
             ->get();
 
+        // $pinjam = DB::table('pinjams')->paginate(5);
+
         return view('pinjam.index', compact('pinjam'));
     }
 
-    public function exportUsers(Request $request)
+    public function exportPinjam()
     {
         return Excel::download(new ExportPinjam, 'DataPinjam.xlsx');
     }

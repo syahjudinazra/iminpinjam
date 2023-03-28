@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Kanibal;
 use App\Models\Monitor;
 use App\Models\ServiceDone;
-use App\Models\ServicePending;
 use Illuminate\Http\Request;
+use App\Models\ServicePending;
+use Illuminate\Support\Facades\DB;
 
 class MonitorController extends Controller
 {
@@ -15,7 +16,16 @@ class MonitorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, ServiceDone $servicedone, ServicePending $servicepending, Kanibal $kanibal)
+    public function index()
+    {
+        return view('monitor.index', [
+            'barang' => DB::table('service_dones')->orderBy('tanggal', 'desc')->paginate(10, ['*'], 'servicedone'),
+            'barangsp' => DB::table('service_pendings')->orderBy('tanggal', 'desc')->paginate(10, ['*'], 'servicepending'),
+            'kanibal' => DB::table('kanibals')->orderBy('tanggal', 'desc')->paginate(10, ['*'], 'kanibal')
+        ]);
+    }
+
+    public function total(Request $request, ServiceDone $servicedone, ServicePending $servicepending, Kanibal $kanibal)
     {
         $servicedone = ServiceDone::count();
         $servicepending = ServicePending::count();
@@ -54,7 +64,7 @@ class MonitorController extends Controller
      * @param  \App\Models\Monitor  $monitor
      * @return \Illuminate\Http\Response
      */
-    public function show(Monitor $monitor)
+    public function show()
     {
         //
     }
@@ -65,7 +75,7 @@ class MonitorController extends Controller
      * @param  \App\Models\Monitor  $monitor
      * @return \Illuminate\Http\Response
      */
-    public function edit(Monitor $monitor)
+    public function edit()
     {
         //
     }
@@ -77,7 +87,7 @@ class MonitorController extends Controller
      * @param  \App\Models\Monitor  $monitor
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Monitor $monitor)
+    public function update(Request $request,)
     {
         //
     }
@@ -88,7 +98,7 @@ class MonitorController extends Controller
      * @param  \App\Models\Monitor  $monitor
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Monitor $monitor)
+    public function destroy()
     {
         //
     }

@@ -9,7 +9,7 @@
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Service Pending</h1>
 
-            <a href="{{ route('export-users') }}" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm">
+            <a href="{{ route('export-servicepending') }}" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm">
                 <i class="fas fa-download fa-sm text-white-50"></i> Generate Excel</a>
         </div>
 
@@ -586,8 +586,8 @@
             <tbody>
                 @foreach ($servicepending as $item)
                     <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td>{{ $item->tanggal }}</td>
+                        <td>{{ $servicepending->firstItem() + $loop->index }}</td>
+                        <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d/m/Y') }}</td>
                         <td>{{ $item->serialnumber }}</td>
                         <td>{{ $item->pelanggan }}</td>
                         <td>{{ $item->model }}</td>
@@ -613,5 +613,6 @@
                 @endforeach
             </tbody>
         </table>
+        {!! $servicepending->onEachSide(10)->links('pagination::bootstrap-5') !!}
     </div>
 @endsection

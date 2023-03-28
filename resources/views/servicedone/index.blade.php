@@ -9,7 +9,7 @@
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Service Done</h1>
 
-            <a href="{{ route('export-users') }}" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm">
+            <a href="{{ route('export-servicedone') }}" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm">
                 <i class="fas fa-download fa-sm text-white-50"></i> Generate Excel</a>
         </div>
 
@@ -24,6 +24,20 @@
             </div>
         @endif
 
+        <form method="GET" action="{{ route('search.servicedone') }}"
+            class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
+            style="float: right">
+            <div class="input-group" style="flex-wrap: nowrap;">
+                <div class="form-outline ">
+                    <input type="search" id="form1" name="search" class="form-control"
+                        value="{{ request()->input('search') }}" />
+                    <label class="form-label" for="form1">Search</label>
+                </div>
+                <button type="submit" class="btn btn-danger d-inline">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </form>
 
         <!-- Tambah Data -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -154,7 +168,8 @@
 
                             <div class="form-group">
                                 <label for="teknisi"><b>Teknisi</b></label>
-                                <select class="form-control" id="teknisi" name="teknisi" required>
+                                <select class="form-control" id="teknisi" name="teknisi"
+                                    value="{{ old('teknisi') }}">
                                     <option>Pilih Teknisi</option>
                                     <option>Khaerul</option>
                                     <option>Ozi</option>
@@ -586,8 +601,8 @@
             <tbody>
                 @foreach ($servicedone as $item)
                     <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td>{{ $item->tanggal }}</td>
+                        <td>{{ $servicedone->firstItem() + $loop->index }}</td>
+                        <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d/m/Y') }}</td>
                         <td>{{ $item->serialnumber }}</td>
                         <td>{{ $item->pelanggan }}</td>
                         <td>{{ $item->model }}</td>
@@ -610,5 +625,6 @@
                 @endforeach
             </tbody>
         </table>
+        {!! $servicedone->onEachSide(10)->links('pagination::bootstrap-5') !!}
     </div>
 @endsection

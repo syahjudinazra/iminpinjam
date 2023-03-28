@@ -23,8 +23,10 @@ class KembaliController extends Controller
         // return view('kembali.index')->with('kembali', $kembali);
 
         $pinjam = DB::table('pinjams')
-        ->where('status', '1')
-        ->get();
+            ->where('status', '1')
+            ->get();
+
+        // $pinjam = DB::table('pinjams')->paginate(5);
 
         return view('pinjam.index', compact('pinjam'));
     }
@@ -35,10 +37,11 @@ class KembaliController extends Controller
         $kembali->status = $request->status;
         $kembali->save();
 
-        return response()->json(['success'=>'Status change successfully.']);
+        return response()->json(['success' => 'Status change successfully.']);
     }
 
-    public function exportKembali(Request $request){
+    public function exportKembali(Request $request)
+    {
         return Excel::download(new ExportKembali, 'Data Kembali.xlsx');
     }
 
@@ -76,9 +79,9 @@ class KembaliController extends Controller
         ]);
 
         $validatedData = $request->all();
-        $fileName = time().$request->file('gambar')->getClientOriginalName();
+        $fileName = time() . $request->file('gambar')->getClientOriginalName();
         $path = $request->file('gambar')->storeAs('images', $fileName, 'public');
-        $validatedData["gambar"] = '/storage/'.$path;
+        $validatedData["gambar"] = '/storage/' . $path;
 
         Kembali::create($validatedData);
 
@@ -93,11 +96,11 @@ class KembaliController extends Controller
      */
     public function show(Kembali $kembali, $id)
     {
-            // Find the data by id
-    $kembali = Kembali::findOrFail($id);
+        // Find the data by id
+        $kembali = Kembali::findOrFail($id);
 
-    // Return the view with the data
-    return view('kembali.index', compact('kembali'));
+        // Return the view with the data
+        return view('kembali.index', compact('kembali'));
     }
 
     /**
@@ -147,13 +150,13 @@ class KembaliController extends Controller
      */
     public function destroy($id)
     {
-                // Find the data by id
-                $kembali = Kembali::findOrFail($id);
+        // Find the data by id
+        $kembali = Kembali::findOrFail($id);
 
-                // Delete the kembali
-                $kembali->delete();
+        // Delete the kembali
+        $kembali->delete();
 
-                // Redirect back with a success message
-                return redirect()->back()->with('success', 'Data has been deleted successfully!');
+        // Redirect back with a success message
+        return redirect()->back()->with('success', 'Data has been deleted successfully!');
     }
 }

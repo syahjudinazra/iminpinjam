@@ -18,7 +18,6 @@ class ServiceDone extends Model
         'android',
         'garansi',
         'kerusakan',
-        'kerusakanbawaan',
         'teknisi',
         'perbaikan',
         'snkanibal',

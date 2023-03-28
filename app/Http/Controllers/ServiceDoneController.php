@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\ServiceDone;
 use Illuminate\Http\Request;
+use App\Exports\ServiceDoneExport;
+use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ServiceDoneController extends Controller
 {
@@ -14,8 +17,31 @@ class ServiceDoneController extends Controller
      */
     public function index()
     {
-        $servicedone = ServiceDone::all();
-        return view('servicedone.index')->with('servicedone', $servicedone);
+        $servicedone = DB::table('service_dones')->orderBy('tanggal', 'desc')->paginate(10);
+        return view('servicedone.index', compact('servicedone'));
+
+        // return response()->json([
+        //     'data' => $servicedone
+        // ]);
+    }
+
+    public function exportServiceDone()
+    {
+        return Excel::download(new ServiceDoneExport, 'DataServiceDone.xlsx');
+    }
+
+    public function search()
+    {
+        $servicedone = ServiceDone::latest();
+        if (request()->has('search')) {
+            $servicedone->where('tanggal', 'Like', '%' . request()->input('search') . '%');
+            $servicedone->orWhere('serialnumber', 'Like', '%' . request()->input('search') . '%');
+            $servicedone->orWhere('pelanggan', 'Like', '%' . request()->input('search') . '%');
+            $servicedone->orWhere('model', 'Like', '%' . request()->input('search') . '%');
+        }
+        $servicedone = $servicedone->paginate(5);
+        return view('servicedone.index', compact('servicedone'))
+            ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**

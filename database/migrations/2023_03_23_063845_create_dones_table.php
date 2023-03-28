@@ -19,16 +19,15 @@ return new class extends Migration
             $table->string('serialnumber');
             $table->string('pelanggan');
             $table->string('model');
-            $table->string('ram')->nullable();
-            $table->string('android')->nullable();
-            $table->string('garansi')->nullable();
+            $table->string('ram');
+            $table->string('android');
+            $table->string('garansi');
             $table->string('kerusakan');
-            $table->boolean('kerusakanbawaan')->default(0);
             $table->string('teknisi');
-            $table->text('perbaikan');
+            $table->string('perbaikan');
             $table->string('snkanibal');
             $table->string('nosparepart');
-            $table->string('note')->nullable();
+            $table->string('note');
             $table->timestamps();
         });
     }

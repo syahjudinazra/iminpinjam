@@ -18,7 +18,6 @@ class ServicePending extends Model
         'android',
         'garansi',
         'kerusakan',
-        'kerusakanbawaan',
         'teknisi',
         'perbaikan',
         'snkanibal',

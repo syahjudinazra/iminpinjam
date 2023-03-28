@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\KanibalExport;
 use App\Models\Kanibal;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class KanibalController extends Controller
 {
@@ -14,8 +17,13 @@ class KanibalController extends Controller
      */
     public function index()
     {
-        $kanibal = Kanibal::all();
-        return view('kanibal.index')->with('kanibal', $kanibal);
+        $kanibal = DB::table('kanibals')->orderBy('tanggal', 'desc')->paginate(10);
+        return view('kanibal.index', compact('kanibal'));
+    }
+
+    public function exportKanibal()
+    {
+        return Excel::download(new KanibalExport, 'DataKanibal.xlsx');
     }
 
     /**
@@ -126,5 +134,35 @@ class KanibalController extends Controller
 
         // Redirect back with a success message
         return redirect()->back()->with('success', 'Data telah dihapus');
+    }
+
+    public function finish(Kanibal $kanibal, $id)
+    {
+
+        // Ambil data dari tabel sumber
+        $kanibal = DB::table('kanibals')->where('id', $id)->first();
+
+        // Simpan data ke tabel tujuan
+        DB::table('service_dones')->insert([
+            'tanggal'     =>   $kanibal->tanggal,
+            'serialnumber'   =>   $kanibal->serialnumber,
+            'pelanggan'   =>   $kanibal->pelanggan,
+            'model'   =>   $kanibal->model,
+            'ram'   =>   $kanibal->ram,
+            'android'   =>   $kanibal->android,
+            'garansi'   =>   $kanibal->garansi,
+            'kerusakan'   =>   $kanibal->kerusakan,
+            'teknisi'   =>   $kanibal->teknisi,
+            'perbaikan'   =>   $kanibal->perbaikan,
+            'snkanibal'   =>   $kanibal->snkanibal,
+            'nosparepart'   =>   $kanibal->nosparepart,
+            'note'   =>   $kanibal->note,
+        ]);
+
+        // Hapus data dari tabel sumber
+        DB::table('kanibals')->where('id', $id)->delete();
+
+        // Redirect ke halaman yang diinginkan
+        return redirect('/servicedone')->with('success', 'Data telah dipindahkan');
     }
 }

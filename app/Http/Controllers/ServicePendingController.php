@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\ServicePending;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ServicePendingExport;
 
 class ServicePendingController extends Controller
 {
@@ -15,8 +17,13 @@ class ServicePendingController extends Controller
      */
     public function index()
     {
-        $servicepending = ServicePending::all();
-        return view('servicepending.index')->with('servicepending', $servicepending);
+        $servicepending = DB::table('service_pendings')->orderBy('tanggal', 'desc')->paginate(10);
+        return view('servicepending.index', compact('servicepending'));
+    }
+
+    public function exportServicePending()
+    {
+        return Excel::download(new ServicePendingExport, 'DataServicePending.xlsx');
     }
 
     /**
@@ -129,52 +136,33 @@ class ServicePendingController extends Controller
         return redirect()->back()->with('success', 'Data telah dihapus');
     }
 
-    //move data table
-    public function finish(Request $request, ServicePending $servicepending)
+    public function finish(ServicePending $servicepending, $id)
     {
-        // $servicepending = DB::table('service_pendings')->where('id', '' . $servicepending->id . '')->first();
 
-        // DB::table('service_dones')->insert(
-        //     array(
-        //         'tanggal'     =>   $servicepending->tanggal,
-        //         'serialnumber'   =>   $servicepending->serialnumber,
-        //         'pelanggan'   =>   $servicepending->pelanggan,
-        //         'model'   =>   $servicepending->model,
-        //         'ram'   =>   $servicepending->ram,
-        //         'android'   =>   $servicepending->android,
-        //         'garansi'   =>   $servicepending->garansi,
-        //         'kerusakan'   =>   $servicepending->kerusakan,
-        //         'teknisi'   =>   $servicepending->teknisi,
-        //         'perbaikan'   =>   $servicepending->perbaikan,
-        //         'snkanibal'   =>   $servicepending->snkanibal,
-        //         'nosparepart'   =>   $servicepending->nosparepart,
-        //         'note'   =>   $servicepending->note,
-        //     )
-        // );
-        // DB::table('service_pendings')->where('id', $servicepending->id)->delete();
-        // return redirect('/servicedone')->with('success', 'Data telah dipindahkan');
+        // Ambil data dari tabel sumber
+        $servicepending = DB::table('service_pendings')->where('id', $id)->first();
 
-        $servicepending = DB::table('service_pendings')->get();
+        // Simpan data ke tabel tujuan
+        DB::table('service_dones')->insert([
+            'tanggal'     =>   $servicepending->tanggal,
+            'serialnumber'   =>   $servicepending->serialnumber,
+            'pelanggan'   =>   $servicepending->pelanggan,
+            'model'   =>   $servicepending->model,
+            'ram'   =>   $servicepending->ram,
+            'android'   =>   $servicepending->android,
+            'garansi'   =>   $servicepending->garansi,
+            'kerusakan'   =>   $servicepending->kerusakan,
+            'teknisi'   =>   $servicepending->teknisi,
+            'perbaikan'   =>   $servicepending->perbaikan,
+            'snkanibal'   =>   $servicepending->snkanibal,
+            'nosparepart'   =>   $servicepending->nosparepart,
+            'note'   =>   $servicepending->note,
+        ]);
 
-        foreach ($servicepending as $data) {
-            DB::table('service_dones')->insert([
-                'tanggal' => $data->tanggal,
-                'serialnumber' => $data->serialnumber,
-                'pelanggan' => $data->pelanggan,
-                'model' => $data->model,
-                'ram' => $data->ram,
-                'android' => $data->android,
-                'garansi' => $data->garansi,
-                'kerusakan' => $data->kerusakan,
-                'teknisi' => $data->teknisi,
-                'perbaikan' => $data->perbaikan,
-                'snkanibal' => $data->snkanibal,
-                'nosparepart' => $data->nosparepart,
-                'note' => $data->note,
-                // dst.
-            ]);
-        }
+        // Hapus data dari tabel sumber
+        DB::table('service_pendings')->where('id', $id)->delete();
 
-        return "Data berhasil dikirim ke tabel tujuan";
+        // Redirect ke halaman yang diinginkan
+        return redirect('/servicedone')->with('success', 'Data telah dipindahkan');
     }
 }

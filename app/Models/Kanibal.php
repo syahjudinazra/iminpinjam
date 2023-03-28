@@ -18,7 +18,6 @@ class Kanibal extends Model
         'android',
         'garansi',
         'kerusakan',
-        'kerusakanbawaan',
         'teknisi',
         'perbaikan',
         'snkanibal',
