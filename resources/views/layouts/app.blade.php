@@ -65,6 +65,7 @@
     <script src="{{ asset('sb2admin/js/sb-admin-2.min.js') }}"></script>
 
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
 </body>
 
 </html>

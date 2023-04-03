@@ -19,8 +19,8 @@ class MonitorController extends Controller
     public function index()
     {
         return view('monitor.index', [
-            'barang' => DB::table('service_dones')->orderBy('tanggal', 'desc')->paginate(10, ['*'], 'servicedone'),
-            'barangsp' => DB::table('service_pendings')->orderBy('tanggal', 'desc')->paginate(10, ['*'], 'servicepending'),
+            'servicedone' => DB::table('service_dones')->orderBy('tanggal', 'desc')->paginate(10, ['*'], 'servicedone'),
+            'servicepending' => DB::table('service_pendings')->orderBy('tanggal', 'desc')->paginate(10, ['*'], 'servicepending'),
             'kanibal' => DB::table('kanibals')->orderBy('tanggal', 'desc')->paginate(10, ['*'], 'kanibal')
         ]);
     }

@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('tanggalkembali')->nullable();
             $table->string('penerima')->nullable();
             $table->string('kelengkapankembali')->nullable();
-            $table->boolean('status')->default('0');
+            $table->string('status')->default('0');
             // $table->enum('status', ['0', '1'])->default('0');
             $table->timestamps();
         });

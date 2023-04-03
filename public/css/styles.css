@@ -1,14 +1,16 @@
-
-.navbar-nav .nav-link.active, .navbar-nav .show>.nav-link {
+.navbar-nav .nav-link.active,
+.navbar-nav .show > .nav-link {
     color: white !important;
     background-color: #f6323f !important;
     font-weight: bold !important;
 }
 
-.fa-box:before {
-    color: #d1d1d1 !important;
+.scroll {
+    height: 100vh;
+    overflow: scroll;
 }
 
-.fa-tachometer-alt:before {
-    color: #d1d1d1 !important;
+.headfix {
+    position: sticky;
+    top: 0;
 }

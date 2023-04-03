@@ -39,9 +39,8 @@ class ServiceDoneController extends Controller
             $servicedone->orWhere('pelanggan', 'Like', '%' . request()->input('search') . '%');
             $servicedone->orWhere('model', 'Like', '%' . request()->input('search') . '%');
         }
-        $servicedone = $servicedone->paginate(5);
-        return view('servicedone.index', compact('servicedone'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+        $servicedone = $servicedone->paginate(10);
+        return view('servicedone.index', compact('servicedone'));
     }
 
     /**

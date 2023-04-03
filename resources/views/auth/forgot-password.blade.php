@@ -9,8 +9,8 @@
                 <div class="card shadow-sm">
                     <div class="card-body">
                         <div class="mb-4">
-                            <h5>Reset Password</h5>
-                            <p class="mb-2">Note: Jika berhasil akan kembali ke menu login
+                            <h5>Forgot Password?</h5>
+                            <p class="mb-2">Enter your registered email ID to reset the password
                             </p>
                         </div>
                         @if ($errors->any())
@@ -30,21 +30,17 @@
                                 {{ session()->get('status') }}
                             </div>
                         @endif
-                        <form action="{{ route('update.password') }}" method="post">
+
+                        <form action="{{ route('password.email') }}" method="post">
                             @csrf
                             <div class="mb-3">
-                                <input type="hidden" name="token" value="{{ request()->token }}">
-                                <input type="hidden" name="email" value="{{ request()->email }}">
-                                <label for="password" class="form-label"><b>Password</b></label>
-                                <input type="password" id="password" class="form-control mb-2" name="password"
-                                    placeholder="Enter Your New Password">
-                                <label for="password_confirmation" class="form-label"><b>Password Confirmation</b></label>
-                                <input type="password" id="password_confirmation" class="form-control"
-                                    name="password_confirmation" placeholder="Enter Your Password Confirmation">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" id="email" class="form-control" name="email"
+                                    placeholder="Enter Your Email" required="">
                             </div>
                             <div class="mb-3 d-grid">
-                                <button type="submit" class="btn btn-primary" value="Update Password">
-                                    Update Password
+                                <button type="submit" class="btn btn-primary" value="Request Password Reset">
+                                    Reset Password
                                 </button>
                             </div>
                             {{-- <span>Don't have an account? <a href="/login">sign in</a></span> --}}

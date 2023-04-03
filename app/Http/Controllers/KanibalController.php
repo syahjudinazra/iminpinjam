@@ -26,6 +26,19 @@ class KanibalController extends Controller
         return Excel::download(new KanibalExport, 'DataKanibal.xlsx');
     }
 
+    public function search()
+    {
+        $kanibal = Kanibal::latest();
+        if (request()->has('search')) {
+            $kanibal->where('tanggal', 'Like', '%' . request()->input('search') . '%');
+            $kanibal->orWhere('serialnumber', 'Like', '%' . request()->input('search') . '%');
+            $kanibal->orWhere('pelanggan', 'Like', '%' . request()->input('search') . '%');
+            $kanibal->orWhere('model', 'Like', '%' . request()->input('search') . '%');
+        }
+        $kanibal = $kanibal->paginate(10);
+        return view('kanibal.index', compact('kanibal'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *

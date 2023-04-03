@@ -42,9 +42,9 @@ class PinjamController extends Controller
             $pinjam->orWhere('device', 'Like', '%' . request()->input('search') . '%');
             $pinjam->orWhere('customer', 'Like', '%' . request()->input('search') . '%');
         }
-        $pinjam = $pinjam->paginate(5);
-        return view('pinjam.index', compact('pinjam'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+        $pinjam = $pinjam->paginate(10);
+        return view('pinjam.index', compact('pinjam'));
+        // ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
 
@@ -66,29 +66,6 @@ class PinjamController extends Controller
      */
     public function store(Request $request)
     {
-        // $validatedData = $request->validate([
-        //     'tanggal' => 'required|max:255',
-        //     'gambar' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-        //     'serialnumber' => 'required|max:255',
-        //     'device' => 'required|max:255',
-        //     'customer' => 'required|max:255',
-        //     'telp' => 'required|max:255',
-        //     'pengirim' => 'required|max:255',
-        //     'kelengkapankirim' => 'required|max:255',
-        //     'tanggalkembali' => 'max:255',
-        //     'penerima' => 'max:255',
-        //     'kelengkapankembali' => 'max:255',
-        //     'status' => 'boolean',
-        // ]);
-
-        // $validatedData = $request->all();
-        // $fileName = time().$request->file('gambar')->getClientOriginalName();
-        // $path = $request->file('gambar')->storeAs('gambar', $fileName, 'public');
-        // $validatedData["gambar"] = '/storage/'.$path;
-
-        // Pinjam::create($validatedData);
-
-        // return redirect('pinjam')->with('success', 'Data telah ditambahkan');
 
         $pinjam = new Pinjam;
         $pinjam->tanggal = $request->input('tanggal');

@@ -26,21 +26,12 @@ class KembaliController extends Controller
             ->where('status', '1')
             ->get();
 
-        // $pinjam = DB::table('pinjams')->paginate(5);
+        // $pinjam = DB::table('pinjams')->paginate(10);
 
         return view('pinjam.index', compact('pinjam'));
     }
 
-    public function changestatus(Request $request)
-    {
-        $kembali = Kembali::find($request->id);
-        $kembali->status = $request->status;
-        $kembali->save();
-
-        return response()->json(['success' => 'Status change successfully.']);
-    }
-
-    public function exportKembali(Request $request)
+    public function exportKembali()
     {
         return Excel::download(new ExportKembali, 'Data Kembali.xlsx');
     }

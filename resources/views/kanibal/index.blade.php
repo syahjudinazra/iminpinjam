@@ -24,6 +24,20 @@
             </div>
         @endif
 
+        <form method="GET" action="{{ route('search.kanibal') }}"
+            class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
+            style="float: right">
+            <div class="input-group" style="flex-wrap: nowrap;">
+                <div class="form-outline ">
+                    <input type="search" id="form1" name="search" class="form-control"
+                        value="{{ request()->input('search') }}" />
+                    <label class="form-label" for="form1">Search</label>
+                </div>
+                <button type="submit" class="btn btn-danger d-inline">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </form>
 
         <!-- Tambah Data -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -53,7 +67,7 @@
                             <div class="form-group">
                                 <label for="pelanggan"><b>Pelanggan</b></label>
                                 <input type="text" class="form-control" id="pelanggan" name="pelanggan"
-                                    placeholder="Masukan Nama Pelanggan" value="{{ old('pelanggan') }}">
+                                    placeholder="Masukan Nama Pelanggan" value="iMinID_stock" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="model"><b>Model</b></label>
@@ -165,17 +179,17 @@
                             <div class="form-group">
                                 <label for="perbaikan"><b>Perbaikan</b></label>
                                 <input type="text" class="form-control" id="perbaikan" name="perbaikan"
-                                    placeholder="Masukan Perbaikan" value="{{ old('perbaikan') }}">
+                                    placeholder="Masukan Perbaikan" value="-" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="snkanibal"><b>SN Kanibal</b></label>
                                 <input type="text" class="form-control" id="snkanibal" name="snkanibal"
-                                    placeholder="Masukan SN Kanibal" value="{{ old('snkanibal') }}">
+                                    placeholder="Masukan SN Kanibal" value="-" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="nosparepart"><b>No SparePart</b></label>
                                 <input type="text" class="form-control" id="nosparepart" name="nosparepart"
-                                    placeholder="Masukan No SparePart" value="{{ old('nosparepart') }}">
+                                    placeholder="Masukan No SparePart" value="-" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="note"><b>Note</b></label>
@@ -225,7 +239,7 @@
                             <div class="mb-3">
                                 <label for="pelanggan" class="form-label"><b>Pelanggan</b></label>
                                 <input type="text" class="form-control" id="pelanggan" name="pelanggan"
-                                    value="{{ $item->pelanggan }}">
+                                    value="iMinID_stock" readonly>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="model"><b>Model</b></label>

@@ -26,6 +26,19 @@ class ServicePendingController extends Controller
         return Excel::download(new ServicePendingExport, 'DataServicePending.xlsx');
     }
 
+    public function search()
+    {
+        $servicepending = ServicePending::latest();
+        if (request()->has('search')) {
+            $servicepending->where('tanggal', 'Like', '%' . request()->input('search') . '%');
+            $servicepending->orWhere('serialnumber', 'Like', '%' . request()->input('search') . '%');
+            $servicepending->orWhere('pelanggan', 'Like', '%' . request()->input('search') . '%');
+            $servicepending->orWhere('model', 'Like', '%' . request()->input('search') . '%');
+        }
+        $servicepending = $servicepending->paginate(10);
+        return view('servicepending.index', compact('servicepending'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *

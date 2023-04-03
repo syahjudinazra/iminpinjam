@@ -20,4 +20,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('servicedone', [ServiceDoneController::class, 'index']);
+Route::get('/pinjam/{id}', [PinjamController::class, 'show']);

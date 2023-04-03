@@ -771,9 +771,9 @@
     @endforeach
     <!-- end kembali edit data -->
 
-    <div class="container-fluid mt-3">
-        <table class="table table-striped table-hover">
-            <thead class="table-dark">
+    <div class="container-fluid scroll mt-3 ">
+        <table class="table table-striped table-hover table-bordered">
+            <thead class="table-dark headfix">
                 <th>No</th>
                 <th>Tanggal</th>
                 {{-- <th>Gambar</th> --}}
@@ -786,7 +786,7 @@
                 @foreach ($pinjam as $item)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $item->tanggal }}</td>
+                        <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d/m/Y') }}</td>
                         {{-- <td>
                     <img src="{{ url('/storage/gambar/'. $item->gambar ) }}" width= '60' height='60' class="img img-responsive" />
                 </td> --}}
@@ -830,5 +830,8 @@
                 @endforeach
             </tbody>
         </table>
+        {{-- @if (request()->is('pinjam'))
+            {!! $pinjam->onEachSide(10)->links('pagination::bootstrap-5') !!}
+        @endif --}}
     </div>
 @endsection
