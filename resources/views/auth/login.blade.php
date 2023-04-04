@@ -26,14 +26,14 @@
 
                                         <div class="form-outline mb-4">
                                             <input type="email" name="email" id="email"
-                                                class="form-control form-control-lg" />
+                                                class="form-control form-control-lg" style="color: black !important" />
                                             <label class="form-label" for="email">{{ __('Email Address') }}</label>
                                         </div>
 
                                         <div>
                                             <div class="form-outline mb-4">
                                                 <input type="password" name="password" id="password"
-                                                    class="form-control form-control-lg" />
+                                                    class="form-control form-control-lg" style="color: black !important" />
                                                 <label class="form-label" for="password">{{ __('Password') }}</label>
                                             </div>
                                             <div>

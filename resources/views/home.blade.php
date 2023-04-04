@@ -2,41 +2,43 @@
 @extends('layouts.navbar')
 
 @section('content')
-            <!-- Begin Page Content -->
-            <div class="container-fluid">
-
-                <!-- Page Heading -->
-                <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">Dashboard Admin</h1>
-                    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm">
-                        <i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
-                </div>
-
-            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
-                Add New Product
-            </button>
-
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add Product</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    </div>
-                    <div class="modal-body">
-                    ...
-                    </div>
-                    <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                </div>
-                </div>
+    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="{{ asset('img/1.jpg') }}" class="img-product">
             </div>
-
+            <div class="carousel-item">
+                <img src="{{ asset('img/2.jpg') }}" class="img-product">
+            </div>
+            <div class="carousel-item">
+                <img src="{{ asset('img/3.jpg') }}" class="img-product">
+            </div>
+            <div class="carousel-item">
+                <img src="{{ asset('img/4.jpg') }}" class="img-product">
+            </div>
+            <div class="carousel-item">
+                <img src="{{ asset('img/5.jpg') }}" class="img-product">
+            </div>
+            <div class="carousel-item">
+                <img src="{{ asset('img/6.jpg') }}" class="img-product">
+            </div>
+            <div class="carousel-item">
+                <img src="{{ asset('img/7.jpg') }}" class="img-product">
+            </div>
+            <div class="carousel-item">
+                <img src="{{ asset('img/8.jpg') }}" class="img-product">
+            </div>
+            <div class="carousel-item">
+                <img src="{{ asset('img/9.jpg') }}" class="img-product">
+            </div>
         </div>
-
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
 @endsection

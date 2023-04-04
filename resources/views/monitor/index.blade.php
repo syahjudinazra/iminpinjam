@@ -24,7 +24,7 @@
                             <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $servicedone->total() }}</div>
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                            <i class="fas fa-list-check fa-2x text-gray-300"></i>
                         </div>
                     </div>
                 </div>
@@ -41,7 +41,7 @@
                             <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $servicepending->total() }}</div>
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                            <i class="fa-solid fa-spinner fa-2x text-gray-300"></i>
                         </div>
                     </div>
                 </div>
@@ -59,7 +59,7 @@
                             <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $kanibal->total() }}</div>
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-comments fa-2x text-gray-300"></i>
+                            <i class="fa-solid fa-gears fa-2x text-gray-300"></i>
                         </div>
                     </div>
                 </div>
