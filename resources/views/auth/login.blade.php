@@ -38,7 +38,7 @@
                                             </div>
                                             <div>
                                                 <a href="{{ route('forgot.password') }}" class="mb-2"
-                                                    style="float: right; margin-top: -20px; text-decoration:none">
+                                                    style="color:#393f81; float: right; margin-top: -20px; text-decoration:none">
                                                     Forgot Password?
                                                 </a>
                                             </div>
@@ -50,9 +50,11 @@
                                         </div>
 
                                         {{-- <p class="mb-5 pb-lg-2" style="color: #393f81;">Don't have an account? <a
-                                                href="/register" style="color: #393f81;">Register here</a></p>
-                                        <a href="#!" class="small text-muted">Terms of use.</a>
-                                        <a href="#!" class="small text-muted">Privacy policy</a> --}}
+                                                href="/register" style="color: #393f81;">Register here</a></p> --}}
+
+                                        <p class="mb-5 pb-lg-2" style="color: #393f81;">Don't have an account? <a
+                                                href="/pinjam" style="color: #393f81; text-decoration:none">Login as
+                                                guest</a></p>
                                     </form>
                                 </div>
                             </div>

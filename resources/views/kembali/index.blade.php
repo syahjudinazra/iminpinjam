@@ -295,6 +295,15 @@
                                     value="{{ $item->customer }}">
                             </div>
                             <div class="mb-3">
+                                <label for="alamat" class="form-label"><b>Alamat</b></label>
+                                <textarea class="form-control" id="alamat" name="alamat" rows="3">{{ $item->alamat }}</textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="sales" class="form-label"><b>Sales</b></label>
+                                <input type="text" class="form-control" id="sales" name="sales"
+                                    value="{{ $item->sales }}">
+                            </div>
+                            <div class="mb-3">
                                 <label for="telp" class="form-label"><b>No Telp</b></label>
                                 <input type="number" class="form-control" id="telp" name="telp"
                                     value="{{ $item->telp }}">
@@ -358,6 +367,15 @@
                             <label for="customer" class="form-label"><b>Customer</b></label>
                             <input type="text" class="form-control" id="customer" name="customer"
                                 value="{{ $item->customer }}" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="alamat" class="form-label"><b>Alamat</b></label>
+                            <textarea class="form-control" id="alamat" name="alamat" rows="3" readonly>{{ $item->alamat }}</textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="sales" class="form-label"><b>Sales</b></label>
+                            <input type="text" class="form-control" id="sales" name="sales"
+                                value="{{ $item->sales }}" readonly>
                         </div>
                         <div class="mb-3">
                             <label for="telp" class="form-label"><b>No Telp</b></label>

@@ -18,6 +18,8 @@ class Pinjam extends Model
         'serialnumber',
         'device',
         'customer',
+        'alamat',
+        'sales',
         'telp',
         'pengirim',
         'kelengkapankirim',
@@ -26,5 +28,4 @@ class Pinjam extends Model
         'kelengkapankembali',
         'status',
     ];
-
 }

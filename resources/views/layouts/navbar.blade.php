@@ -8,7 +8,7 @@
                     <img src="{{ asset('img/iminlogo.png') }}" alt="iminlogo" style="max-width:100%">
                 </div>
                 <div class="sidebar-brand-text mx-3">
-                    <sup>Pinjam</sup>
+                    <sup>Tech</sup>
                 </div>
             </a>
 

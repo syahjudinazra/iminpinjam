@@ -72,6 +72,8 @@ class PinjamController extends Controller
         $pinjam->serialnumber = $request->input('serialnumber');
         $pinjam->device = $request->input('device');
         $pinjam->customer = $request->input('customer');
+        $pinjam->alamat = $request->input('alamat');
+        $pinjam->sales = $request->input('sales');
         $pinjam->telp = $request->input('telp');
         $pinjam->pengirim = $request->input('pengirim');
         $pinjam->kelengkapankirim = $request->input('kelengkapankirim');
@@ -135,6 +137,8 @@ class PinjamController extends Controller
         $pinjam->serialnumber = $request->input('serialnumber');
         $pinjam->device = $request->input('device');
         $pinjam->customer = $request->input('customer');
+        $pinjam->alamat = $request->input('alamat');
+        $pinjam->sales = $request->input('sales');
         $pinjam->telp = $request->input('telp');
         $pinjam->pengirim = $request->input('pengirim');
         $pinjam->kelengkapankirim = $request->input('kelengkapankirim');

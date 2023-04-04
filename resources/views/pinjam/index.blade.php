@@ -124,12 +124,24 @@
                                     <option value="K1-101" data-tokens="K1-101">K1-101</option>
                                     <option value="K2-201" data-tokens="K2-201">K2-201</option>
                                     <option value="X1 Scanner" data-tokens="X1 Scanner">X1 Scanner</option>
+                                    <option value="Stand S1" data-tokens="Stand S1">Stand S1</option>
+                                    <option value="Stand Swan" data-tokens="Stand Swan">Stand Swan</option>
+                                    <option value="Charger Docking" data-tokens="Charger Docking">Charger Docking</option>
                                 </select>
                             </div>
                             <div class="mb-3">
                                 <label for="customer" class="form-label"><b>Customer</b></label>
                                 <input type="text" class="form-control" id="customer" name="customer"
                                     placeholder="Masukan Nama Customer">
+                            </div>
+                            <div class="mb-3">
+                                <label for="alamat" class="form-label"><b>Alamat</b></label>
+                                <textarea class="form-control" id="alamat" name="alamat" rows="3" placeholder="Jl. Pergudangan Ecopark"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="sales" class="form-label"><b>Sales</b></label>
+                                <input type="text" class="form-control" id="sales" name="sales"
+                                    placeholder="Masukan Nama Sales">
                             </div>
                             <div class="mb-3">
                                 <label for="telp" class="form-label"><b>No Telp</b></label>
@@ -146,10 +158,6 @@
                                 <textarea class="form-control" id="kelengkapankirim" name="kelengkapankirim" rows="3"
                                     placeholder="Contoh:Adaptor,Dus,Docking"></textarea>
                             </div>
-                            {{-- <div class="mb-3">
-                            <label for="status" class="form-label"><b>Status</b></label>
-                            <input type="text" class="form-control" id="status" name="status" value="0" readonly>
-                          </div> --}}
                             <div class="mb-3">
                                 <label for="gambar" class="form-label"><b>Gambar</b></label>
                                 <input class="form-control" type="file" id="gambar" name="gambar">
@@ -291,12 +299,27 @@
                                         {{ $item->device == 'K2 201' ? 'selected' : '' }}>K2 201</option>
                                     <option value="X1 Scanner" data-tokens="X1 Scanner"
                                         {{ $item->device == 'X1 Scanner' ? 'selected' : '' }}>X1 Scanner</option>
+                                    <option value="Stand S1" data-tokens="Stand S1"
+                                        {{ $item->device == 'Stand S1' ? 'selected' : '' }}>Stand S1</option>
+                                    <option value="Stand Swan" data-tokens="Stand Swan"
+                                        {{ $item->device == 'Stand Swan' ? 'selected' : '' }}>Stand Swan</option>
+                                    <option value="Charger Docking" data-tokens="Charger Docking"
+                                        {{ $item->device == 'Charger Docking' ? 'selected' : '' }}>Charger Docking</option>
                                 </select>
                             </div>
                             <div class="mb-3">
                                 <label for="customer" class="form-label"><b>Customer</b></label>
                                 <input type="text" class="form-control" id="customer" name="customer"
                                     value="{{ $item->customer }}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="alamat" class="form-label"><b>Alamat</b></label>
+                                <textarea class="form-control" id="alamat" name="alamat" rows="3">{{ $item->alamat }}</textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="sales" class="form-label"><b>Sales</b></label>
+                                <input type="text" class="form-control" id="sales" name="sales"
+                                    value="{{ $item->sales }}">
                             </div>
                             <div class="mb-3">
                                 <label for="telp" class="form-label"><b>No Telp</b></label>
@@ -310,8 +333,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="kelengkapankirim" class="form-label"><b>Kelengkapan Kirim</b></label>
-                                <textarea class="form-control" id="kelengkapankirim" name="kelengkapankirim" rows="3"
-                                    placeholder="Contoh:Adaptor,Dus,Docking">{{ $item->kelengkapankirim }}</textarea>
+                                <textarea class="form-control" id="kelengkapankirim" name="kelengkapankirim" rows="3">{{ $item->kelengkapankirim }}</textarea>
                             </div>
                             <div class="mb-3">
                                 <label for="status" class="form-label"><b>Status</b></label>
@@ -367,6 +389,15 @@
                             <label for="customer" class="form-label"><b>Customer</b></label>
                             <input type="text" class="form-control" id="customer" name="customer"
                                 value="{{ $item->customer }}" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="alamat" class="form-label"><b>Alamat</b></label>
+                            <textarea class="form-control" id="alamat" name="alamat" rows="3" readonly>{{ $item->alamat }}</textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="sales" class="form-label"><b>Sales</b></label>
+                            <input type="text" class="form-control" id="sales" name="sales"
+                                value="{{ $item->sales }}" readonly>
                         </div>
                         <div class="mb-3">
                             <label for="telp" class="form-label"><b>No Telp</b></label>
@@ -468,6 +499,15 @@
                                     value="{{ $item->customer }}"readonly>
                             </div>
                             <div class="mb-3">
+                                <label for="alamat" class="form-label"><b>Alamat</b></label>
+                                <textarea class="form-control" id="alamat" name="alamat" rows="3" readonly>{{ $item->alamat }}</textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="sales" class="form-label"><b>Sales</b></label>
+                                <input type="text" class="form-control" id="sales" name="sales"
+                                    value="{{ $item->sales }}"readonly>
+                            </div>
+                            <div class="mb-3">
                                 <label for="telp" class="form-label"><b>No Telp</b></label>
                                 <input type="number" class="form-control" id="telp" name="telp"
                                     value="{{ $item->telp }}"readonly>
@@ -479,8 +519,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="kelengkapankirim" class="form-label"><b>Kelengkapan Kirim</b></label>
-                                <textarea class="form-control" id="kelengkapankirim" name="kelengkapankirim" rows="3"
-                                    placeholder="Contoh:Adaptor,Dus,Docking" readonly>{{ $item->kelengkapankirim }}</textarea>
+                                <textarea class="form-control" id="kelengkapankirim" name="kelengkapankirim" rows="3" readonly>{{ $item->kelengkapankirim }}</textarea>
                             </div>
                             <div class="mb-3">
                                 <label for="tanggalkembali" class="form-label"><b>Tanggal Kembali</b></label>
@@ -545,6 +584,15 @@
                             <label for="customer" class="form-label"><b>Customer</b></label>
                             <input type="text" class="form-control" id="customer" name="customer"
                                 value="{{ $item->customer }}" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="alamat" class="form-label"><b>Alamat</b></label>
+                            <textarea class="form-control" id="alamat" name="alamat" rows="3" readonly>{{ $item->alamat }}</textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="sales" class="form-label"><b>Sales</b></label>
+                            <input type="text" class="form-control" id="sales" name="sales"
+                                value="{{ $item->sales }}" readonly>
                         </div>
                         <div class="mb-3">
                             <label for="telp" class="form-label"><b>No Telp</b></label>
@@ -718,6 +766,15 @@
                                 <label for="customer" class="form-label"><b>Customer</b></label>
                                 <input type="text" class="form-control" id="customer" name="customer"
                                     value="{{ $item->customer }}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="alamat" class="form-label"><b>Alamat</b></label>
+                                <textarea class="form-control" id="alamat" name="alamat" rows="3">{{ $item->alamat }}</textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="sales" class="form-label"><b>Sales</b></label>
+                                <input type="text" class="form-control" id="sales" name="sales"
+                                    value="{{ $item->sales }}">
                             </div>
                             <div class="mb-3">
                                 <label for="telp" class="form-label"><b>No Telp</b></label>

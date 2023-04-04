@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('serialnumber')->nullable();
             $table->string('device')->nullable();
             $table->string('customer')->nullable();
+            $table->string('alamat')->nullable();
+            $table->string('sales')->nullable();
             $table->string('telp')->nullable();
             $table->string('pengirim')->nullable();
             $table->string('kelengkapankirim')->nullable();
