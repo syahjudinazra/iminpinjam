@@ -17,6 +17,8 @@ class Pinjam extends Model
         'gambar',
         'serialnumber',
         'device',
+        'ram',
+        'android',
         'customer',
         'alamat',
         'sales',

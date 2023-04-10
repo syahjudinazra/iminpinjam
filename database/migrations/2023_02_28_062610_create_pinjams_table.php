@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('gambar', 300)->nullable();
             $table->string('serialnumber')->nullable();
             $table->string('device')->nullable();
+            $table->string('ram')->nullable();
+            $table->string('android')->nullable();
             $table->string('customer')->nullable();
             $table->string('alamat')->nullable();
             $table->string('sales')->nullable();

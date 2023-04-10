@@ -71,6 +71,8 @@ class PinjamController extends Controller
         $pinjam->tanggal = $request->input('tanggal');
         $pinjam->serialnumber = $request->input('serialnumber');
         $pinjam->device = $request->input('device');
+        $pinjam->ram = $request->input('ram');
+        $pinjam->android = $request->input('android');
         $pinjam->customer = $request->input('customer');
         $pinjam->alamat = $request->input('alamat');
         $pinjam->sales = $request->input('sales');
@@ -136,6 +138,8 @@ class PinjamController extends Controller
         $pinjam->tanggal = $request->input('tanggal');
         $pinjam->serialnumber = $request->input('serialnumber');
         $pinjam->device = $request->input('device');
+        $pinjam->ram = $request->input('ram');
+        $pinjam->android = $request->input('android');
         $pinjam->customer = $request->input('customer');
         $pinjam->alamat = $request->input('alamat');
         $pinjam->sales = $request->input('sales');
