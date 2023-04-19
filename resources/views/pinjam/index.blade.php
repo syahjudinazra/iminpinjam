@@ -255,6 +255,7 @@
                                     <option>Pilih Versi Android</option>
                                     <option>-</option>
                                     <option>Android 7</option>
+                                    <option>Android 8</option>
                                     <option>Android 11</option>
                                     <option>Android 11 GMS</option>
                                 </select>
@@ -647,6 +648,10 @@
                                         {{ $item->android == 'Android 7' ? 'selected' : '' }}>
                                         Android 7
                                     </option>
+                                    <option value="Android 8" data-tokens="Android 8"
+                                        {{ $item->android == 'Android 8' ? 'selected' : '' }}>
+                                        Android 8
+                                    </option>
                                     <option value="Android 11" data-tokens="Android 11"
                                         {{ $item->android == 'Android 11' ? 'selected' : '' }}>
                                         Android 11
@@ -685,7 +690,7 @@
                                 <label for="kelengkapankirim" class="form-label"><b>Kelengkapan Kirim</b></label>
                                 <textarea class="form-control" id="kelengkapankirim" name="kelengkapankirim" rows="3">{{ $item->kelengkapankirim }}</textarea>
                             </div>
-                            <div class="mb-3">
+                            <div class="mb-3" hidden>
                                 <label for="status" class="form-label"><b>Status</b></label>
                                 <input type="text" class="form-control" id="status" name="status"
                                     value="{{ $item->status }}" readonly>
@@ -901,11 +906,11 @@
                                     placeholder="Masukan Nama Penerima">
                             </div>
                             <div class="mb-3">
-                                <label for="kelengkapankembali" class="form-label"><b>Kelengkapan Kirim</b></label>
+                                <label for="kelengkapankembali" class="form-label"><b>Kelengkapan Kembali</b></label>
                                 <textarea class="form-control" id="kelengkapankembali" name="kelengkapankembali" rows="3"
                                     placeholder="Contoh:Adaptor,Dus,Docking"></textarea>
                             </div>
-                            <div class="mb-3">
+                            <div class="mb-3" hidden>
                                 <label for="status" class="form-label"><b>Status</b></label>
                                 <input type="text" class="form-control" id="status" name="status" value="1"
                                     readonly>
@@ -1366,6 +1371,10 @@
                                         {{ $item->android == 'Android 7' ? 'selected' : '' }}>
                                         Android 7
                                     </option>
+                                    <option value="Android 8" data-tokens="Android 8"
+                                        {{ $item->android == 'Android 8' ? 'selected' : '' }}>
+                                        Android 8
+                                    </option>
                                     <option value="Android 11" data-tokens="Android 11"
                                         {{ $item->android == 'Android 11' ? 'selected' : '' }}>
                                         Android 11
@@ -1404,7 +1413,7 @@
                                 <label for="kelengkapankirim" class="form-label"><b>Kelengkapan Kirim</b></label>
                                 <textarea class="form-control" id="kelengkapankirim" name="kelengkapankirim" rows="3">{{ $item->kelengkapankirim }}</textarea>
                             </div>
-                            <div class="mb-3">
+                            <div class="mb-3" hidden>
                                 <label for="status" class="form-label"><b>Status</b></label>
                                 <input type="text" class="form-control" id="status" name="status"
                                     value="{{ $item->status }}" readonly>

@@ -109,6 +109,10 @@
                         <i class="fa fa-bars"></i>
                     </button>
 
+                    <div class="ml-2">
+                        <a href="https://oss-sg.imin.sg/docs/en/index.html" class="btn btn-outline-secondary"
+                            target="blank">SDK</a>
+                    </div>
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
@@ -137,8 +141,10 @@
                     </ul>
 
                     <ul class="navbar-nav ms-auto">
+
                         <!-- Authentication Links -->
                         @guest
+
                             @if (Route::has('login'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -173,10 +179,13 @@
                                         </a>
                                 </div>
                                 </form>
+
                 </div>
                 </li>
+
             @endguest
             </ul>
+
             </nav>
 
             <div>
