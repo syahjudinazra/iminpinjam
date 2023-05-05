@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('service_pendings', function (Blueprint $table) {
             $table->id();
-            $table->string('tanggal');
+            $table->date('tanggal');
             $table->string('serialnumber');
             $table->string('pelanggan');
             $table->string('model');

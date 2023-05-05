@@ -19,7 +19,7 @@ class PinjamController extends Controller
     public function index()
     {
 
-        $pinjam = DB::table('pinjams')
+        $pinjam = DB::table('pinjams')->orderBy('tanggal', 'desc')
             ->where('status', '0')
             ->get();
 
@@ -82,7 +82,6 @@ class PinjamController extends Controller
         $pinjam->tanggalkembali = $request->input('tanggalkembali');
         $pinjam->penerima = $request->input('penerima');
         $pinjam->kelengkapankembali = $request->input('kelengkapankembali');
-        // $pinjam->status = $request->input('status');
 
         if ($request->hasFile('gambar')) {
             $file = $request->file('gambar');

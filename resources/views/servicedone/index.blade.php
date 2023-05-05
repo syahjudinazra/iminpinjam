@@ -13,32 +13,67 @@
                 <i class="fas fa-download fa-sm text-white-50"></i> Generate Excel</a>
         </div>
 
-        <button type="button" class="btn btn-danger mb-2" data-toggle="modal" data-target="#exampleModal">
-            <i class="fa-solid fa-plus"></i> Tambah Produk
-        </button>
+        @if (Auth::check())
+            <div class="searchdone">
+                @if (Auth::check())
+                    <button type="button" class="btn btn-danger mb-2" data-toggle="modal" data-target="#exampleModal">
+                        <i class="fa-solid fa-plus"></i> Tambah Produk
+                    </button>
+                @endif
 
-        @if (session()->has('success'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                {{ session('success') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                @if (session()->has('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+
+                <form method="GET" action="{{ route('search.servicedone') }}"
+                    class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
+                    style="float: right">
+                    <div class="input-group" style="flex-wrap: nowrap;">
+                        <div class="form-outline ">
+                            <input type="search" id="form1" name="search" class="form-control"
+                                value="{{ request()->input('search') }}" />
+                            <label class="form-label" for="form1">Search</label>
+                        </div>
+                        <button type="submit" class="btn btn-danger d-inline">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        @else
+            <div class="searchdone" style="margin-bottom: 80px">
+                @if (Auth::check())
+                    <button type="button" class="btn btn-danger mb-2" data-toggle="modal" data-target="#exampleModal">
+                        <i class="fa-solid fa-plus"></i> Tambah Produk
+                    </button>
+                @endif
+
+                @if (session()->has('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+
+                <form method="GET" action="{{ route('search.servicedone') }}"
+                    class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
+                    style="float: right">
+                    <div class="input-group" style="flex-wrap: nowrap;">
+                        <div class="form-outline ">
+                            <input type="search" id="form1" name="search" class="form-control"
+                                value="{{ request()->input('search') }}" />
+                            <label class="form-label" for="form1">Search</label>
+                        </div>
+                        <button type="submit" class="btn btn-danger d-inline">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </form>
             </div>
         @endif
-
-        <form method="GET" action="{{ route('search.servicedone') }}"
-            class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
-            style="float: right">
-            <div class="input-group" style="flex-wrap: nowrap;">
-                <div class="form-outline ">
-                    <input type="search" id="form1" name="search" class="form-control"
-                        value="{{ request()->input('search') }}" />
-                    <label class="form-label" for="form1">Search</label>
-                </div>
-                <button type="submit" class="btn btn-danger d-inline">
-                    <i class="fas fa-search"></i>
-                </button>
-            </div>
-        </form>
-
         <!-- Tambah Data -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -589,42 +624,44 @@
     <!-- end delete data -->
 
     <div class="container-fluid mt-3">
-        <table class="table table-striped table-hover">
-            <thead class="table-dark">
-                <th>No</th>
-                <th>Tanggal</th>
-                <th>Serial Number</th>
-                <th>Pelanggan</th>
-                <th>Model</th>
-                <th>Action</th>
-            </thead>
-            <tbody>
-                @foreach ($servicedone as $item)
-                    <tr>
-                        <td>{{ $servicedone->firstItem() + $loop->index }}</td>
-                        <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d/m/Y') }}</td>
-                        <td>{{ $item->serialnumber }}</td>
-                        <td>{{ $item->pelanggan }}</td>
-                        <td>{{ $item->model }}</td>
-                        <td>
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead class="table-dark">
+                    <th>No</th>
+                    <th>Tanggal</th>
+                    <th>Serial Number</th>
+                    <th>Pelanggan</th>
+                    <th>Model</th>
+                    <th>Action</th>
+                </thead>
+                <tbody>
+                    @foreach ($servicedone as $item)
+                        <tr>
+                            <td>{{ $servicedone->firstItem() + $loop->index }}</td>
+                            <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d/m/Y') }}</td>
+                            <td>{{ $item->serialnumber }}</td>
+                            <td>{{ $item->pelanggan }}</td>
+                            <td>{{ $item->model }}</td>
+                            <td>
 
-                            <a href="#" class="btn btn-warning" data-toggle="modal"
-                                data-target="#editModal{{ $item->id }}"><i
-                                    class="fa-solid fa-pen-to-square"></i></a>
+                                <a href="#" class="btn btn-warning" data-toggle="modal"
+                                    data-target="#editModal{{ $item->id }}"><i
+                                        class="fa-solid fa-pen-to-square"></i></a>
 
-                            <a href="#" class="btn btn-primary" data-toggle="modal"
-                                data-target="#viewModal{{ $item->id }}"><i class="fa-solid fa-eye"></i></a>
+                                <a href="#" class="btn btn-primary" data-toggle="modal"
+                                    data-target="#viewModal{{ $item->id }}"><i class="fa-solid fa-eye"></i></a>
 
-                            <a href="#" class="btn btn-danger" data-toggle="modal"
-                                data-target="#deleteModal{{ $item->id }}"><i class="fa-solid fa-trash"></i></a>
+                                <a href="#" class="btn btn-danger" data-toggle="modal"
+                                    data-target="#deleteModal{{ $item->id }}"><i class="fa-solid fa-trash"></i></a>
 
-                            {{-- <a href="#" class="btn btn-success" data-toggle="modal"
+                                {{-- <a href="#" class="btn btn-success" data-toggle="modal"
                                 data-target="#moveModal{{ $item->id }}"><i class="fa-solid fa-paper-plane"></i></a> --}}
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-        {!! $servicedone->onEachSide(10)->links('pagination::bootstrap-5') !!}
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            {!! $servicedone->onEachSide(10)->links('pagination::bootstrap-5') !!}
+        </div>
     </div>
 @endsection

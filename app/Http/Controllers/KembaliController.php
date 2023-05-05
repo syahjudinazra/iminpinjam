@@ -22,7 +22,7 @@ class KembaliController extends Controller
         // $kembali = Kembali::all();
         // return view('kembali.index')->with('kembali', $kembali);
 
-        $pinjam = DB::table('pinjams')
+        $pinjam = DB::table('pinjams')->orderBy('tanggal', 'desc')
             ->where('status', '1')
             ->get();
 

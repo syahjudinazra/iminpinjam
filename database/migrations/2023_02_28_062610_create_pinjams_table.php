@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('pinjams', function (Blueprint $table) {
             $table->id();
-            $table->string('tanggal')->nullable();
+            $table->date('tanggal')->nullable();
             $table->string('gambar', 300)->nullable();
             $table->string('serialnumber')->nullable();
             $table->string('device')->nullable();

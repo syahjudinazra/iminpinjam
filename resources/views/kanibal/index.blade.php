@@ -13,32 +13,67 @@
                 <i class="fas fa-download fa-sm text-white-50"></i> Generate Excel</a>
         </div>
 
-        <button type="button" class="btn btn-danger mb-2" data-toggle="modal" data-target="#exampleModal">
-            <i class="fa-solid fa-plus"></i> Tambah Produk
-        </button>
+        @if (Auth::check())
+            <div class="searchkanibal">
+                @if (Auth::check())
+                    <button type="button" class="btn btn-danger mb-2" data-toggle="modal" data-target="#exampleModal">
+                        <i class="fa-solid fa-plus"></i> Tambah Produk
+                    </button>
+                @endif
 
-        @if (session()->has('success'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                {{ session('success') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                @if (session()->has('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+
+                <form method="GET" action="{{ route('search.kanibal') }}"
+                    class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
+                    style="float: right">
+                    <div class="input-group" style="flex-wrap: nowrap;">
+                        <div class="form-outline ">
+                            <input type="search" id="form1" name="search" class="form-control"
+                                value="{{ request()->input('search') }}" />
+                            <label class="form-label" for="form1">Search</label>
+                        </div>
+                        <button type="submit" class="btn btn-danger d-inline">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        @else
+            <div class="searchkanibal" style="margin-bottom: 80px">
+                @if (Auth::check())
+                    <button type="button" class="btn btn-danger mb-2" data-toggle="modal" data-target="#exampleModal">
+                        <i class="fa-solid fa-plus"></i> Tambah Produk
+                    </button>
+                @endif
+
+                @if (session()->has('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+
+                <form method="GET" action="{{ route('search.kanibal') }}"
+                    class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
+                    style="float: right">
+                    <div class="input-group" style="flex-wrap: nowrap;">
+                        <div class="form-outline ">
+                            <input type="search" id="form1" name="search" class="form-control"
+                                value="{{ request()->input('search') }}" />
+                            <label class="form-label" for="form1">Search</label>
+                        </div>
+                        <button type="submit" class="btn btn-danger d-inline">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </form>
             </div>
         @endif
-
-        <form method="GET" action="{{ route('search.kanibal') }}"
-            class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
-            style="float: right">
-            <div class="input-group" style="flex-wrap: nowrap;">
-                <div class="form-outline ">
-                    <input type="search" id="form1" name="search" class="form-control"
-                        value="{{ request()->input('search') }}" />
-                    <label class="form-label" for="form1">Search</label>
-                </div>
-                <button type="submit" class="btn btn-danger d-inline">
-                    <i class="fas fa-search"></i>
-                </button>
-            </div>
-        </form>
-
         <!-- Tambah Data -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">

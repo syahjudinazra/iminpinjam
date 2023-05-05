@@ -14,3 +14,7 @@
     position: sticky;
     top: 0;
 }
+
+.table-responsive {
+    max-height: 400px;
+}

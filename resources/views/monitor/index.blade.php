@@ -349,35 +349,37 @@
     </div>
 
     <div class="container-fluid mt-3">
-        <table class="table table-striped table-hover">
-            <thead class="bg-danger" style="color:white">
-                <tr>
-                    <th>No</th>
-                    <th>Tanggal</th>
-                    <th>Serial Number</th>
-                    <th>Pelanggan</th>
-                    <th>Model</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($servicedone as $item)
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead class="bg-danger" style="color:white">
                     <tr>
-                        <td>{{ $servicedone->firstItem() + $loop->index }}</td>
-                        <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d/m/Y') }}</td>
-                        <td>{{ $item->serialnumber }}</td>
-                        <td>{{ $item->pelanggan }}</td>
-                        <td>{{ $item->model }}</td>
-                        <td>
-                            <a href="#" class="btn btn-primary" data-toggle="modal"
-                                data-target="#viewModal{{ $item->id }}"><i class="fa-solid fa-eye"></i></a>
-                        </td>
+                        <th>No</th>
+                        <th>Tanggal</th>
+                        <th>Serial Number</th>
+                        <th>Pelanggan</th>
+                        <th>Model</th>
+                        <th>Action</th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
-        {{-- {{ $servicedone->appends($_GET)->links() }} --}}
-        {!! $servicedone->onEachSide(10)->links('pagination::bootstrap-5') !!}
+                </thead>
+                <tbody>
+                    @foreach ($servicedone as $item)
+                        <tr>
+                            <td>{{ $servicedone->firstItem() + $loop->index }}</td>
+                            <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d/m/Y') }}</td>
+                            <td>{{ $item->serialnumber }}</td>
+                            <td>{{ $item->pelanggan }}</td>
+                            <td>{{ $item->model }}</td>
+                            <td>
+                                <a href="#" class="btn btn-primary" data-toggle="modal"
+                                    data-target="#viewModal{{ $item->id }}"><i class="fa-solid fa-eye"></i></a>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            {{-- {{ $servicedone->appends($_GET)->links() }} --}}
+            {!! $servicedone->onEachSide(10)->links('pagination::bootstrap-5') !!}
+        </div>
     </div>
 
 
@@ -401,34 +403,37 @@
     </div>
 
     <div class="container-fluid mt-3">
-        <table class="table table-striped table-hover">
-            <thead class="bg-warning">
-                <tr>
-                    <th>No</th>
-                    <th>Tanggal</th>
-                    <th>Serial Number</th>
-                    <th>Pelanggan</th>
-                    <th>Model</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($servicepending as $item)
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead class="bg-warning">
                     <tr>
-                        <td>{{ $servicepending->firstItem() + $loop->index }}</td>
-                        <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d/m/Y') }}</td>
-                        <td>{{ $item->serialnumber }}</td>
-                        <td>{{ $item->pelanggan }}</td>
-                        <td>{{ $item->model }}</td>
-                        <td>
-                            <a href="#" class="btn btn-primary" data-toggle="modal"
-                                data-target="#viewModalPending{{ $item->id }}"><i class="fa-solid fa-eye"></i></a>
-                        </td>
+                        <th>No</th>
+                        <th>Tanggal</th>
+                        <th>Serial Number</th>
+                        <th>Pelanggan</th>
+                        <th>Model</th>
+                        <th>Action</th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
-        {!! $servicepending->onEachSide(10)->links('pagination::bootstrap-5') !!}
+                </thead>
+                <tbody>
+                    @foreach ($servicepending as $item)
+                        <tr>
+                            <td>{{ $servicepending->firstItem() + $loop->index }}</td>
+                            <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d/m/Y') }}</td>
+                            <td>{{ $item->serialnumber }}</td>
+                            <td>{{ $item->pelanggan }}</td>
+                            <td>{{ $item->model }}</td>
+                            <td>
+                                <a href="#" class="btn btn-primary" data-toggle="modal"
+                                    data-target="#viewModalPending{{ $item->id }}"><i
+                                        class="fa-solid fa-eye"></i></a>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            {!! $servicepending->onEachSide(10)->links('pagination::bootstrap-5') !!}
+        </div>
     </div>
 
     <div class="container-fluid">
@@ -451,34 +456,37 @@
     </div>
 
     <div class="container-fluid mt-3">
-        <table class="table table-striped table-hover">
-            <thead class="bg-dark" style="color:white">
-                <tr>
-                    <th>No</th>
-                    <th>Tanggal</th>
-                    <th>Serial Number</th>
-                    <th>Pelanggan</th>
-                    <th>Model</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($kanibal as $item)
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead class="bg-dark" style="color:white">
                     <tr>
-                        <td>{{ $kanibal->firstItem() + $loop->index }}</td>
-                        <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d/m/Y') }}</td>
-                        <td>{{ $item->serialnumber }}</td>
-                        <td>{{ $item->pelanggan }}</td>
-                        <td>{{ $item->model }}</td>
-                        <td>
-                            <a href="#" class="btn btn-primary" data-toggle="modal"
-                                data-target="#viewModalKanibal{{ $item->id }}"><i class="fa-solid fa-eye"></i></a>
-                        </td>
+                        <th>No</th>
+                        <th>Tanggal</th>
+                        <th>Serial Number</th>
+                        <th>Pelanggan</th>
+                        <th>Model</th>
+                        <th>Action</th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
-        {!! $kanibal->onEachSide(10)->links('pagination::bootstrap-5') !!}
+                </thead>
+                <tbody>
+                    @foreach ($kanibal as $item)
+                        <tr>
+                            <td>{{ $kanibal->firstItem() + $loop->index }}</td>
+                            <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d/m/Y') }}</td>
+                            <td>{{ $item->serialnumber }}</td>
+                            <td>{{ $item->pelanggan }}</td>
+                            <td>{{ $item->model }}</td>
+                            <td>
+                                <a href="#" class="btn btn-primary" data-toggle="modal"
+                                    data-target="#viewModalKanibal{{ $item->id }}"><i
+                                        class="fa-solid fa-eye"></i></a>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            {!! $kanibal->onEachSide(10)->links('pagination::bootstrap-5') !!}
+        </div>
     </div>
     </main>
     </div>

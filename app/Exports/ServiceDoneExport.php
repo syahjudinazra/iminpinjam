@@ -5,6 +5,7 @@ namespace App\Exports;
 use App\Models\ServiceDone;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithValidation;
 
 class ServiceDoneExport implements FromCollection, WithHeadings
 {

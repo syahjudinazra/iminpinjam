@@ -17,43 +17,75 @@
             <a href="{{ route('export-pinjam') }}" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm">
                 <i class="fas fa-download fa-sm text-white-50"></i> Generate Excel</a>
         </div>
+        @if (Auth::check())
+            <div class="searchpinjam">
+                @if (Auth::check() && request()->is('pinjam'))
+                    <button type="button" id="addpinjam" class="btn btn-danger mb-2" data-toggle="modal"
+                        data-target="#exampleModal">
+                        <i class="fa-solid fa-plus"></i> Tambah Produk
+                    </button>
+                @endif
 
-        @if (request()->is('pinjam'))
-            <button type="button" class="btn btn-danger mb-2" data-toggle="modal" data-target="#exampleModal">
-                <i class="fa-solid fa-plus"></i> Tambah Produk
-            </button>
-        @endif
+                @if (session()->has('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
 
-        @if (session()->has('success'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                {{ session('success') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <form method="GET" action="{{ route('search.index') }}"
+                    class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
+                    style="float: right">
+                    <div class="input-group" style="flex-wrap: nowrap;">
+                        <div class="form-outline ">
+                            <input type="search" id="form1" name="search" class="form-control"
+                                value="{{ request()->input('search') }}" />
+                            <label class="form-label" for="form1">Search</label>
+                        </div>
+                        <button type="submit" class="btn btn-danger d-inline">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        @else
+            <div class="searchpinjam" style="margin-bottom: 80px">
+                @if (Auth::check() && request()->is('pinjam'))
+                    <button type="button" id="addpinjam" class="btn btn-danger mb-2" data-toggle="modal"
+                        data-target="#exampleModal">
+                        <i class="fa-solid fa-plus"></i> Tambah Produk
+                    </button>
+                @endif
+
+                @if (session()->has('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+
+                <form method="GET" action="{{ route('search.index') }}"
+                    class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
+                    style="float: right">
+                    <div class="input-group" style="flex-wrap: nowrap;">
+                        <div class="form-outline ">
+                            <input type="search" id="form1" name="search" class="form-control"
+                                value="{{ request()->input('search') }}" />
+                            <label class="form-label" for="form1">Search</label>
+                        </div>
+                        <button type="submit" class="btn btn-danger d-inline">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </form>
             </div>
         @endif
-
-        <form method="GET" action="{{ route('search.index') }}"
-            class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
-            style="float: right">
-            <div class="input-group" style="flex-wrap: nowrap;">
-                <div class="form-outline ">
-                    <input type="search" id="form1" name="search" class="form-control"
-                        value="{{ request()->input('search') }}" />
-                    <label class="form-label" for="form1">Search</label>
-                </div>
-                <button type="submit" class="btn btn-danger d-inline">
-                    <i class="fas fa-search"></i>
-                </button>
-            </div>
-        </form>
-
         <!-- Tambah Data -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Tambah Pinjam Barang</h5>
-
-
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -76,12 +108,14 @@
                                     id="device"required>
                                     <option value="Pilih Device">Pilih Device</option>
                                     <option value="A4-101 Handle" data-tokens="A4-101 Handle">A4-101 Handle</option>
-                                    <option value="A4-102 Desktop Stand" data-tokens="A4-102 Desktop Stand">A4-102 Desktop
+                                    <option value="A4-102 Desktop Stand" data-tokens="A4-102 Desktop Stand">A4-102
+                                        Desktop
                                         Stand</option>
                                     <option value="A4-103 Stand" data-tokens="A4-103 Stand">A4-103 Stand</option>
                                     <option value="A4-104 Stand" data-tokens="A4-104 Stand">A4-104 Stand</option>
                                     <option value="A4-105 Stand" data-tokens="A4-105 Stand">A4-105 Stand</option>
-                                    <option value="A4-107 Desktop Stand" data-tokens="A4-107 Desktop Stand">A4-107 Desktop
+                                    <option value="A4-107 Desktop Stand" data-tokens="A4-107 Desktop Stand">A4-107
+                                        Desktop
                                         Stand</option>
                                     <option value="D1" data-tokens="D1">D1</option>
                                     <option value="D1 Pro" data-tokens="D1 Pro">D1 Pro</option>
@@ -98,23 +132,29 @@
                                     <option value="D3-506 lama" data-tokens="D3-506 lama">D3-506 lama</option>
                                     <option value="D3-501 Moka" data-tokens="D3-501 Moka">D3-501 Moka</option>
                                     <option value="D3-503 Moka" data-tokens="D3-503 Moka">D3-503 Moka</option>
-                                    <option value="D3-501 Moka Ultra" data-tokens="D3-501 Moka Ultra">D3-501 Moka Ultra
+                                    <option value="D3-501 Moka Ultra" data-tokens="D3-501 Moka Ultra">D3-501 Moka
+                                        Ultra
                                     </option>
-                                    <option value="D3-503 Moka Ultra+" data-tokens="D3-503 Moka Ultra+">D3-503 Moka Ultra+
+                                    <option value="D3-503 Moka Ultra+" data-tokens="D3-503 Moka Ultra+">D3-503 Moka
+                                        Ultra+
                                     </option>
                                     <option value="D3 DS1" data-tokens="D3 DS1">D3 DS1</option>
                                     <option value="D3 DS1K" data-tokens="D3 DS1K">D3 DS1K</option>
                                     <option value="D3 DS1 DP" data-tokens="D3 DS1 DP">D3 DS1 DP</option>
                                     <option value="D3 DS1 TS DP" data-tokens="D3 DS1 TS DP">D3 DS1 TS DP</option>
-                                    <option value="D3 DS1 Iseller" data-tokens="D3 DS1 Iseller">D3 DS1 Iseller</option>
+                                    <option value="D3 DS1 Iseller" data-tokens="D3 DS1 Iseller">D3 DS1 Iseller
+                                    </option>
                                     <option value="D3 DS1 TS Iseller DP" data-tokens="D3 DS1 TS Iseller DP">D3 DS1 TS
                                         Iseller DP</option>
                                     <option value="D3 DS1 Stand" data-tokens="D3 DS1 Stand">D3 DS1 Stand</option>
-                                    <option value="D3 DS1 Stand 1M DP" data-tokens="D3 DS1 Stand 1M DP">D3 DS1 Stand 1M DP
+                                    <option value="D3 DS1 Stand 1M DP" data-tokens="D3 DS1 Stand 1M DP">D3 DS1 Stand
+                                        1M DP
                                     </option>
-                                    <option value="D3 DS1 Display NFC" data-tokens="D3 DS1 Display NFC">D3 DS1 Display NFC
+                                    <option value="D3 DS1 Display NFC" data-tokens="D3 DS1 Display NFC">D3 DS1 Display
+                                        NFC
                                     </option>
-                                    <option value="D3 DS1 Extention Display" data-tokens="D3 DS1 Extention Display">D3 DS1
+                                    <option value="D3 DS1 Extention Display" data-tokens="D3 DS1 Extention Display">D3
+                                        DS1
                                         Extention Display</option>
                                     <option value="D3 DS1 Extention Display Iseller"
                                         data-tokens="D3 DS1 Extention Display Iseller">D3 DS1
@@ -142,12 +182,15 @@
                                     <option value="M1" data-tokens="M1">M1</option>
                                     <option value="M2-201" data-tokens="M2-201">M2-201</option>
                                     <option value="M2-202" data-tokens="M2-202">M2-202</option>
-                                    <option value="M2-202 iSeller" data-tokens="M2-202 iSeller">M2-202 iSeller</option>
+                                    <option value="M2-202 iSeller" data-tokens="M2-202 iSeller">M2-202 iSeller
+                                    </option>
                                     <option value="M2-203" data-tokens="M2-203">M2-203</option>
-                                    <option value="M2-203 iSeller" data-tokens="M2-203 iSeller">M2-203 iSeller</option>
+                                    <option value="M2-203 iSeller" data-tokens="M2-203 iSeller">M2-203 iSeller
+                                    </option>
                                     <option value="M2-203 White" data-tokens="M2-203 White">M2-203 White</option>
                                     <option value="M2-203 (Full)" data-tokens="M2-203 (Full)">M2-203 (Full)</option>
-                                    <option value="M2-203 NFC Iseller" data-tokens="M2-203 NFC Iseller">M2-203 NFC Iseller
+                                    <option value="M2-203 NFC Iseller" data-tokens="M2-203 NFC Iseller">M2-203 NFC
+                                        Iseller
                                     </option>
                                     <option value="M-203 Traveloka" data-tokens="M2-203 Traveloka">M2-203 Traveloka
                                     </option>
@@ -158,19 +201,25 @@
                                     <option value="M2 Max NFC" data-tokens="M2 Max NFC">M2 Max NFC</option>
                                     <option value="M2 Max BASE" data-tokens="M2 Max BASE">M2 Max BASE</option>
                                     <option value="M2 Swift 1S" data-tokens="M2 Swift 1S">M2 Swift 1S</option>
-                                    <option value="M2 Swift 1S NFC" data-tokens="M2 Swift 1S NFC">M2 Swift 1S NFC</option>
+                                    <option value="M2 Swift 1S NFC" data-tokens="M2 Swift 1S NFC">M2 Swift 1S NFC
+                                    </option>
                                     <option value="M2 Swift 1P" data-tokens="M2 Swift 1P">M2 Swift 1P</option>
-                                    <option value="M2 Swift 1 NFC" data-tokens="M2 Swift 1 NFC">M2 Swift 1 NFC</option>
-                                    <option value="M2 Swift 1P NFC" data-tokens="M2 Swift 1P NFC">M2 Swift 1P NFC</option>
+                                    <option value="M2 Swift 1 NFC" data-tokens="M2 Swift 1 NFC">M2 Swift 1 NFC
+                                    </option>
+                                    <option value="M2 Swift 1P NFC" data-tokens="M2 Swift 1P NFC">M2 Swift 1P NFC
+                                    </option>
                                     <option value="M2 Swift PDA" data-tokens="M2 Swift PDA">M2 Swift PDA</option>
-                                    <option value="M2 Swift 1 PDA" data-tokens="M2 Swift 1 PDA">M2 Swift 1 PDA</option>
+                                    <option value="M2 Swift 1 PDA" data-tokens="M2 Swift 1 PDA">M2 Swift 1 PDA
+                                    </option>
                                     <option value="M2 Swift 1 STRAP" data-tokens="M2 Swift 1 STRAP">M2 Swift 1 STRAP
                                     </option>
-                                    <option value="M2 Swift 1 Scanner" data-tokens="M2 Swift 1 Scanner">M2 Swift 1 Scanner
+                                    <option value="M2 Swift 1 Scanner" data-tokens="M2 Swift 1 Scanner">M2 Swift 1
+                                        Scanner
                                     </option>
                                     <option value="M2 Swift Printer" data-tokens="M2 Swift Printer">M2 Swift Printer
                                     </option>
-                                    <option value="M2 Swift 1 Printer" data-tokens="M2 Swift 1 Printer">M2 Swift 1 Printer
+                                    <option value="M2 Swift 1 Printer" data-tokens="M2 Swift 1 Printer">M2 Swift 1
+                                        Printer
                                     </option>
                                     <option value="R1-201" data-tokens="R1-201">R1-201</option>
                                     <option value="R1-202" data-tokens="R1-202">R1-202</option>
@@ -184,11 +233,13 @@
                                     <option value="X1 Scanner" data-tokens="X1 Scanner">X1 Scanner</option>
                                     <option value="Stand S1" data-tokens="Stand S1">Stand S1</option>
                                     <option value="Stand Swan" data-tokens="Stand Swan">Stand Swan</option>
-                                    <option value="Kassen Barcode 2D RS-720" data-tokens="Kassen Barcode 2D RS-720">Kassen
+                                    <option value="Kassen Barcode 2D RS-720" data-tokens="Kassen Barcode 2D RS-720">
+                                        Kassen
                                         Barcode 2D RS-720</option>
                                     <option value="Kassen Barcode KS-605" data-tokens="Kassen Barcode KS-605">Kassen
                                         Barcode KS-605</option>
-                                    <option value="Kassen Printer BT-P3200" data-tokens="Kassen Printer BT-P3200">Kassen
+                                    <option value="Kassen Printer BT-P3200" data-tokens="Kassen Printer BT-P3200">
+                                        Kassen
                                         Printer BT-P3200</option>
                                     <option value="Kassen Printer BT-P299" data-tokens="Kassen Printer BT-P299">Kassen
                                         Printer BT-P299</option>
@@ -196,26 +247,32 @@
                                         Printer BT-P290</option>
                                     <option value="Kassen Printer Label DT-643" data-tokens="Kassen Printer Label DT-643">
                                         Kassen Printer Label DT-643</option>
-                                    <option value="Cash Drawer KH-330" data-tokens="Cash Drawer KH-330">Cash Drawer KH-330
+                                    <option value="Cash Drawer KH-330" data-tokens="Cash Drawer KH-330">Cash Drawer
+                                        KH-330
                                     </option>
-                                    <option value="Cash Drawer KH-410" data-tokens="Cash Drawer KH-410">Cash Drawer KH-410
+                                    <option value="Cash Drawer KH-410" data-tokens="Cash Drawer KH-410">Cash Drawer
+                                        KH-410
                                     </option>
                                     <option value="Cash Drawer 408" data-tokens="Cash Drawer 408">Cash Drawer 408
                                     </option>
-                                    <option value="Cash Drawer Panda" data-tokens="Cash Drawer Panda">Cash Drawer Panda
+                                    <option value="Cash Drawer Panda" data-tokens="Cash Drawer Panda">Cash Drawer
+                                        Panda
                                     </option>
                                     <option value="Barcode Scanner" data-tokens="Barcode Scanner">Barcode Scanner
                                     </option>
-                                    <option value="Barcode Scanner RS-720" data-tokens="Barcode Scanner RS-720">Barcode
+                                    <option value="Barcode Scanner RS-720" data-tokens="Barcode Scanner RS-720">
+                                        Barcode
                                         Scanner RS-720
                                     </option>
                                     <option value="Printer Thermal Label DT-643"
                                         data-tokens="Printer Thermal Label DT-643">Printer Thermal Label DT-643
                                     </option>
-                                    <option value="Printer Thermal BT-P299" data-tokens="Printer Thermal BT-P299">Printer
+                                    <option value="Printer Thermal BT-P299" data-tokens="Printer Thermal BT-P299">
+                                        Printer
                                         Thermal BT-P299
                                     </option>
-                                    <option value="Printer Thermal BT-P290" data-tokens="Printer Thermal BT-P290">Printer
+                                    <option value="Printer Thermal BT-P290" data-tokens="Printer Thermal BT-P290">
+                                        Printer
                                         Thermal BT-P290
                                     </option>
                                     <option value="Printer Thermal BTP-3200 USE"
@@ -224,7 +281,8 @@
                                     <option value="Printer Thermal BTP-3200 BT" data-tokens="Printer Thermal BTP-3200 BT">
                                         Printer Thermal BTP-3200 BT
                                     </option>
-                                    <option value="Printer Thermal 58" data-tokens="Printer Thermal 58">Printer Thermal 58
+                                    <option value="Printer Thermal 58" data-tokens="Printer Thermal 58">Printer
+                                        Thermal 58
                                     </option>
                                     <option value="Thermal Label 40 X 30 mm" data-tokens="Thermal Label 40 X 30 mm">
                                         Thermal Label 40 X 30 mm
@@ -843,7 +901,7 @@
                                 <input type="date" class="form-control" id="tanggal" name="tanggal"
                                     value="{{ $item->tanggal }}"readonly>
                             </div>
-                            <div class="mb-3">
+                            <div class="mb-3" hidden>
                                 <label for="gambar" class="form-label"><b>Gambar</b></label>
                                 <input class="form-control" type="file" id="gambar" name="gambar"
                                     value="{{ $item->gambar }}"readonly>
@@ -898,7 +956,8 @@
                             </div>
                             <div class="mb-3">
                                 <label for="tanggalkembali" class="form-label"><b>Tanggal Kembali</b></label>
-                                <input type="date" class="form-control" id="tanggalkembali" name="tanggalkembali">
+                                <input type="date" class="form-control" id="tanggalkembali"
+                                    name="tanggalkembali">
                             </div>
                             <div class="mb-3">
                                 <label for="penerima" class="form-label"><b>Penerima</b></label>
@@ -912,8 +971,8 @@
                             </div>
                             <div class="mb-3" hidden>
                                 <label for="status" class="form-label"><b>Status</b></label>
-                                <input type="text" class="form-control" id="status" name="status" value="1"
-                                    readonly>
+                                <input type="text" class="form-control" id="status" name="status"
+                                    value="1" readonly>
                             </div>
                         </div>
                         <div class="modal-footer">
