@@ -378,7 +378,7 @@
                 </tbody>
             </table>
             {{-- {{ $servicedone->appends($_GET)->links() }} --}}
-            {!! $servicedone->onEachSide(10)->links('pagination::bootstrap-5') !!}
+            {{ $servicedone->onEachSide(2)->links('pagination::bootstrap-5') }}
         </div>
     </div>
 
@@ -432,7 +432,7 @@
                     @endforeach
                 </tbody>
             </table>
-            {!! $servicepending->onEachSide(10)->links('pagination::bootstrap-5') !!}
+            {!! $servicepending->onEachSide(2)->links('pagination::bootstrap-5') !!}
         </div>
     </div>
 
@@ -485,7 +485,7 @@
                     @endforeach
                 </tbody>
             </table>
-            {!! $kanibal->onEachSide(10)->links('pagination::bootstrap-5') !!}
+            {!! $kanibal->onEachSide(2)->links('pagination::bootstrap-5') !!}
         </div>
     </div>
     </main>

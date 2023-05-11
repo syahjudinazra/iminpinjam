@@ -17,6 +17,13 @@
             <a href="{{ route('export-pinjam') }}" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm">
                 <i class="fas fa-download fa-sm text-white-50"></i> Generate Excel</a>
         </div>
+        @if (session()->has('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+
         @if (Auth::check())
             <div class="searchpinjam">
                 @if (Auth::check() && request()->is('pinjam'))
@@ -24,13 +31,6 @@
                         data-target="#exampleModal">
                         <i class="fa-solid fa-plus"></i> Tambah Produk
                     </button>
-                @endif
-
-                @if (session()->has('success'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        {{ session('success') }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
                 @endif
 
                 <form method="GET" action="{{ route('search.index') }}"
