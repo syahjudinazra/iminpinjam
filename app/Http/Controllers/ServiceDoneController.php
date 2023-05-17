@@ -17,7 +17,7 @@ class ServiceDoneController extends Controller
      */
     public function index()
     {
-        $servicedone = DB::table('service_dones')->orderBy('tanggal', 'desc')->paginate(5);
+        $servicedone = DB::table('service_dones')->orderBy('tanggal', 'desc')->paginate(10);
         return view('servicedone.index', compact('servicedone'));
 
         // return response()->json([

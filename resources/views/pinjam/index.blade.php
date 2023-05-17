@@ -838,7 +838,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="gambar" class="form-label"><b>Gambar</b></label><br>
-                            <img src="{{ url('/storage/gambar/' . $item->gambar) }}" width='60' height='60'
+                            <img src="{{ asset('storage/gambar/' . $item->gambar) }}" width='60' height='60'
                                 class="img img-responsive" id="gambar" name="gambar">
                         </div>
                     </div>
@@ -901,11 +901,6 @@
                                 <input type="date" class="form-control" id="tanggal" name="tanggal"
                                     value="{{ $item->tanggal }}"readonly>
                             </div>
-                            <div class="mb-3" hidden>
-                                <label for="gambar" class="form-label"><b>Gambar</b></label>
-                                <input class="form-control" type="file" id="gambar" name="gambar"
-                                    value="{{ $item->gambar }}"readonly>
-                            </div>
                             <div class="mb-3">
                                 <label for="serialnumber" class="form-label"><b>Serial Number</b></label>
                                 <input type="text" class="form-control" id="serialnumber" name="serialnumber"
@@ -956,8 +951,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="tanggalkembali" class="form-label"><b>Tanggal Kembali</b></label>
-                                <input type="date" class="form-control" id="tanggalkembali"
-                                    name="tanggalkembali">
+                                <input type="date" class="form-control" id="tanggalkembali" name="tanggalkembali">
                             </div>
                             <div class="mb-3">
                                 <label for="penerima" class="form-label"><b>Penerima</b></label>
@@ -973,6 +967,11 @@
                                 <label for="status" class="form-label"><b>Status</b></label>
                                 <input type="text" class="form-control" id="status" name="status"
                                     value="1" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="gambar" class="form-label"><b>Gambar</b></label><br>
+                                <img src="{{ asset('storage/gambar/' . $item->gambar) }}" width='60'
+                                    height='60' class="img img-responsive" id="gambar" name="gambar">
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -1068,7 +1067,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="gambar" class="form-label"><b>Gambar</b></label><br>
-                            <img src="{{ url('/storage/gambar/' . $item->gambar) }}" width='60' height='60'
+                            <img src="{{ asset('storage/gambar/' . $item->gambar) }}" width='60' height='60'
                                 class="img img-responsive" id="gambar" name="gambar">
                         </div>
                     </div>
@@ -1472,6 +1471,21 @@
                                 <label for="kelengkapankirim" class="form-label"><b>Kelengkapan Kirim</b></label>
                                 <textarea class="form-control" id="kelengkapankirim" name="kelengkapankirim" rows="3">{{ $item->kelengkapankirim }}</textarea>
                             </div>
+                            <div class="mb-3">
+                                <label for="tanggalkembali" class="form-label"><b>Tanggal Kembali</b></label>
+                                <input type="date" class="form-control" id="tanggalkembali" name="tanggalkembali"
+                                    value="{{ $item->tanggalkembali }}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="penerima" class="form-label"><b>Penerima</b></label>
+                                <input type="text" class="form-control" id="penerima" name="penerima"
+                                    placeholder="Masukan Nama Penerima" value="{{ $item->penerima }}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="kelengkapankembali" class="form-label"><b>Kelengkapan Kembali</b></label>
+                                <textarea class="form-control" id="kelengkapankembali" name="kelengkapankembali" rows="3"
+                                    placeholder="Contoh:Adaptor,Dus,Docking">{{ $item->kelengkapankembali }}</textarea>
+                            </div>
                             <div class="mb-3" hidden>
                                 <label for="status" class="form-label"><b>Status</b></label>
                                 <input type="text" class="form-control" id="status" name="status"
@@ -1480,7 +1494,6 @@
                             <div class="mb-3">
                                 <label for="gambar" class="form-label"><b>Gambar</b></label><br>
                                 <input class="form-control" type="file" id="gambar" name="gambar">
-                                {{-- <img src="{{ asset('storage/gambar/'.$item->gambar) }}" width= '60' height='60' class="img img-responsive"> --}}
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -1553,8 +1566,5 @@
                 @endforeach
             </tbody>
         </table>
-        {{-- @if (request()->is('pinjam'))
-            {!! $pinjam->onEachSide(10)->links('pagination::bootstrap-5') !!}
-        @endif --}}
     </div>
 @endsection

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Exports\ExportPinjam;
 use App\Exports\ExportKembali;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Maatwebsite\Excel\Facades\Excel;
 
 class KembaliController extends Controller
@@ -54,29 +55,7 @@ class KembaliController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'tanggal' => 'required|max:255',
-            'gambar' => 'image|mimes:jpeg,png,jpg|max:2048',
-            'serialnumber' => 'required|max:255',
-            'device' => 'required|max:255',
-            'customer' => 'required|max:255',
-            'telp' => 'required|max:255',
-            'pengirim' => 'required|max:255',
-            'kelengkapankirim' => 'required|max:255',
-            'tanggalkembali' => 'max:255',
-            'penerima' => 'max:255',
-            'kelengkapankembali' => 'max:255',
-            'status' => 'boolean',
-        ]);
-
-        $validatedData = $request->all();
-        $fileName = time() . $request->file('gambar')->getClientOriginalName();
-        $path = $request->file('gambar')->storeAs('images', $fileName, 'public');
-        $validatedData["gambar"] = '/storage/' . $path;
-
-        Kembali::create($validatedData);
-
-        return redirect('kembali')->with('success', 'Data telah ditambahkan');
+        //
     }
 
     /**
@@ -115,22 +94,7 @@ class KembaliController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $kembali = Kembali::find($id);
-        $kembali->tanggal = $request->input('tanggal');
-        // $kembali->gambar = $request->input('gambar');
-        $kembali->serialnumber = $request->input('serialnumber');
-        $kembali->device = $request->input('device');
-        $kembali->customer = $request->input('customer');
-        $kembali->telp = $request->input('telp');
-        $kembali->pengirim = $request->input('pengirim');
-        $kembali->kelengkapankirim = $request->input('kelengkapankirim');
-        $kembali->tanggalkembali = $request->input('tanggalkembali');
-        $kembali->penerima = $request->input('penerima');
-        $kembali->kelengkapankembali = $request->input('kelengkapankembali');
-        $kembali->status = $request->input('status');
-
-        $kembali->save();
-        return redirect('kembali')->with('success', 'Data telah diubah');
+        //
     }
 
     /**
