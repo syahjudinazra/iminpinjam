@@ -106,7 +106,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="model"><b>Model</b></label>
-                                <select class="form-control selectpicker" name="model" id="model"
+                                <select class="form-select selectpicker" name="model" id="model"
                                     data-live-search="true" required>
                                     <option value="Pilih Model">Pilih Model</option>
                                     <option value="D1" data-tokens="D1">D1</option>
@@ -116,20 +116,44 @@
                                     <option value="D2-401" data-tokens="D2-401">D2-401</option>
                                     <option value="D2-402" data-tokens="D2-402">D2-402</option>
                                     <option value="D2-Pro" data-tokens="D2-Pro">D2-Pro</option>
-                                    <option value="D3-504 lama" data-tokens="">D3-504 lama</option>
-                                    <option value="D3-505 lama" data-tokens="D3-505 lama">D3-505 lama</option>
-                                    <option value="D3-506 lama" data-tokens="D3-506 lama">D3-506 lama</option>
                                     <option value="D3-504" data-tokens="D3-504">D3-504</option>
                                     <option value="D3-505" data-tokens="D3-505">D3-505</option>
                                     <option value="D3-506" data-tokens="D3-506">D3-506</option>
+                                    <option value="D3-504 lama" data-tokens="">D3-504 lama</option>
+                                    <option value="D3-505 lama" data-tokens="D3-505 lama">D3-505 lama</option>
+                                    <option value="D3-506 lama" data-tokens="D3-506 lama">D3-506 lama</option>
                                     <option value="D3-501 Moka" data-tokens="D3-501 Moka">D3-501 Moka</option>
                                     <option value="D3-503 Moka" data-tokens="D3-503 Moka">D3-503 Moka</option>
+                                    <option value="D3-501 Moka Ultra" data-tokens="D3-501 Moka Ultra">D3-501 Moka
+                                        Ultra
+                                    </option>
+                                    <option value="D3-503 Moka Ultra+" data-tokens="D3-503 Moka Ultra+">D3-503 Moka
+                                        Ultra+
+                                    </option>
                                     <option value="D3 DS1" data-tokens="D3 DS1">D3 DS1</option>
+                                    <option value="D3 DS1K" data-tokens="D3 DS1K">D3 DS1K</option>
+                                    <option value="D3 DS1 DP" data-tokens="D3 DS1 DP">D3 DS1 DP</option>
+                                    <option value="D3 DS1 TS DP" data-tokens="D3 DS1 TS DP">D3 DS1 TS DP</option>
+                                    <option value="D3 DS1 Iseller" data-tokens="D3 DS1 Iseller">D3 DS1 Iseller
+                                    </option>
+                                    <option value="D3 DS1 TS Iseller DP" data-tokens="D3 DS1 TS Iseller DP">D3 DS1 TS
+                                        Iseller DP</option>
+                                    <option value="D3 DS1 Display NFC" data-tokens="D3 DS1 Display NFC">D3 DS1 Display
+                                        NFC
+                                    </option>
                                     <option value="D3 DS1 Extention Display" data-tokens="D3 DS1 Extention Display">D3 DS1
                                         Extention Display</option>
+                                    <option value="D3 DS1 Extention Display DP" data-tokens="D3 DS1 Extention Display DP">
+                                        D3 DS1 Extention Display DP</option>
                                     <option value="D3 DS1 Extention Display TS" data-tokens="D3 DS1 Extention Display TS">
                                         D3
                                         DS1 Extention Display TS</option>
+                                    <option value="D3 DS1 Extention Display TS DP"
+                                        data-tokens="D3 DS1 Extention Display TS DP">
+                                        D3 DS1 Extention Display TS DP</option>
+                                    <option value="D3 DS1 Extention Display HDMI"
+                                        data-tokens="D3 DS1 Extention Display HDMI">
+                                        D3 DS1 Extention Display HDMI</option>
                                     <option value="D4-502" data-tokens="D4-502">D4-502</option>
                                     <option value="D4-503" data-tokens="D4-503">D4-503</option>
                                     <option value="D4-503 White" data-tokens="D4-503 White">D4-503 White</option>
@@ -139,10 +163,16 @@
                                     <option value="D4-505 DT" data-tokens="D4-505 DT">D4-505 DT</option>
                                     <option value="D4 Falcon 1" data-tokens="D4 Falcon 1">D4 Falcon 1</option>
                                     <option value="M2-202" data-tokens="M2-202">M2-202</option>
+                                    <option value="M2-202 Olsera" data-tokens="M2-202 Olsera">M2-202 Olsera
+                                    </option>
                                     <option value="M2-202 iSeller" data-tokens="M2-202 iSeller">M2-202 iSeller</option>
+                                    <option value="M2-202 Grab" data-tokens="M2-202 Grab">M2-202 Grab
+                                    </option>
                                     <option value="M2-203" data-tokens="M2-203">M2-203</option>
                                     <option value="M2-203 iSeller" data-tokens="M2-203 iSeller">M2-203 iSeller</option>
                                     <option value="M2-203 White" data-tokens="M2-203 White">M2-203 White</option>
+                                    <option value="M2-203 Grab" data-tokens="M2-203 Grab">M2-203 Grab
+                                    </option>
                                     <option value="M2 Pro" data-tokens="M2 Pro">M2 Pro</option>
                                     <option value="M2 Max" data-tokens="M2 Max">M2 Max</option>
                                     <option value="M2 Swift 1S" data-tokens="M2 Swift 1S">M2 Swift 1S</option>
@@ -162,7 +192,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="ram"><b>RAM/Storage</b></label>
-                                <select class="form-control" id="ram" name="ram" value="{{ old('ram') }}"
+                                <select class="form-select" id="ram" name="ram" value="{{ old('ram') }}"
                                     required>
                                     <option>Pilih RAM/Storage</option>
                                     <option>-</option>
@@ -176,18 +206,19 @@
                             </div>
                             <div class="form-group">
                                 <label for="android"><b>Versi Android</b></label>
-                                <select class="form-control" id="android" name="android" value="{{ old('android') }}"
+                                <select class="form-select" id="android" name="android" value="{{ old('android') }}"
                                     required>
                                     <option>Pilih Versi Android</option>
                                     <option>-</option>
                                     <option>Android 7</option>
+                                    <option>Android 8</option>
                                     <option>Android 11</option>
                                     <option>Android 11 GMS</option>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label for="garansi"><b>Garansi</b></label>
-                                <select class="form-control" id="garansi" name="garansi" value="{{ old('garansi') }}"
+                                <select class="form-select" id="garansi" name="garansi" value="{{ old('garansi') }}"
                                     required>
                                     <option>Pilih Garansi</option>
                                     <option>DOA (Garansi)</option>
@@ -203,7 +234,7 @@
 
                             <div class="form-group">
                                 <label for="teknisi"><b>Teknisi</b></label>
-                                <select class="form-control" id="teknisi" name="teknisi" required>
+                                <select class="form-select" id="teknisi" name="teknisi" required>
                                     <option>Pilih Teknisi</option>
                                     <option>Khaerul</option>
                                     <option>Ozi</option>
@@ -278,7 +309,7 @@
                             </div>
                             <div class="form-group mb-3">
                                 <label for="model"><b>Model</b></label>
-                                <select class="form-control selectpicker" name="model" id="model"
+                                <select class="form-select selectpicker" name="model" id="model"
                                     data-live-search="true" required>
                                     <option value="Pilih Model">Pilih Model</option>
                                     <option value="D1" data-tokens="D1" {{ $item->model == 'D1' ? 'selected' : '' }}>
@@ -295,30 +326,61 @@
                                         {{ $item->model == 'D2-402' ? 'selected' : '' }}>D2-402</option>
                                     <option value="D2-Pro" data-tokens="D2-Pro"
                                         {{ $item->model == 'D2-Pro' ? 'selected' : '' }}>D2-Pro</option>
-                                    <option value="D3 504 lama" data-tokens="D3 504 lama"
-                                        {{ $item->model == 'D3 504 lama' ? 'selected' : '' }}>D3 504 lama</option>
-                                    <option value="D3 505 lama" data-tokens="D3 505 lama"
-                                        {{ $item->model == 'D3 505 lama' ? 'selected' : '' }}>D3 505 lama</option>
-                                    <option value="D3 506 lama" data-tokens="D3 506 lama"
-                                        {{ $item->model == 'D3 506 lama' ? 'selected' : '' }}>D3 506 lama</option>
                                     <option value="D3-504" data-tokens="D3-504"
                                         {{ $item->model == 'D3-504' ? 'selected' : '' }}>D3-504</option>
                                     <option value="D3-505" data-tokens="D3-505"
                                         {{ $item->model == 'D3-505' ? 'selected' : '' }}>D3-505</option>
                                     <option value="D3-506" data-tokens="D3-506"
                                         {{ $item->model == 'D3-506' ? 'selected' : '' }}>D3-506</option>
+                                    <option value="D3 504 lama" data-tokens="D3 504 lama"
+                                        {{ $item->model == 'D3 504 lama' ? 'selected' : '' }}>D3 504 lama</option>
+                                    <option value="D3 505 lama" data-tokens="D3 505 lama"
+                                        {{ $item->model == 'D3 505 lama' ? 'selected' : '' }}>D3 505 lama</option>
+                                    <option value="D3 506 lama" data-tokens="D3 506 lama"
+                                        {{ $item->model == 'D3 506 lama' ? 'selected' : '' }}>D3 506 lama</option>
                                     <option value="D3-501 Moka" data-tokens="D3-501 Moka"
                                         {{ $item->model == 'D3-501 Moka' ? 'selected' : '' }}>D3-501 Moka</option>
                                     <option value="D3-503 Moka" data-tokens="D3-503 Moka"
                                         {{ $item->model == 'D3-503 Moka' ? 'selected' : '' }}>D3-503 Moka</option>
+                                    <option value="D3-501 Moka Ultra" data-tokens="D3-501 Moka Ultra"
+                                        {{ $item->model == 'D3-501 Moka Ultra' ? 'selected' : '' }}>D3-501 Moka Ultra
+                                    </option>
+                                    <option value="D3-503 Moka Ultra+" data-tokens="D3-503 Moka Ultra+"
+                                        {{ $item->model == 'D3-503 Moka Ultra+' ? 'selected' : '' }}>D3-503 Moka Ultra+
+                                    </option>
                                     <option value="D3 DS1" data-tokens="D3 DS1"
                                         {{ $item->model == 'D3 DS1' ? 'selected' : '' }}>D3 DS1</option>
+                                    <option value="D3 DS1K" data-tokens="D3 DS1K"
+                                        {{ $item->model == 'D3 DS1K' ? 'selected' : '' }}>D3 DS1K</option>
+                                    <option value="D3 DS1 DP" data-tokens="D3 DS1 DP"
+                                        {{ $item->model == 'D3 DS1 DP' ? 'selected' : '' }}>D3 DS1 DP</option>
+                                    <option value="D3 DS1 TS DP" data-tokens="D3 DS1 TS DP"
+                                        {{ $item->model == 'D3 DS1 TS DP' ? 'selected' : '' }}>D3 DS1 TS DP</option>
+                                    <option value="D3 DS1 Iseller" data-tokens="D3 DS1 Iseller"
+                                        {{ $item->model == 'D3 DS1 Iseller' ? 'selected' : '' }}>D3 DS1 Iseller</option>
+                                    <option value="D3 DS1 TS Iseller DP" data-tokens="D3 DS1 TS Iseller DP"
+                                        {{ $item->model == 'D3 DS1 TS Iseller DP' ? 'selected' : '' }}>D3 DS1 TS Iseller DP
+                                    </option>
+                                    <option value="D3 DS1 Display NFC" data-tokens="D3 DS1 Display NFC"
+                                        {{ $item->model == 'D3 DS1 Display NFC' ? 'selected' : '' }}>D3 DS1 Display NFC
+                                    </option>
                                     <option value="D3 DS1 Extention Display" data-tokens="D3 DS1 Extention Display"
                                         {{ $item->model == 'D3 DS1 Extention Display' ? 'selected' : '' }}>D3 DS1
                                         Extention Display</option>
+                                    <option value="D3 DS1 Extention Display DP" data-tokens="D3 DS1 Extention Display DP"
+                                        {{ $item->model == 'D3 DS1 Extention Display DP' ? 'selected' : '' }}>D3 DS1
+                                        Extention Display DP</option>
                                     <option value="D3 DS1 Extention Display TS" data-tokens="D3 DS1 Extention Display TS"
                                         {{ $item->model == 'D3 DS1 Extention Display TS' ? 'selected' : '' }}>D3 DS1
                                         Extention Display TS</option>
+                                    <option value="D3 DS1 Extention Display TS DP"
+                                        data-tokens="D3 DS1 Extention Display TS DP"
+                                        {{ $item->model == 'D3 DS1 Extention Display TS DP' ? 'selected' : '' }}>D3 DS1
+                                        Extention Display TS DP</option>
+                                    <option value="D3 DS1 Extention Display HDMI"
+                                        data-tokens="D3 DS1 Extention Display HDMI"
+                                        {{ $item->model == 'D3 DS1 Extention Display HDMI' ? 'selected' : '' }}>D3 DS1
+                                        Extention Display HDMI</option>
                                     <option value="D4-502" data-tokens="D4-502"
                                         {{ $item->model == 'D4-502' ? 'selected' : '' }}>D4-502</option>
                                     <option value="D4-503" data-tokens="D4-503"
@@ -337,14 +399,20 @@
                                         {{ $item->model == 'D4 Falcon 1' ? 'selected' : '' }}>D4 Falcon 1</option>
                                     <option value="M2-202" data-tokens="M2-202"
                                         {{ $item->model == 'M2-202' ? 'selected' : '' }}>M2-202</option>
+                                    <option value="M2-202 Olsera" data-tokens="M2-202 Olsera"
+                                        {{ $item->model == 'M2-202 Olsera' ? 'selected' : '' }}>M2-202 Olsera</option>
                                     <option value="M2-202 iSeller" data-tokens="M2-202 iSeller"
                                         {{ $item->model == 'M2-202 iSeller' ? 'selected' : '' }}>M2-202 iSeller</option>
+                                    <option value="M2-202 Grab" data-tokens="M2-202 Grab"
+                                        {{ $item->model == 'M2-202 Grab' ? 'selected' : '' }}>M2-202 Grab</option>
                                     <option value="M2-203" data-tokens="M2-203"
                                         {{ $item->model == 'M2-203' ? 'selected' : '' }}>M2-203</option>
                                     <option value="M2-203 iSeller" data-tokens="M2-203 iSeller"
                                         {{ $item->model == 'M2-203 iSeller' ? 'selected' : '' }}>M2-203 iSeller</option>
                                     <option value="M2-203 White" data-tokens="M2-203 White"
                                         {{ $item->model == 'M2-203 White' ? 'selected' : '' }}>M2-203 White</option>
+                                    <option value="M2-203 Grab" data-tokens="M2-203 Grab"
+                                        {{ $item->model == 'M2-203 Grab' ? 'selected' : '' }}>M2-203 Grab</option>
                                     <option value="M2 Pro" data-tokens="M2 Pro"
                                         {{ $item->model == 'M2 Pro' ? 'selected' : '' }}>M2 Pro</option>
                                     <option value="M2 Max" data-tokens="M2 Max"
@@ -377,7 +445,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="ram"><b>RAM/Storage</b></label>
-                                <select class="form-control" id="ram" name="ram" required>
+                                <select class="form-select" id="ram" name="ram" required>
                                     <option value="Pilih RAM/Storage">Pilih RAM/Storage</option>
                                     <option value="-" data-tokens="-" {{ $item->ram == '-' ? 'selected' : '' }}>
                                         -
@@ -408,7 +476,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="android"><b>Versi Android</b></label>
-                                <select class="form-control" id="android" name="android" required>
+                                <select class="form-select" id="android" name="android" required>
                                     <option value="Pilih Android">Pilih Android</option>
                                     <option value="-" data-tokens="-" {{ $item->android == '-' ? 'selected' : '' }}>
                                         -
@@ -416,6 +484,10 @@
                                     <option value="Android 7" data-tokens="Android 7"
                                         {{ $item->android == 'Android 7' ? 'selected' : '' }}>
                                         Android 7
+                                    </option>
+                                    <option value="Android 8" data-tokens="Android 8"
+                                        {{ $item->android == 'Android 8' ? 'selected' : '' }}>
+                                        Android 8
                                     </option>
                                     <option value="Android 11" data-tokens="Android 11"
                                         {{ $item->android == 'Android 11' ? 'selected' : '' }}>
@@ -453,7 +525,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="teknisi"><b>Teknisi</b></label>
-                                <select class="form-control" id="teknisi" name="teknisi" value="{{ old('teknisi') }}"
+                                <select class="form-select" id="teknisi" name="teknisi" value="{{ old('teknisi') }}"
                                     required>
                                     <option value="Pilih Teknisi">Pilih Teknisi</option>
                                     <option value="Khaerul" data-tokens="Khaerul"
