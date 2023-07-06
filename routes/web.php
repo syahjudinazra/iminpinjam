@@ -55,7 +55,7 @@ Route::get('/pinjam/{id}/edit', [PinjamController::class, 'edit'])->middleware('
 Route::put('/pinjam/{id}', [PinjamController::class, 'update'])->middleware('auth')->name('users.update');
 Route::delete('/pinjam/{id}', [PinjamController::class, 'destroy'])->middleware('auth')->name('users.destroy');
 Route::get('/pinjam/{id}', [PinjamController::class, 'show'])->name('users.show');
-
+Route::get('/generate-pdf/{id}', [PinjamController::class, 'generatePdf']);
 
 //KEMBALI
 Route::get('/export-kembali', [KembaliController::class, 'exportKembali'])->name('export-kembali');

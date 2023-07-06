@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class ServiceDone extends Model
 {
     use HasFactory;
+    protected $table = 'service_dones';
+    protected $primaryKey = 'id';
+    protected $dates = ['tanggal'];
 
     protected $fillable = [
         'tanggal',

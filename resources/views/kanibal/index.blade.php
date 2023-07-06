@@ -134,6 +134,9 @@
                                     <option value="D3 DS1K" data-tokens="D3 DS1K">D3 DS1K</option>
                                     <option value="D3 DS1 DP" data-tokens="D3 DS1 DP">D3 DS1 DP</option>
                                     <option value="D3 DS1 TS DP" data-tokens="D3 DS1 TS DP">D3 DS1 TS DP</option>
+                                    <option value="D3 DS1 HDMI" data-tokens="D3 DS1 HDMI">D3 DS1 HDMI</option>
+                                    <option value="D3 DS1 HDMI TS" data-tokens="D3 DS1 HDMI TS">D3 DS1 HDMI TS</option>
+                                    <option value="D3 DS1 HDMI NFC" data-tokens="D3 DS1 HDMI NFC">D3 DS1 HDMI NFC</option>
                                     <option value="D3 DS1 Iseller" data-tokens="D3 DS1 Iseller">D3 DS1 Iseller
                                     </option>
                                     <option value="D3 DS1 TS Iseller DP" data-tokens="D3 DS1 TS Iseller DP">D3 DS1 TS
@@ -154,6 +157,9 @@
                                     <option value="D3 DS1 Extention Display HDMI"
                                         data-tokens="D3 DS1 Extention Display HDMI">
                                         D3 DS1 Extention Display HDMI</option>
+                                    <option value="D3 DS1 Extention Display TS HDMI"
+                                        data-tokens="D3 DS1 Extention Display TS HDMI">D3 DS1 Extention Display TS HDMI
+                                    </option>
                                     <option value="D4-502" data-tokens="D4-502">D4-502</option>
                                     <option value="D4-503" data-tokens="D4-503">D4-503</option>
                                     <option value="D4-503 White" data-tokens="D4-503 White">D4-503 White</option>
@@ -161,6 +167,7 @@
                                     <option value="D4-504 White" data-tokens="D4-504 White">D4-504 White</option>
                                     <option value="D4-505" data-tokens="D4-505">D4-505</option>
                                     <option value="D4-505 DT" data-tokens="D4-505 DT">D4-505 DT</option>
+                                    <option value="D4-505 Pro" data-tokens="D4-505 Pro">D4-505 Pro</option>
                                     <option value="D4 Falcon 1" data-tokens="D4 Falcon 1">D4 Falcon 1</option>
                                     <option value="M2-202" data-tokens="M2-202">M2-202</option>
                                     <option value="M2-202 Olsera" data-tokens="M2-202 Olsera">M2-202 Olsera
@@ -188,6 +195,7 @@
                                     <option value="K1-101" data-tokens="K1-101">K1-101</option>
                                     <option value="K2-201" data-tokens="K2-201">K2-201</option>
                                     <option value="X1 Scanner" data-tokens="X1 Scanner">X1 Scanner</option>
+                                    <option value="Stand Swan" data-tokens="Stand Swan">Stand Swan</option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -356,6 +364,12 @@
                                         {{ $item->model == 'D3 DS1 DP' ? 'selected' : '' }}>D3 DS1 DP</option>
                                     <option value="D3 DS1 TS DP" data-tokens="D3 DS1 TS DP"
                                         {{ $item->model == 'D3 DS1 TS DP' ? 'selected' : '' }}>D3 DS1 TS DP</option>
+                                    <option value="D3 DS1 HDMI" data-tokens="D3 DS1 HDMI"
+                                        {{ $item->model == 'D3 DS1 HDMI' ? 'selected' : '' }}>D3 DS1 HDMI</option>
+                                    <option value="D3 DS1 HDMI TS" data-tokens="D3 DS1 HDMI TS"
+                                        {{ $item->model == 'D3 DS1 HDMI TS' ? 'selected' : '' }}>D3 DS1 HDMI TS</option>
+                                    <option value="D3 DS1 HDMI NFC" data-tokens="D3 DS1 HDMI NFC"
+                                        {{ $item->model == 'D3 DS1 HDMI NFC' ? 'selected' : '' }}>D3 DS1 HDMI NFC</option>
                                     <option value="D3 DS1 Iseller" data-tokens="D3 DS1 Iseller"
                                         {{ $item->model == 'D3 DS1 Iseller' ? 'selected' : '' }}>D3 DS1 Iseller</option>
                                     <option value="D3 DS1 TS Iseller DP" data-tokens="D3 DS1 TS Iseller DP"
@@ -381,6 +395,10 @@
                                         data-tokens="D3 DS1 Extention Display HDMI"
                                         {{ $item->model == 'D3 DS1 Extention Display HDMI' ? 'selected' : '' }}>D3 DS1
                                         Extention Display HDMI</option>
+                                    <option value="D3 DS1 Extention Display TS HDMI"
+                                        data-tokens="D3 DS1 Extention Display TS HDMI"
+                                        {{ $item->model == 'D3 DS1 Extention Display TS HDMI' ? 'selected' : '' }}>D3 DS1
+                                        Extention Display TS HDMI</option>
                                     <option value="D4-502" data-tokens="D4-502"
                                         {{ $item->model == 'D4-502' ? 'selected' : '' }}>D4-502</option>
                                     <option value="D4-503" data-tokens="D4-503"
@@ -395,6 +413,8 @@
                                         {{ $item->model == 'D4-505' ? 'selected' : '' }}>D4-505</option>
                                     <option value="D4-505 DT" data-tokens="D4-505 DT"
                                         {{ $item->model == 'D4-505 DT' ? 'selected' : '' }}>D4-505 DT</option>
+                                    <option value="D4-505 Pro" data-tokens="D4-505 Pro"
+                                        {{ $item->model == 'D4-505 Pro' ? 'selected' : '' }}>D4-505 Pro</option>
                                     <option value="D4 Falcon 1" data-tokens="D4 Falcon 1"
                                         {{ $item->model == 'D4 Falcon 1' ? 'selected' : '' }}>D4 Falcon 1</option>
                                     <option value="M2-202" data-tokens="M2-202"
@@ -441,6 +461,8 @@
                                         {{ $item->model == 'K2 201' ? 'selected' : '' }}>K2 201</option>
                                     <option value="X1 Scanner" data-tokens="X1 Scanner"
                                         {{ $item->model == 'X1 Scanner' ? 'selected' : '' }}>X1 Scanner</option>
+                                    <option value="Stand Swan" data-tokens="Stand Swan"
+                                        {{ $item->model == 'Stand Swan' ? 'selected' : '' }}>Stand Swan</option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -713,27 +735,27 @@
                         <td>{{ $item->pelanggan }}</td>
                         <td>{{ $item->model }}</td>
                         <td>
-
-                            <a href="#" class="btn btn-warning" data-toggle="modal"
-                                data-target="#editModal{{ $item->id }}"><i
-                                    class="fa-solid fa-pen-to-square"></i></a>
-
+                            @if (Auth::check())
+                                <a href="#" class="btn btn-warning" data-toggle="modal"
+                                    data-target="#editModal{{ $item->id }}"><i
+                                        class="fa-solid fa-pen-to-square"></i></a>
+                            @endif
                             <a href="#" class="btn btn-primary" data-toggle="modal"
                                 data-target="#viewModal{{ $item->id }}"><i class="fa-solid fa-eye"></i></a>
 
-                            <a href="#" class="btn btn-danger" data-toggle="modal"
-                                data-target="#deleteModal{{ $item->id }}"><i class="fa-solid fa-trash"></i></a>
-
-                            {{-- <a href="#" class="btn btn-success" data-toggle="modal"
-                                data-target="#moveModal{{ $item->id }}"><i class="fa-solid fa-paper-plane"></i></a> --}}
-
-                            <a href="/kanibal/finish/{{ $item->id }}" class="btn btn-success"><i
-                                    class="fa-solid fa-paper-plane"></i></a>
+                            @if (Auth::check())
+                                <a href="#" class="btn btn-danger" data-toggle="modal"
+                                    data-target="#deleteModal{{ $item->id }}"><i class="fa-solid fa-trash"></i></a>
+                            @endif
+                            @if (Auth::check())
+                                <a href="/kanibal/finish/{{ $item->id }}" class="btn btn-success"><i
+                                        class="fa-solid fa-paper-plane"></i></a>
+                            @endif
                         </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
-        {!! $kanibal->onEachSide(10)->links('pagination::bootstrap-5') !!}
+        {!! $kanibal->onEachSide(1)->links('pagination::bootstrap-5') !!}
     </div>
 @endsection

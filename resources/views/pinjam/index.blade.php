@@ -142,6 +142,9 @@
                                     <option value="D3 DS1K" data-tokens="D3 DS1K">D3 DS1K</option>
                                     <option value="D3 DS1 DP" data-tokens="D3 DS1 DP">D3 DS1 DP</option>
                                     <option value="D3 DS1 TS DP" data-tokens="D3 DS1 TS DP">D3 DS1 TS DP</option>
+                                    <option value="D3 DS1 HDMI" data-tokens="D3 DS1 HDMI">D3 DS1 HDMI</option>
+                                    <option value="D3 DS1 HDMI TS" data-tokens="D3 DS1 HDMI TS">D3 DS1 HDMI TS</option>
+                                    <option value="D3 DS1 HDMI NFC" data-tokens="D3 DS1 HDMI NFC">D3 DS1 HDMI NFC</option>
                                     <option value="D3 DS1 Iseller" data-tokens="D3 DS1 Iseller">D3 DS1 Iseller
                                     </option>
                                     <option value="D3 DS1 TS Iseller DP" data-tokens="D3 DS1 TS Iseller DP">D3 DS1 TS
@@ -169,6 +172,9 @@
                                     <option value="D3 DS1 Extention Display HDMI"
                                         data-tokens="D3 DS1 Extention Display HDMI">
                                         D3 DS1 Extention Display HDMI</option>
+                                    <option value="D3 DS1 Extention Display TS HDMI"
+                                        data-tokens="D3 DS1 Extention Display TS HDMI">D3 DS1 Extention Display TS HDMI
+                                    </option>
                                     <option value="D4-501" data-tokens="D4-501">D4-501</option>
                                     <option value="D4-502" data-tokens="D4-502">D4-502</option>
                                     <option value="D4-503" data-tokens="D4-503">D4-503</option>
@@ -236,6 +242,8 @@
                                     <option value="X1-201" data-tokens="X1-201">X1-201</option>
                                     <option value="X1 Scanner" data-tokens="X1 Scanner">X1 Scanner</option>
                                     <option value="Stand S1" data-tokens="Stand S1">Stand S1</option>
+                                    <option value="Stand K1" data-tokens="Stand K1">Stand K1</option>
+                                    <option value="Stand K2" data-tokens="Stand K2">Stand K2</option>
                                     <option value="Stand Swan" data-tokens="Stand Swan">Stand Swan</option>
                                     <option value="Kassen Barcode 2D RS-720" data-tokens="Kassen Barcode 2D RS-720">
                                         Kassen
@@ -294,6 +302,9 @@
                                     <option value="Converter USB - AUX" data-tokens="Converter USB - AUX">
                                         Converter USB - AUX
                                     </option>
+                                    <option value="Webcam Camera" data-tokens="Webcam Camera">
+                                        Webcam Camera
+                                    </option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -308,6 +319,7 @@
                                     <option>4/16</option>
                                     <option>4/32</option>
                                     <option>4/64</option>
+                                    <option>8/128</option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -457,6 +469,12 @@
                                         {{ $item->device == 'D3 DS1 DP' ? 'selected' : '' }}>D3 DS1 DP</option>
                                     <option value="D3 DS1 TS DP" data-tokens="D3 DS1 TS DP"
                                         {{ $item->device == 'D3 DS1 TS DP' ? 'selected' : '' }}>D3 DS1 TS DP</option>
+                                    <option value="D3 DS1 HDMI" data-tokens="D3 DS1 HDMI"
+                                        {{ $item->device == 'D3 DS1 HDMI' ? 'selected' : '' }}>D3 DS1 HDMI</option>
+                                    <option value="D3 DS1 HDMI TS" data-tokens="D3 DS1 HDMI TS"
+                                        {{ $item->device == 'D3 DS1 HDMI TS' ? 'selected' : '' }}>D3 DS1 HDMI TS</option>
+                                    <option value="D3 DS1 HDMI NFC" data-tokens="D3 DS1 HDMI NFC"
+                                        {{ $item->device == 'D3 DS1 HDMI NFC' ? 'selected' : '' }}>D3 DS1 HDMI NFC</option>
                                     <option value="D3 DS1 Iseller" data-tokens="D3 DS1 Iseller"
                                         {{ $item->device == 'D3 DS1 Iseller' ? 'selected' : '' }}>D3 DS1 Iseller</option>
                                     <option value="D3 DS1 TS Iseller DP" data-tokens="D3 DS1 TS Iseller DP"
@@ -491,6 +509,10 @@
                                         data-tokens="D3 DS1 Extention Display HDMI"
                                         {{ $item->device == 'D3 DS1 Extention Display HDMI' ? 'selected' : '' }}>
                                         D3 DS1 Extention Display HDMI</option>
+                                    <option value="D3 DS1 Extention Display TS HDMI"
+                                        data-tokens="D3 DS1 Extention Display TS HDMI"
+                                        {{ $item->device == 'D3 DS1 Extention Display TS HDMI' ? 'selected' : '' }}>D3 DS1
+                                        Extention Display TS HDMI</option>
                                     <option value="D4-501" data-tokens="D4-501"
                                         {{ $item->device == 'D4-501' ? 'selected' : '' }}>D4-501</option>
                                     <option value="D4-502" data-tokens="D4-502"
@@ -591,6 +613,10 @@
                                         {{ $item->device == 'X1 Scanner' ? 'selected' : '' }}>X1 Scanner</option>
                                     <option value="Stand S1" data-tokens="Stand S1"
                                         {{ $item->device == 'Stand S1' ? 'selected' : '' }}>Stand S1</option>
+                                    <option value="Stand K1" data-tokens="Stand K1"
+                                        {{ $item->device == 'Stand K1' ? 'selected' : '' }}>Stand K1</option>
+                                    <option value="Stand K2" data-tokens="Stand K2"
+                                        {{ $item->device == 'Stand K2' ? 'selected' : '' }}>Stand K2</option>
                                     <option value="Stand Swan" data-tokens="Stand Swan"
                                         {{ $item->device == 'Stand Swan' ? 'selected' : '' }}>Stand Swan</option>
                                     <option value="Kassen Barcode 2D RS-720" data-tokens="Kassen Barcode 2D RS-720"
@@ -663,6 +689,10 @@
                                         {{ $item->device == 'Converter USB - AUX' ? 'selected' : '' }}>
                                         Converter USB - AUX
                                     </option>
+                                    <option value="Webcam Camera" data-tokens="Webcam Camera"
+                                        {{ $item->device == 'Webcam Camera' ? 'selected' : '' }}>
+                                        Webcam Camera
+                                    </option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -695,6 +725,10 @@
                                     <option value="4/64" data-tokens="4/64"
                                         {{ $item->ram == '4/64' ? 'selected' : '' }}>
                                         4/64
+                                    </option>
+                                    <option value="8/128" data-tokens="8/128"
+                                        {{ $item->ram == '8/128' ? 'selected' : '' }}>
+                                        8/128
                                     </option>
                                 </select>
                             </div>
@@ -955,7 +989,8 @@
                             </div>
                             <div class="mb-3">
                                 <label for="tanggalkembali" class="form-label"><b>Tanggal Kembali</b></label>
-                                <input type="date" class="form-control" id="tanggalkembali" name="tanggalkembali">
+                                <input type="date" class="form-control" id="tanggalkembali"
+                                    name="tanggalkembali">
                             </div>
                             <div class="mb-3">
                                 <label for="penerima" class="form-label"><b>Penerima</b></label>
@@ -1174,6 +1209,13 @@
                                         {{ $item->device == 'D3 DS1 DP' ? 'selected' : '' }}>D3 DS1 DP</option>
                                     <option value="D3 DS1 TS DP" data-tokens="D3 DS1 TS DP"
                                         {{ $item->device == 'D3 DS1 TS DP' ? 'selected' : '' }}>D3 DS1 TS DP</option>
+                                    <option value="D3 DS1 HDMI" data-tokens="D3 DS1 HDMI"
+                                        {{ $item->device == 'D3 DS1 HDMI' ? 'selected' : '' }}>D3 DS1 HDMI</option>
+                                    <option value="D3 DS1 HDMI TS" data-tokens="D3 DS1 HDMI TS"
+                                        {{ $item->device == 'D3 DS1 HDMI TS' ? 'selected' : '' }}>D3 DS1 HDMI TS</option>
+                                    <option value="D3 DS1 HDMI NFC" data-tokens="D3 DS1 HDMI NFC"
+                                        {{ $item->device == 'D3 DS1 HDMI NFC' ? 'selected' : '' }}>D3 DS1 HDMI NFC
+                                    </option>
                                     <option value="D3 DS1 Iseller" data-tokens="D3 DS1 Iseller"
                                         {{ $item->device == 'D3 DS1 Iseller' ? 'selected' : '' }}>D3 DS1 Iseller</option>
                                     <option value="D3 DS1 TS Iseller DP" data-tokens="D3 DS1 TS Iseller DP"
@@ -1210,6 +1252,10 @@
                                         data-tokens="D3 DS1 Extention Display HDMI"
                                         {{ $item->device == 'D3 DS1 Extention Display HDMI' ? 'selected' : '' }}>
                                         D3 DS1 Extention Display HDMI</option>
+                                    <option value="D3 DS1 Extention Display TS HDMI"
+                                        data-tokens="D3 DS1 Extention Display TS HDMI"
+                                        {{ $item->device == 'D3 DS1 Extention Display TS HDMI' ? 'selected' : '' }}>D3 DS1
+                                        Extention Display TS HDMI</option>
                                     <option value="D4-501" data-tokens="D4-501"
                                         {{ $item->device == 'D4-501' ? 'selected' : '' }}>D4-501</option>
                                     <option value="D4-502" data-tokens="D4-502"
@@ -1312,6 +1358,10 @@
                                         {{ $item->device == 'X1 Scanner' ? 'selected' : '' }}>X1 Scanner</option>
                                     <option value="Stand S1" data-tokens="Stand S1"
                                         {{ $item->device == 'Stand S1' ? 'selected' : '' }}>Stand S1</option>
+                                    <option value="Stand K1" data-tokens="Stand K1"
+                                        {{ $item->device == 'Stand K1' ? 'selected' : '' }}>Stand K1</option>
+                                    <option value="Stand K2" data-tokens="Stand K2"
+                                        {{ $item->device == 'Stand K2' ? 'selected' : '' }}>Stand K2</option>
                                     <option value="Stand Swan" data-tokens="Stand Swan"
                                         {{ $item->device == 'Stand Swan' ? 'selected' : '' }}>Stand Swan</option>
                                     <option value="Kassen Barcode 2D RS-720" data-tokens="Kassen Barcode 2D RS-720"
@@ -1386,6 +1436,10 @@
                                         {{ $item->device == 'Converter USB - AUX' ? 'selected' : '' }}>
                                         Converter USB - AUX
                                     </option>
+                                    <option value="Webcam Camera" data-tokens="Webcam Camera"
+                                        {{ $item->device == 'Webcam Camera' ? 'selected' : '' }}>
+                                        Webcam Camera
+                                    </option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -1418,6 +1472,10 @@
                                     <option value="4/64" data-tokens="4/64"
                                         {{ $item->ram == '4/64' ? 'selected' : '' }}>
                                         4/64
+                                    </option>
+                                    <option value="8/128" data-tokens="8/128"
+                                        {{ $item->ram == '8/128' ? 'selected' : '' }}>
+                                        8/128
                                     </option>
                                 </select>
                             </div>
@@ -1534,18 +1592,18 @@
                         <td>{{ $item->device }}</td>
                         <td>{{ $item->customer }}</td>
                         <td>
-                            @if (request()->is('pinjam'))
+
+                            @if (Auth::check() && request()->is('pinjam'))
                                 <a href="#" class="btn btn-warning" data-toggle="modal"
                                     data-target="#editModal{{ $item->id }}"><i
                                         class="fa-solid fa-pen-to-square"></i></a>
                             @endif
-
                             @if (request()->is('pinjam'))
                                 <a href="#" class="btn btn-primary" data-toggle="modal"
                                     data-target="#viewModal{{ $item->id }}"><i class="fa-solid fa-eye"></i></a>
                             @endif
 
-                            @if (request()->is('kembali'))
+                            @if (Auth::check() && request()->is('kembali'))
                                 <a href="#" class="btn btn-warning" data-toggle="modal"
                                     data-target="#editkembaliModal{{ $item->id }}"><i
                                         class="fa-solid fa-pen-to-square"></i></a>
@@ -1557,13 +1615,22 @@
                                         class="fa-solid fa-eye"></i></a>
                             @endif
 
-                            <a href="#" class="btn btn-danger" data-toggle="modal"
-                                data-target="#deleteModal{{ $item->id }}"><i class="fa-solid fa-trash"></i></a>
+                            @if (Auth::check())
+                                <a href="#" class="btn btn-danger" data-toggle="modal"
+                                    data-target="#deleteModal{{ $item->id }}"><i
+                                        class="fa-solid fa-trash"></i></a>
+                            @endif
 
-                            @if (request()->is('pinjam'))
+                            @if (Auth::check() && request()->is('pinjam'))
                                 <a href="#" class="btn btn-success" data-toggle="modal"
                                     data-target="#moveModal{{ $item->id }}"><i
                                         class="fa-solid fa-paper-plane"></i></a>
+                            @endif
+
+                            @if (Auth::check())
+                                <a href="{{ url('generate-pdf', $item->id) }}" class="btn btn-danger"
+                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Download PDF"><i
+                                        class="fa-solid fa-file-pdf"></i></a>
                             @endif
                         </td>
                     </tr>

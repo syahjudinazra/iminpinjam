@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class ServicePending extends Model
 {
     use HasFactory;
+    protected $table = 'service_pendings';
+    protected $primaryKey = 'id';
+    protected $dates = ['tanggal'];
 
     protected $fillable = [
         'tanggal',

@@ -8,6 +8,7 @@ use App\Exports\ExportPinjam;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Maatwebsite\Excel\Facades\Excel;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class PinjamController extends Controller
 {
@@ -45,6 +46,13 @@ class PinjamController extends Controller
         $pinjam = $pinjam->paginate(10);
         return view('pinjam.index', compact('pinjam'));
         // ->with('i', (request()->input('page', 1) - 1) * 5);
+    }
+
+    public function generatePdf($id)
+    {
+        $pinjam = Pinjam::findOrFail($id);
+        $pdf = pdf::loadView('pdf.generate', ['pinjam' => $pinjam]);
+        return $pdf->download('test.pdf');
     }
 
 

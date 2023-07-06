@@ -9,6 +9,10 @@ class Kanibal extends Model
 {
     use HasFactory;
 
+    protected $table = 'kanibals';
+    protected $primaryKey = 'id';
+    protected $dates = ['tanggal'];
+
     protected $fillable = [
         'tanggal',
         'serialnumber',

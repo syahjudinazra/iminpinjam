@@ -455,17 +455,20 @@
                             <td>{{ $item->device }}</td>
                             <td>{{ $item->customer }}</td>
                             <td>
-
-                                <a href="#" class="btn btn-warning" data-toggle="modal"
-                                    data-target="#editModal{{ $item->id }}"><i
-                                        class="fa-solid fa-pen-to-square"></i></a>
+                                @if (Auth::check())
+                                    <a href="#" class="btn btn-warning" data-toggle="modal"
+                                        data-target="#editModal{{ $item->id }}"><i
+                                            class="fa-solid fa-pen-to-square"></i></a>
+                                @endif
 
                                 <a href="#" class="btn btn-primary" data-toggle="modal"
                                     data-target="#viewModal{{ $item->id }}"><i class="fa-solid fa-eye"></i></a>
 
-                                <a href="#" class="btn btn-danger" data-toggle="modal"
-                                    data-target="#deleteModal{{ $item->id }}"><i class="fa-solid fa-trash"></i></a>
-
+                                @if (Auth::check())
+                                    <a href="#" class="btn btn-danger" data-toggle="modal"
+                                        data-target="#deleteModal{{ $item->id }}"><i
+                                            class="fa-solid fa-trash"></i></a>
+                                @endif
                             </td>
                         </tr>
                     @endforeach
