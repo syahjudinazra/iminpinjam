@@ -91,8 +91,8 @@ Route::put('/servicepending/{id}', [ServicePendingController::class, 'update'])-
 Route::delete('/servicepending/{id}', [ServicePendingController::class, 'destroy'])->middleware('auth')->name('servicepending.destroy');
 Route::get('/export-servicepending', [ServicePendingController::class, 'exportServicePending'])->name('export-servicepending');
 Route::get('/servicepending/{id}', [ServicePendingController::class, 'show'])->name('servicepending.show');
-
 Route::get('/servicepending/finish/{id}', [ServicePendingController::class, 'finish'])->middleware('auth');
+
 
 //KANIBAL
 Route::get('/kanibal/search', [KanibalController::class, 'search'])->name('search.kanibal');

@@ -160,7 +160,7 @@
         .invoice-box table tr.information table td {
             width: 100%;
             display: block;
-            text-align: center;
+
         }
     }
 
@@ -217,15 +217,17 @@
                 <td colspan="2">
                     <table>
                         <tr>
-                            <td style="width: 50%">
+                            <td>
                                 <p style="font-size: 12px"><b>Loan to : {{ $pinjam->customer }} </b></p>
-                                <p style="font-size: 10px; margin-top:-10px"><b>Address :
+                                <p style="font-size: 10px; margin-top:-10px; width: 50%"><b>Address :
                                         {{ $pinjam->alamat }}</b></p>
                             </td>
                             <td>
-                                <p style="font-size: 10px"><b>Date : {{ $pinjam->tanggal->format('d-m-Y') }} </b></p>
-                                <p style="font-size: 10px; margin-top:-10px"><b>Sales Rep : {{ Auth::user()->name }}
-                                    </b></p>
+                                <p style="font-size: 10px; margin-left:-20px"><b>Date :
+                                        {{ $pinjam->tanggal->format('d-m-Y') }} </b></p>
+                                <p style="font-size: 10px; margin-top:-10px; margin-left:-20px"><b>Sales Rep :
+                                        {{ Auth::user()->name }}</b>
+                                </p>
                             </td>
                         </tr>
                     </table>

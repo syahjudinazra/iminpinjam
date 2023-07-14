@@ -9,10 +9,18 @@
         <div class="d-sm-flex justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Service Pending</h1>
 
-            <a href="{{ route('export-servicepending') }}" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm">
-                <i class="fas fa-download fa-sm text-white-50"></i> Generate Excel</a>
-        </div>
+            <form action="{{ route('export-servicepending') }}" method="GET">
+                <label for="start_date">Start Date:</label>
+                <input type="date" id="start_date" name="start_date">
 
+                <label for="end_date">End Date:</label>
+                <input type="date" id="end_date" name="end_date">
+
+                <button class="btn btn-sm btn-success" type="submit"><i
+                        class="fas fa-download fa-sm text-white-50"></i>Export
+                    Excel</button>
+            </form>
+        </div>
 
         @if (session()->has('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -22,27 +30,29 @@
         @endif
 
         @if (Auth::check())
-            <div class="searchpending">
-                @if (Auth::check())
-                    <button type="button" class="btn btn-danger mb-2" data-toggle="modal" data-target="#exampleModal">
-                        <i class="fa-solid fa-plus"></i> Tambah Produk
-                    </button>
-                @endif
-
-                <form method="GET" action="{{ route('search.servicepending') }}"
-                    class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
-                    style="float: right">
-                    <div class="input-group" style="flex-wrap: nowrap;">
-                        <div class="form-outline ">
-                            <input type="search" id="form1" name="search" class="form-control"
-                                value="{{ request()->input('search') }}" />
-                            <label class="form-label" for="form1">Search</label>
-                        </div>
-                        <button type="submit" class="btn btn-danger d-inline">
-                            <i class="fas fa-search"></i>
+            <div class="row">
+                <div class="searchpending">
+                    @if (Auth::check())
+                        <button type="button" class="btn btn-danger mb-2" data-toggle="modal" data-target="#exampleModal">
+                            <i class="fa-solid fa-plus"></i> Tambah Produk
                         </button>
-                    </div>
-                </form>
+                    @endif
+
+                    <form method="GET" action="{{ route('search.servicepending') }}"
+                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
+                        style="float: right">
+                        <div class="input-group" style="flex-wrap: nowrap;">
+                            <div class="form-outline ">
+                                <input type="search" id="form1" name="search" class="form-control"
+                                    value="{{ request()->input('search') }}" />
+                                <label class="form-label" for="form1">Search</label>
+                            </div>
+                            <button type="submit" class="btn btn-danger d-inline">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
         @else
             <div class="searchpending" style="margin-bottom: 80px">
@@ -75,6 +85,7 @@
                 </form>
             </div>
         @endif
+
         <!-- Tambah Data -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">

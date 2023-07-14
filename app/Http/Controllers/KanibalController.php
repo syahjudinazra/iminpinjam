@@ -21,10 +21,21 @@ class KanibalController extends Controller
         return view('kanibal.index', compact('kanibal'));
     }
 
-    public function exportKanibal()
+    // public function exportKanibal()
+    // {
+    //     return Excel::download(new KanibalExport, 'DataKanibal.xlsx');
+    // }
+
+    public function exportKanibal(Request $request)
     {
-        return Excel::download(new KanibalExport, 'DataKanibal.xlsx');
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+
+        $data = Kanibal::whereBetween('tanggal', [$startDate, $endDate])->get();
+
+        return Excel::download(new KanibalExport($data), 'DataServiceDone.xlsx');
     }
+
 
     public function search()
     {

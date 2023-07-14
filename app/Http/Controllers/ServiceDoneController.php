@@ -25,9 +25,19 @@ class ServiceDoneController extends Controller
         // ]);
     }
 
-    public function exportServiceDone()
+    // public function exportServiceDone()
+    // {
+    //     return Excel::download(new ServiceDoneExport, 'DataServiceDone.xlsx');
+    // }
+
+    public function exportServiceDone(Request $request)
     {
-        return Excel::download(new ServiceDoneExport, 'DataServiceDone.xlsx');
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+
+        $data = ServiceDone::whereBetween('tanggal', [$startDate, $endDate])->get();
+
+        return Excel::download(new ServiceDoneExport($data), 'DataServiceDone.xlsx');
     }
 
     public function search()

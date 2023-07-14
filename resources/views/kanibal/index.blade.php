@@ -9,8 +9,17 @@
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Kanibal</h1>
 
-            <a href="{{ route('export-kanibal') }}" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm">
-                <i class="fas fa-download fa-sm text-white-50"></i> Generate Excel</a>
+            <form action="{{ route('export-kanibal') }}" method="GET">
+                <label for="start_date">Start Date:</label>
+                <input type="date" id="start_date" name="start_date">
+
+                <label for="end_date">End Date:</label>
+                <input type="date" id="end_date" name="end_date">
+
+                <button class="btn btn-sm btn-success" type="submit"><i
+                        class="fas fa-download fa-sm text-white-50"></i>Export
+                    Excel</button>
+            </form>
         </div>
 
         @if (session()->has('success'))

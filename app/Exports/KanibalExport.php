@@ -5,15 +5,22 @@ namespace App\Exports;
 use App\Models\Kanibal;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\Exportable;
 
 class KanibalExport implements FromCollection, WithHeadings
 {
-    /**
-     * @return \Illuminate\Support\Collection
-     */
+    use Exportable;
+
+    protected $data;
+
+    public function __construct($data)
+    {
+        $this->data = $data;
+    }
+
     public function collection()
     {
-        return Kanibal::all();
+        return $this->data;
     }
 
     public function headings(): array

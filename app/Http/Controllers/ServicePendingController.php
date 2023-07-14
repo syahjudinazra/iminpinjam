@@ -23,9 +23,19 @@ class ServicePendingController extends Controller
         return view('servicepending.index', compact('servicepending'));
     }
 
-    public function exportServicePending()
+    // public function exportServicePending()
+    // {
+    //     return Excel::download(new ServicePendingExport, 'DataServicePending.xlsx');
+    // }
+
+    public function exportServicePending(Request $request)
     {
-        return Excel::download(new ServicePendingExport, 'DataServicePending.xlsx');
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+
+        $data = ServicePending::whereBetween('tanggal', [$startDate, $endDate])->get();
+
+        return Excel::download(new ServicePendingExport($data), 'DataServicePending.xlsx');
     }
 
     public function search()
