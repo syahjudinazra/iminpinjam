@@ -88,7 +88,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Tambah Service Done</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Tambah Data Kanibal</h5>
 
 
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -114,10 +114,10 @@
                                     placeholder="Masukan Nama Pelanggan" value="iMinID_stock" readonly>
                             </div>
                             <div class="form-group">
-                                <label for="model"><b>Model</b></label>
+                                <label for="model"><b>Tipe Device</b></label>
                                 <select class="form-select selectpicker" name="model" id="model"
                                     data-live-search="true" required>
-                                    <option value="Pilih Model">Pilih Model</option>
+                                    <option value="Pilih Tipe Device">Pilih Tipe Device</option>
                                     <option value="D1" data-tokens="D1">D1</option>
                                     <option value="D1 Moka" data-tokens="D1 Moka">D1 Moka</option>
                                     <option value="D1-Pro" data-tokens="D1-Pro">D1-Pro</option>
@@ -148,8 +148,13 @@
                                     <option value="D3 DS1 HDMI NFC" data-tokens="D3 DS1 HDMI NFC">D3 DS1 HDMI NFC</option>
                                     <option value="D3 DS1 Iseller" data-tokens="D3 DS1 Iseller">D3 DS1 Iseller
                                     </option>
+                                    <option value="D3 DS1 Iseller DP" data-tokens="D3 DS1 Iseller DP">D3 DS1 Iseller DP
+                                    </option>
                                     <option value="D3 DS1 TS Iseller DP" data-tokens="D3 DS1 TS Iseller DP">D3 DS1 TS
                                         Iseller DP</option>
+                                    <option value="D3 DS1 Iseller Extention Display DP"
+                                        data-tokens="D3 DS1 Iseller Extention Display DP">D3 DS1 Iseller Extention Display
+                                        DP</option>
                                     <option value="D3 DS1 Display NFC" data-tokens="D3 DS1 Display NFC">D3 DS1 Display
                                         NFC
                                     </option>
@@ -174,6 +179,7 @@
                                     <option value="D4-503 White" data-tokens="D4-503 White">D4-503 White</option>
                                     <option value="D4-504" data-tokens="D4-504">D4-504</option>
                                     <option value="D4-504 White" data-tokens="D4-504 White">D4-504 White</option>
+                                    <option value="D4-504 Pro" data-tokens="D4-504 Pro">D4-504 Pro</option>
                                     <option value="D4-505" data-tokens="D4-505">D4-505</option>
                                     <option value="D4-505 DT" data-tokens="D4-505 DT">D4-505 DT</option>
                                     <option value="D4-505 Pro" data-tokens="D4-505 Pro">D4-505 Pro</option>
@@ -219,6 +225,7 @@
                                     <option>4/16</option>
                                     <option>4/32</option>
                                     <option>4/64</option>
+                                    <option>8/128</option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -325,10 +332,10 @@
                                     value="iMinID_stock" readonly>
                             </div>
                             <div class="form-group mb-3">
-                                <label for="model"><b>Model</b></label>
+                                <label for="model"><b>Tipe Device</b></label>
                                 <select class="form-select selectpicker" name="model" id="model"
                                     data-live-search="true" required>
-                                    <option value="Pilih Model">Pilih Model</option>
+                                    <option value="Pilih Tipe Device">Pilih Tipe Device</option>
                                     <option value="D1" data-tokens="D1" {{ $item->model == 'D1' ? 'selected' : '' }}>
                                         D1</option>
                                     <option value="D1 Moka" data-tokens="D1 Moka"
@@ -381,8 +388,16 @@
                                         {{ $item->model == 'D3 DS1 HDMI NFC' ? 'selected' : '' }}>D3 DS1 HDMI NFC</option>
                                     <option value="D3 DS1 Iseller" data-tokens="D3 DS1 Iseller"
                                         {{ $item->model == 'D3 DS1 Iseller' ? 'selected' : '' }}>D3 DS1 Iseller</option>
+                                    <option value="D3 DS1 Iseller DP" data-tokens="D3 DS1 Iseller DP"
+                                        {{ $item->model == 'D3 DS1 Iseller DP' ? 'selected' : '' }}>D3 DS1 Iseller DP
+                                    </option>
                                     <option value="D3 DS1 TS Iseller DP" data-tokens="D3 DS1 TS Iseller DP"
                                         {{ $item->model == 'D3 DS1 TS Iseller DP' ? 'selected' : '' }}>D3 DS1 TS Iseller DP
+                                    </option>
+                                    <option value="D3 DS1 Iseller Extention Display DP"
+                                        data-tokens="D3 DS1 Iseller Extention Display DP"
+                                        {{ $item->model == 'D3 DS1 Iseller Extention Display DP' ? 'selected' : '' }}>D3
+                                        DS1 Iseller Extention Display DP
                                     </option>
                                     <option value="D3 DS1 Display NFC" data-tokens="D3 DS1 Display NFC"
                                         {{ $item->model == 'D3 DS1 Display NFC' ? 'selected' : '' }}>D3 DS1 Display NFC
@@ -418,6 +433,8 @@
                                         {{ $item->model == 'D4-504' ? 'selected' : '' }}>D4-504</option>
                                     <option value="D4-504 White" data-tokens="D4-504 White"
                                         {{ $item->model == 'D4-504 White' ? 'selected' : '' }}>D4-504 White</option>
+                                    <option value="D4-504 Pro" data-tokens="D4-504 Pro"
+                                        {{ $item->model == 'D4-504 Pro' ? 'selected' : '' }}>D4-504 Pro</option>
                                     <option value="D4-505" data-tokens="D4-505"
                                         {{ $item->model == 'D4-505' ? 'selected' : '' }}>D4-505</option>
                                     <option value="D4-505 DT" data-tokens="D4-505 DT"
@@ -502,6 +519,10 @@
                                     <option value="4/64" data-tokens="4/64"
                                         {{ $item->ram == '4/64' ? 'selected' : '' }}>
                                         4/64
+                                    </option>
+                                    <option value="8/128" data-tokens="8/128"
+                                        {{ $item->ram == '8/128' ? 'selected' : '' }}>
+                                        8/128
                                     </option>
                                 </select>
                             </div>

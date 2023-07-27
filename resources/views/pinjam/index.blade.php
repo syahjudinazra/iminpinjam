@@ -147,8 +147,13 @@
                                     <option value="D3 DS1 HDMI NFC" data-tokens="D3 DS1 HDMI NFC">D3 DS1 HDMI NFC</option>
                                     <option value="D3 DS1 Iseller" data-tokens="D3 DS1 Iseller">D3 DS1 Iseller
                                     </option>
+                                    <option value="D3 DS1 Iseller DP" data-tokens="D3 DS1 Iseller DP">D3 DS1 Iseller DP
+                                    </option>
                                     <option value="D3 DS1 TS Iseller DP" data-tokens="D3 DS1 TS Iseller DP">D3 DS1 TS
                                         Iseller DP</option>
+                                    <option value="D3 DS1 Iseller Extention Display DP"
+                                        data-tokens="D3 DS1 Iseller Extention Display DP">D3 DS1 Iseller Extention Display
+                                        DP</option>
                                     <option value="D3 DS1 Stand" data-tokens="D3 DS1 Stand">D3 DS1 Stand</option>
                                     <option value="D3 DS1 Stand 1M DP" data-tokens="D3 DS1 Stand 1M DP">D3 DS1 Stand
                                         1M DP
@@ -181,6 +186,7 @@
                                     <option value="D4-503 White" data-tokens="D4-503 White">D4-503 White</option>
                                     <option value="D4-504" data-tokens="D4-504">D4-504</option>
                                     <option value="D4-504 White" data-tokens="D4-504 White">D4-504 White</option>
+                                    <option value="D4-504 Pro" data-tokens="D4-504 Pro">D4-504 Pro</option>
                                     <option value="D4-505" data-tokens="D4-505">D4-505</option>
                                     <option value="D4-505 DT" data-tokens="D4-505 DT">D4-505 DT</option>
                                     <option value="D4-505 Pro" data-tokens="D4-505 Pro">D4-505 Pro</option>
@@ -477,9 +483,16 @@
                                         {{ $item->device == 'D3 DS1 HDMI NFC' ? 'selected' : '' }}>D3 DS1 HDMI NFC</option>
                                     <option value="D3 DS1 Iseller" data-tokens="D3 DS1 Iseller"
                                         {{ $item->device == 'D3 DS1 Iseller' ? 'selected' : '' }}>D3 DS1 Iseller</option>
+                                    <option value="D3 DS1 Iseller DP" data-tokens="D3 DS1 Iseller DP"
+                                        {{ $item->device == 'D3 DS1 Iseller DP' ? 'selected' : '' }}>D3 DS1 Iseller DP
+                                    </option>
                                     <option value="D3 DS1 TS Iseller DP" data-tokens="D3 DS1 TS Iseller DP"
                                         {{ $item->device == 'D3 DS1 TS Iseller DP' ? 'selected' : '' }}>D3 DS1 TS
                                         Iseller DP</option>
+                                    <option value="D3 DS1 Iseller Extention Display DP"
+                                        data-tokens="D3 DS1 Iseller Extention Display DP"
+                                        {{ $item->device == 'D3 DS1 Iseller Extention Display DP' ? 'selected' : '' }}>D3
+                                        DS1 Iseller Extention Display DP</option>
                                     <option value="D3 DS1 Stand" data-tokens="D3 DS1 Stand"
                                         {{ $item->device == 'D3 DS1 Stand' ? 'selected' : '' }}>D3 DS1 Stand</option>
                                     <option value="D3 DS1 Stand 1M DP" data-tokens="D3 DS1 Stand 1M DP"
@@ -525,6 +538,8 @@
                                         {{ $item->device == 'D4-504' ? 'selected' : '' }}>D4-504</option>
                                     <option value="D4-504 White" data-tokens="D4-504 White"
                                         {{ $item->device == 'D4-504 White' ? 'selected' : '' }}>D4-504 White</option>
+                                    <option value="D4-504 Pro" data-tokens="D4-504 Pro"
+                                        {{ $item->device == 'D4-504 Pro' ? 'selected' : '' }}>D4-504 Pro</option>
                                     <option value="D4-505" data-tokens="D4-505"
                                         {{ $item->device == 'D4-505' ? 'selected' : '' }}>D4-505</option>
                                     <option value="D4-505 DT" data-tokens="D4-505 DT"
@@ -1218,9 +1233,16 @@
                                     </option>
                                     <option value="D3 DS1 Iseller" data-tokens="D3 DS1 Iseller"
                                         {{ $item->device == 'D3 DS1 Iseller' ? 'selected' : '' }}>D3 DS1 Iseller</option>
+                                    <option value="D3 DS1 Iseller DP" data-tokens="D3 DS1 Iseller DP"
+                                        {{ $item->device == 'D3 DS1 Iseller DP' ? 'selected' : '' }}>D3 DS1 Iseller DP
+                                    </option>
                                     <option value="D3 DS1 TS Iseller DP" data-tokens="D3 DS1 TS Iseller DP"
                                         {{ $item->device == 'D3 DS1 TS Iseller DP' ? 'selected' : '' }}>D3 DS1 TS
                                         Iseller DP</option>
+                                    <option value="D3 DS1 Iseller Extention Display DP"
+                                        data-tokens="D3 DS1 Iseller Extention Display DP"
+                                        {{ $item->device == 'D3 DS1 Iseller Extention Display DP' ? 'selected' : '' }}>D3
+                                        DS1 Iseller Extention Display DP</option>
                                     <option value="D3 DS1 Stand" data-tokens="D3 DS1 Stand"
                                         {{ $item->device == 'D3 DS1 Stand' ? 'selected' : '' }}>D3 DS1 Stand</option>
                                     <option value="D3 DS1 Stand 1M DP" data-tokens="D3 DS1 Stand 1M DP"
@@ -1268,6 +1290,8 @@
                                         {{ $item->device == 'D4-504' ? 'selected' : '' }}>D4-504</option>
                                     <option value="D4-504 White" data-tokens="D4-504 White"
                                         {{ $item->device == 'D4-504 White' ? 'selected' : '' }}>D4-504 White</option>
+                                    <option value="D4-504 Pro" data-tokens="D4-504 Pro"
+                                        {{ $item->device == 'D4-504 Pro' ? 'selected' : '' }}>D4-504 Pro</option>
                                     <option value="D4-505" data-tokens="D4-505"
                                         {{ $item->device == 'D4-505' ? 'selected' : '' }}>D4-505</option>
                                     <option value="D4-505 DT" data-tokens="D4-505 DT"
