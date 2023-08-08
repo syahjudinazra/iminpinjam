@@ -305,6 +305,12 @@
                                     <option value="Webcam Camera" data-tokens="Webcam Camera">
                                         Webcam Camera
                                     </option>
+                                    <option value="Comson CSPL 78 BT" data-tokens="Comson CSPL 78 BT">
+                                        Comson CSPL 78 BT
+                                    </option>
+                                    <option value="Comson CSP 893 UE" data-tokens="Comson CSP 893 UE">
+                                        Comson CSP 893 UE
+                                    </option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -701,6 +707,14 @@
                                     <option value="Webcam Camera" data-tokens="Webcam Camera"
                                         {{ $item->device == 'Webcam Camera' ? 'selected' : '' }}>
                                         Webcam Camera
+                                    </option>
+                                    <option value="Comson CSPL 78 BT" data-tokens="Comson CSPL 78 BT"
+                                        {{ $item->device == 'Comson CSPL 78 BT' ? 'selected' : '' }}>
+                                        Comson CSPL 78 BT
+                                    </option>
+                                    <option value="Comson CSP 893 UE" data-tokens="Comson CSP 893 UE"
+                                        {{ $item->device == 'Comson CSP 893 UE' ? 'selected' : '' }}>
+                                        Comson CSP 893 UE
                                     </option>
                                 </select>
                             </div>
@@ -1457,6 +1471,14 @@
                                     <option value="Webcam Camera" data-tokens="Webcam Camera"
                                         {{ $item->device == 'Webcam Camera' ? 'selected' : '' }}>
                                         Webcam Camera
+                                    </option>
+                                    <option value="Comson CSPL 78 BT" data-tokens="Comson CSPL 78 BT"
+                                        {{ $item->device == 'Comson CSPL 78 BT' ? 'selected' : '' }}>
+                                        Comson CSPL 78 BT
+                                    </option>
+                                    <option value="Comson CSP 893 UE" data-tokens="Comson CSP 893 UE"
+                                        {{ $item->device == 'Comson CSP 893 UE' ? 'selected' : '' }}>
+                                        Comson CSP 893 UE
                                     </option>
                                 </select>
                             </div>
