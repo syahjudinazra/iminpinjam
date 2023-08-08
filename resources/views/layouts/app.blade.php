@@ -53,23 +53,20 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-
     <!-- MDB -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.1.0/mdb.min.js"></script>
     <!-- Bootstrap core JavaScript-->
     <script src="{{ asset('sb2admin/vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('sb2admin/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-
     <!-- Core plugin JavaScript-->
     <script src="{{ asset('sb2admin/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
-
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('sb2admin/js/sb-admin-2.min.js') }}"></script>
-
     <!-- Datatables -->
     <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
     <script src="hhttps://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    @include('sweetalert::alert')
     <script>
         $(document).ready(function() {
             $('#hometable').DataTable();

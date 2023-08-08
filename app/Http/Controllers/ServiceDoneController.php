@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Exports\ServiceDoneExport;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Validator;
 
 class ServiceDoneController extends Controller
 {
@@ -19,10 +20,6 @@ class ServiceDoneController extends Controller
     {
         $servicedone = DB::table('service_dones')->orderBy('tanggal', 'desc')->paginate(10);
         return view('servicedone.index', compact('servicedone'));
-
-        // return response()->json([
-        //     'data' => $servicedone
-        // ]);
     }
 
     // public function exportServiceDone()
@@ -71,6 +68,22 @@ class ServiceDoneController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'tanggal' => 'required|max:255',
+            'serialnumber' => 'required|max:255',
+            'pelanggan' => 'required|max:255',
+            'model' => 'required|max:255',
+            'ram' => 'required|max:255',
+            'android' => 'required|max:255',
+            'garansi' => 'max:255',
+            'kerusakan' => 'max:255',
+            'teknisi' => 'max:255',
+            'perbaikan' => 'max:255',
+            'snkanibal' => 'max:255',
+            'nosparepart' => 'max:255',
+            'note' => 'max:255',
+        ]);
+
         $servicedone = new ServiceDone();
         $servicedone->tanggal = $request->input('tanggal');
         $servicedone->serialnumber = $request->input('serialnumber');
@@ -87,7 +100,7 @@ class ServiceDoneController extends Controller
         $servicedone->note = $request->input('note');
 
         $servicedone->save();
-        return redirect()->back()->with('success', 'Data telah ditambahkan');
+        return redirect()->back()->with('success', 'Data Berhasil Ditambahkan');
     }
 
     /**
@@ -98,10 +111,7 @@ class ServiceDoneController extends Controller
      */
     public function show($id)
     {
-        // Find the data by id
         $servicedone = ServiceDone::findOrFail($id);
-
-        // // Return the view with the data
         return view('servicedone.index', compact('servicedone'));
     }
 
@@ -126,6 +136,22 @@ class ServiceDoneController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'tanggal' => 'required|max:255',
+            'serialnumber' => 'required|max:255',
+            'pelanggan' => 'required|max:255',
+            'model' => 'required|max:255',
+            'ram' => 'required|max:255',
+            'android' => 'required|max:255',
+            'garansi' => 'max:255',
+            'kerusakan' => 'max:255',
+            'teknisi' => 'max:255',
+            'perbaikan' => 'max:255',
+            'snkanibal' => 'max:255',
+            'nosparepart' => 'max:255',
+            'note' => 'max:255',
+        ]);
+
         $servicedone = ServiceDone::find($id);
         $servicedone->tanggal = $request->input('tanggal');
         $servicedone->serialnumber = $request->input('serialnumber');
@@ -142,7 +168,7 @@ class ServiceDoneController extends Controller
         $servicedone->note = $request->input('note');
 
         $servicedone->update();
-        return redirect()->back()->with('success', 'Data telah diubah');
+        return redirect()->back()->with('success', 'Data berhasil diubah');
     }
 
     /**
@@ -160,6 +186,6 @@ class ServiceDoneController extends Controller
         $servicedone->delete();
 
         // Redirect back with a success message
-        return redirect()->back()->with('success', 'Data telah dihapus');
+        return redirect()->back()->with('success', 'Data berhasil dihapus');
     }
 }

@@ -16,18 +16,11 @@
                 <label for="end_date">End Date:</label>
                 <input type="date" id="end_date" name="end_date">
 
-                <button class="btn btn-sm btn-success" type="submit"><i
+                <button class="btn btn-success btn-sm" type="submit"><i
                         class="fas fa-download fa-sm text-white-50"></i>Export
                     Excel</button>
             </form>
         </div>
-
-        @if (session()->has('success'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                {{ session('success') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        @endif
 
         @if (Auth::check())
             <div class="searchdone">

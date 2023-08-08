@@ -69,6 +69,22 @@ class ServicePendingController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'tanggal' => 'required|max:255',
+            'serialnumber' => 'required|max:255',
+            'pelanggan' => 'required|max:255',
+            'model' => 'required|max:255',
+            'ram' => 'required|max:255',
+            'android' => 'required|max:255',
+            'garansi' => 'max:255',
+            'kerusakan' => 'max:255',
+            'teknisi' => 'max:255',
+            'perbaikan' => 'max:255',
+            'snkanibal' => 'max:255',
+            'nosparepart' => 'max:255',
+            'note' => 'max:255',
+        ]);
+
         $servicepending = new ServicePending();
         $servicepending->tanggal = $request->input('tanggal');
         $servicepending->serialnumber = $request->input('serialnumber');
@@ -85,7 +101,7 @@ class ServicePendingController extends Controller
         $servicepending->note = $request->input('note');
 
         $servicepending->save();
-        return redirect()->back()->with('success', 'Data telah ditambahkan');
+        return redirect()->back()->with('success', 'Data berhasil ditambahkan');
     }
 
     /**
@@ -124,6 +140,22 @@ class ServicePendingController extends Controller
      */
     public function update(Request $request, ServicePending $servicePending, $id)
     {
+        $request->validate([
+            'tanggal' => 'required|max:255',
+            'serialnumber' => 'required|max:255',
+            'pelanggan' => 'required|max:255',
+            'model' => 'required|max:255',
+            'ram' => 'required|max:255',
+            'android' => 'required|max:255',
+            'garansi' => 'max:255',
+            'kerusakan' => 'max:255',
+            'teknisi' => 'max:255',
+            'perbaikan' => 'max:255',
+            'snkanibal' => 'max:255',
+            'nosparepart' => 'max:255',
+            'note' => 'max:255',
+        ]);
+
         $servicepending = ServicePending::find($id);
         $servicepending->tanggal = $request->input('tanggal');
         $servicepending->serialnumber = $request->input('serialnumber');
@@ -140,7 +172,7 @@ class ServicePendingController extends Controller
         $servicepending->note = $request->input('note');
 
         $servicepending->update();
-        return redirect()->back()->with('success', 'Data telah diubah');
+        return redirect()->back()->with('success', 'Data berhasil diubah');
     }
 
     /**
@@ -151,23 +183,16 @@ class ServicePendingController extends Controller
      */
     public function destroy(ServicePending $servicePending, $id)
     {
-        // Find the data by id
         $servicePending = ServicePending::findOrFail($id);
 
-        // Delete the servicePending
         $servicePending->delete();
 
-        // Redirect back with a success message
-        return redirect()->back()->with('success', 'Data telah dihapus');
+        return redirect()->back()->with('success', 'Data berhasil dihapus');
     }
 
     public function finish(ServicePending $servicepending, $id)
     {
-
-        // Ambil data dari tabel sumber
         $servicepending = DB::table('service_pendings')->where('id', $id)->first();
-
-        // Simpan data ke tabel tujuan
         DB::table('service_dones')->insert([
             'tanggal'     =>   $servicepending->tanggal,
             'serialnumber'   =>   $servicepending->serialnumber,
@@ -184,10 +209,7 @@ class ServicePendingController extends Controller
             'note'   =>   $servicepending->note,
         ]);
 
-        // Hapus data dari tabel sumber
         DB::table('service_pendings')->where('id', $id)->delete();
-
-        // Redirect ke halaman yang diinginkan
-        return redirect('/servicedone')->with('success', 'Data telah dipindahkan');
+        return redirect('/servicedone')->with('success', 'Data berhasil dipindahkan');
     }
 }

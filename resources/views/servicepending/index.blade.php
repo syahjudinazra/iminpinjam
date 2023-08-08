@@ -22,13 +22,6 @@
             </form>
         </div>
 
-        @if (session()->has('success'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                {{ session('success') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        @endif
-
         @if (Auth::check())
             <div class="row">
                 <div class="searchpending">
@@ -533,8 +526,7 @@
                                 <label for="android"><b>Versi Android</b></label>
                                 <select class="form-select" id="android" name="android" required>
                                     <option value="Pilih Android">Pilih Android</option>
-                                    <option value="-" data-tokens="-"
-                                        {{ $item->android == '-' ? 'selected' : '' }}>
+                                    <option value="-" data-tokens="-" {{ $item->android == '-' ? 'selected' : '' }}>
                                         -
                                     </option>
                                     <option value="Android 7" data-tokens="Android 7"

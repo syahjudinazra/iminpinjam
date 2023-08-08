@@ -115,7 +115,7 @@ class PinjamController extends Controller
         $pinjam->kelengkapankembali = $request->input('kelengkapankembali');
 
         $pinjam->save();
-        return redirect()->back()->with('success', 'Data telah ditambahkan');
+        return redirect()->back()->with('success', 'Data berhasil ditambahkan');
     }
     /**
      * Display the specified resource.
@@ -202,7 +202,7 @@ class PinjamController extends Controller
         $pinjam->status = $request->input('status');
 
         $pinjam->update();
-        return redirect()->back()->with('success', 'Data telah diubah');
+        return redirect()->back()->with('success', 'Data berhasil diubah');
     }
 
     /**
@@ -220,6 +220,6 @@ class PinjamController extends Controller
         $pinjam->delete();
 
         // Redirect back with a success message
-        return redirect()->back()->with('success', 'Data has been deleted successfully!');
+        return redirect()->back()->with('success', 'Data berhasil dihapus');
     }
 }

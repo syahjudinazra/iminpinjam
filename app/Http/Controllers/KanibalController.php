@@ -68,6 +68,22 @@ class KanibalController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'tanggal' => 'required|max:255',
+            'serialnumber' => 'required|max:255',
+            'pelanggan' => 'required|max:255',
+            'model' => 'required|max:255',
+            'ram' => 'required|max:255',
+            'android' => 'required|max:255',
+            'garansi' => 'max:255',
+            'kerusakan' => 'max:255',
+            'teknisi' => 'max:255',
+            'perbaikan' => 'max:255',
+            'snkanibal' => 'max:255',
+            'nosparepart' => 'max:255',
+            'note' => 'max:255',
+        ]);
+
         $kanibal = new Kanibal();
         $kanibal->tanggal = $request->input('tanggal');
         $kanibal->serialnumber = $request->input('serialnumber');
@@ -84,7 +100,7 @@ class KanibalController extends Controller
         $kanibal->note = $request->input('note');
 
         $kanibal->save();
-        return redirect()->back()->with('success', 'Data telah ditambahkan');
+        return redirect()->back()->with('success', 'Data berhasil ditambahkan');
     }
 
     /**
@@ -123,6 +139,22 @@ class KanibalController extends Controller
      */
     public function update(Request $request, Kanibal $kanibal, $id)
     {
+        $request->validate([
+            'tanggal' => 'required|max:255',
+            'serialnumber' => 'required|max:255',
+            'pelanggan' => 'required|max:255',
+            'model' => 'required|max:255',
+            'ram' => 'required|max:255',
+            'android' => 'required|max:255',
+            'garansi' => 'max:255',
+            'kerusakan' => 'max:255',
+            'teknisi' => 'max:255',
+            'perbaikan' => 'max:255',
+            'snkanibal' => 'max:255',
+            'nosparepart' => 'max:255',
+            'note' => 'max:255',
+        ]);
+
         $kanibal = Kanibal::find($id);
         $kanibal->tanggal = $request->input('tanggal');
         $kanibal->serialnumber = $request->input('serialnumber');
@@ -139,7 +171,7 @@ class KanibalController extends Controller
         $kanibal->note = $request->input('note');
 
         $kanibal->update();
-        return redirect()->back()->with('success', 'Data telah diubah');
+        return redirect()->back()->with('success', 'Data berhasil diubah');
     }
 
     /**
@@ -157,7 +189,7 @@ class KanibalController extends Controller
         $kanibal->delete();
 
         // Redirect back with a success message
-        return redirect()->back()->with('success', 'Data telah dihapus');
+        return redirect()->back()->with('success', 'Data berhasil dihapus');
     }
 
     public function finish(Kanibal $kanibal, $id)
@@ -187,6 +219,6 @@ class KanibalController extends Controller
         DB::table('kanibals')->where('id', $id)->delete();
 
         // Redirect ke halaman yang diinginkan
-        return redirect('/servicedone')->with('success', 'Data telah dipindahkan');
+        return redirect('/servicedone')->with('success', 'Data berhasil dipindahkan');
     }
 }
