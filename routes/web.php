@@ -105,5 +105,4 @@ Route::put('/kanibal/{id}', [KanibalController::class, 'update'])->middleware('a
 Route::delete('/kanibal/{id}', [KanibalController::class, 'destroy'])->middleware('auth')->name('kanibal.destroy');
 Route::get('/export-kanibal', [KanibalController::class, 'exportKanibal'])->name('export-kanibal');
 Route::get('/kanibal/{id}', [KanibalController::class, 'show'])->name('kanibal.show');
-
 Route::get('/kanibal/finish/{id}', [KanibalController::class, 'finish'])->middleware('auth');

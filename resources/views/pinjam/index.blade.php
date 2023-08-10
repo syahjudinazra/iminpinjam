@@ -43,19 +43,12 @@
                 </form>
             </div>
         @else
-            <div class="searchpinjam" style="margin-bottom: 80px">
+            <div class="searchpinjam">
                 @if (Auth::check() && request()->is('pinjam'))
                     <button type="button" id="addpinjam" class="btn btn-danger mb-2" data-toggle="modal"
                         data-target="#exampleModal">
                         <i class="fa-solid fa-plus"></i> Tambah Produk
                     </button>
-                @endif
-
-                @if (session()->has('success'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        {{ session('success') }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
                 @endif
 
                 <form method="GET" action="{{ route('search.index') }}"
@@ -1638,10 +1631,6 @@
                                     data-target="#editModal{{ $item->id }}"><i
                                         class="fa-solid fa-pen-to-square"></i></a>
                             @endif
-                            @if (request()->is('pinjam'))
-                                <a href="#" class="btn btn-primary" data-toggle="modal"
-                                    data-target="#viewModal{{ $item->id }}"><i class="fa-solid fa-eye"></i></a>
-                            @endif
 
                             @if (Auth::check() && request()->is('kembali'))
                                 <a href="#" class="btn btn-warning" data-toggle="modal"
@@ -1649,7 +1638,10 @@
                                         class="fa-solid fa-pen-to-square"></i></a>
                             @endif
 
-                            @if (request()->is('kembali'))
+                            @if (request()->is('pinjam'))
+                                <a href="#" class="btn btn-primary" data-toggle="modal"
+                                    data-target="#viewModal{{ $item->id }}"><i class="fa-solid fa-eye"></i></a>
+                            @else
                                 <a href="#" class="btn btn-primary" data-toggle="modal"
                                     data-target="#viewkembaliModal{{ $item->id }}"><i
                                         class="fa-solid fa-eye"></i></a>
@@ -1668,10 +1660,11 @@
                             @endif
 
                             @if (Auth::check())
-                                <a href="{{ url('generate-pdf', $item->id) }}" class="btn btn-danger"
+                                <a href="{{ url('generate-pdf', $item->id) }}" class="btn btn-secondary"
                                     data-bs-toggle="tooltip" data-bs-placement="top" title="Download PDF"><i
                                         class="fa-solid fa-file-pdf"></i></a>
                             @endif
+
                         </td>
                     </tr>
                 @endforeach
