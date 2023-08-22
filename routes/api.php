@@ -1,9 +1,8 @@
 <?php
 
-use App\Http\Controllers\ServiceDoneController;
-use App\Http\Controllers\PinjamController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\http\Controllers\ServiceDoneController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,4 +19,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/servicedone/{id}', [ServiceDoneController::class, 'show']);
+// Route::get('/api/servicedone', [Api\ServiceDoneController::class, 'index']);
+// // Route::get('/servicedone', function () {
+// //     return response()->json([
+// //         'success' => true,
+// //         'data'    => $servicedone
+// //     ], 200);
+// // });

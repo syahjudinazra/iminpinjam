@@ -29,8 +29,8 @@ class ServiceDoneController extends Controller
 
     public function exportServiceDone(Request $request)
     {
-        $startDate = $request->input('startingDate');
-        $endDate = $request->input('endingDate');
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
 
         $data = ServiceDone::whereBetween('tanggal', [$startDate, $endDate])->get();
 
