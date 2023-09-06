@@ -11,6 +11,7 @@ use App\Http\Controllers\MonitorController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ServiceDoneController;
 use App\Http\Controllers\ServicePendingController;
+use App\Http\Controllers\SparePartsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -106,3 +107,16 @@ Route::delete('/kanibal/{id}', [KanibalController::class, 'destroy'])->middlewar
 Route::get('/export-kanibal', [KanibalController::class, 'exportKanibal'])->name('export-kanibal');
 Route::get('/kanibal/{id}', [KanibalController::class, 'show'])->name('kanibal.show');
 Route::get('/kanibal/finish/{id}', [KanibalController::class, 'finish'])->middleware('auth');
+
+//SPAREPARTS
+Route::resource('/spareparts', SparePartsController::class)->except([
+    'show', 'edit', 'update', 'destroy',
+]);
+
+Route::get('/spareparts/{id}/edit', [SparePartsController::class, 'edit'])->middleware('auth')->name('spareparts.edit');
+Route::put('/spareparts/{id}', [SparePartsController::class, 'update'])->middleware('auth')->name('spareparts.update');
+Route::delete('/spareparts/{id}', [SparePartsController::class, 'destroy'])->middleware('auth')->name('spareparts.destroy');
+Route::post('/import-spareparts', [SparePartsController::class, 'importSpareParts'])->name('import.spareparts');
+Route::get('/export-spareparts', [SparePartsController::class, 'exportSpareParts'])->name('export.spareparts');
+Route::get('/spareparts/{id}', [SparePartsController::class, 'show'])->name('spareparts.show');
+Route::post('/spareparts/{id}', [SparePartsController::class, 'updateQuantity'])->name('update.quantity');

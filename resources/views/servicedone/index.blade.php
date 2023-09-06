@@ -752,31 +752,37 @@
                     <th>Action</th>
                 </thead>
                 <tbody>
-                    @foreach ($servicedone as $item)
+                    @empty($servicedone)
                         <tr>
-                            <td>{{ $servicedone->firstItem() + $loop->index }}</td>
-                            <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d/m/Y') }}</td>
-                            <td>{{ $item->serialnumber }}</td>
-                            <td>{{ $item->pelanggan }}</td>
-                            <td>{{ $item->model }}</td>
-                            <td>
-                                @if (Auth::check())
-                                    <a href="#" class="btn btn-warning" data-toggle="modal"
-                                        data-target="#editModal{{ $item->id }}"><i
-                                            class="fa-solid fa-pen-to-square"></i></a>
-                                @endif
-
-                                <a href="#" class="btn btn-primary" data-toggle="modal"
-                                    data-target="#viewModal{{ $item->id }}"><i class="fa-solid fa-eye"></i></a>
-
-                                @if (Auth::check())
-                                    <a href="#" class="btn btn-danger" data-toggle="modal"
-                                        data-target="#deleteModal{{ $item->id }}"><i
-                                            class="fa-solid fa-trash"></i></a>
-                                @endif
-                            </td>
+                            <td colspan="6">No data found</td>
                         </tr>
-                    @endforeach
+                    @else
+                        @foreach ($servicedone as $item)
+                            <tr>
+                                <td>{{ $servicedone->firstItem() + $loop->index }}</td>
+                                <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d/m/Y') }}</td>
+                                <td>{{ $item->serialnumber }}</td>
+                                <td>{{ $item->pelanggan }}</td>
+                                <td>{{ $item->model }}</td>
+                                <td>
+                                    @if (Auth::check())
+                                        <a href="#" class="btn btn-warning" data-toggle="modal"
+                                            data-target="#editModal{{ $item->id }}"><i
+                                                class="fa-solid fa-pen-to-square"></i></a>
+                                    @endif
+
+                                    <a href="#" class="btn btn-primary" data-toggle="modal"
+                                        data-target="#viewModal{{ $item->id }}"><i class="fa-solid fa-eye"></i></a>
+
+                                    @if (Auth::check())
+                                        <a href="#" class="btn btn-danger" data-toggle="modal"
+                                            data-target="#deleteModal{{ $item->id }}"><i
+                                                class="fa-solid fa-trash"></i></a>
+                                    @endif
+                                </td>
+                            </tr>
+                        @endforeach
+                    @endempty
                 </tbody>
             </table>
             {!! $servicedone->onEachSide(1)->links('pagination::bootstrap-5') !!}

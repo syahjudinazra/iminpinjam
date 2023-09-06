@@ -82,11 +82,14 @@
                 </div>
             </li>
 
-            {{-- <li class="nav-item">
-            <a class="nav-link" href="charts.html">
-                <i class="fas fa-fw fa-cog"></i>
-                <span>Kanibal</span></a>
-        </li> --}}
+            <div class="sidebar-heading">
+                Service Spare Parts
+            </div>
+            <li class="nav-item">
+                <a class="nav-link {{ Request::is('spareparts*') ? 'active' : '' }}" href="/spareparts">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>SpareParts</span></a>
+            </li>
 
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">

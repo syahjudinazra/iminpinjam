@@ -18,3 +18,19 @@
 .table-responsive {
     max-height: 400px;
 }
+
+.dataTables_length label {
+    margin-right: 10px !important;
+}
+
+.minusquan {
+    width: 20%;
+    height: 4rem;
+    font-size: 2rem;
+}
+
+.addquan {
+    width: 20%;
+    height: 4rem;
+    font-size: 2rem;
+}
