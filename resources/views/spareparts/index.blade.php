@@ -201,6 +201,35 @@
     @endforeach
     <!-- end reduce Quantity -->
 
+    <!-- delete data -->
+    @foreach ($spareParts as $item)
+        <div class="modal fade" id="deleteModal{{ $item->id }}" tabindex="-1"
+            aria-labelledby="deleteModalLabel{{ $item->id }}" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModalLabel{{ $item->id }}">Delete Data Spare Parts</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to delete this Data?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <form action="{{ route('spareparts.destroy', $item->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
+    <!-- end delete data -->
+
     <div class="container">
         <table id="hometable" class="table table-striped table-bordered" style="width:100%">
             <thead>
@@ -224,13 +253,17 @@
                                 data-target="#editModalQuantityReduce{{ $item->id }}" data-bs-toggle="tooltip"
                                 data-bs-placement="top" title="Quantity"><i class="fa-solid fa-minus"></i></a>
 
-                            <a href="#" class="btn btn-danger" data-toggle="modal"
+                            <a href="#" class="btn btn-success" data-toggle="modal"
                                 data-target="#editModalQuantity{{ $item->id }}" data-bs-toggle="tooltip"
                                 data-bs-placement="top" title="Quantity"><i class="fa-solid fa-plus"></i></a>
 
                             <a href="#" class="btn btn-primary" data-toggle="modal"
                                 data-target="#editModal{{ $item->id }}" data-bs-toggle="tooltip"
                                 data-bs-placement="top" title="Edit"><i class="fa-solid fa-pen-to-square"></i></a>
+
+                            <a href="#" class="btn btn-danger" data-toggle="modal"
+                                data-target="#deleteModal{{ $item->id }}" data-bs-toggle="tooltip"
+                                data-bs-placement="top" title="Delete"><i class="fa-solid fa-trash"></i></a>
                         </td>
                     </tr>
                 @endforeach
@@ -241,7 +274,6 @@
                     <th>Tipe</th>
                     <th>Nama</th>
                     <th>Quantity</th>
-                    <th>Action</th>
                 </tr>
             </tfoot>
         </table>

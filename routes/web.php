@@ -119,4 +119,4 @@ Route::delete('/spareparts/{id}', [SparePartsController::class, 'destroy'])->mid
 Route::post('/import-spareparts', [SparePartsController::class, 'importSpareParts'])->name('import.spareparts');
 Route::get('/export-spareparts', [SparePartsController::class, 'exportSpareParts'])->name('export.spareparts');
 Route::get('/spareparts/{id}', [SparePartsController::class, 'show'])->name('spareparts.show');
-Route::post('/spareparts/{id}', [SparePartsController::class, 'updateQuantity'])->name('update.quantity');
+Route::post('/spareparts/{id}', [SparePartsController::class, 'updateQuantity'])->middleware('auth')->name('update.quantity');

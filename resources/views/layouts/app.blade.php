@@ -72,19 +72,14 @@
     <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script> --}}
     @include('sweetalert::alert')
     <script>
-        $(document).ready(function() {
-            $('#hometable').DataTable({
-                dom: 'lBfrtip',
-                lengthMenu: [
-                    [25, 50, 100, -1],
-                    ['25', '50', 100, 'All']
-                ],
-            });
-        });
-    </script>
-    <script>
         new DataTable('#hometable', {
             initComplete: function() {
+                var r = $('#hometable tfoot tr');
+                r.find('th').each(function() {
+                    $(this).css('padding', 8);
+                });
+                $('#hometable thead').append(r);
+                $('#search_0').css('text-align', 'center');
                 this.api()
                     .columns()
                     .every(function() {
