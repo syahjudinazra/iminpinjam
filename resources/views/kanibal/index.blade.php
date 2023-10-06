@@ -256,6 +256,8 @@
                                     <option>Khaerul</option>
                                     <option>Ozi</option>
                                     <option>Alfian</option>
+                                    <option>Timo</option>
+                                    <option>Andre</option>
                                     <option>Other</option>
                                 </select>
                             </div>
@@ -311,7 +313,7 @@
                         <div class="modal-body">
                             <div class="mb-3">
                                 <label for="tanggal" class="form-label"><b>Tanggal</b></label>
-                                <input type="date" class="form-control" id="tanggal" name="tanggal"
+                                <input type="text" class="form-control" id="tanggal" name="tanggal"
                                     value="{{ $item->tanggal }}">
                             </div>
                             <div class="mb-3">
@@ -585,6 +587,14 @@
                                         {{ $item->teknisi == 'Alfian' ? 'selected' : '' }}>
                                         Alfian
                                     </option>
+                                    <option value="Timo" data-tokens="Timo"
+                                        {{ $item->teknisi == 'Timo' ? 'selected' : '' }}>
+                                        Timo
+                                    </option>
+                                    <option value="Andre" data-tokens="Andre"
+                                        {{ $item->teknisi == 'Andre' ? 'selected' : '' }}>
+                                        Andre
+                                    </option>
                                     <option value="Other" data-tokens="Other"
                                         {{ $item->teknisi == 'Other' ? 'selected' : '' }}>
                                         Other
@@ -638,7 +648,7 @@
                     <div class="modal-body">
                         <div class="mb-3">
                             <label for="tanggal" class="form-label"><b>Tanggal</b></label>
-                            <input type="date" class="form-control" id="tanggal" name="tanggal"
+                            <input type="text" class="form-control" id="tanggal" name="tanggal"
                                 value="{{ $item->tanggal }}" readonly>
                         </div>
                         <div class="mb-3">

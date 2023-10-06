@@ -137,21 +137,26 @@
                                     <option value="D3 DS1 DP" data-tokens="D3 DS1 DP">D3 DS1 DP</option>
                                     <option value="D3 DS1 TS DP" data-tokens="D3 DS1 TS DP">D3 DS1 TS DP</option>
                                     <option value="D3 DS1 HDMI" data-tokens="D3 DS1 HDMI">D3 DS1 HDMI</option>
-                                    <option value="D3 DS1 HDMI TS" data-tokens="D3 DS1 HDMI TS">D3 DS1 HDMI TS</option>
-                                    <option value="D3 DS1 HDMI NFC" data-tokens="D3 DS1 HDMI NFC">D3 DS1 HDMI NFC</option>
+                                    <option value="D3 DS1 HDMI TS" data-tokens="D3 DS1 HDMI TS">D3 DS1 HDMI TS
+                                    </option>
+                                    <option value="D3 DS1 HDMI NFC" data-tokens="D3 DS1 HDMI NFC">D3 DS1 HDMI NFC
+                                    </option>
                                     <option value="D3 DS1 Iseller" data-tokens="D3 DS1 Iseller">D3 DS1 Iseller
                                     </option>
-                                    <option value="D3 DS1 Iseller DP" data-tokens="D3 DS1 Iseller DP">D3 DS1 Iseller DP
+                                    <option value="D3 DS1 Iseller DP" data-tokens="D3 DS1 Iseller DP">D3 DS1 Iseller
+                                        DP
                                     </option>
                                     <option value="D3 DS1 TS Iseller DP" data-tokens="D3 DS1 TS Iseller DP">D3 DS1 TS
                                         Iseller DP</option>
                                     <option value="D3 DS1 Iseller Extention Display DP"
-                                        data-tokens="D3 DS1 Iseller Extention Display DP">D3 DS1 Iseller Extention Display
+                                        data-tokens="D3 DS1 Iseller Extention Display DP">D3 DS1 Iseller Extention
+                                        Display
                                         DP</option>
                                     <option value="D3 DS1 Display NFC" data-tokens="D3 DS1 Display NFC">D3 DS1 Display
                                         NFC
                                     </option>
-                                    <option value="D3 DS1 Extention Display" data-tokens="D3 DS1 Extention Display">D3 DS1
+                                    <option value="D3 DS1 Extention Display" data-tokens="D3 DS1 Extention Display">D3
+                                        DS1
                                         Extention Display</option>
                                     <option value="D3 DS1 Extention Display DP" data-tokens="D3 DS1 Extention Display DP">
                                         D3 DS1 Extention Display DP</option>
@@ -180,11 +185,13 @@
                                     <option value="M2-202" data-tokens="M2-202">M2-202</option>
                                     <option value="M2-202 Olsera" data-tokens="M2-202 Olsera">M2-202 Olsera
                                     </option>
-                                    <option value="M2-202 iSeller" data-tokens="M2-202 iSeller">M2-202 iSeller</option>
+                                    <option value="M2-202 iSeller" data-tokens="M2-202 iSeller">M2-202 iSeller
+                                    </option>
                                     <option value="M2-202 Grab" data-tokens="M2-202 Grab">M2-202 Grab
                                     </option>
                                     <option value="M2-203" data-tokens="M2-203">M2-203</option>
-                                    <option value="M2-203 iSeller" data-tokens="M2-203 iSeller">M2-203 iSeller</option>
+                                    <option value="M2-203 iSeller" data-tokens="M2-203 iSeller">M2-203 iSeller
+                                    </option>
                                     <option value="M2-203 White" data-tokens="M2-203 White">M2-203 White</option>
                                     <option value="M2-203 Grab" data-tokens="M2-203 Grab">M2-203 Grab
                                     </option>
@@ -193,9 +200,11 @@
                                     <option value="M2 Swift 1S" data-tokens="M2 Swift 1S">M2 Swift 1S</option>
                                     <option value="M2 Swift 1P" data-tokens="M2 Swift 1P">M2 Swift 1P</option>
                                     <option value="M2 Swift PDA" data-tokens="M2 Swift PDA">M2 Swift PDA</option>
-                                    <option value="M2 Swift 1 Scanner" data-tokens="M2 Swift 1 Scanner">M2 Swift 1 Scanner
+                                    <option value="M2 Swift 1 Scanner" data-tokens="M2 Swift 1 Scanner">M2 Swift 1
+                                        Scanner
                                     </option>
-                                    <option value="M2 Swift 1 Printer" data-tokens="M2 Swift 1 Printer">M2 Swift 1 Printer
+                                    <option value="M2 Swift 1 Printer" data-tokens="M2 Swift 1 Printer">M2 Swift 1
+                                        Printer
                                     </option>
                                     <option value="R1-201" data-tokens="R1-201">R1-201</option>
                                     <option value="R1-202" data-tokens="R1-202">R1-202</option>
@@ -256,6 +265,8 @@
                                     <option>Khaerul</option>
                                     <option>Ozi</option>
                                     <option>Alfian</option>
+                                    <option>Timo</option>
+                                    <option>Andre</option>
                                     <option>Other</option>
                                 </select>
                             </div>
@@ -311,8 +322,7 @@
                         <div class="modal-body">
                             <div class="mb-3">
                                 <label for="tanggal" class="form-label"><b>Tanggal</b></label>
-                                <input type="date" class="form-control" id="tanggal" name="tanggal"
-                                    value="{{ $item->tanggal }}">
+                                <input class="form-control" id="tanggal" name="tanggal" value="{{ $item->tanggal }}">
                             </div>
                             <div class="mb-3">
                                 <label for="serialnumber" class="form-label"><b>Serial Number</b></label>
@@ -586,6 +596,14 @@
                                         {{ $item->teknisi == 'Alfian' ? 'selected' : '' }}>
                                         Alfian
                                     </option>
+                                    <option value="Timo" data-tokens="Timo"
+                                        {{ $item->teknisi == 'Timo' ? 'selected' : '' }}>
+                                        Timo
+                                    </option>
+                                    <option value="Andre" data-tokens="Andre"
+                                        {{ $item->teknisi == 'Andre' ? 'selected' : '' }}>
+                                        Andre
+                                    </option>
                                     <option value="Other" data-tokens="Other"
                                         {{ $item->teknisi == 'Other' ? 'selected' : '' }}>
                                         Other
@@ -639,7 +657,7 @@
                     <div class="modal-body">
                         <div class="mb-3">
                             <label for="tanggal" class="form-label"><b>Tanggal</b></label>
-                            <input type="date" class="form-control" id="tanggal" name="tanggal"
+                            <input type="text" class="form-control" id="tanggal" name="tanggal"
                                 value="{{ $item->tanggal }}" readonly>
                         </div>
                         <div class="mb-3">

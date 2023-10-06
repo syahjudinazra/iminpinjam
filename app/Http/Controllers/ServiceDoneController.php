@@ -8,6 +8,7 @@ use App\Exports\ServiceDoneExport;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Validator;
+use PhpOffice\PhpSpreadsheet\Calculation\Web\Service;
 
 class ServiceDoneController extends Controller
 {
@@ -37,19 +38,15 @@ class ServiceDoneController extends Controller
         return Excel::download(new ServiceDoneExport($data), 'DataServiceDone.xlsx');
     }
 
-    public function search()
-    {
-        $servicedone = ServiceDone::latest();
-        if (request()->has('search')) {
-            $servicedone->where('tanggal', 'Like', '%' . request()->input('search') . '%');
-            $servicedone->orWhere('serialnumber', 'Like', '%' . request()->input('search') . '%');
-            $servicedone->orWhere('pelanggan', 'Like', '%' . request()->input('search') . '%');
-            $servicedone->orWhere('model', 'Like', '%' . request()->input('search') . '%');
-        }
-        $servicedone = $servicedone->paginate(10);
-        return view('servicedone.index', compact('servicedone'));
+    public function search(Request $request) {
+        $search = $request->search;
+        $servicedone = ServiceDone::where('tanggal', 'LIKE', '%'.$search.'%')
+        ->orWhere('serialnumber', 'LIKE', '%'.$search.'%')
+        ->orWhere('pelanggan', 'LIKE', '%'.$search.'%')
+        ->orWhere('model', 'LIKE', '%'.$search.'%')
+        ->paginate(10);
+        return view('servicedone.index', ['servicedone' => $servicedone]);
     }
-
     /**
      * Show the form for creating a new resource.
      *
