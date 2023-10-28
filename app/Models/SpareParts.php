@@ -19,5 +19,6 @@ class SpareParts extends Model
         'tipe',
         'nama',
         'quantity',
+        'harga',
     ];
 }

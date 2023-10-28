@@ -13,12 +13,12 @@ class SparePartsExport implements FromCollection, WithHeadings
      */
     public function collection()
     {
-        return SpareParts::select("nospareparts", "tipe", "nama", "quantity")->get();
+        return SpareParts::select("nospareparts", "tipe", "nama", "quantity", "harga")->get();
         // return SpareParts::all();
     }
 
     public function headings(): array
     {
-        return ["No SpareParts", "Tipe", "Nama", "Quantity"];
+        return ["No SpareParts", "Tipe", "Nama", "Quantity", "Harga"];
     }
 }

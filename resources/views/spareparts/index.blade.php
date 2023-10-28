@@ -2,26 +2,16 @@
 @extends('layouts.navbar')
 
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <h1 class="h3 mb-3 text-gray-800">Spare Parts</h1>
-            <div class="head-area">
-                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#sparepartmodal">
-                    <i class="fa-solid fa-plus"></i> Tambah
-                </button>
-                {{-- <div class="btn-group">
-                    <button class="btn btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        Excel
+            @if (Auth::check())
+                <div class="head-area">
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#sparepartmodal">
+                        <i class="fa-solid fa-plus"></i> Tambah
                     </button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#importModal"
-                                href="#">Import
-                                Excel</a></li>
-                        <li><a href="{{ route('export.spareparts') }}" class="dropdown-item">Export Excel</a></li>
-                    </ul>
-                </div> --}}
-            </div>
+                </div>
+            @endif
             <div class="buttonarea d-flex gap-3 justify-content-end mb-3">
                 <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#importModal">
                     Import Excel
@@ -30,11 +20,11 @@
             </div>
         </div>
     </div>
-    <!-- Import Excel Modal -->
 
+    <!-- Import Excel Modal -->
     <div class="modal fade" id="importModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content" style="width: auto">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Import Excel</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -43,8 +33,13 @@
                     @csrf
                     <div class="modal-body">
                         <div class="d-flex justify-content-center">
-                            <input type="file" name="file" class="form-control" style="width: auto">
+                            <input type="file" name="file" id="file" class="form-control" style="width: auto">
                         </div>
+                        <a href="{{ route('download.template', ['filename' => 'templateexcelimport.xlsx']) }}"
+                            class="d-flex justify-content-center">Download
+                            template</a>
+                        {{-- <button id="previewButton">Preview Excel File</button> --}}
+                        <div class="table table-bordered mt-2" id="preview"></div>
                     </div>
                     <div class="modal-footer justify-content-center">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -86,8 +81,13 @@
                         </div>
                         <div class="form-group">
                             <label for="quantity"><b>Quantity</b></label>
-                            <input type="text" class="form-control" id="quantity" name="quantity"
+                            <input type="number" class="form-control" id="quantity" name="quantity"
                                 placeholder="Masukan Quantity" value="{{ old('quantity') }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="harga"><b>Harga</b></label>
+                            <input type="number" class="form-control" id="harga" name="harga"
+                                placeholder="Masukan Harga" value="{{ old('harga') }}">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -138,6 +138,11 @@
                                 <label for="quantity" class="form-label"><b>Quantity</b></label>
                                 <input type="number" class="form-control" id="quantity" name="quantity"
                                     value="{{ $item->quantity }}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="harga" class="form-label"><b>Harga</b></label>
+                                <input type="number" class="form-control" id="harga" name="harga"
+                                    value="{{ $item->harga }}">
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -230,7 +235,7 @@
     @endforeach
     <!-- end delete data -->
 
-    <div class="container">
+    <div class="container-fluid mt-3">
         <table id="hometable" class="table table-striped table-bordered" style="width:100%">
             <thead>
                 <tr>
@@ -238,6 +243,7 @@
                     <th>Tipe</th>
                     <th>Nama</th>
                     <th>Quantity</th>
+                    <th>Harga</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -248,6 +254,7 @@
                         <td>{{ $item->tipe }}</td>
                         <td>{{ $item->nama }}</td>
                         <td>{{ $item->quantity }}</td>
+                        <td>{{ $item->harga }}</td>
                         <td>
                             <a href="#" class="btn btn-warning" data-toggle="modal"
                                 data-target="#editModalQuantityReduce{{ $item->id }}" data-bs-toggle="tooltip"
@@ -274,6 +281,7 @@
                     <th>Tipe</th>
                     <th>Nama</th>
                     <th>Quantity</th>
+                    <th>Harga</th>
                 </tr>
             </tfoot>
         </table>

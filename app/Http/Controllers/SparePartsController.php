@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Imports\SparePartsImport;
-use App\Exports\SparePartsExport;
 use App\Models\SpareParts;
 use Illuminate\Http\Request;
+use App\Exports\SparePartsExport;
+use App\Imports\SparePartsImport;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Arr;
 
 class SparePartsController extends Controller
 {
@@ -21,11 +24,24 @@ class SparePartsController extends Controller
         return view('spareparts.index', compact('spareParts'));
     }
 
-    public function importSpareParts()
+    public function importSpareParts(Request $request)
     {
-        Excel::import(new SparePartsImport, request()->file('file'));
 
-        return back();
+    $rules = [
+        'file' => 'required|mimes:xls,xlsx',
+    ];
+
+    $request->validate($rules);
+        $data = Excel::toArray(new SparePartsImport, request()->file('file'));
+
+        collect(head($data))->each(function ($row, $key) {
+            DB::table('spareparts')
+                ->updateOrInsert(
+                    ['nospareparts' => $row['nospareparts']],
+                    Arr::except($row, ['nospareparts'])
+                );
+        });
+        return redirect()->back()->with('success', 'Data Berhasil DiImport');
     }
 
     public function exportSpareParts()
@@ -53,6 +69,17 @@ class SparePartsController extends Controller
         return redirect()->route('spareparts.index', ['id' => $spareParts->id]);
     }
 
+    public function templateImport($filename)
+    {
+        $filePath = storage_path('app/template/' . $filename); // Adjust the path if needed
+
+        if (file_exists($filePath)) {
+            return response()->download($filePath);
+        } else {
+            return response()->json(['error' => 'File not found'], 404);
+        }
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -76,6 +103,7 @@ class SparePartsController extends Controller
             'tipe' => 'max:255',
             'nama' => 'max:255',
             'quantity' => 'required',
+            'harga' => 'required',
         ]);
 
         $spareParts = new spareParts();
@@ -83,6 +111,7 @@ class SparePartsController extends Controller
         $spareParts->tipe = $request->input('tipe');
         $spareParts->nama = $request->input('nama');
         $spareParts->quantity = $request->input('quantity');
+        $spareParts->harga = $request->input('harga');
 
         $spareParts->save();
         return redirect()->back()->with('success', 'Data Berhasil Ditambahkan');
@@ -125,6 +154,7 @@ class SparePartsController extends Controller
             'tipe' => 'max:255',
             'nama' => 'max:255',
             'quantity' => 'required',
+            'harga' => 'required',
         ]);
 
         $spareParts = SpareParts::find($id);
@@ -132,6 +162,7 @@ class SparePartsController extends Controller
         $spareParts->tipe = $request->input('tipe');
         $spareParts->nama = $request->input('nama');
         $spareParts->quantity = $request->input('quantity');
+        $spareParts->harga = $request->input('harga');
 
         $spareParts->update();
         return redirect()->back()->with('success', 'Data berhasil diubah');

@@ -27,7 +27,7 @@
                     </button>
                 @endif
 
-                <form method="GET" action="{{ route('search.index') }}"
+                {{-- <form method="GET" action="{{ route('search.index') }}"
                     class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
                     style="float: right">
                     <div class="input-group" style="flex-wrap: nowrap;">
@@ -40,7 +40,7 @@
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
-                </form>
+                </form> --}}
             </div>
         @else
             <div class="searchpinjam">
@@ -51,7 +51,7 @@
                     </button>
                 @endif
 
-                <form method="GET" action="{{ route('search.index') }}"
+                {{-- <form method="GET" action="{{ route('search.index') }}"
                     class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
                     style="float: right">
                     <div class="input-group" style="flex-wrap: nowrap;">
@@ -64,7 +64,7 @@
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
-                </form>
+                </form> --}}
             </div>
         @endif
         <!-- Tambah Data -->
@@ -1603,8 +1603,8 @@
     <!-- end kembali edit data -->
 
     <div class="container-fluid scroll mt-3 ">
-        <table class="table table-striped table-hover table-bordered">
-            <thead class="table-dark headfix">
+        <table id="service" class="table table-striped table-bordered" style="width:100%">
+            <thead class="headfix">
                 <th>No</th>
                 <th>Tanggal</th>
                 {{-- <th>Gambar</th> --}}

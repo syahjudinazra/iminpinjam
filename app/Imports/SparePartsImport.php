@@ -20,6 +20,7 @@ class SparePartsImport implements ToModel, WithHeadingRow
             'tipe'    => $row['tipe'],
             'nama'    => $row['nama'],
             'quantity'    => $row['quantity'],
+            'harga'    => $row['harga'],
         ]);
     }
 }

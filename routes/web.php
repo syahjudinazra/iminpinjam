@@ -81,6 +81,7 @@ Route::delete('/servicedone/{id}', [ServiceDoneController::class, 'destroy'])->m
 Route::get('/export-servicedone', [ServiceDoneController::class, 'exportServiceDone'])->name('export-servicedone');
 Route::get('/servicedone/{id}', [ServiceDoneController::class, 'show'])->name('servicedone.show');
 
+
 //SERVICE PENDING
 Route::get('/servicepending/search', [ServicePendingController::class, 'search'])->name('search.servicepending');
 Route::resource('/servicepending', ServicePendingController::class)->except([
@@ -116,7 +117,9 @@ Route::resource('/spareparts', SparePartsController::class)->except([
 Route::get('/spareparts/{id}/edit', [SparePartsController::class, 'edit'])->middleware('auth')->name('spareparts.edit');
 Route::put('/spareparts/{id}', [SparePartsController::class, 'update'])->middleware('auth')->name('spareparts.update');
 Route::delete('/spareparts/{id}', [SparePartsController::class, 'destroy'])->middleware('auth')->name('spareparts.destroy');
-Route::post('/import-spareparts', [SparePartsController::class, 'importSpareParts'])->name('import.spareparts');
-Route::get('/export-spareparts', [SparePartsController::class, 'exportSpareParts'])->name('export.spareparts');
+Route::post('/import-spareparts', [SparePartsController::class, 'importSpareParts'])->middleware('auth')->name('import.spareparts');
+Route::get('/export-spareparts', [SparePartsController::class, 'exportSpareParts'])->middleware('auth')->name('export.spareparts');
 Route::get('/spareparts/{id}', [SparePartsController::class, 'show'])->name('spareparts.show');
 Route::post('/spareparts/{id}', [SparePartsController::class, 'updateQuantity'])->middleware('auth')->name('update.quantity');
+Route::get('download/{filename}', [SparePartsController::class, 'templateImport'])->name('download.template');
+

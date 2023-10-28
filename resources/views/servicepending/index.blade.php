@@ -31,7 +31,7 @@
                         </button>
                     @endif
 
-                    <form method="GET" action="{{ route('search.servicepending') }}"
+                    {{-- <form method="GET" action="{{ route('search.servicepending') }}"
                         class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
                         style="float: right">
                         <div class="input-group" style="flex-wrap: nowrap;">
@@ -44,7 +44,7 @@
                                 <i class="fas fa-search"></i>
                             </button>
                         </div>
-                    </form>
+                    </form> --}}
                 </div>
             </div>
         @else
@@ -62,7 +62,7 @@
                     </div>
                 @endif
 
-                <form method="GET" action="{{ route('search.servicepending') }}"
+                {{-- <form method="GET" action="{{ route('search.servicepending') }}"
                     class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
                     style="float: right">
                     <div class="input-group" style="flex-wrap: nowrap;">
@@ -75,7 +75,7 @@
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
-                </form>
+                </form> --}}
             </div>
         @endif
 
@@ -316,7 +316,7 @@
                         <div class="modal-body">
                             <div class="mb-3">
                                 <label for="tanggal" class="form-label"><b>Tanggal</b></label>
-                                <input type="text" class="form-control" id="tanggal" name="tanggal"
+                                <input type="date" class="form-control" id="tanggal" name="tanggal"
                                     value="{{ $item->tanggal }}">
                             </div>
                             <div class="mb-3">
@@ -651,7 +651,7 @@
                     <div class="modal-body">
                         <div class="mb-3">
                             <label for="tanggal" class="form-label"><b>Tanggal</b></label>
-                            <input type="text" class="form-control" id="tanggal" name="tanggal"
+                            <input type="date" class="form-control" id="tanggal" name="tanggal"
                                 value="{{ $item->tanggal }}" readonly>
                         </div>
                         <div class="mb-3">
@@ -754,8 +754,8 @@
 
     <div class="container-fluid mt-3">
         <div style="overflow: auto">
-            <table class="table table-striped table-hover">
-                <thead class="table-dark">
+            <table id="service" class="table table-striped table-bordered" style="width:100%">
+                <thead>
                     <th>No</th>
                     <th>Tanggal</th>
                     <th>Serial Number</th>
