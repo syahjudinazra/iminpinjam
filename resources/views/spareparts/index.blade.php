@@ -22,11 +22,11 @@
     </div>
 
     <!-- Import Excel Modal -->
-    <div class="modal fade" id="importModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="importModal" tabindex="-1" aria-labelledby="importModal" aria-hidden="true">
         <div class="modal-dialog modal-lg">
-            <div class="modal-content" style="width: auto">
+            <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Import Excel</h5>
+                    <h5 class="modal-title">Import Excel</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form action="{{ route('import.spareparts') }}" method="POST" enctype="multipart/form-data">
@@ -38,8 +38,7 @@
                         <a href="{{ route('download.template', ['filename' => 'templateexcelimport.xlsx']) }}"
                             class="d-flex justify-content-center">Download
                             template</a>
-                        {{-- <button id="previewButton">Preview Excel File</button> --}}
-                        <div class="table table-bordered mt-2" id="preview"></div>
+                        <div class="table table-bordered mt-2" id="preview" style="width: auto"></div>
                     </div>
                     <div class="modal-footer justify-content-center">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -81,7 +80,7 @@
                         </div>
                         <div class="form-group">
                             <label for="quantity"><b>Quantity</b></label>
-                            <input type="number" class="form-control" id="quantity" name="quantity"
+                            <input type="number" class="form-control" id="quantity" name="quantity" min="1"
                                 placeholder="Masukan Quantity" value="{{ old('quantity') }}">
                         </div>
                         <div class="form-group">
@@ -137,7 +136,7 @@
                             <div class="mb-3">
                                 <label for="quantity" class="form-label"><b>Quantity</b></label>
                                 <input type="number" class="form-control" id="quantity" name="quantity"
-                                    value="{{ $item->quantity }}">
+                                    min="1" value="{{ $item->quantity }}">
                             </div>
                             <div class="mb-3">
                                 <label for="harga" class="form-label"><b>Harga</b></label>

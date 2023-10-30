@@ -98,12 +98,6 @@
             }
         });
 
-        // // Function to handle the preview button click
-        // document.getElementById('previewButton').addEventListener('click', function() {
-        //     // Trigger the file input click event
-        //     document.getElementById('importSpareparts').click();
-        // });
-
         function convertSheetToHtmlWithDuplicateHighlight(sheet) {
             const sheetData = XLSX.utils.sheet_to_json(sheet, {
                 header: 1,

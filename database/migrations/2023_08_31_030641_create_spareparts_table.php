@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('spareparts', function (Blueprint $table) {
             $table->id();
-            $table->string('nospareparts')->nullable();
-            $table->string('tipe')->nullable();
-            $table->string('nama')->nullable();
+            $table->string('nospareparts');
+            $table->string('tipe');
+            $table->string('nama');
             $table->integer('quantity');
             $table->decimal('harga');
             $table->timestamps();

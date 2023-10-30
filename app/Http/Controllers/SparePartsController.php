@@ -41,7 +41,8 @@ class SparePartsController extends Controller
                     Arr::except($row, ['nospareparts'])
                 );
         });
-        return redirect()->back()->with('success', 'Data Berhasil DiImport');
+
+        return redirect()->back()->with('success', 'Data Berhasil Diimport');
     }
 
     public function exportSpareParts()
