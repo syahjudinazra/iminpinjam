@@ -103,8 +103,8 @@ class SparePartsController extends Controller
             'nospareparts' => 'max:255',
             'tipe' => 'max:255',
             'nama' => 'max:255',
-            'quantity' => 'required',
-            'harga' => 'required',
+            'quantity' => 'numeric',
+            'harga' => 'numeric',
         ]);
 
         $spareParts = new spareParts();
@@ -154,8 +154,8 @@ class SparePartsController extends Controller
             'nospareparts' => 'max:255',
             'tipe' => 'max:255',
             'nama' => 'max:255',
-            'quantity' => 'required',
-            'harga' => 'required',
+            'quantity' => 'numeric',
+            'harga' => 'numeric',
         ]);
 
         $spareParts = SpareParts::find($id);

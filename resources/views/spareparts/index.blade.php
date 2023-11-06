@@ -38,7 +38,7 @@
                         <a href="{{ route('download.template', ['filename' => 'templateexcelimport.xlsx']) }}"
                             class="d-flex justify-content-center">Download
                             template</a>
-                        <div class="table table-bordered mt-2" id="preview" style="width: auto"></div>
+                        <div class="table table-bordered mt-2" id="preview"></div>
                     </div>
                     <div class="modal-footer justify-content-center">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
