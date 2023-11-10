@@ -37,7 +37,11 @@ class SparePartsController extends Controller
         collect(head($data))->each(function ($row, $key) {
             DB::table('spareparts')
                 ->updateOrInsert(
-                    ['nospareparts' => $row['nospareparts']],
+                    ['nospareparts' => $row['nospareparts'],
+                    'tipe' => $row['tipe'],
+                    'nama' => $row['nama'],
+                    'quantity' => $row['quantity'],
+                    'harga' => $row['harga']],
                     Arr::except($row, ['nospareparts'])
                 );
         });
@@ -57,17 +61,20 @@ class SparePartsController extends Controller
 
         if ($request->has('add')) {
             $spareParts->quantity += $quantity;
+            $spareParts->save();
+
+            return redirect()->back()->with('success', 'Data Berhasil Ditambah');
+
         } elseif ($request->has('reduce')) {
             if ($spareParts->quantity >= $quantity) {
                 $spareParts->quantity -= $quantity;
+                $spareParts->save();
+
+                return redirect()->back()->with('success', 'Data Berhasil Dikurangi');
             } else {
                 return redirect()->back()->with('error', 'Jangan Melebihi Quantity');
             }
         }
-
-        $spareParts->save();
-
-        return redirect()->route('spareparts.index', ['id' => $spareParts->id]);
     }
 
     public function templateImport($filename)

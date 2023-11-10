@@ -42,7 +42,7 @@
                     </div>
                     <div class="modal-footer justify-content-center">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button class="btn btn-success">Submit</button>
+                        <button id="importButton" class="btn btn-success">Submit</button>
                     </div>
                 </form>
             </div>

@@ -71,7 +71,6 @@
 
     @include('sweetalert::alert')
     <script>
-        // Function to handle file input change event
         document.getElementById("file").addEventListener("change", function(e) {
             const file = e.target.files[0];
             if (file) {
@@ -92,6 +91,13 @@
 
                     // Display the HTML table in the preview container
                     document.getElementById("preview").innerHTML = htmlTable;
+
+                    // Check for duplicates in "nospareparts" column
+                    const nosparepartsDuplicates = checkNosparepartsDuplicates(sheet);
+
+                    // Hide or show the submit button based on duplicates
+                    const importButton = document.getElementById("importButton");
+                    importButton.style.display = nosparepartsDuplicates ? "none" : "block";
                 };
 
                 reader.readAsArrayBuffer(file);
@@ -124,6 +130,24 @@
 
             htmlTable += "</table>";
             return htmlTable;
+        }
+
+        function checkNosparepartsDuplicates(sheet) {
+            const sheetData = XLSX.utils.sheet_to_json(sheet, {
+                header: 1,
+            });
+            const nosparepartsIndex = sheetData[0].indexOf("nospareparts");
+            const nosparepartsValues = new Set();
+
+            for (let row of sheetData.slice(1)) {
+                const nosparepartsValue = row[nosparepartsIndex];
+                if (nosparepartsValues.has(nosparepartsValue)) {
+                    return true; // Duplicate found
+                }
+                nosparepartsValues.add(nosparepartsValue);
+            }
+
+            return false; // No duplicates
         }
     </script>
     <script>
