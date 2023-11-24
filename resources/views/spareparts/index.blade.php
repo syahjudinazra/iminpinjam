@@ -33,7 +33,8 @@
                     @csrf
                     <div class="modal-body">
                         <div class="d-flex justify-content-center">
-                            <input type="file" name="file" id="file" class="form-control" style="width: auto">
+                            <input type="file" name="inputSpareParts" id="inputSpareParts" class="form-control"
+                                style="width: auto">
                         </div>
                         <a href="{{ route('download.template', ['filename' => 'templateexcelimport.xlsx']) }}"
                             class="d-flex justify-content-center">Download

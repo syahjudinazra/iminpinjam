@@ -71,7 +71,7 @@
 
     @include('sweetalert::alert')
     <script>
-        document.getElementById("file").addEventListener("change", function(e) {
+        document.getElementById("inputSpareParts").addEventListener("change", function(e) {
             const file = e.target.files[0];
             if (file) {
                 // Read the Excel file
@@ -83,19 +83,10 @@
                         type: "array",
                     });
 
-                    // Assuming the Excel file has only one sheet
                     const sheet = workbook.Sheets[workbook.SheetNames[0]];
-
-                    // Convert the sheet data to HTML with duplicate checking
                     const htmlTable = convertSheetToHtmlWithDuplicateHighlight(sheet);
-
-                    // Display the HTML table in the preview container
                     document.getElementById("preview").innerHTML = htmlTable;
-
-                    // Check for duplicates in "nospareparts" column
                     const nosparepartsDuplicates = checkNosparepartsDuplicates(sheet);
-
-                    // Hide or show the submit button based on duplicates
                     const importButton = document.getElementById("importButton");
                     importButton.style.display = nosparepartsDuplicates ? "none" : "block";
                 };
@@ -142,12 +133,12 @@
             for (let row of sheetData.slice(1)) {
                 const nosparepartsValue = row[nosparepartsIndex];
                 if (nosparepartsValues.has(nosparepartsValue)) {
-                    return true; // Duplicate found
+                    return true;
                 }
                 nosparepartsValues.add(nosparepartsValue);
             }
 
-            return false; // No duplicates
+            return false;
         }
     </script>
     <script>

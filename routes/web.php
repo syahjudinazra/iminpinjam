@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\HistoryController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PinjamController;
@@ -123,3 +124,7 @@ Route::get('/spareparts/{id}', [SparePartsController::class, 'show'])->name('spa
 Route::post('/spareparts/{id}', [SparePartsController::class, 'updateQuantity'])->middleware('auth')->name('update.quantity');
 Route::get('download/{filename}', [SparePartsController::class, 'templateImport'])->name('download.template');
 
+//History
+Route::resource('/history', HistoryController::class)->except([
+    'show', 'edit', 'update', 'destroy',
+]);

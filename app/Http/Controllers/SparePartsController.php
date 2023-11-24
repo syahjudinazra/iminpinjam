@@ -8,8 +8,6 @@ use App\Exports\SparePartsExport;
 use App\Imports\SparePartsImport;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Arr;
 
 class SparePartsController extends Controller
 {
@@ -21,30 +19,38 @@ class SparePartsController extends Controller
     public function index()
     {
         $spareParts = SpareParts::all();
+
         return view('spareparts.index', compact('spareParts'));
     }
 
     public function importSpareParts(Request $request)
     {
+        $rules = [
+            'inputSpareParts' => 'required|mimes:xls,xlsx',
+        ];
 
-    $rules = [
-        'file' => 'required|mimes:xls,xlsx',
-    ];
+        $request->validate($rules);
 
-    $request->validate($rules);
-        $data = Excel::toArray(new SparePartsImport, request()->file('file'));
+        $data = Excel::toArray(new SparePartsImport, $request->file('inputSpareParts'));
 
-        collect(head($data))->each(function ($row, $key) {
-            DB::table('spareparts')
-                ->updateOrInsert(
-                    ['nospareparts' => $row['nospareparts'],
-                    'tipe' => $row['tipe'],
-                    'nama' => $row['nama'],
-                    'quantity' => $row['quantity'],
-                    'harga' => $row['harga']],
-                    Arr::except($row, ['nospareparts'])
-                );
-        });
+        $sparePartsData = collect(head($data))->map(function ($row) {
+            return [
+                'nospareparts' => $row['nospareparts'],
+                'tipe' => $row['tipe'],
+                'nama' => $row['nama'],
+                'quantity' => $row['quantity'],
+                'harga' => $row['harga'],
+            ];
+        })->filter(function ($sparePart) {
+            return $sparePart['nospareparts'] !== null;
+        })->keyBy('nospareparts')->toArray();
+
+        foreach ($sparePartsData as $noSparePart => $sparePart) {
+            DB::table('spareparts')->updateOrInsert(
+                ['nospareparts' => $noSparePart],
+                $sparePart
+            );
+        }
 
         return redirect()->back()->with('success', 'Data Berhasil Diimport');
     }
@@ -61,15 +67,14 @@ class SparePartsController extends Controller
 
         if ($request->has('add')) {
             $spareParts->quantity += $quantity;
-            $spareParts->save();
 
+            $spareParts->save();
             return redirect()->back()->with('success', 'Data Berhasil Ditambah');
 
         } elseif ($request->has('reduce')) {
             if ($spareParts->quantity >= $quantity) {
                 $spareParts->quantity -= $quantity;
                 $spareParts->save();
-
                 return redirect()->back()->with('success', 'Data Berhasil Dikurangi');
             } else {
                 return redirect()->back()->with('error', 'Jangan Melebihi Quantity');
