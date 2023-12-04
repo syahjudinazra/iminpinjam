@@ -1602,72 +1602,79 @@
     @endforeach
     <!-- end kembali edit data -->
 
-    <div class="container-fluid scroll mt-3 ">
-        <table id="service" class="table table-striped table-bordered" style="width:100%">
+    <div class="container-fluid mt-3">
+        <table id="hometable" class="table table-striped table-bordered" style="width:100%">
             <thead class="headfix">
                 <th>No</th>
                 <th>Tanggal</th>
                 {{-- <th>Gambar</th> --}}
+
                 <th>Serial Number</th>
                 <th>Tipe Device</th>
                 <th>Customer</th>
                 <th>Action</th>
             </thead>
             <tbody>
-                @foreach ($pinjam as $item)
+                @empty($pinjam)
                     <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d/m/Y') }}</td>
-                        {{-- <td>
+                        <td colspan="6">No data found</td>
+                    </tr>
+                @else
+                    @foreach ($pinjam as $item)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d/m/Y') }}</td>
+                            {{-- <td>
                     <img src="{{ url('/storage/gambar/'. $item->gambar ) }}" width= '60' height='60' class="img img-responsive" />
                 </td> --}}
-                        <td>{{ $item->serialnumber }}</td>
-                        <td>{{ $item->device }}</td>
-                        <td>{{ $item->customer }}</td>
-                        <td>
+                            <td>{{ $item->serialnumber }}</td>
+                            <td>{{ $item->device }}</td>
+                            <td>{{ $item->customer }}</td>
+                            <td>
 
-                            @if (Auth::check() && request()->is('pinjam'))
-                                <a href="#" class="btn btn-warning" data-toggle="modal"
-                                    data-target="#editModal{{ $item->id }}"><i
-                                        class="fa-solid fa-pen-to-square"></i></a>
-                            @endif
+                                @if (Auth::check() && request()->is('pinjam'))
+                                    <a href="#" class="btn btn-warning" data-toggle="modal"
+                                        data-target="#editModal{{ $item->id }}"><i
+                                            class="fa-solid fa-pen-to-square"></i></a>
+                                @endif
 
-                            @if (Auth::check() && request()->is('kembali'))
-                                <a href="#" class="btn btn-warning" data-toggle="modal"
-                                    data-target="#editkembaliModal{{ $item->id }}"><i
-                                        class="fa-solid fa-pen-to-square"></i></a>
-                            @endif
+                                @if (Auth::check() && request()->is('kembali'))
+                                    <a href="#" class="btn btn-warning" data-toggle="modal"
+                                        data-target="#editkembaliModal{{ $item->id }}"><i
+                                            class="fa-solid fa-pen-to-square"></i></a>
+                                @endif
 
-                            @if (request()->is('pinjam'))
-                                <a href="#" class="btn btn-primary" data-toggle="modal"
-                                    data-target="#viewModal{{ $item->id }}"><i class="fa-solid fa-eye"></i></a>
-                            @else
-                                <a href="#" class="btn btn-primary" data-toggle="modal"
-                                    data-target="#viewkembaliModal{{ $item->id }}"><i
-                                        class="fa-solid fa-eye"></i></a>
-                            @endif
+                                @if (request()->is('pinjam'))
+                                    <a href="#" class="btn btn-primary" data-toggle="modal"
+                                        data-target="#viewModal{{ $item->id }}"><i class="fa-solid fa-eye"></i></a>
+                                @else
+                                    <a href="#" class="btn btn-primary" data-toggle="modal"
+                                        data-target="#viewkembaliModal{{ $item->id }}"><i
+                                            class="fa-solid fa-eye"></i></a>
+                                @endif
 
-                            @if (Auth::check())
-                                <a href="#" class="btn btn-danger" data-toggle="modal"
-                                    data-target="#deleteModal{{ $item->id }}"><i
-                                        class="fa-solid fa-trash"></i></a>
-                            @endif
+                                @if (Auth::check())
+                                    <a href="#" class="btn btn-danger" data-toggle="modal"
+                                        data-target="#deleteModal{{ $item->id }}"><i
+                                            class="fa-solid fa-trash"></i></a>
+                                @endif
 
-                            @if (Auth::check() && request()->is('pinjam'))
-                                <a href="#" class="btn btn-success" data-toggle="modal"
-                                    data-target="#moveModal{{ $item->id }}"><i
-                                        class="fa-solid fa-paper-plane"></i></a>
-                            @endif
+                                @if (Auth::check() && request()->is('pinjam'))
+                                    <a href="#" class="btn btn-success" data-toggle="modal"
+                                        data-target="#moveModal{{ $item->id }}"><i
+                                            class="fa-solid fa-paper-plane"></i></a>
+                                @endif
 
-                            @if (Auth::check())
-                                <a href="{{ url('generate-pdf', $item->id) }}" class="btn btn-secondary"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Download PDF"><i
-                                        class="fa-solid fa-file-pdf"></i></a>
-                            @endif
+                                @if (Auth::check())
+                                    <a href="{{ url('generate-pdf', $item->id) }}" class="btn btn-secondary"
+                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Download PDF"><i
+                                            class="fa-solid fa-file-pdf"></i></a>
+                                @endif
 
-                        </td>
-                    </tr>
-                @endforeach
+                            </td>
+                        </tr>
+                    @endforeach
+                @endempty
             </tbody>
         </table>
     </div>

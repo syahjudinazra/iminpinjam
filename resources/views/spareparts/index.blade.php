@@ -13,10 +13,13 @@
                 </div>
             @endif
             <div class="buttonarea d-flex gap-3 justify-content-end mb-3">
-                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#importModal">
+                <button type="button" class="btn btn-success text-white" data-bs-toggle="modal"
+                    data-bs-target="#importModal"><i class="fa-solid fa-file-import" style="color: #ffffff;"></i>
                     Import Excel
                 </button>
-                <a href="{{ route('export.spareparts') }}" class="btn btn-success float-end">Export Excel</a>
+                <a href="{{ route('export.spareparts') }}" class="btn btn text-white float-end"
+                    style="background-color: #F05025"><i class="fa-solid fa-download" style="color: #ffffff;"></i> Export
+                    Excel</a>
             </div>
         </div>
     </div>
@@ -81,7 +84,7 @@
                         </div>
                         <div class="form-group">
                             <label for="quantity"><b>Quantity</b></label>
-                            <input type="number" class="form-control" id="quantity" name="quantity" min="1"
+                            <input type="number" class="form-control" id="quantity" name="quantity" min="0"
                                 placeholder="Masukan Quantity" value="{{ old('quantity') }}">
                         </div>
                         <div class="form-group">
@@ -137,7 +140,7 @@
                             <div class="mb-3">
                                 <label for="quantity" class="form-label"><b>Quantity</b></label>
                                 <input type="number" class="form-control" id="quantity" name="quantity"
-                                    min="1" value="{{ $item->quantity }}">
+                                    min="0" value="{{ $item->quantity }}">
                             </div>
                             <div class="mb-3">
                                 <label for="harga" class="form-label"><b>Harga</b></label>

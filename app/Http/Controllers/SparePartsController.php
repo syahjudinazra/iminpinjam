@@ -67,7 +67,6 @@ class SparePartsController extends Controller
 
         if ($request->has('add')) {
             $spareParts->quantity += $quantity;
-
             $spareParts->save();
             return redirect()->back()->with('success', 'Data Berhasil Ditambah');
 

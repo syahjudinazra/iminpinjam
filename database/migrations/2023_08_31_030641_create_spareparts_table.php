@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('tipe');
             $table->string('nama');
             $table->integer('quantity');
-            $table->decimal('harga');
+            $table->integer('harga');
             $table->timestamps();
             $table->softDeletes();
         });

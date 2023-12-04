@@ -24,10 +24,16 @@
                                         <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account
                                         </h5>
 
-                                        <div class="form-outline mb-4">
+                                        {{-- <div class="form-outline mb-4">
                                             <input type="email" name="email" id="email"
                                                 class="form-control form-control-lg" style="color: black !important" />
                                             <label class="form-label" for="email">{{ __('Email Address') }}</label>
+                                        </div> --}}
+
+                                        <div class="form-outline mb-4">
+                                            <input type="name" name="name" id="name"
+                                                class="form-control form-control-lg" style="color: black !important" />
+                                            <label class="form-label" for="name">{{ __('Name') }}</label>
                                         </div>
 
                                         <div>

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\HistoryController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PinjamController;
@@ -25,9 +26,14 @@ use App\Http\Controllers\SparePartsController;
 |
 */
 
-Route::get('/', function () {
-    return view('auth.login');
-});
+// Route::get('/', function () {
+//     // return view('auth.login');
+//     return view('home');
+// });
+
+//Dashboard
+Route::get('/', [HomeController::class, 'index']);
+Route::get('/home/total', [HomeController::class, 'total']);
 
 //Lupa Password
 Route::get('/forgot-password', [ForgotPasswordController::class, 'index'])->middleware('guest')->name('forgot.password');
@@ -128,3 +134,5 @@ Route::get('download/{filename}', [SparePartsController::class, 'templateImport'
 Route::resource('/history', HistoryController::class)->except([
     'show', 'edit', 'update', 'destroy',
 ]);
+
+Route::get('/export-sparepartsactivity', [HistoryController::class, 'SparePartsActivity'])->middleware('auth')->name('export.sparepartsactivity');

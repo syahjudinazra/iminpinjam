@@ -17,7 +17,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link {{ Request::is('home') ? 'active' : '' }}" href="/home">
+                <a class="nav-link {{ Request::is('home') ? 'active' : '' }}" href="/">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -85,10 +85,21 @@
             <div class="sidebar-heading">
                 Service Spare Parts
             </div>
+
             <li class="nav-item">
-                <a class="nav-link {{ Request::is('spareparts*') ? 'active' : '' }}" href="/spareparts">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseone"
+                    aria-expanded="true" aria-controls="collapseone">
                     <i class="fas fa-fw fa-cog"></i>
-                    <span>SpareParts</span></a>
+                    <span>SpareParts</span>
+                </a>
+                <div id="collapseone" class="collapse" aria-labelledby="headingone" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">List SpareParts</h6>
+                        <a class="collapse-item {{ Request::is('spareparts*') ? 'active' : '' }}"
+                            href="/spareparts">Stock</a>
+                        <a class="collapse-item {{ Request::is('history*') ? 'active' : '' }}" href="/history">History</a>
+                    </div>
+                </div>
             </li>
 
             <!-- Sidebar Toggler (Sidebar) -->
@@ -131,7 +142,8 @@
                                 <form class="form-inline mr-auto w-100 navbar-search">
                                     <div class="input-group">
                                         <input type="text" class="form-control bg-light border-0 small"
-                                            placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                                            placeholder="Search for..." aria-label="Search"
+                                            aria-describedby="basic-addon2">
                                         <div class="input-group-append">
                                             <button class="btn btn-primary" type="button">
                                                 <i class="fas fa-search fa-sm"></i>
@@ -149,16 +161,16 @@
                         @guest
 
                             @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <li class="nav-item mr-4 overflow-hidden font-weight-bold">
+                                    <a class="nav-link text-dark" href="{{ route('login') }}">Login</a>
                                 </li>
                             @endif
 
-                            @if (Route::has('register'))
+                            {{-- @if (Route::has('register'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
-                            @endif
+                            @endif --}}
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"

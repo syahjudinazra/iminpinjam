@@ -3,13 +3,22 @@
 
 @section('content')
     <div class="container">
-        <div class="history">
-            <h1>History</h1>
+        <div class="row">
+            <h1 class="h3 mb-3 text-gray-800">History SpareParts</h1>
+            <div class="buttonarea d-flex gap-3 justify-content-end mb-3">
+                <a href="{{ route('export.sparepartsactivity') }}" class="btn btn text-white float-end"
+                    style="background-color: #F05025"><i class="fa-solid fa-download" style="color: #ffffff;"></i> Export
+                    Excel</a>
+            </div>
         </div>
+    </div>
+
+    <div class="container">
         <table id="hometable" class="table table-striped table-bordered" style="width:100%">
             <thead>
                 <tr>
                     <th>User</th>
+                    <th>No SpareParts</th>
                     <th>Before</th>
                     <th>After</th>
                     <th>Description</th>
@@ -20,6 +29,7 @@
                 @foreach ($historyLog as $item)
                     <tr>
                         <td>{{ $item->causer->name }}</td>
+                        <td>{{ $item->subject->nospareparts }}</td>
                         <td>
                             @if (@is_array($item->changes['old']))
                                 @foreach ($item->changes['old'] as $key => $itemChange)
@@ -42,6 +52,7 @@
             <tfoot>
                 <tr>
                     <th>User</th>
+                    <th>No SpareParts</th>
                     <th>Before</th>
                     <th>After</th>
                     <th>Description</th>

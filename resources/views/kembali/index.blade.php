@@ -432,7 +432,7 @@
 
     <div class="container-fluid mt-3">
         <div class="table-responsive">
-            <table class="table table-striped table-hover">
+            <table id="hometable" class="table table-striped table-bordered" style="width:100%">
                 <thead class="table-dark">
                     <th>No</th>
                     <th>Tanggal</th>

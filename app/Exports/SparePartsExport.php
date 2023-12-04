@@ -19,6 +19,6 @@ class SparePartsExport implements FromCollection, WithHeadings
 
     public function headings(): array
     {
-        return ["No SpareParts", "Tipe", "Nama", "Quantity", "Harga"];
+        return ["nospareparts", "tipe", "nama", "quantity", "harga"];
     }
 }
