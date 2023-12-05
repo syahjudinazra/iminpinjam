@@ -17,14 +17,9 @@ class KanibalController extends Controller
      */
     public function index()
     {
-        $kanibal = DB::table('kanibals')->orderBy('tanggal', 'desc')->paginate(10);
+        $kanibal = DB::table('kanibals')->orderBy('tanggal', 'desc')->get();
         return view('kanibal.index', compact('kanibal'));
     }
-
-    // public function exportKanibal()
-    // {
-    //     return Excel::download(new KanibalExport, 'DataKanibal.xlsx');
-    // }
 
     public function exportKanibal(Request $request)
     {

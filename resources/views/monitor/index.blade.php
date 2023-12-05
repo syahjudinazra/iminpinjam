@@ -2,13 +2,13 @@
 @extends('layouts.navbar')
 
 @section('content')
-    <div class="container-fluid">
+    {{-- <div class="container-fluid">
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Service Monitoring</h1>
         </div>
-    </div>
+    </div> --}}
 
-    <div class="row justify-content-center">
+    {{-- <div class="row justify-content-center">
 
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card border-left-primary shadow h-100 py-2">
@@ -61,7 +61,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- view data -->
     @foreach ($servicedone as $item)
         <div class="modal fade" id="viewModal{{ $item->id }}" tabindex="-1"

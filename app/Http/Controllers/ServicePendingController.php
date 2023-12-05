@@ -19,14 +19,9 @@ class ServicePendingController extends Controller
      */
     public function index()
     {
-        $servicepending = DB::table('service_pendings')->orderBy('tanggal', 'desc')->paginate(10);
+        $servicepending = DB::table('service_pendings')->orderBy('tanggal', 'desc')->get();
         return view('servicepending.index', compact('servicepending'));
     }
-
-    // public function exportServicePending()
-    // {
-    //     return Excel::download(new ServicePendingExport, 'DataServicePending.xlsx');
-    // }
 
     public function exportServicePending(Request $request)
     {

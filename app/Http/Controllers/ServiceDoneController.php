@@ -20,14 +20,10 @@ class ServiceDoneController extends Controller
      */
     public function index()
     {
-        $servicedone = DB::table('service_dones')->orderBy('tanggal', 'desc')->paginate(10);
+        $servicedone = DB::table('service_dones')->orderBy('tanggal', 'desc')->get();
+        // $servicedone = ServiceDone::all();
         return view('servicedone.index', compact('servicedone'));
     }
-
-    // public function exportServiceDone()
-    // {
-    //     return Excel::download(new ServiceDoneExport, 'DataServiceDone.xlsx');
-    // }
 
     public function exportServiceDone(Request $request)
     {
@@ -177,13 +173,10 @@ class ServiceDoneController extends Controller
      */
     public function destroy(ServiceDone $serviceDone, $id)
     {
-        // Find the data by id
-        $servicedone = ServiceDone::findOrFail($id);
 
-        // Delete the servicedone
+        $servicedone = ServiceDone::findOrFail($id);
         $servicedone->delete();
 
-        // Redirect back with a success message
         return redirect()->back()->with('success', 'Data berhasil dihapus');
     }
 }

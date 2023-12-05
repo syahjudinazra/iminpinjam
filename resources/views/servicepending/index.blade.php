@@ -766,7 +766,7 @@
                 <tbody>
                     @foreach ($servicepending as $item)
                         <tr>
-                            <td>{{ $servicepending->firstItem() + $loop->index }}</td>
+                            <td>{{ $loop->index + 1 }}</td>
                             <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d/m/Y') }}</td>
                             <td>{{ $item->serialnumber }}</td>
                             <td>{{ $item->pelanggan }}</td>
@@ -800,7 +800,7 @@
                     @endforeach
                 </tbody>
             </table>
-            {!! $servicepending->onEachSide(1)->links('pagination::bootstrap-5') !!}
+            {{-- {!! $servicepending->onEachSide(1)->links('pagination::bootstrap-5') !!} --}}
         </div>
     </div>
 @endsection

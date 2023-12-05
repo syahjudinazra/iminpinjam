@@ -760,7 +760,7 @@
 
     <div class="container-fluid mt-3">
         <div style="overflow: auto">
-            <table id="service" class="table table-striped table-bordered" style="width:100%">
+            <table id="service" class="table table-striped table-bordered nowrap" style="width:100%">
                 <thead>
                     <th>No</th>
                     <th>Tanggal</th>
@@ -777,7 +777,7 @@
                     @else
                         @foreach ($servicedone as $item)
                             <tr>
-                                <td>{{ $servicedone->firstItem() + $loop->index }}</td>
+                                <td>{{ $loop->index + 1 }}</td>
                                 <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d/m/Y') }}</td>
                                 <td>{{ $item->serialnumber }}</td>
                                 <td>{{ $item->pelanggan }}</td>
@@ -803,7 +803,7 @@
                     @endempty
                 </tbody>
             </table>
-            {!! $servicedone->onEachSide(1)->links('pagination::bootstrap-5') !!}
+            {{-- {!! $servicedone->onEachSide(1)->links('pagination::bootstrap-5') !!} --}}
         </div>
     </div>
 @endsection

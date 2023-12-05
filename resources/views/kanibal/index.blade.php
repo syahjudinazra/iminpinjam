@@ -762,7 +762,7 @@
             <tbody>
                 @foreach ($kanibal as $item)
                     <tr>
-                        <td>{{ $kanibal->firstItem() + $loop->index }}</td>
+                        <td>{{ $loop->index + 1 }}</td>
                         <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d/m/Y') }}</td>
                         <td>{{ $item->serialnumber }}</td>
                         <td>{{ $item->pelanggan }}</td>
@@ -789,6 +789,6 @@
                 @endforeach
             </tbody>
         </table>
-        {!! $kanibal->onEachSide(1)->links('pagination::bootstrap-5') !!}
+        {{-- {!! $kanibal->onEachSide(1)->links('pagination::bootstrap-5') !!} --}}
     </div>
 @endsection
