@@ -343,7 +343,7 @@
         </div>
     </div>
 
-    <div class="container-fluid mt-3">
+    <div class="container-fluid mt-3 mb-6">
         <div class="table-responsive">
             <table class="table table-striped table-hover">
                 <thead class="bg-danger" style="color:white">
@@ -397,7 +397,7 @@
         </div>
     </div>
 
-    <div class="container-fluid mt-3">
+    <div class="container-fluid mt-3 mb-6">
         <div class="table-responsive">
             <table class="table table-striped table-hover">
                 <thead class="bg-warning">

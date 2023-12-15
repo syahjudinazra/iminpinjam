@@ -116,7 +116,7 @@
                         @method('PUT')
 
                         <div class="modal-header">
-                            <h5 class="modal-title" id="editModalLabel{{ $item->id }}">Edit Data Quantity</h5>
+                            <h5 class="modal-title" id="editModalLabel{{ $item->id }}">Edit Data SpareParts</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -246,7 +246,7 @@
                     <th>Tipe</th>
                     <th>Nama</th>
                     <th>Quantity</th>
-                    <th>Harga</th>
+                    <th>Harga ($)</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -284,7 +284,7 @@
                     <th>Tipe</th>
                     <th>Nama</th>
                     <th>Quantity</th>
-                    <th>Harga</th>
+                    <th>Harga ($)</th>
                 </tr>
             </tfoot>
         </table>

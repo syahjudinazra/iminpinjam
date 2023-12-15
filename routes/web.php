@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\FirmwareController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
@@ -14,17 +15,6 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ServiceDoneController;
 use App\Http\Controllers\ServicePendingController;
 use App\Http\Controllers\SparePartsController;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 // Route::get('/', function () {
 //     // return view('auth.login');
@@ -136,3 +126,18 @@ Route::resource('/history', HistoryController::class)->except([
 ]);
 
 Route::get('/export-sparepartsactivity', [HistoryController::class, 'SparePartsActivity'])->middleware('auth')->name('export.sparepartsactivity');
+
+//Firmware
+Route::prefix('firmware')->group(function () {
+    Route::resource('/', FirmwareController::class)->except([
+        'show', 'edit', 'update', 'destroy',
+    ]);
+
+    Route::get('/table', [FirmwareController::class, 'table'])
+        ->middleware('auth')
+        ->name('firmware.table');
+
+        Route::get('/{id}/edit', [FirmwareController::class, 'edit'])->middleware('auth')->name('firmware.edit');
+        Route::put('/{id}', [FirmwareController::class, 'update'])->middleware('auth')->name('firmware.update');
+        Route::delete('/{id}', [FirmwareController::class, 'destroy'])->middleware('auth')->name('firmware.destroy');
+});

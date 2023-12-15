@@ -1,0 +1,39 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('firmwares', function (Blueprint $table) {
+            $table->id();
+            $table->string('tipe');
+            $table->string('version');
+            $table->string('android');
+            $table->string('flash');
+            $table->string('ota');
+            $table->string('kategori');
+            $table->string('gambar', 300)->nullable();
+            $table->timestamps();
+            $table->softDeletes();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('firmwares');
+    }
+};

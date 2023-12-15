@@ -22,25 +22,14 @@
                     <span>Dashboard</span></a>
             </li>
 
-            <!-- Divider -->
             <hr class="sidebar-divider">
-
-            {{-- <div class="sidebar-heading">
-            Product
-        </div>
-
-        <li class="nav-item">
-            <a class="nav-link {{ Request::is('product*') ? 'active' : '' }}"  href="/product">
-                <i class="fas fa-fw fa-box"></i>
-                <span>Product</span></a>
-        </li> --}}
 
             <!-- Heading -->
             <div class="sidebar-heading">
                 Peminjaman Barang
             </div>
 
-            <!-- Nav Item - Pages Collapse Menu -->
+            <!-- Nav Item - Pinjam -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
@@ -61,7 +50,7 @@
             <div class="sidebar-heading">
                 Service Barang
             </div>
-
+            <!-- Nav Item - Services -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
@@ -85,7 +74,7 @@
             <div class="sidebar-heading">
                 Service Spare Parts
             </div>
-
+            <!-- Nav Item - SpareParts -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseone"
                     aria-expanded="true" aria-controls="collapseone">
@@ -100,6 +89,18 @@
                         <a class="collapse-item {{ Request::is('history*') ? 'active' : '' }}" href="/history">History</a>
                     </div>
                 </div>
+            </li>
+
+            <hr class="sidebar-divider">
+
+            <div class="sidebar-heading">
+                Firmware
+            </div>
+            <!-- Nav Item - Firmware -->
+            <li class="nav-item">
+                <a class="nav-link {{ Request::is('firmware*') ? 'active' : '' }}" href="/firmware">
+                    <i class="fas fa-fw fa-microchip"></i>
+                    <span>Firmware</span></a>
             </li>
 
             <!-- Sidebar Toggler (Sidebar) -->

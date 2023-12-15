@@ -135,6 +135,7 @@
                                     <option value="D3 DS1" data-tokens="D3 DS1">D3 DS1</option>
                                     <option value="D3 DS1K" data-tokens="D3 DS1K">D3 DS1K</option>
                                     <option value="D3 DS1 DP" data-tokens="D3 DS1 DP">D3 DS1 DP</option>
+                                    <option value="D3 DS1 PRO DP" data-tokens="D3 DS1 PRO DP">D3 DS1 PRO DP</option>
                                     <option value="D3 DS1 TS DP" data-tokens="D3 DS1 TS DP">D3 DS1 TS DP</option>
                                     <option value="D3 DS1 HDMI" data-tokens="D3 DS1 HDMI">D3 DS1 HDMI</option>
                                     <option value="D3 DS1 HDMI TS" data-tokens="D3 DS1 HDMI TS">D3 DS1 HDMI TS</option>
@@ -197,6 +198,8 @@
                                     </option>
                                     <option value="M2 Swift 1 Printer" data-tokens="M2 Swift 1 Printer">M2 Swift 1 Printer
                                     </option>
+                                    <option value="M2 Swift 2 Pro" data-tokens="M2 Swift 2 Pro">M2 Swift 2 Pro
+                                    </option>
                                     <option value="R1-201" data-tokens="R1-201">R1-201</option>
                                     <option value="R1-202" data-tokens="R1-202">R1-202</option>
                                     <option value="S1-701" data-tokens="S1-701">S1-701</option>
@@ -231,6 +234,7 @@
                                     <option>Android 8</option>
                                     <option>Android 11</option>
                                     <option>Android 11 GMS</option>
+                                    <option>Android 13</option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -258,6 +262,7 @@
                                     <option>Alfian</option>
                                     <option>Timo</option>
                                     <option>Andre</option>
+                                    <option>Barul</option>
                                     <option>Other</option>
                                 </select>
                             </div>
@@ -373,6 +378,8 @@
                                         {{ $item->model == 'D3 DS1K' ? 'selected' : '' }}>D3 DS1K</option>
                                     <option value="D3 DS1 DP" data-tokens="D3 DS1 DP"
                                         {{ $item->model == 'D3 DS1 DP' ? 'selected' : '' }}>D3 DS1 DP</option>
+                                    <option value="D3 DS1 PRO DP" data-tokens="D3 DS1 PRO DP"
+                                        {{ $item->model == 'D3 DS1 PRO DP' ? 'selected' : '' }}>D3 DS1 PRO DP</option>
                                     <option value="D3 DS1 TS DP" data-tokens="D3 DS1 TS DP"
                                         {{ $item->model == 'D3 DS1 TS DP' ? 'selected' : '' }}>D3 DS1 TS DP</option>
                                     <option value="D3 DS1 HDMI" data-tokens="D3 DS1 HDMI"
@@ -470,6 +477,9 @@
                                     <option value="M2 Swift 1 Printer" data-tokens="M2 Swift 1 Printer"
                                         {{ $item->model == 'M2 Swift 1 Printer' ? 'selected' : '' }}>M2 Swift 1 Printer
                                     </option>
+                                    <option value="M2 Swift 2 Pro" data-tokens="M2 Swift 2 Pro"
+                                        {{ $item->model == 'M2 Swift 2 Pro' ? 'selected' : '' }}>M2 Swift 2 Pro
+                                    </option>
                                     <option value="R1 201" data-tokens="R1 201"
                                         {{ $item->model == 'R1 201' ? 'selected' : '' }}>R1 201</option>
                                     <option value="R1 202" data-tokens="R1 202"
@@ -544,6 +554,10 @@
                                         {{ $item->android == 'Android 11 GMS' ? 'selected' : '' }}>
                                         Android 11 GMS
                                     </option>
+                                    <option value="Android 13" data-tokens="Android 13"
+                                        {{ $item->android == 'Android 13' ? 'selected' : '' }}>
+                                        Android 13
+                                    </option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -594,6 +608,10 @@
                                     <option value="Andre" data-tokens="Andre"
                                         {{ $item->teknisi == 'Andre' ? 'selected' : '' }}>
                                         Andre
+                                    </option>
+                                    <option value="Barul" data-tokens="Barul"
+                                        {{ $item->teknisi == 'Barul' ? 'selected' : '' }}>
+                                        Barul
                                     </option>
                                     <option value="Other" data-tokens="Other"
                                         {{ $item->teknisi == 'Other' ? 'selected' : '' }}>
