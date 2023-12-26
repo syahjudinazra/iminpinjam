@@ -35,8 +35,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="tipe"><b>Tipe Device</b></label><br />
-                                    <select id="tipe" class="form-select select2" name="tipe" style="width: 100%"
-                                        required>
+                                    <select id="tipe" class="form-select" name="tipe" style="width: 100%" required>
                                         <option value="Null">Pilih Tipe Device</option>
                                         <option value="A4-101" data-tokens="A4-101">A4-101</option>
                                         <option value="A4-102" data-tokens="A4-102">A4-102</option>
@@ -221,23 +220,23 @@
                                 <div class="form-group">
                                     <label for="status"><b>Status</b></label><br />
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" id="gudang" name="status[]"
-                                            value="Gudang">
+                                        <input class="form-check-input mt-1" type="checkbox" id="gudang"
+                                            name="status[]" value="Gudang">
                                         <label class="form-check-label" for="gudang">Gudang</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" id="service" name="status[]"
-                                            value="Service">
+                                        <input class="form-check-input mt-1" type="checkbox" id="service"
+                                            name="status[]" value="Service">
                                         <label class="form-check-label" for="service">Service</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" id="dipinjam" name="status[]"
-                                            value="Dipinjam">
+                                        <input class="form-check-input mt-1" type="checkbox" id="dipinjam"
+                                            name="status[]" value="Dipinjam">
                                         <label class="form-check-label" for="dipinjam">Dipinjam</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" id="terjual" name="status[]"
-                                            value="Terjual">
+                                        <input class="form-check-input mt-1" type="checkbox" id="terjual"
+                                            name="status[]" value="Terjual">
                                         <label class="form-check-label" for="terjual">Terjual</label>
                                     </div>
                                 </div>
@@ -277,7 +276,7 @@
                                     </div>
                                     <div class="form-group mb-3">
                                         <label for="tipe"><b>Tipe Device</b></label><br />
-                                        <select id="tipe" class="form-select select2" name="tipe" required>
+                                        <select id="tipe" class="form-select" name="tipe" required>
                                             <option value="Null">Pilih Tipe Device</option>
                                             <option value="A4-101" data-tokens="A4-101"
                                                 {{ $item->tipe == 'A4-101' ? 'selected' : '' }}>
@@ -639,25 +638,25 @@
                                     <div class="form-group">
                                         <label><b>Status</b></label><br />
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox" id="gudang"
+                                            <input class="form-check-input mt-1" type="checkbox" id="gudang"
                                                 name="status" value="Gudang"
                                                 {{ in_array('Gudang', explode(',', $item->status)) ? 'checked' : '' }}>
                                             <label class="form-check-label" for="gudang">Gudang</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox" id="service"
+                                            <input class="form-check-input mt-1" type="checkbox" id="service"
                                                 name="status" value="Service"
                                                 {{ in_array('Service', explode(',', $item->status)) ? 'checked' : '' }}>
                                             <label class="form-check-label" for="service">Service</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox" id="dipinjam"
+                                            <input class="form-check-input mt-1" type="checkbox" id="dipinjam"
                                                 name="status" value="Dipinjam"
                                                 {{ in_array('Dipinjam', explode(',', $item->status)) ? 'checked' : '' }}>
                                             <label class="form-check-label" for="dipinjam">Dipinjam</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox" id="terjual"
+                                            <input class="form-check-input mt-1" type="checkbox" id="terjual"
                                                 name="status" value="Terjual"
                                                 {{ in_array('Terjual', explode(',', $item->status)) ? 'checked' : '' }}>
                                             <label class="form-check-label" for="terjual">Terjual</label>

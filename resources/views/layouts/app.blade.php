@@ -76,10 +76,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"
         integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous">
     </script>
-    {{-- <!-- Core plugin JavaScript-->
+    <!-- Core plugin JavaScript-->
     <script src="{{ asset('sb2admin/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
     <!-- Custom scripts for all pages-->
-    <script src="{{ asset('sb2admin/js/sb-admin-2.min.js') }}"></script> --}}
+    <script src="{{ asset('sb2admin/js/sb-admin-2.min.js') }}"></script>
     <!-- Datatables -->
     <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
@@ -90,7 +90,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.1/xlsx.full.min.js"></script>
     <!-- Select Search -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
 
     @include('sweetalert::alert')
     <script>

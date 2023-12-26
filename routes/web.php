@@ -150,16 +150,12 @@ Route::prefix('stock')->group(function () {
     ]);
 
     Route::get('/gudang', [StockController::class, 'gudang'])
-        ->middleware('auth')
         ->name('stock.gudang');
     Route::get('/service', [StockController::class, 'service'])
-        ->middleware('auth')
         ->name('stock.service');
     Route::get('/dipinjam', [StockController::class, 'dipinjam'])
-        ->middleware('auth')
         ->name('stock.dipinjam');
     Route::get('/terjual', [StockController::class, 'terjual'])
-        ->middleware('auth')
         ->name('stock.terjual');
 
         Route::get('/{id}/edit', [StockController::class, 'edit'])->middleware('auth')->name('stock.edit');
