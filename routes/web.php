@@ -15,6 +15,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ServiceDoneController;
 use App\Http\Controllers\ServicePendingController;
 use App\Http\Controllers\SparePartsController;
+use App\Http\Controllers\StockController;
 
 // Route::get('/', function () {
 //     // return view('auth.login');
@@ -140,4 +141,28 @@ Route::prefix('firmware')->group(function () {
         Route::get('/{id}/edit', [FirmwareController::class, 'edit'])->middleware('auth')->name('firmware.edit');
         Route::put('/{id}', [FirmwareController::class, 'update'])->middleware('auth')->name('firmware.update');
         Route::delete('/{id}', [FirmwareController::class, 'destroy'])->middleware('auth')->name('firmware.destroy');
+});
+
+//Stock
+Route::prefix('stock')->group(function () {
+    Route::resource('/', StockController::class)->except([
+        'show', 'edit', 'update', 'destroy',
+    ]);
+
+    Route::get('/gudang', [StockController::class, 'gudang'])
+        ->middleware('auth')
+        ->name('stock.gudang');
+    Route::get('/service', [StockController::class, 'service'])
+        ->middleware('auth')
+        ->name('stock.service');
+    Route::get('/dipinjam', [StockController::class, 'dipinjam'])
+        ->middleware('auth')
+        ->name('stock.dipinjam');
+    Route::get('/terjual', [StockController::class, 'terjual'])
+        ->middleware('auth')
+        ->name('stock.terjual');
+
+        Route::get('/{id}/edit', [StockController::class, 'edit'])->middleware('auth')->name('stock.edit');
+        Route::put('/{id}', [StockController::class, 'update'])->middleware('auth')->name('stock.update');
+        Route::delete('/{id}', [StockController::class, 'destroy'])->middleware('auth')->name('stock.destroy');
 });

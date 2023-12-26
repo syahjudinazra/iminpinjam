@@ -8,7 +8,7 @@
         </div>
         @if (Auth::check())
             <div class="head-area">
-                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#firmwaremodal">
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-target="#firmwaremodal">
                     <i class="fa-solid fa-plus"></i> Tambah Firmware
                 </button>
             </div>
@@ -21,7 +21,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Tambah Firmware</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -55,7 +55,7 @@
                                 placeholder="Masukan URL OTA" value="{{ old('ota') }}">
                         </div>
                         <div class="form-group">
-                            <label for="ota"><b>Kategori</b></label><br />
+                            <label for="kategori"><b>Kategori</b></label><br />
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="checkbox" id="desktop" name="kategori[]"
                                     value="Desktop">
@@ -79,7 +79,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-danger">Tambah</button>
                     </div>
                 </form>
@@ -101,7 +101,7 @@
 
                         <div class="modal-header">
                             <h5 class="modal-title" id="editModalLabel{{ $item->id }}">Edit Data Firmware</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
@@ -160,7 +160,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                             <button type="submit" class="btn btn-primary">Save Changes</button>
                         </div>
                     </form>
@@ -177,7 +177,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="deleteModalLabel{{ $item->id }}">Delete Data Firmware</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -185,7 +185,7 @@
                         Are you sure you want to delete this Data?
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                         <form action="{{ route('firmware.destroy', $item->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
@@ -201,7 +201,7 @@
     <!-- Table Firmware -->
     <div class="container mt-3">
         <div style="overflow: auto">
-            <table id="service" class="table table-striped table-bordered nowrap" style="width:100%">
+            <table id="secondTable" class="table table-striped table-bordered nowrap" style="width:100%">
                 <thead>
                     <th>No</th>
                     <th>Tipe</th>
@@ -233,11 +233,11 @@
                                         class="img img-responsive" />
                                 </td>
                                 <td>
-                                    <a href="#" class="btn btn-primary" data-toggle="modal"
+                                    <a href="#" class="btn btn-primary btn-sm" data-bs-toggle="modal"
                                         data-target="#editModal{{ $item->id }}" data-bs-toggle="tooltip"
                                         data-bs-placement="top" title="Edit"><i class="fa-solid fa-pen-to-square"></i></a>
 
-                                    <a href="#" class="btn btn-danger" data-toggle="modal"
+                                    <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal"
                                         data-target="#deleteModal{{ $item->id }}" data-bs-toggle="tooltip"
                                         data-bs-placement="top" title="Delete"><i class="fa-solid fa-trash"></i></a>
                                 </td>

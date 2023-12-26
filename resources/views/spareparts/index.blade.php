@@ -7,14 +7,14 @@
             <h1 class="h3 mb-3 text-gray-800">Spare Parts</h1>
             @if (Auth::check())
                 <div class="head-area">
-                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#sparepartmodal">
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-target="#sparepartmodal">
                         <i class="fa-solid fa-plus"></i> Tambah
                     </button>
                 </div>
             @endif
             <div class="buttonarea d-flex gap-3 justify-content-end mb-3">
                 <button type="button" class="btn btn-success text-white" data-bs-toggle="modal"
-                    data-bs-target="#importModal"><i class="fa-solid fa-file-import" style="color: #ffffff;"></i>
+                    data-target="#importModal"><i class="fa-solid fa-file-import" style="color: #ffffff;"></i>
                     Import Excel
                 </button>
                 <a href="{{ route('export.spareparts') }}" class="btn btn text-white float-end"
@@ -59,7 +59,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Tambah Spare Parts</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -94,7 +94,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-danger">Tambah</button>
                     </div>
                 </form>
@@ -117,7 +117,7 @@
 
                         <div class="modal-header">
                             <h5 class="modal-title" id="editModalLabel{{ $item->id }}">Edit Data SpareParts</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
@@ -149,7 +149,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                             <button type="submit" class="btn btn-primary">Save Changes</button>
                         </div>
                     </form>
@@ -174,7 +174,7 @@
                             <input class="addquan text-center" type="number" id="quantity" name="quantity">
                         </div>
                         <div class="modal-footer justify-content-center">
-                            <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Cancel</button>
                             <button class="btn btn-success btn-sm mb-1" type="submit" name="add">Submit</button>
                         </div>
                     </form>
@@ -199,7 +199,7 @@
                             <input class="minusquan text-center" type="number" id="quantity" name="quantity">
                         </div>
                         <div class="modal-footer justify-content-center">
-                            <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Cancel</button>
                             <button class="btn btn-success btn-sm mb-1" type="submit" name="reduce">Submit</button>
                         </div>
                     </form>
@@ -217,7 +217,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="deleteModalLabel{{ $item->id }}">Delete Data Spare Parts</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -225,7 +225,7 @@
                         Are you sure you want to delete this Data?
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                         <form action="{{ route('spareparts.destroy', $item->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
@@ -259,19 +259,19 @@
                         <td>{{ $item->quantity }}</td>
                         <td>{{ $item->harga }}</td>
                         <td>
-                            <a href="#" class="btn btn-warning" data-toggle="modal"
+                            <a href="#" class="btn btn-warning btn-sm" data-bs-toggle="modal"
                                 data-target="#editModalQuantityReduce{{ $item->id }}" data-bs-toggle="tooltip"
                                 data-bs-placement="top" title="Quantity"><i class="fa-solid fa-minus"></i></a>
 
-                            <a href="#" class="btn btn-success" data-toggle="modal"
+                            <a href="#" class="btn btn-success btn-sm" data-bs-toggle="modal"
                                 data-target="#editModalQuantity{{ $item->id }}" data-bs-toggle="tooltip"
                                 data-bs-placement="top" title="Quantity"><i class="fa-solid fa-plus"></i></a>
 
-                            <a href="#" class="btn btn-primary" data-toggle="modal"
+                            <a href="#" class="btn btn-primary btn-sm" data-bs-toggle="modal"
                                 data-target="#editModal{{ $item->id }}" data-bs-toggle="tooltip"
                                 data-bs-placement="top" title="Edit"><i class="fa-solid fa-pen-to-square"></i></a>
 
-                            <a href="#" class="btn btn-danger" data-toggle="modal"
+                            <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal"
                                 data-target="#deleteModal{{ $item->id }}" data-bs-toggle="tooltip"
                                 data-bs-placement="top" title="Delete"><i class="fa-solid fa-trash"></i></a>
                         </td>
@@ -290,3 +290,7 @@
         </table>
     </div>
 @endsection
+
+@push('js')
+    <script src="{{ asset('js/importSpareparts.js') }}"></script>
+@endpush

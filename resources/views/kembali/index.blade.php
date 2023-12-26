@@ -12,7 +12,7 @@
                 <i class="fas fa-download fa-sm text-white-50"></i> Generate Excel</a>
         </div>
 
-        {{-- <button type="button" class="btn btn-danger mb-2" data-toggle="modal" data-target="#exampleModal">
+        {{-- <button type="button" class="btn btn-danger mb-2" data-bs-toggle="modal" data-target="#exampleModal">
                     <i class="fa-solid fa-plus"></i> Tambah Produk
                 </button> --}}
 
@@ -31,7 +31,7 @@
                         <h5 class="modal-title" id="exampleModalLabel">Tambah Barang</h5>
 
 
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -144,12 +144,12 @@
                             <div class="mb-3">
                                 <label for="status" class="form-label"><b>Status</b></label><br>
                                 <input data-id="#" class="toggle-class" type="checkbox" data-onstyle="success"
-                                    data-offstyle="danger" data-toggle="toggle" data-on="Yes" data-off="No"
+                                    data-offstyle="danger" data-bs-toggle="toggle" data-on="Yes" data-off="No"
                                     value="1">
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-danger">Tambah</button>
                         </div>
                     </form>
@@ -170,7 +170,7 @@
                         @method('PUT')
                         <div class="modal-header">
                             <h5 class="modal-title" id="editModalLabel{{ $item->id }}">Edit Data kembali</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
@@ -320,7 +320,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                             <button type="submit" class="btn btn-warning">Edit Data</button>
                         </div>
                     </form>
@@ -338,7 +338,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="viewModalLabel{{ $item->id }}">View Data kembali</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -393,7 +393,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
@@ -409,7 +409,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="deleteModalLabel{{ $item->id }}">Delete Data kembali</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -417,7 +417,7 @@
                         Are you sure you want to delete this Data?
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                         <form action="{{ route('kembali.destroy', $item->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
@@ -456,19 +456,20 @@
                             <td>{{ $item->customer }}</td>
                             <td>
                                 @if (Auth::check())
-                                    <a href="#" class="btn btn-warning" data-toggle="modal"
+                                    <a href="#" class="btn btn-warning" data-bs-toggle="modal"
                                         data-target="#editModal{{ $item->id }}"><i
                                             class="fa-solid fa-pen-to-square"></i></a>
                                 @endif
 
-                                <a href="#" class="btn btn-primary" data-toggle="modal"
+                                <a href="#" class="btn btn-primary" data-bs-toggle="modal"
                                     data-target="#viewModal{{ $item->id }}"><i class="fa-solid fa-eye"></i></a>
 
                                 @if (Auth::check())
-                                    <a href="#" class="btn btn-danger" data-toggle="modal"
+                                    <a href="#" class="btn btn-danger" data-bs-toggle="modal"
                                         data-target="#deleteModal{{ $item->id }}"><i
                                             class="fa-solid fa-trash"></i></a>
                                 @endif
+
                             </td>
                         </tr>
                     @endforeach

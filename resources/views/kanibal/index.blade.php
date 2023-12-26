@@ -25,7 +25,7 @@
         @if (Auth::check())
             <div class="searchkanibal">
                 @if (Auth::check())
-                    <button type="button" class="btn btn-danger mb-2" data-toggle="modal" data-target="#exampleModal">
+                    <button type="button" class="btn btn-danger mb-2" data-bs-toggle="modal" data-target="#exampleModal">
                         <i class="fa-solid fa-plus"></i> Tambah Produk
                     </button>
                 @endif
@@ -48,7 +48,7 @@
         @else
             <div class="searchkanibal" style="margin-bottom: 80px">
                 @if (Auth::check())
-                    <button type="button" class="btn btn-danger mb-2" data-toggle="modal" data-target="#exampleModal">
+                    <button type="button" class="btn btn-danger mb-2" data-bs-toggle="modal" data-target="#exampleModal">
                         <i class="fa-solid fa-plus"></i> Tambah Produk
                     </button>
                 @endif
@@ -84,7 +84,7 @@
                         <h5 class="modal-title" id="exampleModalLabel">Tambah Data Kanibal</h5>
 
 
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -288,7 +288,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-danger">Tambah</button>
                         </div>
                     </form>
@@ -311,7 +311,7 @@
 
                         <div class="modal-header">
                             <h5 class="modal-title" id="editModalLabel{{ $item->id }}">Edit Data Service Done</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
@@ -641,7 +641,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                             <button type="submit" class="btn btn-warning">Edit Data</button>
                         </div>
                     </form>
@@ -659,7 +659,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="viewModalLabel{{ $item->id }}">View Data </h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -730,7 +730,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
@@ -746,7 +746,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="deleteModalLabel{{ $item->id }}">Delete Data Pinjam</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -754,7 +754,7 @@
                         Are you sure you want to delete this Data?
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                         <form action="{{ route('kanibal.destroy', $item->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
@@ -767,8 +767,42 @@
     @endforeach
     <!-- end delete data -->
 
+    <!-- Copy Text -->
+    @foreach ($kanibal as $item)
+        <div class="modal fade" id="copyText{{ $item->id }}" tabindex="-1" role="dialog"
+            aria-labelledby="copyModalLabel{{ $item->id }}" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="copyModalLabel{{ $item->id }}">Service Done Data</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body bg-light">
+                        <div class="highlight float-right">
+                            <button class="copyClipboard btn btn-secodary"
+                                data-clipboard-target="#copyData{{ $item->id }}">
+                                <i class="fa-solid fa-clone text-muted"></i>Copy
+                            </button>
+                        </div>
+                        <pre id="copyData{{ $item->id }}" class="highlight mt-4 d-flex flex-column">
+                                <span class="mb-4">{{ $item->pelanggan }}</span>
+                                <span>Tanggal Servis : {{ $item->tanggal }}</span>
+                                <span>Tipe : {{ $item->model }}</span>
+                                <span class="mb-4">SN : {{ $item->serialnumber }}</span>
+                                <span class="mb-4">Kerusakan : {{ $item->kerusakan }}</span>
+                                <span class="mb-4">Perbaikan : {{ $item->perbaikan }}</span>
+                                <span class="mb-4">Note : {{ $item->note }}</span>
+                            </pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
+
     <div class="container-fluid mt-3">
-        <table id="service" class="table table-striped table-bordered" style="width:100%">
+        <table id="secondTable" class="table table-striped table-bordered" style="width:100%">
             <thead>
                 <th>No</th>
                 <th>Tanggal</th>
@@ -787,20 +821,24 @@
                         <td>{{ $item->model }}</td>
                         <td>
                             @if (Auth::check())
-                                <a href="#" class="btn btn-warning" data-toggle="modal"
+                                <a href="#" class="btn btn-warning btn-sm" data-bs-toggle="modal"
                                     data-target="#editModal{{ $item->id }}"><i
                                         class="fa-solid fa-pen-to-square"></i></a>
                             @endif
-                            <a href="#" class="btn btn-primary" data-toggle="modal"
+                            <a href="#" class="btn btn-primary btn-sm" data-bs-toggle="modal"
                                 data-target="#viewModal{{ $item->id }}"><i class="fa-solid fa-eye"></i></a>
 
                             @if (Auth::check())
-                                <a href="#" class="btn btn-danger" data-toggle="modal"
+                                <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal"
                                     data-target="#deleteModal{{ $item->id }}"><i class="fa-solid fa-trash"></i></a>
                             @endif
                             @if (Auth::check())
-                                <a href="/kanibal/finish/{{ $item->id }}" class="btn btn-success"><i
+                                <a href="/kanibal/finish/{{ $item->id }}" class="btn btn-success btn-sm"><i
                                         class="fa-solid fa-paper-plane"></i></a>
+                            @endif
+                            @if (Auth::check())
+                                <a href="#" class="btn btn-secondary btn-sm" data-bs-toggle="modal"
+                                    data-target="#copyText{{ $item->id }}"><i class="fa-solid fa-clone"></i></a>
                             @endif
                         </td>
                     </tr>
@@ -810,3 +848,7 @@
         {{-- {!! $kanibal->onEachSide(1)->links('pagination::bootstrap-5') !!} --}}
     </div>
 @endsection
+
+@push('js')
+    <script src="{{ asset('js/copyText.js') }}"></script>
+@endpush

@@ -70,7 +70,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="viewModalLabel{{ $item->id }}">View Data </h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -141,7 +141,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
@@ -157,7 +157,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="viewModalLabel{{ $item->id }}">View Data </h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -228,7 +228,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
@@ -244,7 +244,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="viewModalLabel{{ $item->id }}">View Data </h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -315,7 +315,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
@@ -365,7 +365,7 @@
                             <td>{{ $item->pelanggan }}</td>
                             <td>{{ $item->model }}</td>
                             <td>
-                                <a href="#" class="btn btn-primary" data-toggle="modal"
+                                <a href="#" class="btn btn-primary btn-sm" data-bs-toggle="modal"
                                     data-target="#viewModal{{ $item->id }}"><i class="fa-solid fa-eye"></i></a>
                             </td>
                         </tr>
@@ -419,7 +419,7 @@
                             <td>{{ $item->pelanggan }}</td>
                             <td>{{ $item->model }}</td>
                             <td>
-                                <a href="#" class="btn btn-primary" data-toggle="modal"
+                                <a href="#" class="btn btn-primary btn-sm" data-bs-toggle="modal"
                                     data-target="#viewModalPending{{ $item->id }}"><i
                                         class="fa-solid fa-eye"></i></a>
                             </td>
@@ -472,7 +472,7 @@
                             <td>{{ $item->pelanggan }}</td>
                             <td>{{ $item->model }}</td>
                             <td>
-                                <a href="#" class="btn btn-primary" data-toggle="modal"
+                                <a href="#" class="btn btn-primary btn-sm" data-bs-toggle="modal"
                                     data-target="#viewModalKanibal{{ $item->id }}"><i
                                         class="fa-solid fa-eye"></i></a>
                             </td>

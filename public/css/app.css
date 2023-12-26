@@ -6175,7 +6175,7 @@ fieldset:disabled .btn {
     margin-left: 15%;
     list-style: none;
 }
-.carousel-indicators [data-bs-target] {
+.carousel-indicators [data-target] {
     box-sizing: content-box;
     flex: 0 1 auto;
     width: 30px;
@@ -6194,7 +6194,7 @@ fieldset:disabled .btn {
     transition: opacity 0.6s ease;
 }
 @media (prefers-reduced-motion: reduce) {
-    .carousel-indicators [data-bs-target] {
+    .carousel-indicators [data-target] {
         transition: none;
     }
 }
@@ -6217,7 +6217,7 @@ fieldset:disabled .btn {
 .carousel-dark .carousel-control-next-icon {
     filter: invert(1) grayscale(100);
 }
-.carousel-dark .carousel-indicators [data-bs-target] {
+.carousel-dark .carousel-indicators [data-target] {
     background-color: #000;
 }
 .carousel-dark .carousel-caption {

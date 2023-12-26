@@ -21,7 +21,7 @@
         @if (Auth::check())
             <div class="searchpinjam">
                 @if (Auth::check() && request()->is('pinjam'))
-                    <button type="button" id="addpinjam" class="btn btn-danger mb-2" data-toggle="modal"
+                    <button type="button" id="addpinjam" class="btn btn-danger mb-2" data-bs-toggle="modal"
                         data-target="#exampleModal">
                         <i class="fa-solid fa-plus"></i> Tambah Produk
                     </button>
@@ -45,7 +45,7 @@
         @else
             <div class="searchpinjam">
                 @if (Auth::check() && request()->is('pinjam'))
-                    <button type="button" id="addpinjam" class="btn btn-danger mb-2" data-toggle="modal"
+                    <button type="button" id="addpinjam" class="btn btn-danger mb-2" data-bs-toggle="modal"
                         data-target="#exampleModal">
                         <i class="fa-solid fa-plus"></i> Tambah Produk
                     </button>
@@ -73,7 +73,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Tambah Pinjam Barang</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -372,7 +372,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-danger">Tambah</button>
                         </div>
                     </form>
@@ -394,7 +394,7 @@
 
                         <div class="modal-header">
                             <h5 class="modal-title" id="editModalLabel{{ $item->id }}">Edit Data Pinjam</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
@@ -827,7 +827,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                             <button type="submit" class="btn btn-warning">Edit Data</button>
                         </div>
                     </form>
@@ -845,7 +845,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="viewModalLabel{{ $item->id }}">View Data Pinjam</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -910,7 +910,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
@@ -926,7 +926,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="deleteModalLabel{{ $item->id }}">Delete Data Pinjam</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -934,7 +934,7 @@
                         Are you sure you want to delete this Data?
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                         <form action="{{ route('users.destroy', $item->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
@@ -958,7 +958,7 @@
                         @method('PUT')
                         <div class="modal-header">
                             <h5 class="modal-title" id="moveModalLabel{{ $item->id }}">Ajukan Pengembalian</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
@@ -1043,7 +1043,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                             <button type="submit" class="btn btn-success">Pindah Data</button>
                         </div>
                     </form>
@@ -1061,7 +1061,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="viewModalLabel{{ $item->id }}">View Data Pinjam</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -1140,7 +1140,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
@@ -1160,7 +1160,7 @@
                         @method('PUT')
                         <div class="modal-header">
                             <h5 class="modal-title" id="editModalLabel{{ $item->id }}">Edit Data Pinjam</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
@@ -1614,7 +1614,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                             <button type="submit" class="btn btn-warning">Edit Data</button>
                         </div>
                     </form>
@@ -1655,40 +1655,40 @@
                             <td>
 
                                 @if (Auth::check() && request()->is('pinjam'))
-                                    <a href="#" class="btn btn-warning" data-toggle="modal"
+                                    <a href="#" class="btn btn-warning btn-sm" data-bs-toggle="modal"
                                         data-target="#editModal{{ $item->id }}"><i
                                             class="fa-solid fa-pen-to-square"></i></a>
                                 @endif
 
                                 @if (Auth::check() && request()->is('kembali'))
-                                    <a href="#" class="btn btn-warning" data-toggle="modal"
+                                    <a href="#" class="btn btn-warning btn-sm" data-bs-toggle="modal"
                                         data-target="#editkembaliModal{{ $item->id }}"><i
                                             class="fa-solid fa-pen-to-square"></i></a>
                                 @endif
 
                                 @if (request()->is('pinjam'))
-                                    <a href="#" class="btn btn-primary" data-toggle="modal"
+                                    <a href="#" class="btn btn-primary btn-sm" data-bs-toggle="modal"
                                         data-target="#viewModal{{ $item->id }}"><i class="fa-solid fa-eye"></i></a>
                                 @else
-                                    <a href="#" class="btn btn-primary" data-toggle="modal"
+                                    <a href="#" class="btn btn-primary btn-sm" data-bs-toggle="modal"
                                         data-target="#viewkembaliModal{{ $item->id }}"><i
                                             class="fa-solid fa-eye"></i></a>
                                 @endif
 
                                 @if (Auth::check())
-                                    <a href="#" class="btn btn-danger" data-toggle="modal"
+                                    <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal"
                                         data-target="#deleteModal{{ $item->id }}"><i
                                             class="fa-solid fa-trash"></i></a>
                                 @endif
 
                                 @if (Auth::check() && request()->is('pinjam'))
-                                    <a href="#" class="btn btn-success" data-toggle="modal"
+                                    <a href="#" class="btn btn-success btn-sm" data-bs-toggle="modal"
                                         data-target="#moveModal{{ $item->id }}"><i
                                             class="fa-solid fa-paper-plane"></i></a>
                                 @endif
 
                                 @if (Auth::check())
-                                    <a href="{{ url('generate-pdf', $item->id) }}" class="btn btn-secondary"
+                                    <a href="{{ url('generate-pdf', $item->id) }}" class="btn btn-secondary btn-sm"
                                         data-bs-toggle="tooltip" data-bs-placement="top" title="Download PDF"><i
                                             class="fa-solid fa-file-pdf"></i></a>
                                 @endif

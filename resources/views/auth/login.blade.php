@@ -8,7 +8,7 @@
                     <div class="card" style="border-radius: 1rem;">
                         <div class="row g-0">
                             <div class="col-md-6 col-lg-5 d-none d-md-block">
-                                <img src="{{ asset('img/screen-test.png') }}" alt="login form" class="img-fluid"
+                                <img src="{{ asset('img/screen-test.png') }}" alt="login photo" class="img-fluid"
                                     style="border-radius: 1rem 0 0 1rem; height:100%" />
                             </div>
                             <div class="col-md-6 col-lg-7 d-flex align-items-center">
@@ -37,10 +37,11 @@
                                         </div>
 
                                         <div>
-                                            <div class="form-outline mb-4">
+                                            <div class="form-outline d-flex align-items-center mb-4">
                                                 <input type="password" name="password" id="password"
                                                     class="form-control form-control-lg" style="color: black !important" />
                                                 <label class="form-label" for="password">{{ __('Password') }}</label>
+                                                <i class="fa-regular fa-eye mr-2"></i>
                                             </div>
                                             <div>
                                                 <a href="{{ route('forgot.password') }}" class="mb-2"
@@ -71,3 +72,7 @@
         </div>
     </section>
 @endsection
+
+@push('js')
+    <script src="{{ asset('js/login/passwordView.js') }}"></script>
+@endpush
