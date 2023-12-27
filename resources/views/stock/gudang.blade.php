@@ -31,7 +31,7 @@
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="tipe"><b>Tipe Device</b></label>
-                                    <select id="tipe" class="form-select" name="tipe" required>
+                                    <select id="tipe" class="form-control form-control-chosen" name="tipe" required>
                                         <option value="Null">Pilih Tipe Device</option>
                                         <option value="A4-101" data-tokens="A4-101"
                                             {{ $item->tipe == 'A4-101' ? 'selected' : '' }}>

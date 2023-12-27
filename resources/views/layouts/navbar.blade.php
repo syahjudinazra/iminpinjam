@@ -17,7 +17,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link {{ Request::is('home') ? 'active' : '' }}" href="/">
+                <a class="nav-link {{ Request::is('/') ? 'active' : '' }}" href="/">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -39,17 +39,18 @@
                 <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">List Stock:</h6>
-                        <a class="collapse-item {{ Request::is('monitor*') ? 'active' : '' }}" href="/stock">Monitor</a>
-                        <a class="collapse-item {{ Request::is('gudang*') ? 'active' : '' }}"
+                        <a class="collapse-item {{ Request::is('stock') ? 'active' : '' }}" href="/stock">Monitor</a>
+                        <a class="collapse-item {{ Request::is('stock/gudang*') ? 'active' : '' }}"
                             href="/stock/gudang">Gudang</a>
-                        <a class="collapse-item {{ Request::is('serviceStock*') ? 'active' : '' }}"
+                        <a class="collapse-item {{ Request::is('stock/service*') ? 'active' : '' }}"
                             href="/stock/service">Service</a>
-                        <a class="collapse-item {{ Request::is('dipinjam*') ? 'active' : '' }}"
+                        <a class="collapse-item {{ Request::is('stock/dipinjam*') ? 'active' : '' }}"
                             href="/stock/dipinjam">Dipinjam</a>
-                        <a class="collapse-item {{ Request::is('terjual*') ? 'active' : '' }}"
+                        <a class="collapse-item {{ Request::is('stock/terjual*') ? 'active' : '' }}"
                             href="/stock/terjual">Terjual</a>
                     </div>
                 </div>
+
             </li>
 
             <hr class="sidebar-divider">
