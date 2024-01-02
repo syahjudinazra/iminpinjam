@@ -29,6 +29,7 @@ return new class extends Migration
             $table->string('nosparepart');
             $table->string('note');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

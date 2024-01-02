@@ -156,6 +156,9 @@
             },
         });
     </script>
+    {{-- <script>
+        $(".form-control-chosen").chosen();
+    </script> --}}
 </body>
 
 </html>
