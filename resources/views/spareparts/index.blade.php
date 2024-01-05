@@ -102,7 +102,6 @@
             <!-- End Tambah Data -->
         </div>
     </div>
-    </div>
 
     <!-- add edit Data -->
     @foreach ($spareParts as $item)

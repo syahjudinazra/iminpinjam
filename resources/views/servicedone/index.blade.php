@@ -744,9 +744,9 @@
                     </div>
                     <div class="modal-body bg-light">
                         <div class="highlight float-right">
-                            <button class="copyClipboard btn btn-secodary"
+                            <button type="button" class="copyClipboard btn btn-secondary"
                                 data-clipboard-target="#copyData{{ $item->id }}">
-                                <i class="fa-solid fa-clone text-muted"></i>Copy
+                                <i class="fa-solid fa-clone mr-2"></i>Copy
                             </button>
                         </div>
                         <pre id="copyData{{ $item->id }}" class="highlight mt-4 d-flex flex-column">

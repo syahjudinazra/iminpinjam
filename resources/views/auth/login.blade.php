@@ -31,17 +31,23 @@
                                         </div> --}}
 
                                         <div class="form-outline mb-4">
-                                            <input type="name" name="name" id="name"
-                                                class="form-control form-control-lg" style="color: black !important" />
                                             <label class="form-label" for="name">{{ __('Name') }}</label>
+                                            <input type="name" name="name" id="name"
+                                                class="form-control form-control shadow-none"
+                                                placeholder="Input your name" />
                                         </div>
 
                                         <div>
-                                            <div class="form-outline d-flex align-items-center mb-4">
-                                                <input type="password" name="password" id="password"
-                                                    class="form-control form-control-lg" style="color: black !important" />
+                                            <div class="form-outline mb-4">
                                                 <label class="form-label" for="password">{{ __('Password') }}</label>
-                                                <i class="fa-regular fa-eye mr-2"></i>
+                                                <div class="input-group">
+                                                    <input type="password" name="password" id="password"
+                                                        class="form-control form-control shadow-none"
+                                                        placeholder="Input your password" />
+                                                    <button class="btn btn-dark shadow-none" type="button">
+                                                        <i class="far fa-eye" id="eyeIcon"></i>
+                                                    </button>
+                                                </div>
                                             </div>
                                             <div>
                                                 <a href="{{ route('forgot.password') }}" class="mb-2"

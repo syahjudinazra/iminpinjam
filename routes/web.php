@@ -161,4 +161,7 @@ Route::prefix('stock')->group(function () {
         Route::get('/{id}/edit', [StockController::class, 'edit'])->middleware('auth')->name('stock.edit');
         Route::put('/{id}', [StockController::class, 'update'])->middleware('auth')->name('stock.update');
         Route::delete('/{id}', [StockController::class, 'destroy'])->middleware('auth')->name('stock.destroy');
+        Route::post('/import-stocks', [StockController::class, 'importStocks'])->middleware('auth')->name('import.stocks');
+        Route::get('/export-stocks', [StockController::class, 'exportStocks'])->middleware('auth')->name('export.stocks');
+        Route::get('download/{filename}', [StockController::class, 'templateImportStock'])->name('template.stocks');
 });

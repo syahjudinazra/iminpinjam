@@ -392,26 +392,26 @@
                                 <div class="form-group">
                                     <label><b>Status</b></label><br />
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" id="gudang" name="status"
-                                            value="Gudang"
+                                        <input class="form-check-input mt-1" type="radio" id="gudang"
+                                            name="status" value="Gudang"
                                             {{ in_array('Gudang', explode(',', $item->status)) ? 'checked' : '' }}>
                                         <label class="form-check-label" for="gudang">Gudang</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" id="service" name="status"
-                                            value="Service"
+                                        <input class="form-check-input mt-1" type="radio" id="service"
+                                            name="status" value="Service"
                                             {{ in_array('Service', explode(',', $item->status)) ? 'checked' : '' }}>
                                         <label class="form-check-label" for="service">Service</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" id="dipinjam" name="status"
-                                            value="Dipinjam"
+                                        <input class="form-check-input mt-1" type="radio" id="dipinjam"
+                                            name="status" value="Dipinjam"
                                             {{ in_array('Dipinjam', explode(',', $item->status)) ? 'checked' : '' }}>
                                         <label class="form-check-label" for="dipinjam">Dipinjam</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" id="terjual" name="status"
-                                            value="Terjual"
+                                        <input class="form-check-input mt-1" type="radio" id="terjual"
+                                            name="status" value="Terjual"
                                             {{ in_array('Terjual', explode(',', $item->status)) ? 'checked' : '' }}>
                                         <label class="form-check-label" for="terjual">Terjual</label>
                                     </div>

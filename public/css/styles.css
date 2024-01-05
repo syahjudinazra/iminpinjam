@@ -1,3 +1,7 @@
+.form-control:focus {
+    border-color: #000000 !important;
+}
+
 .navbar-nav .nav-link.active,
 .navbar-nav .show > .nav-link {
     color: white !important;

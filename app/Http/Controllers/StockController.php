@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Stock;
+use App\Exports\StockExport;
+use App\Imports\StockImport;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class StockController extends Controller
 {
@@ -40,6 +44,56 @@ class StockController extends Controller
     {
         $stockTerjual = Stock::where('status', 'terjual')->get();
         return view('stock.terjual', compact('stockTerjual'));
+    }
+
+    public function exportStocks()
+    {
+        return Excel::download(new StockExport, 'DataStock.xlsx');
+    }
+
+    public function importStocks(Request $request)
+    {
+        $rules = [
+            'inputStocks' => 'required|mimes:xls,xlsx',
+        ];
+
+        $request->validate($rules);
+
+        $data = Excel::toArray(new StockImport, $request->file('inputStocks'));
+
+        $stocksData = collect(head($data))->map(function ($row) {
+            return [
+                'serialnumber' => $row['serialnumber'],
+                'tipe' => $row['tipe'],
+                'noinvoice' => $row['noinvoice'],
+                'tanggalmasuk' => $row['tanggalmasuk'],
+                'tanggalkeluar' => $row['tanggalkeluar'],
+                'pelanggan' => $row['pelanggan'],
+                'status' => $row['status'],
+            ];
+        })->filter(function ($stockImin) {
+            return $stockImin['serialnumber'] !== null;
+        })->keyBy('serialnumber')->toArray();
+
+        foreach ($stocksData as $serialStocks => $stockImin) {
+            DB::table('stocks')->updateOrInsert(
+                ['serialnumber' => $serialStocks],
+                $stockImin
+            );
+        }
+
+        return redirect()->back()->with('success', 'Data Berhasil Diimport');
+    }
+
+    public function templateImportStock($filename)
+    {
+        $filePath = storage_path('app/template/' . $filename); // Adjust the path if needed
+
+        if (file_exists($filePath)) {
+            return response()->download($filePath);
+        } else {
+            return response()->json(['error' => 'File not found'], 404);
+        }
     }
     /**
      * Show the form for creating a new resource.
