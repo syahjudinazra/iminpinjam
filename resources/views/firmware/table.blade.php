@@ -57,17 +57,17 @@
                         <div class="form-group">
                             <label for="kategori"><b>Kategori</b></label><br />
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="desktop" name="kategori[]"
+                                <input class="form-check-input mt-1" type="radio" id="desktop" name="kategori[]"
                                     value="Desktop">
                                 <label class="form-check-label" for="desktop">Desktop</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="mobile" name="kategori[]"
+                                <input class="form-check-input mt-1" type="radio" id="mobile" name="kategori[]"
                                     value="Mobile">
                                 <label class="form-check-label" for="mobile">Mobile</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="kiosk" name="kategori[]"
+                                <input class="form-check-input mt-1" type="radio" id="kiosk" name="kategori[]"
                                     value="KIOSK">
                                 <label class="form-check-label" for="kiosk">KIOSK</label>
                             </div>
@@ -134,19 +134,19 @@
                             <div class="form-group">
                                 <label><b>Kategori</b></label><br />
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="desktop" name="kategori"
+                                    <input class="form-check-input mt-1" type="radio" id="desktop" name="kategori"
                                         value="Desktop"
                                         {{ in_array('Desktop', explode(',', $item->kategori)) ? 'checked' : '' }}>
                                     <label class="form-check-label" for="desktop">Desktop</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="mobile" name="kategori"
+                                    <input class="form-check-input mt-1" type="radio" id="mobile" name="kategori"
                                         value="Mobile"
                                         {{ in_array('Mobile', explode(',', $item->kategori)) ? 'checked' : '' }}>
                                     <label class="form-check-label" for="mobile">Mobile</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="kiosk" name="kategori"
+                                    <input class="form-check-input mt-1" type="radio" id="kiosk" name="kategori"
                                         value="KIOSK"
                                         {{ in_array('KIOSK', explode(',', $item->kategori)) ? 'checked' : '' }}>
                                     <label class="form-check-label" for="kiosk">KIOSK</label>

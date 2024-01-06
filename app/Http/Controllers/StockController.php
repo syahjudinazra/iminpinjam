@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Stock;
 use App\Exports\StockExport;
 use App\Imports\StockImport;
@@ -60,14 +61,15 @@ class StockController extends Controller
         $request->validate($rules);
 
         $data = Excel::toArray(new StockImport, $request->file('inputStocks'));
-
         $stocksData = collect(head($data))->map(function ($row) {
+            $tanggalmasuk = Carbon::createFromDate('1899-12-30')->addDays($row['tanggalmasuk'])->toDateString();
+            $tanggalkeluar = Carbon::createFromDate('1899-12-30')->addDays($row['tanggalkeluar'])->toDateString();
             return [
                 'serialnumber' => $row['serialnumber'],
                 'tipe' => $row['tipe'],
                 'noinvoice' => $row['noinvoice'],
-                'tanggalmasuk' => $row['tanggalmasuk'],
-                'tanggalkeluar' => $row['tanggalkeluar'],
+                'tanggalmasuk' => $tanggalmasuk,
+                'tanggalkeluar' => $tanggalkeluar,
                 'pelanggan' => $row['pelanggan'],
                 'status' => $row['status'],
             ];

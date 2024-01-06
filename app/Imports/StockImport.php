@@ -25,16 +25,5 @@ class StockImport implements ToModel, WithHeadingRow
             'pelanggan' => $row['pelanggan'],
             'status' => $row['status'],
         ]);
-
-            // Check if 'tanggalkeluar' exists and is not empty
-    if (isset($row['tanggalkeluar']) && !empty($row['tanggalkeluar'])) {
-        // Handle 'tanggalkeluar' when it's not empty
-        $data['tanggalkeluar'] = Carbon::createFromFormat('d-m-Y', $row['tanggalkeluar']);
-    } else {
-        // Set 'tanggalkeluar' as null when it's empty or not provided
-        $data['tanggalkeluar'] = null;
-    }
-
-    return new Stock($data);
     }
 }
