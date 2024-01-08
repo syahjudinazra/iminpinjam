@@ -2,14 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Stock extends Model
 {
     use HasFactory;
     protected $table = 'stocks';
     protected $primaryKey = 'id';
+    protected $date = ['tanggalkeluar'];
 
     protected $fillable = [
         'serialnumber',

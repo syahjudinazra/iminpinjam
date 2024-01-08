@@ -63,7 +63,11 @@ class StockController extends Controller
         $data = Excel::toArray(new StockImport, $request->file('inputStocks'));
         $stocksData = collect(head($data))->map(function ($row) {
             $tanggalmasuk = Carbon::createFromDate('1899-12-30')->addDays($row['tanggalmasuk'])->toDateString();
-            $tanggalkeluar = Carbon::createFromDate('1899-12-30')->addDays($row['tanggalkeluar'])->toDateString();
+            if ($row['tanggalkeluar'] !== null) {
+                $tanggalkeluar = Carbon::createFromDate('1899-12-30')->addDays($row['tanggalkeluar'])->toDateString();
+            } else {
+                $tanggalkeluar = null;
+            }
             return [
                 'serialnumber' => $row['serialnumber'],
                 'tipe' => $row['tipe'],
