@@ -19,8 +19,13 @@ class StockController extends Controller
      */
     public function index()
     {
+        // $stockGudang = Stock::where('status', 'Gudang')->count();
+        // $stockService = Stock::where('status', 'Service')->count();
+        // $stockDipinjam = Stock::where('status', 'Dipinjam')->count();
+        // $stockTerjual = Stock::where('status', 'Terjual')->count();
+
         $stock = Stock::all();
-        return view ('stock.monitor', compact('stock'));
+        return view('stock.monitor', compact('stock', 'stockGudang', 'stockService', 'stockDipinjam', 'stockTerjual'));
     }
 
     public function gudang()
@@ -45,6 +50,16 @@ class StockController extends Controller
     {
         $stockTerjual = Stock::where('status', 'terjual')->get();
         return view('stock.terjual', compact('stockTerjual'));
+    }
+
+    public function total(Request $request)
+    {
+        $stockGudang = Stock::count();
+        $stockService = Stock::count();
+        $stockDipinjam = Stock::count();
+        $stockTerjual = Stock::count();
+
+        return view ('stock.monitor', compact('stock'));
     }
 
     public function exportStocks()

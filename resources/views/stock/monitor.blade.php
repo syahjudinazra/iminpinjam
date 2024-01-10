@@ -745,10 +745,10 @@
                 <thead>
                     <th>Serial Number</th>
                     <th>Tipe</th>
-                    <th>No Invoice</th>
-                    <th>Tanggal Masuk</th>
-                    <th>Tanggal Keluar</th>
-                    <th>Pelanggan</th>
+                    <th>Gudang</th>
+                    <th>Service</th>
+                    <th>Dipinjam</th>
+                    <th>Terjual</th>
                     <th>Action</th>
                 </thead>
                 <tbody>

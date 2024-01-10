@@ -478,7 +478,13 @@
                         <td>{{ $item->tipe }}</td>
                         <td>{{ $item->noinvoice }}</td>
                         <td>{{ $item->tanggalmasuk }}</td>
-                        <td>{{ $item->tanggalkeluar }}</td>
+                        <td>
+                            @if ($item->tanggalkeluar)
+                                {{ \Carbon\Carbon::parse($item->tanggalkeluar)->format('d/m/Y') }}
+                            @else
+                                &nbsp;
+                            @endif
+                        </td>
                         <td>{{ $item->pelanggan }}</td>
                         <td>
                             <a href="#" class="btn btn-primary btn-sm" data-bs-toggle="modal"

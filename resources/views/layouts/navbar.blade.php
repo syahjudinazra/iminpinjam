@@ -135,6 +135,23 @@
                     <span>Firmware</span></a>
             </li>
 
+            <hr class="sidebar-divider">
+
+            @auth
+                @if (auth()->user()->hasRole('superadmin'))
+                    <div class="sidebar-heading">
+                        Users Settings
+                    </div>
+                    <!-- Nav Item - User -->
+                    <li class="nav-item">
+                        <a class="nav-link {{ Request::is('user*') ? 'active' : '' }}" href="/user">
+                            <i class="fas fa-fw fa-user"></i>
+                            <span>User Settings</span>
+                        </a>
+                    </li>
+                @endif
+            @endauth
+
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>

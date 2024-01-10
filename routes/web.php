@@ -16,6 +16,7 @@ use App\Http\Controllers\ServiceDoneController;
 use App\Http\Controllers\ServicePendingController;
 use App\Http\Controllers\SparePartsController;
 use App\Http\Controllers\StockController;
+use App\Http\Controllers\UserSettingsController;
 
 // Route::get('/', function () {
 //     // return view('auth.login');
@@ -164,4 +165,12 @@ Route::prefix('stock')->group(function () {
         Route::post('/import-stocks', [StockController::class, 'importStocks'])->middleware('auth')->name('import.stocks');
         Route::get('/export-stocks', [StockController::class, 'exportStocks'])->middleware('auth')->name('export.stocks');
         Route::get('download/{filename}', [StockController::class, 'templateImportStock'])->name('template.stocks');
+});
+
+//User Settings
+Route::prefix('user')->group(function () {
+    Route::resource('/', UserSettingsController::class)->except([
+        'show', 'edit', 'update', 'destroy',
+    ]);
+
 });
