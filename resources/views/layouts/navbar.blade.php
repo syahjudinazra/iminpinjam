@@ -78,7 +78,7 @@
             </li>
 
 
-            <div class="sidebar-heading">
+            {{-- <div class="sidebar-heading">
                 Service Barang
             </div>
             <!-- Nav Item - Services -->
@@ -100,6 +100,30 @@
                         <a class="collapse-item {{ Request::is('kanibal*') ? 'active' : '' }}" href="/kanibal">Kanibal</a>
                     </div>
                 </div>
+            </li> --}}
+
+            <div class="sidebar-heading">
+                Service
+            </div>
+            <!-- Nav Item - Services -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-target="#collapseUtilities"
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>Services</span>
+                </a>
+                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">List Services</h6>
+                        <a class="collapse-item {{ Request::is('monitor*') ? 'active' : '' }}" href="/monitor">Tambah
+                            Baru</a>
+                        <a class="collapse-item {{ Request::is('servicedone*') ? 'active' : '' }}"
+                            href="/servicedone">Service Done</a>
+                        <a class="collapse-item {{ Request::is('servicepending*') ? 'active' : '' }}"
+                            href="/servicepending">Service Pending</a>
+                    </div>
+                </div>
             </li>
 
             <div class="sidebar-heading">
@@ -117,8 +141,7 @@
                         <h6 class="collapse-header">List SpareParts</h6>
                         <a class="collapse-item {{ Request::is('spareparts*') ? 'active' : '' }}"
                             href="/spareparts">Stock</a>
-                        <a class="collapse-item {{ Request::is('history*') ? 'active' : '' }}"
-                            href="/history">History</a>
+                        <a class="collapse-item {{ Request::is('history*') ? 'active' : '' }}" href="/history">History</a>
                     </div>
                 </div>
             </li>
