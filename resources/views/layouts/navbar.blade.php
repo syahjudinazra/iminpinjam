@@ -115,13 +115,24 @@
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">List Services</h6>
-                        <a class="collapse-item {{ Request::is('monitor*') ? 'active' : '' }}" href="/monitor">Tambah
+
+                        <a class="collapse-item {{ Request::is('service') ? 'active' : '' }}" href="/service">Tambah
                             Baru</a>
-                        <a class="collapse-item {{ Request::is('servicedone*') ? 'active' : '' }}"
-                            href="/servicedone">Service Done</a>
-                        <a class="collapse-item {{ Request::is('servicepending*') ? 'active' : '' }}"
-                            href="/servicepending">Service Pending</a>
+                        <h5 class="collapse-header font-weight-bold text-white bg-secondary">Pelanggan</h5>
+                        <a class="collapse-item {{ Request::is('service/pendingPelanggan*') ? 'active' : '' }}"
+                            href="/service/pendingPelanggan">Pending</a>
+                        <a class="collapse-item {{ Request::is('service/validasiPelanggan*') ? 'active' : '' }}"
+                            href="/service/validasiPelanggan">Validasi</a>
+                        <a class="collapse-item {{ Request::is('service/selesaiPelanggan*') ? 'active' : '' }}"
+                            href="/service/selesaiPelanggan">Selesai</a>
+                        <h5 class="collapse-header font-weight-bold text-white bg-secondary">Stock</h5>
+                        <a class="collapse-item {{ Request::is('service/pendingStock*') ? 'active' : '' }}"
+                            href="/service/pendingStock">Pending</a>
+                        <a class="collapse-item {{ Request::is('service/validasiStock*') ? 'active' : '' }}"
+                            href="/service/validasiStock">Validasi</a>
+                        <a class="collapse-item {{ Request::is('service/selesaiStock*') ? 'active' : '' }}"
+                            href="/service/selesaiStock">Selesai</a>
+
                     </div>
                 </div>
             </li>
@@ -141,7 +152,8 @@
                         <h6 class="collapse-header">List SpareParts</h6>
                         <a class="collapse-item {{ Request::is('spareparts*') ? 'active' : '' }}"
                             href="/spareparts">Stock</a>
-                        <a class="collapse-item {{ Request::is('history*') ? 'active' : '' }}" href="/history">History</a>
+                        <a class="collapse-item {{ Request::is('history*') ? 'active' : '' }}"
+                            href="/history">History</a>
                     </div>
                 </div>
             </li>

@@ -91,7 +91,7 @@
                             </div>
                             <div class="form-group mb-3">
                                 <label for="device"><b>Tipe Device</b></label>
-                                <select class="form-select selectpicker" data-live-search="true" name="device"
+                                <select class="form-select form-control-chosen" data-live-search="true" name="device"
                                     id="device"required>
                                     <option value="Pilih Device">Pilih Device</option>
                                     <option value="A4-101 Handle" data-tokens="A4-101 Handle">A4-101 Handle</option>
@@ -307,6 +307,9 @@
                                     <option value="Comson CSP 893 UE" data-tokens="Comson CSP 893 UE">
                                         Comson CSP 893 UE
                                     </option>
+                                    <option value="Crane 1">
+                                        Crane 1
+                                    </option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -411,8 +414,7 @@
                             </div>
                             <div class="form-group mb-3">
                                 <label for="device"><b>Tipe Device</b></label>
-                                <select class="form-select selectpicker" name="device" id="device"
-                                    data-live-search="true" required>
+                                <select class="form-select form-control-chosen" name="device" id="device" required>
                                     <option value="Pilih Model">Pilih Model</option>
                                     <option value="A4-101 Handle" data-tokens="A4-101 Handle"
                                         {{ $item->device == 'A4-101 Handle' ? 'selected' : '' }}>A4-101 Handle</option>
@@ -718,6 +720,9 @@
                                         {{ $item->device == 'Comson CSP 893 UE' ? 'selected' : '' }}>
                                         Comson CSP 893 UE
                                     </option>
+                                    <option value="Crane 1" {{ $item->device == 'Crane 1' ? 'selected' : '' }}>
+                                        Crane 1
+                                    </option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -828,7 +833,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-warning">Edit Data</button>
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
                         </div>
                     </form>
                 </div>
@@ -1177,8 +1182,8 @@
                             </div>
                             <div class="form-group mb-3">
                                 <label for="device"><b>Tipe Device</b></label>
-                                <select class="form-select selectpicker" name="device" id="device"
-                                    data-live-search="true" required>
+                                <select class="form-select form-control-chosen" name="device" id="device"
+                                    required>
                                     <option value="Pilih Model">Pilih Model</option>
                                     <option value="A4-101 Handle" data-tokens="A4-101 Handle"
                                         {{ $item->device == 'A4-101 Handle' ? 'selected' : '' }}>A4-101 Handle</option>
@@ -1491,6 +1496,9 @@
                                         {{ $item->device == 'Comson CSP 893 UE' ? 'selected' : '' }}>
                                         Comson CSP 893 UE
                                     </option>
+                                    <option value="Crane 1" {{ $item->device == 'Crane 1' ? 'selected' : '' }}>
+                                        Crane 1
+                                    </option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -1615,7 +1623,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-warning">Edit Data</button>
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
                         </div>
                     </form>
                 </div>

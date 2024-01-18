@@ -19,10 +19,10 @@ class StockController extends Controller
      */
     public function index()
     {
-        // $stockGudang = Stock::where('status', 'Gudang')->count();
-        // $stockService = Stock::where('status', 'Service')->count();
-        // $stockDipinjam = Stock::where('status', 'Dipinjam')->count();
-        // $stockTerjual = Stock::where('status', 'Terjual')->count();
+        $stockGudang = Stock::where('status', 'Gudang')->count();
+        $stockService = Stock::where('status', 'Service')->count();
+        $stockDipinjam = Stock::where('status', 'Dipinjam')->count();
+        $stockTerjual = Stock::where('status', 'Terjual')->count();
 
         $stock = Stock::all();
         return view('stock.monitor', compact('stock', 'stockGudang', 'stockService', 'stockDipinjam', 'stockTerjual'));

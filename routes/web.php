@@ -12,6 +12,7 @@ use App\Http\Controllers\KanibalController;
 use App\Http\Controllers\KembaliController;
 use App\Http\Controllers\MonitorController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ServiceDoneController;
 use App\Http\Controllers\ServicePendingController;
 use App\Http\Controllers\SparePartsController;
@@ -22,6 +23,14 @@ use App\Http\Controllers\UserSettingsController;
 //     // return view('auth.login');
 //     return view('home');
 // });
+
+//User Settings
+Route::prefix('user')->group(function () {
+    Route::resource('/', UserSettingsController::class)->except([
+        'show', 'edit', 'update', 'destroy',
+    ]);
+
+});
 
 //Dashboard
 Route::get('/', [HomeController::class, 'index']);
@@ -167,10 +176,33 @@ Route::prefix('stock')->group(function () {
         Route::get('download/{filename}', [StockController::class, 'templateImportStock'])->name('template.stocks');
 });
 
-//User Settings
-Route::prefix('user')->group(function () {
-    Route::resource('/', UserSettingsController::class)->except([
+//Service
+Route::prefix('service')->group(function () {
+    Route::resource('/', ServiceController::class)->except([
         'show', 'edit', 'update', 'destroy',
     ]);
 
+    Route::get('/pendingPelanggan', [ServiceController::class, 'pendingPelanggan'])
+        ->name('service.pendingPelanggan');
+    Route::get('/validasiPelanggan', [ServiceController::class, 'validasiPelanggan'])
+        ->name('service.validasiPelanggan');
+    Route::get('/selesaiPelanggan', [ServiceController::class, 'selesaiPelanggan'])
+        ->name('service.selesaiPelanggan');
+
+    Route::get('/pendingStock', [ServiceController::class, 'pendingStock'])
+        ->name('service.pendingStock');
+    Route::get('/validasiStock', [ServiceController::class, 'validasiStock'])
+        ->name('service.validasiStock');
+    Route::get('/selesaiStock', [ServiceController::class, 'selesaiStock'])
+        ->name('service.selesaiStock');
+
+
+        Route::get('/{id}/edit', [ServiceController::class, 'edit'])->middleware('auth')->name('service.edit');
+        Route::put('/{id}', [ServiceController::class, 'update'])->middleware('auth')->name('service.update');
+        Route::delete('/{id}', [ServiceController::class, 'destroy'])->middleware('auth')->name('service.destroy');
+    //     Route::post('/import-stocks', [ServiceController::class, 'importStocks'])->middleware('auth')->name('import.stocks');
+        Route::get('/export-service', [ServiceController::class, 'exportService'])->middleware('auth')->name('export.service');
+    //     Route::get('download/{filename}', [ServiceController::class, 'templateImportStock'])->name('template.stocks');
 });
+
+

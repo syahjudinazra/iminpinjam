@@ -180,4 +180,9 @@
     }
 }
 
-/*tooltip copyText*/
+/*Service*/
+.addDataForms {
+    background-color: #ffffff;
+    border-radius: 1rem;
+    padding: 1rem;
+}
