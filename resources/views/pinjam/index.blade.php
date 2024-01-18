@@ -26,21 +26,6 @@
                         <i class="fa-solid fa-plus"></i> Tambah Produk
                     </button>
                 @endif
-
-                {{-- <form method="GET" action="{{ route('search.index') }}"
-                    class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
-                    style="float: right">
-                    <div class="input-group" style="flex-wrap: nowrap;">
-                        <div class="form-outline ">
-                            <input type="search" id="form1" name="search" class="form-control"
-                                value="{{ request()->input('search') }}" />
-                            <label class="form-label" for="form1">Search</label>
-                        </div>
-                        <button type="submit" class="btn btn-danger d-inline">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                </form> --}}
             </div>
         @else
             <div class="searchpinjam">
@@ -50,21 +35,6 @@
                         <i class="fa-solid fa-plus"></i> Tambah Produk
                     </button>
                 @endif
-
-                {{-- <form method="GET" action="{{ route('search.index') }}"
-                    class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
-                    style="float: right">
-                    <div class="input-group" style="flex-wrap: nowrap;">
-                        <div class="form-outline ">
-                            <input type="search" id="form1" name="search" class="form-control"
-                                value="{{ request()->input('search') }}" />
-                            <label class="form-label" for="form1">Search</label>
-                        </div>
-                        <button type="submit" class="btn btn-danger d-inline">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                </form> --}}
             </div>
         @endif
         <!-- Tambah Data -->
@@ -91,224 +61,180 @@
                             </div>
                             <div class="form-group mb-3">
                                 <label for="device"><b>Tipe Device</b></label>
-                                <select class="form-select form-control-chosen" data-live-search="true" name="device"
-                                    id="device"required>
+                                <select class="form-select form-control-chosen" name="device" id="device"required>
                                     <option value="Pilih Device">Pilih Device</option>
-                                    <option value="A4-101 Handle" data-tokens="A4-101 Handle">A4-101 Handle</option>
-                                    <option value="A4-102 Desktop Stand" data-tokens="A4-102 Desktop Stand">A4-102
-                                        Desktop
-                                        Stand</option>
-                                    <option value="A4-103 Stand" data-tokens="A4-103 Stand">A4-103 Stand</option>
-                                    <option value="A4-104 Stand" data-tokens="A4-104 Stand">A4-104 Stand</option>
-                                    <option value="A4-105 Stand" data-tokens="A4-105 Stand">A4-105 Stand</option>
-                                    <option value="A4-107 Desktop Stand" data-tokens="A4-107 Desktop Stand">A4-107
-                                        Desktop
-                                        Stand</option>
-                                    <option value="D1" data-tokens="D1">D1</option>
-                                    <option value="D1 Pro" data-tokens="D1 Pro">D1 Pro</option>
-                                    <option value="D1 Moka" data-tokens="D1 Moka">D1 Moka</option>
-                                    <option value="D1W-702" data-tokens="D1W-702">D1W-702</option>
-                                    <option value="D2 Pro" data-tokens="D2 Pro">D2 Pro</option>
-                                    <option value="D2-401" data-tokens="D2-401">D2-401</option>
-                                    <option value="D2-402" data-tokens="D2-402">D2-402</option>
-                                    <option value="D3-504" data-tokens="D3-504">D3-504</option>
-                                    <option value="D3-505" data-tokens="D3-505">D3-505</option>
-                                    <option value="D3-506" data-tokens="D3-506">D3-506</option>
-                                    <option value="D3-504 lama" data-tokens="D3-504 lama">D3-504 lama</option>
-                                    <option value="D3-505 lama" data-tokens="D3-505 lama">D3-505 lama</option>
-                                    <option value="D3-506 lama" data-tokens="D3-506 lama">D3-506 lama</option>
-                                    <option value="D3-501 Moka" data-tokens="D3-501 Moka">D3-501 Moka</option>
-                                    <option value="D3-503 Moka" data-tokens="D3-503 Moka">D3-503 Moka</option>
-                                    <option value="D3-501 Moka Ultra" data-tokens="D3-501 Moka Ultra">D3-501 Moka
-                                        Ultra
+                                    <option value="A4-101 Handle">A4-101 Handle</option>
+                                    <option value="A4-102 Desktop Stand">A4-102 Desktop Stand</option>
+                                    <option value="A4-103 Stand">A4-103 Stand</option>
+                                    <option value="A4-104 Stand">A4-104 Stand</option>
+                                    <option value="A4-105 Stand">A4-105 Stand</option>
+                                    <option value="A4-107 Desktop Stand">A4-107 Desktop Stand</option>
+                                    <option value="D1">D1</option>
+                                    <option value="D1 Pro">D1 Pro</option>
+                                    <option value="D1 Moka">D1 Moka</option>
+                                    <option value="D1W-702">D1W-702</option>
+                                    <option value="D2 Pro">D2 Pro</option>
+                                    <option value="D2-401">D2-401</option>
+                                    <option value="D2-402">D2-402</option>
+                                    <option value="D3-504">D3-504</option>
+                                    <option value="D3-505">D3-505</option>
+                                    <option value="D3-506">D3-506</option>
+                                    <option value="D3-504 lama">D3-504 lama</option>
+                                    <option value="D3-505 lama">D3-505 lama</option>
+                                    <option value="D3-506 lama">D3-506 lama</option>
+                                    <option value="D3-501 Moka">D3-501 Moka</option>
+                                    <option value="D3-503 Moka">D3-503 Moka</option>
+                                    <option value="D3-501 Moka Ultra">D3-501 Moka Ultra</option>
+                                    <option value="D3-503 Moka Ultra+">D3-503 Moka Ultra+</option>
+                                    <option value="D3 DS1">D3 DS1</option>
+                                    <option value="D3 DS1K">D3 DS1K</option>
+                                    <option value="D3 DS1 DP">D3 DS1 DP</option>
+                                    <option value="D3 DS1 PRO DP">D3 DS1 PRO DP</option>
+                                    <option value="D3 DS1 TS DP">D3 DS1 TS DP</option>
+                                    <option value="D3 DS1 HDMI">D3 DS1 HDMI</option>
+                                    <option value="D3 DS1 HDMI TS">D3 DS1 HDMI TS</option>
+                                    <option value="D3 DS1 HDMI NFC">D3 DS1 HDMI NFC</option>
+                                    <option value="D3 DS1 Iseller">D3 DS1 Iseller</option>
+                                    <option value="D3 DS1 Iseller DP">D3 DS1 Iseller DP</option>
+                                    <option value="D3 DS1 TS Iseller DP">D3 DS1 TS Iseller DP</option>
+                                    <option value="D3 DS1 Iseller Extention Display DP">D3 DS1 Iseller Extention Display DP
                                     </option>
-                                    <option value="D3-503 Moka Ultra+" data-tokens="D3-503 Moka Ultra+">D3-503 Moka
-                                        Ultra+
+                                    <option value="D3 DS1 Stand">D3 DS1 Stand</option>
+                                    <option value="D3 DS1 Stand 1M DP">D3 DS1 Stand 1M DP</option>
+                                    <option value="D3 DS1 Display NFC">D3 DS1 Display NFC</option>
+                                    <option value="D3 DS1 Extention Display">D3 DS1 Extention Display</option>
+                                    <option value="D3 DS1 Extention Display Iseller">D3 DS1 Extention Display Iseller
                                     </option>
-                                    <option value="D3 DS1" data-tokens="D3 DS1">D3 DS1</option>
-                                    <option value="D3 DS1K" data-tokens="D3 DS1K">D3 DS1K</option>
-                                    <option value="D3 DS1 DP" data-tokens="D3 DS1 DP">D3 DS1 DP</option>
-                                    <option value="D3 DS1 PRO DP" data-tokens="D3 DS1 PRO DP">D3 DS1 PRO DP</option>
-                                    <option value="D3 DS1 TS DP" data-tokens="D3 DS1 TS DP">D3 DS1 TS DP</option>
-                                    <option value="D3 DS1 HDMI" data-tokens="D3 DS1 HDMI">D3 DS1 HDMI</option>
-                                    <option value="D3 DS1 HDMI TS" data-tokens="D3 DS1 HDMI TS">D3 DS1 HDMI TS</option>
-                                    <option value="D3 DS1 HDMI NFC" data-tokens="D3 DS1 HDMI NFC">D3 DS1 HDMI NFC</option>
-                                    <option value="D3 DS1 Iseller" data-tokens="D3 DS1 Iseller">D3 DS1 Iseller
+                                    <option value="D3 DS1 Extention Display DP">D3 DS1 Extention Display DP</option>
+                                    <option value="D3 DS1 Extention Display TS">D3 DS1 Extention Display TS</option>
+                                    <option value="D3 DS1 Extention Display TS DP">D3 DS1 Extention Display TS DP</option>
+                                    <option value="D3 DS1 Extention Display HDMI">D3 DS1 Extention Display HDMI</option>
+                                    <option value="D3 DS1 Extention Display TS HDMI">D3 DS1 Extention Display TS HDMI
                                     </option>
-                                    <option value="D3 DS1 Iseller DP" data-tokens="D3 DS1 Iseller DP">D3 DS1 Iseller DP
-                                    </option>
-                                    <option value="D3 DS1 TS Iseller DP" data-tokens="D3 DS1 TS Iseller DP">D3 DS1 TS
-                                        Iseller DP</option>
-                                    <option value="D3 DS1 Iseller Extention Display DP"
-                                        data-tokens="D3 DS1 Iseller Extention Display DP">D3 DS1 Iseller Extention Display
-                                        DP</option>
-                                    <option value="D3 DS1 Stand" data-tokens="D3 DS1 Stand">D3 DS1 Stand</option>
-                                    <option value="D3 DS1 Stand 1M DP" data-tokens="D3 DS1 Stand 1M DP">D3 DS1 Stand
-                                        1M DP
-                                    </option>
-                                    <option value="D3 DS1 Display NFC" data-tokens="D3 DS1 Display NFC">D3 DS1 Display
-                                        NFC
-                                    </option>
-                                    <option value="D3 DS1 Extention Display" data-tokens="D3 DS1 Extention Display">D3
-                                        DS1
-                                        Extention Display</option>
-                                    <option value="D3 DS1 Extention Display Iseller"
-                                        data-tokens="D3 DS1 Extention Display Iseller">D3 DS1
-                                        Extention Display Iseller</option>
-                                    <option value="D3 DS1 Extention Display DP" data-tokens="D3 DS1 Extention Display DP">
-                                        D3 DS1 Extention Display DP</option>
-                                    <option value="D3 DS1 Extention Display TS" data-tokens="D3 DS1 Extention Display TS">
-                                        D3 DS1 Extention Display TS</option>
-                                    <option value="D3 DS1 Extention Display TS DP"
-                                        data-tokens="D3 DS1 Extention Display TS DP">
-                                        D3 DS1 Extention Display TS DP</option>
-                                    <option value="D3 DS1 Extention Display HDMI"
-                                        data-tokens="D3 DS1 Extention Display HDMI">
-                                        D3 DS1 Extention Display HDMI</option>
-                                    <option value="D3 DS1 Extention Display TS HDMI"
-                                        data-tokens="D3 DS1 Extention Display TS HDMI">D3 DS1 Extention Display TS HDMI
-                                    </option>
-                                    <option value="D4-501" data-tokens="D4-501">D4-501</option>
-                                    <option value="D4-502" data-tokens="D4-502">D4-502</option>
-                                    <option value="D4-503" data-tokens="D4-503">D4-503</option>
-                                    <option value="D4-503 White" data-tokens="D4-503 White">D4-503 White</option>
-                                    <option value="D4-504" data-tokens="D4-504">D4-504</option>
-                                    <option value="D4-504 White" data-tokens="D4-504 White">D4-504 White</option>
-                                    <option value="D4-504 Pro" data-tokens="D4-504 Pro">D4-504 Pro</option>
-                                    <option value="D4-505" data-tokens="D4-505">D4-505</option>
-                                    <option value="D4-505 DT" data-tokens="D4-505 DT">D4-505 DT</option>
-                                    <option value="D4-505 Pro" data-tokens="D4-505 Pro">D4-505 Pro</option>
-                                    <option value="D4 Falcon 1" data-tokens="D4 Falcon 1">D4 Falcon 1</option>
-                                    <option value="M1" data-tokens="M1">M1</option>
-                                    <option value="M2-201" data-tokens="M2-201">M2-201</option>
-                                    <option value="M2-202" data-tokens="M2-202">M2-202</option>
-                                    <option value="M2-202 Olsera" data-tokens="M2-202 Olsera">M2-202 Olsera
-                                    </option>
-                                    <option value="M2-202 iSeller" data-tokens="M2-202 iSeller">M2-202 iSeller
-                                    </option>
-                                    <option value="M2-202 Grab" data-tokens="M2-202 Grab">M2-202 Grab
-                                    </option>
-                                    <option value="M2-203" data-tokens="M2-203">M2-203</option>
-                                    <option value="M2-203 iSeller" data-tokens="M2-203 iSeller">M2-203 iSeller
-                                    </option>
-                                    <option value="M2-203 White" data-tokens="M2-203 White">M2-203 White</option>
-                                    <option value="M2-203 (Full)" data-tokens="M2-203 (Full)">M2-203 (Full)</option>
-                                    <option value="M2-203 NFC Iseller" data-tokens="M2-203 NFC Iseller">M2-203 NFC
-                                        Iseller
-                                    </option>
-                                    <option value="M-203 Traveloka" data-tokens="M2-203 Traveloka">M2-203 Traveloka
-                                    </option>
-                                    <option value="M2-203 Grab" data-tokens="M2-203 Grab">M2-203 Grab
-                                    </option>
-                                    <option value="M2 Pro" data-tokens="M2 Pro">M2 Pro</option>
-                                    <option value="M2 Max" data-tokens="M2 Max">M2 Max</option>
-                                    <option value="M2 Max NFC" data-tokens="M2 Max NFC">M2 Max NFC</option>
-                                    <option value="M2 Max BASE" data-tokens="M2 Max BASE">M2 Max BASE</option>
-                                    <option value="M2 Swift 1S" data-tokens="M2 Swift 1S">M2 Swift 1S</option>
-                                    <option value="M2 Swift 1S NFC" data-tokens="M2 Swift 1S NFC">M2 Swift 1S NFC
-                                    </option>
-                                    <option value="M2 Swift 1P" data-tokens="M2 Swift 1P">M2 Swift 1P</option>
-                                    <option value="M2 Swift 1 NFC" data-tokens="M2 Swift 1 NFC">M2 Swift 1 NFC
-                                    </option>
-                                    <option value="M2 Swift 1P NFC" data-tokens="M2 Swift 1P NFC">M2 Swift 1P NFC
-                                    </option>
-                                    <option value="M2 Swift PDA" data-tokens="M2 Swift PDA">M2 Swift PDA</option>
-                                    <option value="M2 Swift 1 PDA" data-tokens="M2 Swift 1 PDA">M2 Swift 1 PDA
-                                    </option>
-                                    <option value="M2 Swift 1 STRAP" data-tokens="M2 Swift 1 STRAP">M2 Swift 1 STRAP
-                                    </option>
-                                    <option value="M2 Swift 1 Scanner" data-tokens="M2 Swift 1 Scanner">M2 Swift 1
-                                        Scanner
-                                    </option>
-                                    <option value="M2 Swift Printer" data-tokens="M2 Swift Printer">M2 Swift Printer
-                                    </option>
-                                    <option value="M2 Swift 1 Printer" data-tokens="M2 Swift 1 Printer">M2 Swift 1
-                                        Printer
-                                    </option>
-                                    <option value="M2 Swift 2 Pro" data-tokens="M2 Swift 2 Pro">M2 Swift 2 Pro
-                                    </option>
-                                    <option value="R1-201" data-tokens="R1-201">R1-201</option>
-                                    <option value="R1-202" data-tokens="R1-202">R1-202</option>
-                                    <option value="S1-701" data-tokens="S1-701">S1-701</option>
-                                    <option value="S1 Rotating Bracket" data-tokens="S1 Rotating Bracket">S1 Rotating
-                                        Bracket</option>
-                                    <option value="S1 Wall Mount" data-tokens="S1 Wall Mount">S1 Wall Mount</option>
-                                    <option value="K1-101" data-tokens="K1-101">K1-101</option>
-                                    <option value="K2-201" data-tokens="K2-201">K2-201</option>
-                                    <option value="X1-201" data-tokens="X1-201">X1-201</option>
-                                    <option value="X1 Scanner" data-tokens="X1 Scanner">X1 Scanner</option>
-                                    <option value="Stand S1" data-tokens="Stand S1">Stand S1</option>
-                                    <option value="Stand K1" data-tokens="Stand K1">Stand K1</option>
-                                    <option value="Stand K2" data-tokens="Stand K2">Stand K2</option>
-                                    <option value="Stand Swan" data-tokens="Stand Swan">Stand Swan</option>
-                                    <option value="Kassen Barcode 2D RS-720" data-tokens="Kassen Barcode 2D RS-720">
-                                        Kassen
+                                    <option value="D4-501">D4-501</option>
+                                    <option value="D4-502">D4-502</option>
+                                    <option value="D4-503">D4-503</option>
+                                    <option value="D4-503 White">D4-503 White</option>
+                                    <option value="D4-504">D4-504</option>
+                                    <option value="D4-504 White">D4-504 White</option>
+                                    <option value="D4-504 Pro">D4-504 Pro</option>
+                                    <option value="D4-505">D4-505</option>
+                                    <option value="D4-505 DT">D4-505 DT</option>
+                                    <option value="D4-505 Pro">D4-505 Pro</option>
+                                    <option value="D4 Falcon 1">D4 Falcon 1</option>
+                                    <option value="M1">M1</option>
+                                    <option value="M2-201">M2-201</option>
+                                    <option value="M2-202">M2-202</option>
+                                    <option value="M2-202 Olsera">M2-202 Olsera</option>
+                                    <option value="M2-202 iSeller">M2-202 iSeller</option>
+                                    <option value="M2-202 Grab">M2-202 Grab </option>
+                                    <option value="M2-203">M2-203</option>
+                                    <option value="M2-203 iSeller">M2-203 iSeller</option>
+                                    <option value="M2-203 White">M2-203 White</option>
+                                    <option value="M2-203 (Full)">M2-203 (Full)</option>
+                                    <option value="M2-203 NFC Iseller">M2-203 NFC Iseller</option>
+                                    <option value="M-203 Traveloka">M2-203 Traveloka</option>
+                                    <option value="M2-203 Grab">M2-203 Grab</option>
+                                    <option value="M2 Pro">M2 Pro</option>
+                                    <option value="M2 Max">M2 Max</option>
+                                    <option value="M2 Max NFC">M2 Max NFC</option>
+                                    <option value="M2 Max BASE">M2 Max BASE</option>
+                                    <option value="M2 Swift 1S">M2 Swift 1S</option>
+                                    <option value="M2 Swift 1S NFC">M2 Swift 1S NFC</option>
+                                    <option value="M2 Swift 1P">M2 Swift 1P</option>
+                                    <option value="M2 Swift 1 NFC">M2 Swift 1 NFC</option>
+                                    <option value="M2 Swift 1P NFC">M2 Swift 1P NFC</option>
+                                    <option value="M2 Swift PDA">M2 Swift PDA</option>
+                                    <option value="M2 Swift 1 PDA">M2 Swift 1 PDA</option>
+                                    <option value="M2 Swift 1 STRAP">M2 Swift 1 STRAP</option>
+                                    <option value="M2 Swift 1 Scanner">M2 Swift 1 Scanner</option>
+                                    <option value="M2 Swift Printer">M2 Swift Printer</option>
+                                    <option value="M2 Swift 1 Printer">M2 Swift 1 Printer</option>
+                                    <option value="M2 Swift 2 Pro">M2 Swift 2 Pro</option>
+                                    <option value="R1-201">R1-201</option>
+                                    <option value="R1-202">R1-202</option>
+                                    <option value="S1-701">S1-701</option>
+                                    <option value="S1 Rotating Bracket">S1 Rotating Bracket</option>
+                                    <option value="S1 Wall Mount">S1 Wall Mount</option>
+                                    <option value="K1-101">K1-101</option>
+                                    <option value="K2-201">K2-201</option>
+                                    <option value="X1-201">X1-201</option>
+                                    <option value="X1 Scanner">X1 Scanner</option>
+                                    <option value="Stand S1">Stand S1</option>
+                                    <option value="Stand K1">Stand K1</option>
+                                    <option value="Stand K2">Stand K2</option>
+                                    <option value="Stand Swan">Stand Swan</option>
+                                    <option value="Kassen Barcode 2D RS-720">Kassen
                                         Barcode 2D RS-720</option>
-                                    <option value="Kassen Barcode KS-605" data-tokens="Kassen Barcode KS-605">Kassen
+                                    <option value="Kassen Barcode KS-605">Kassen
                                         Barcode KS-605</option>
-                                    <option value="Kassen Printer BT-P3200" data-tokens="Kassen Printer BT-P3200">
-                                        Kassen
+                                    <option value="Kassen Printer BT-P3200">Kassen
                                         Printer BT-P3200</option>
-                                    <option value="Kassen Printer BT-P299" data-tokens="Kassen Printer BT-P299">Kassen
+                                    <option value="Kassen Printer BT-P299">Kassen
                                         Printer BT-P299</option>
-                                    <option value="Kassen Printer BT-P290" data-tokens="Kassen Printer BT-P290">Kassen
+                                    <option value="Kassen Printer BT-P290">Kassen
                                         Printer BT-P290</option>
-                                    <option value="Kassen Printer Label DT-643" data-tokens="Kassen Printer Label DT-643">
+                                    <option value="Kassen Printer Label DT-643">
                                         Kassen Printer Label DT-643</option>
-                                    <option value="Cash Drawer KH-330" data-tokens="Cash Drawer KH-330">Cash Drawer
+                                    <option value="Cash Drawer KH-330">Cash Drawer
                                         KH-330
                                     </option>
-                                    <option value="Cash Drawer KH-410" data-tokens="Cash Drawer KH-410">Cash Drawer
+                                    <option value="Cash Drawer KH-410">Cash Drawer
                                         KH-410
                                     </option>
-                                    <option value="Cash Drawer 408" data-tokens="Cash Drawer 408">Cash Drawer 408
+                                    <option value="Cash Drawer 408">Cash Drawer 408
                                     </option>
-                                    <option value="Cash Drawer Panda" data-tokens="Cash Drawer Panda">Cash Drawer
+                                    <option value="Cash Drawer Panda">Cash Drawer
                                         Panda
                                     </option>
-                                    <option value="Barcode Scanner" data-tokens="Barcode Scanner">Barcode Scanner
+                                    <option value="Barcode Scanner">Barcode Scanner
                                     </option>
-                                    <option value="Barcode Scanner RS-720" data-tokens="Barcode Scanner RS-720">
-                                        Barcode
+                                    <option value="Barcode Scanner RS-720">Barcode
                                         Scanner RS-720
                                     </option>
-                                    <option value="Printer Thermal Label DT-643"
-                                        data-tokens="Printer Thermal Label DT-643">Printer Thermal Label DT-643
+                                    <option value="Printer Thermal Label DT-643">Printer Thermal Label
+                                        DT-643
                                     </option>
-                                    <option value="Printer Thermal BT-P299" data-tokens="Printer Thermal BT-P299">
+                                    <option value="Printer Thermal BT-P299">
                                         Printer
                                         Thermal BT-P299
                                     </option>
-                                    <option value="Printer Thermal BT-P290" data-tokens="Printer Thermal BT-P290">
+                                    <option value="Printer Thermal BT-P290">
                                         Printer
                                         Thermal BT-P290
                                     </option>
-                                    <option value="Printer Thermal BTP-3200 USE"
-                                        data-tokens="Printer Thermal BTP-3200 USE">Printer Thermal BTP-3200 USE
+                                    <option value="Printer Thermal BTP-3200 USE">Printer Thermal BTP-3200
+                                        USE
                                     </option>
-                                    <option value="Printer Thermal BTP-3200 BT" data-tokens="Printer Thermal BTP-3200 BT">
+                                    <option value="Printer Thermal BTP-3200 BT">
                                         Printer Thermal BTP-3200 BT
                                     </option>
-                                    <option value="Printer Thermal 58" data-tokens="Printer Thermal 58">Printer
+                                    <option value="Printer Thermal 58">Printer
                                         Thermal 58
                                     </option>
-                                    <option value="Thermal Label 40 X 30 mm" data-tokens="Thermal Label 40 X 30 mm">
+                                    <option value="Thermal Label 40 X 30 mm">
                                         Thermal Label 40 X 30 mm
                                     </option>
-                                    <option value="Converter USB - AUX" data-tokens="Converter USB - AUX">
+                                    <option value="Converter USB - AUX">
                                         Converter USB - AUX
                                     </option>
-                                    <option value="Webcam Camera" data-tokens="Webcam Camera">
+                                    <option value="Webcam Camera">
                                         Webcam Camera
                                     </option>
-                                    <option value="Comson CSPL 78 BT" data-tokens="Comson CSPL 78 BT">
+                                    <option value="Comson CSPL 78 BT">
                                         Comson CSPL 78 BT
                                     </option>
-                                    <option value="Comson CSP 893 UE" data-tokens="Comson CSP 893 UE">
+                                    <option value="Comson CSP 893 UE">
                                         Comson CSP 893 UE
                                     </option>
                                     <option value="Crane 1">
                                         Crane 1
+                                    </option>
+                                    <option value="Board Swift">
+                                        Board Swift
+                                    </option>
+                                    <option value="Board Swan">
+                                        Board Swan
                                     </option>
                                 </select>
                             </div>
@@ -723,6 +649,12 @@
                                     <option value="Crane 1" {{ $item->device == 'Crane 1' ? 'selected' : '' }}>
                                         Crane 1
                                     </option>
+                                    <option value="Board Swift" {{ $item->device == 'Board Swift' ? 'selected' : '' }}>
+                                        Board Swift
+                                    </option>
+                                    <option value="Board Swan" {{ $item->device == 'Board Swan' ? 'selected' : '' }}>
+                                        Board Swan
+                                    </option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -1023,8 +955,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="tanggalkembali" class="form-label"><b>Tanggal Kembali</b></label>
-                                <input type="date" class="form-control" id="tanggalkembali"
-                                    name="tanggalkembali">
+                                <input type="date" class="form-control" id="tanggalkembali" name="tanggalkembali">
                             </div>
                             <div class="mb-3">
                                 <label for="penerima" class="form-label"><b>Penerima</b></label>
@@ -1038,13 +969,13 @@
                             </div>
                             <div class="mb-3" hidden>
                                 <label for="status" class="form-label"><b>Status</b></label>
-                                <input type="text" class="form-control" id="status" name="status"
-                                    value="1" readonly>
+                                <input type="text" class="form-control" id="status" name="status" value="1"
+                                    readonly>
                             </div>
                             <div class="mb-3">
                                 <label for="gambar" class="form-label"><b>Gambar</b></label><br>
-                                <img src="{{ asset('storage/gambar/' . $item->gambar) }}" width='60'
-                                    height='60' class="img img-responsive" id="gambar" name="gambar">
+                                <img src="{{ asset('storage/gambar/' . $item->gambar) }}" width='60' height='60'
+                                    class="img img-responsive" id="gambar" name="gambar">
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -1498,6 +1429,12 @@
                                     </option>
                                     <option value="Crane 1" {{ $item->device == 'Crane 1' ? 'selected' : '' }}>
                                         Crane 1
+                                    </option>
+                                    <option value="Board Swift" {{ $item->device == 'Board Swift' ? 'selected' : '' }}>
+                                        Board Swift
+                                    </option>
+                                    <option value="Board Swan" {{ $item->device == 'Board Swan' ? 'selected' : '' }}>
+                                        Board Swan
                                     </option>
                                 </select>
                             </div>
