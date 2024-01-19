@@ -19,11 +19,11 @@
                 </div>
                 <form action="{{ route('export.service') }}" method="GET" enctype="multipart/form-data">
                     @csrf
-                    <div class="form-group py-4 px-2 d-flex gap-4">
-                        <label for="start_date">Start Date:</label>
+                    <div class="form-group py-4 px-2 d-flex justify-content-center gap-4">
+                        <label for="start_date mt-2">Start Date:</label>
                         <input type="date" id="start_date" name="start_date">
 
-                        <label for="end_date">End Date:</label>
+                        <label for="end_date mt-2">End Date:</label>
                         <input type="date" id="end_date" name="end_date">
                     </div>
                     <div class="modal-footer justify-content-center">

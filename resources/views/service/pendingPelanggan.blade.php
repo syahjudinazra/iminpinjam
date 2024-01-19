@@ -269,13 +269,17 @@
                             </button>
                         </div>
                         <pre id="copyData{{ $item->id }}" class="highlight mt-4 d-flex flex-column">
-                            <span class="mb-4">{{ $item->pelanggan }}</span>
-                            <span>Tanggal Servis : {{ \Carbon\Carbon::parse($item->tanggalmasuk)->format('d/m/Y') }}</span>
-                            <span>Tipe : {{ $item->device }}</span>
-                            <span class="mb-4">SN : {{ $item->serialnumber }}</span>
-                            <span class="mb-4">Kerusakan : {{ $item->kerusakan }}</span>
-                            <span class="mb-4">Perbaikan : {{ $item->perbaikan }}</span>
-                            <span class="mb-4">Catatan : {{ $item->catatan }}</span>
+                            <span>{{ $item->pelanggan }}</span>
+                            <span>{{ $item->device }}</span>
+                            <span>{{ $item->serialnumber }}</span>
+                            <span>*Status :* {{ $item->status }}</span>
+                            <span>*Teknisi :* {{ $item->teknisi }}</span>
+                            &nbsp;
+                            <span>*Kerusakan :* <br /> {{ $item->kerusakan }}</span>
+                            &nbsp;
+                            <span>*Perbaikan :* <br /> {{ $item->perbaikan }}</span>
+                            &nbsp;
+                            <span>*Catatan :* <br />{{ $item->catatan }}</span>
                         </pre>
                     </div>
                 </div>
