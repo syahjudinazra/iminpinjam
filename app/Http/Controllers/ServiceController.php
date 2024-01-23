@@ -209,6 +209,9 @@ class ServiceController extends Controller
                 case 'selesai':
                     $statusMessage = 'Selesai';
                     break;
+                case 'pending':
+                    $statusMessage = 'Antrian';
+                    break;
                 // Add more cases for other status values as needed
 
                 // Default case if no specific status is matched

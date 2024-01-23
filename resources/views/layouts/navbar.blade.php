@@ -120,14 +120,14 @@
                             Baru</a>
                         <h5 class="collapse-header font-weight-bold text-white bg-secondary">Pelanggan</h5>
                         <a class="collapse-item {{ Request::is('service/pendingPelanggan*') ? 'active' : '' }}"
-                            href="/service/pendingPelanggan">Pending</a>
+                            href="/service/pendingPelanggan">Antrian</a>
                         <a class="collapse-item {{ Request::is('service/validasiPelanggan*') ? 'active' : '' }}"
                             href="/service/validasiPelanggan">Validasi</a>
                         <a class="collapse-item {{ Request::is('service/selesaiPelanggan*') ? 'active' : '' }}"
                             href="/service/selesaiPelanggan">Selesai</a>
                         <h5 class="collapse-header font-weight-bold text-white bg-secondary">Stock</h5>
                         <a class="collapse-item {{ Request::is('service/pendingStock*') ? 'active' : '' }}"
-                            href="/service/pendingStock">Pending</a>
+                            href="/service/pendingStock">Antrian</a>
                         <a class="collapse-item {{ Request::is('service/validasiStock*') ? 'active' : '' }}"
                             href="/service/validasiStock">Validasi</a>
                         <a class="collapse-item {{ Request::is('service/selesaiStock*') ? 'active' : '' }}"

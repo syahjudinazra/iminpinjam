@@ -24,64 +24,132 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <div class="mb-3">
-                                <label for="tanggalmasuk" class="form-label font-weight-bold">Tanggal Masuk</label>
-                                <input type="date" class="form-control shadow-none" id="tanggalmasuk" name="tanggalmasuk"
-                                    value="{{ $item->tanggalmasuk }}" readonly>
-                            </div>
-                            <div class="mb-3">
-                                <label for="serialnumber" class="form-label font-weight-bold">Serial Number</label>
-                                <input type="text" class="form-control shadow-none" id="serialnumber" name="serialnumber"
-                                    value="{{ $item->serialnumber }}" readonly>
-                            </div>
-                            <div class="mb-3">
-                                <label for="pemilik" class="form-label font-weight-bold">Pemilik</label>
-                                <input type="text" class="form-control shadow-none" id="pemilik" name="pemilik"
-                                    value="{{ $item->pemilik }}" readonly>
-                            </div>
-                            <div class="form-group" hidden>
-                                <label class="font-weight-bold">Status</label><br />
+                            <div class="form-group">
+                                <label class="font-weight-bold">Pemilik</label><br />
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input mt-1" type="radio" id="validasi" name="status"
-                                        value="validasi"
-                                        {{ in_array('validasi', explode(',', $item->status)) ? 'checked' : '' }}>
-                                    <label class="form-check-label" for="validasi">Validasi</label>
+                                    <input class="form-check-input mt-1" type="radio" id="stock" name="pemilik"
+                                        value="stock"
+                                        {{ in_array('stock', explode(',', $item->pemilik)) ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="stock">Stock</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input mt-1" type="radio" id="customer" name="pemilik"
+                                        value="customer"
+                                        {{ in_array('customer', explode(',', $item->pemilik)) ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="customer">Pelanggan</label>
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <label for="pelanggan" class="form-label font-weight-bold">Pelanggan</label>
                                 <input type="text" class="form-control shadow-none" id="pelanggan" name="pelanggan"
-                                    value="{{ $item->pelanggan }}" readonly>
+                                    value="{{ $item->pelanggan }}">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="device"><b>Tipe Device</b></label>
+                                <select class="form-select form-control-chosen" name="device" id="device" required>
+                                    <option value="Null">Pilih Tipe Device</option>
+                                    <option value="D1" {{ $item->device == 'D1' ? 'selected' : '' }}>D1</option>
+                                    <option value="D1 Pro" {{ $item->device == 'D1 Pro' ? 'selected' : '' }}>D1 Pro</option>
+                                    <option value="D1w" {{ $item->device == 'D1w' ? 'selected' : '' }}>D1w</option>
+                                    <option value="D1w-702" {{ $item->device == 'D1w-702' ? 'selected' : '' }}>D1w-702
+                                    </option>
+                                    <option value="D2-402" {{ $item->device == 'D2-402' ? 'selected' : '' }}>D2-402
+                                    </option>
+                                    <option value="D3-501" {{ $item->device == 'D3-501' ? 'selected' : '' }}>D3-501
+                                    </option>
+                                    <option value="D3-503" {{ $item->device == 'D3-503' ? 'selected' : '' }}>D3-503
+                                    </option>
+                                    <option value="D3-504" {{ $item->device == 'D3-504' ? 'selected' : '' }}>D3-504
+                                    </option>
+                                    <option value="D3-505" {{ $item->device == 'D3-505' ? 'selected' : '' }}>D3-505
+                                    </option>
+                                    <option value="D3-506" {{ $item->device == 'D3-506' ? 'selected' : '' }}>D3-506
+                                    </option>
+                                    <option value="D4-502" {{ $item->device == 'D4-502' ? 'selected' : '' }}>D4-502
+                                    </option>
+                                    <option value="D4-503" {{ $item->device == 'D4-503' ? 'selected' : '' }}>D4-503
+                                    </option>
+                                    <option value="D4-504" {{ $item->device == 'D4-504' ? 'selected' : '' }}>D4-504
+                                    </option>
+                                    <option value="D4-505" {{ $item->device == 'D4-505' ? 'selected' : '' }}>D4-505
+                                    </option>
+                                    <option value="K1-101" {{ $item->device == 'K1-101' ? 'selected' : '' }}>K1-101
+                                    </option>
+                                    <option value="K2-201" {{ $item->device == 'K2-201' ? 'selected' : '' }}>K2-201
+                                    </option>
+                                    <option value="M2-202" {{ $item->device == 'M2-202' ? 'selected' : '' }}>M2-202
+                                    </option>
+                                    <option value="M2-203" {{ $item->device == 'M2-203' ? 'selected' : '' }}>M2-203
+                                    </option>
+                                    <option value="M2 Pro" {{ $item->device == 'M2 Pro' ? 'selected' : '' }}>M2 Pro
+                                    </option>
+                                    <option value="M2 Max" {{ $item->device == 'M2 Max' ? 'selected' : '' }}>M2 Max
+                                    </option>
+                                    <option value="S1-701" {{ $item->device == 'S1-701' ? 'selected' : '' }}>S1-701
+                                    </option>
+                                    <option value="Swan 1" {{ $item->device == 'Swan 1' ? 'selected' : '' }}>Swan 1
+                                    </option>
+                                    <option value="Swan 1K" {{ $item->device == 'Swan 1K' ? 'selected' : '' }}>Swan 1K
+                                    </option>
+                                    <option value="Swan 1 Pro" {{ $item->device == 'Swan 1 Pro' ? 'selected' : '' }}>Swan 1
+                                        Pro</option>
+                                    <option value="Swift 1" {{ $item->device == 'Swift 1' ? 'selected' : '' }}>Swift 1
+                                    </option>
+                                    <option value="Swift 1 Pro" {{ $item->device == 'Swift 1 Pro' ? 'selected' : '' }}>
+                                        Swift 1 Pro</option>
+                                    <option value="Swift 2" {{ $item->device == 'Swift 2' ? 'selected' : '' }}>Swift 2
+                                    </option>
+                                    <option value="Swift 2 Pro" {{ $item->device == 'Swift 2 Pro' ? 'selected' : '' }}>
+                                        Swift 2 Pro</option>
+                                    <option value="Falcon 1" {{ $item->device == 'Falcon 1' ? 'selected' : '' }}>Falcon 1
+                                    </option>
+                                    <option value="Crane 1 16" {{ $item->device == 'Crane 1 16' ? 'selected' : '' }}>Crane
+                                        1 16</option>
+                                    <option value="Crane 1 21.5" {{ $item->device == 'Crane 1 21.5' ? 'selected' : '' }}>
+                                        Crane 1 21.5</option>
+                                    <option value="Crane 1 27" {{ $item->device == 'Crane 1 27' ? 'selected' : '' }}>Crane
+                                        1 27</option>
+                                    <option value="Crane 1 32" {{ $item->device == 'Crane 1 32' ? 'selected' : '' }}>Crane
+                                        1 32</option>
+                                </select>
                             </div>
                             <div class="mb-3">
-                                <label for="device" class="form-label font-weight-bold">Device</label>
-                                <input type="text" class="form-control shadow-none" id="device" name="device"
-                                    value="{{ $item->device }}" readonly>
+                                <label for="serialnumber" class="form-label font-weight-bold">Serial Number</label>
+                                <input type="text" class="form-control shadow-none" id="serialnumber" name="serialnumber"
+                                    value="{{ $item->serialnumber }}">
                             </div>
-                            <div class="mb-3">
-                                <label for="pemakaian" class="form-label font-weight-bold">Pemakaian</label>
-                                <input type="text" class="form-control shadow-none" id="pemakaian" name="pemakaian"
-                                    value="{{ $item->pemakaian }}" readonly>
+                            <div class="form-group mb-3">
+                                <label class="font-weight-bold" for="pemakaian">Pemakaian</label>
+                                <select class="form-select shadow-none" id="pemakaian" name="pemakaian"
+                                    value="{{ old('pemakaian') }}" required>
+                                    <option value="Null">Pilih Lama Pemakaian</option>
+                                    <option
+                                        value="Baru di Unboxing"{{ $item->pemakaian == 'Baru di Unboxing' ? 'selected' : '' }}>
+                                        Baru di Unboxing
+                                    </option>
+                                    <option
+                                        value="7 Hari Kurang"{{ $item->pemakaian == '7 Hari Kurang' ? 'selected' : '' }}>
+                                        7 Hari Kurang
+                                    </option>
+                                    <option
+                                        value="1 Tahun Kurang"{{ $item->pemakaian == '1 Tahun Kurang' ? 'selected' : '' }}>
+                                        1 Tahun Kurang
+                                    </option>
+                                    <option
+                                        value="1 Tahun Lebih"{{ $item->pemakaian == '1 Tahun Lebih' ? 'selected' : '' }}>
+                                        1 Tahun Lebih
+                                    </option>
+                                </select>
                             </div>
                             <div class="mb-3">
                                 <label for="kerusakan" class="form-label font-weight-bold">Kerusakan</label>
                                 <textarea class="form-control shadow-none" id="kerusakan" name="kerusakan" rows="3"
-                                    placeholder="Masukan Kerusakan" readonly>{{ $item->kerusakan }}</textarea>
-                            </div>
-                            <div class="mb-3">
-                                <label for="catatan" class="form-label font-weight-bold">Catatan</label>
-                                <textarea class="form-control shadow-none" id="catatan" name="catatan" rows="3" placeholder="Masukan Catatan"
-                                    readonly>{{ $item->catatan }}</textarea>
-                            </div>
-                            <div class="mb-3">
-                                <label for="tanggalkeluar" class="form-label font-weight-bold">Tanggal Selesai</label>
-                                <input type="date" class="form-control shadow-none" id="tanggalkeluar"
-                                    name="tanggalkeluar" value="{{ $item->tanggalkeluar }}">
+                                    placeholder="Masukan Kerusakan">{{ $item->kerusakan }}</textarea>
                             </div>
                             <div class="mb-3">
                                 <label for="perbaikan" class="form-label font-weight-bold">Perbaikan</label>
                                 <textarea class="form-control shadow-none" id="perbaikan" name="perbaikan" rows="3"
-                                    placeholder="Masukan Perbaikan">{{ $item->perbaikan }}</textarea>
+                                    placeholder="Masukan perbaikan">{{ $item->perbaikan }}</textarea>
                             </div>
                             <div class="form-group">
                                 <label class="font-weight-bold" for="teknisi">Teknisi</label>
@@ -114,13 +182,48 @@
                             <div class="mb-3">
                                 <label for="nosparepart" class="form-label font-weight-bold">No SparePart</label>
                                 <input type="text" class="form-control shadow-none" id="nosparepart"
-                                    name="nosparepart" placeholder="Masukan No Spare Part"
-                                    value="{{ $item->nosparepart }}">
+                                    name="nosparepart" value="{{ $item->nosparepart }}">
                             </div>
                             <div class="mb-3">
                                 <label for="snkanibal" class="form-label font-weight-bold">SN Kanibal</label>
                                 <input type="text" class="form-control shadow-none" id="snkanibal" name="snkanibal"
-                                    placeholder="Masukan SN Kanibal" value="{{ $item->snkanibal }}">
+                                    value="{{ $item->snkanibal }}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="tanggalmasuk" class="form-label font-weight-bold">Tanggal Masuk</label>
+                                <input type="date" class="form-control shadow-none" id="tanggalmasuk"
+                                    name="tanggalmasuk" value="{{ $item->tanggalmasuk }}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="tanggalkeluar" class="form-label font-weight-bold">Tanggal Selesai</label>
+                                <input type="date" class="form-control shadow-none" id="tanggalkeluar"
+                                    name="tanggalkeluar" value="{{ $item->tanggalkeluar }}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="catatan" class="form-label font-weight-bold">Catatan</label>
+                                <textarea class="form-control shadow-none" id="catatan" name="catatan" rows="3"
+                                    placeholder="Masukan Catatan">{{ $item->catatan }}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="font-weight-bold">Status</label><br />
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input mt-1" type="radio" id="pending" name="status"
+                                        value="pending"
+                                        {{ in_array('pending', explode(',', $item->status)) ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="pending">Pending</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input mt-1" type="radio" id="validasi" name="status"
+                                        value="validasi"
+                                        {{ in_array('validasi', explode(',', $item->status)) ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="validasi">Validasi</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input mt-1" type="radio" id="selesai" name="status"
+                                        value="selesai"
+                                        {{ in_array('selesai', explode(',', $item->status)) ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="selesai">Selesai</label>
+                                </div>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -133,7 +236,6 @@
         </div>
     @endforeach
     <!-- End Edit data -->
-
     <!-- view data -->
     @foreach ($selesaiPelanggan as $item)
         <div class="modal fade" id="viewModal{{ $item->id }}" tabindex="-1"
@@ -147,16 +249,6 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <div class="mb-3">
-                            <label for="tanggalmasuk" class="form-label font-weight-bold">Tanggal Masuk</label>
-                            <input type="date" class="form-control shadow-none" id="tanggalmasuk" name="tanggalmasuk"
-                                value="{{ $item->tanggalmasuk }}" readonly>
-                        </div>
-                        <div class="mb-3">
-                            <label for="serialnumber" class="form-label font-weight-bold">Serial Number</label>
-                            <input type="text" class="form-control shadow-none" id="serialnumber" name="serialnumber"
-                                value="{{ $item->serialnumber }}" readonly>
-                        </div>
                         <div class="mb-3">
                             <label for="pemilik" class="form-label font-weight-bold">Pemilik</label>
                             <input type="text" class="form-control shadow-none" id="pemilik" name="pemilik"
@@ -173,6 +265,11 @@
                                 value="{{ $item->device }}" readonly>
                         </div>
                         <div class="mb-3">
+                            <label for="serialnumber" class="form-label font-weight-bold">Serial Number</label>
+                            <input type="text" class="form-control shadow-none" id="serialnumber" name="serialnumber"
+                                value="{{ $item->serialnumber }}" readonly>
+                        </div>
+                        <div class="mb-3">
                             <label for="pemakaian" class="form-label font-weight-bold">Pemakaian</label>
                             <input type="text" class="form-control shadow-none" id="pemakaian" name="pemakaian"
                                 value="{{ $item->pemakaian }}" readonly>
@@ -182,8 +279,28 @@
                             <textarea class="form-control shadow-none" id="kerusakan" name="kerusakan" rows="3" readonly>{{ $item->kerusakan }}</textarea>
                         </div>
                         <div class="mb-3">
-                            <label for="catatan" class="form-label font-weight-bold">Catatan</label>
-                            <textarea class="form-control shadow-none" id="catatan" name="catatan" rows="3" readonly>{{ $item->catatan }}</textarea>
+                            <label for="perbaikan" class="form-label font-weight-bold">Perbaikan</label>
+                            <textarea class="form-control shadow-none" id="perbaikan" name="perbaikan" rows="3" readonly>{{ $item->perbaikan }}</textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="teknisi" class="form-label font-weight-bold">Teknisi</label>
+                            <input type="text" class="form-control shadow-none" id="teknisi" name="teknisi"
+                                value="{{ $item->teknisi }}" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="nosparepart" class="form-label font-weight-bold">No SparePart</label>
+                            <input type="text" class="form-control shadow-none" id="nosparepart" name="nosparepart"
+                                value="{{ $item->nosparepart }}" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="snkanibal" class="form-label font-weight-bold">SN Kanibal</label>
+                            <input type="text" class="form-control shadow-none" id="snkanibal" name="snkanibal"
+                                value="{{ $item->snkanibal }}" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="tanggalmasuk" class="form-label font-weight-bold">Tanggal Masuk</label>
+                            <input type="date" class="form-control shadow-none" id="tanggalmasuk" name="tanggalmasuk"
+                                value="{{ $item->tanggalmasuk }}" readonly>
                         </div>
                         <div class="mb-3">
                             <label for="tanggalkeluar" class="form-label font-weight-bold">Tanggal Selesai</label>
@@ -191,24 +308,8 @@
                                 name="tanggalkeluar" value="{{ $item->tanggalkeluar }}" readonly>
                         </div>
                         <div class="mb-3">
-                            <label for="perbaikan" class="form-label font-weight-bold">Perbaikan</label>
-                            <textarea class="form-control shadow-none" id="perbaikan" name="perbaikan" rows="3"
-                                placeholder="Masukan Perbaikan" readonly>{{ $item->perbaikan }}</textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label for="teknisi" class="form-label font-weight-bold">Teknisi</label>
-                            <input type="text" class="form-control shadow-none" id="teknisi" name="teknisi"
-                                placeholder="Masukan No Spare Part" value="{{ $item->teknisi }}" readonly>
-                        </div>
-                        <div class="mb-3">
-                            <label for="nosparepart" class="form-label font-weight-bold">No SparePart</label>
-                            <input type="text" class="form-control shadow-none" id="nosparepart" name="nosparepart"
-                                placeholder="Masukan No Spare Part" value="{{ $item->nosparepart }}" readonly>
-                        </div>
-                        <div class="mb-3">
-                            <label for="snkanibal" class="form-label font-weight-bold">SN Kanibal</label>
-                            <input type="text" class="form-control shadow-none" id="snkanibal" name="snkanibal"
-                                placeholder="Masukan SN Kanibal" value="{{ $item->snkanibal }}" readonly>
+                            <label for="catatan" class="form-label font-weight-bold">Catatan</label>
+                            <textarea class="form-control shadow-none" id="catatan" name="catatan" rows="3" readonly>{{ $item->catatan }}</textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -273,12 +374,12 @@
                             <span>{{ $item->device }}</span>
                             <span>{{ $item->serialnumber }}</span>
                             <span>*Status :* {{ $item->status }}</span>
-                            <span>*Teknisi :* {{ $item->teknisi }}</span>
                             &nbsp;
                             <span>*Kerusakan :* <br /> {{ $item->kerusakan }}</span>
                             &nbsp;
                             <span>*Perbaikan :* <br /> {{ $item->perbaikan }}</span>
                             &nbsp;
+                            <span>*Teknisi :* <br />{{ $item->teknisi }}</span>
                             <span>*Catatan :* <br />{{ $item->catatan }}</span>
                         </pre>
                     </div>
@@ -322,9 +423,9 @@
                                             More
                                         </a>
                                         <div class="dropdown-menu">
-                                            {{-- <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                            <a class="dropdown-item" href="#" data-bs-toggle="modal"
                                                 data-target="#editModal{{ $item->id }}"><i
-                                                    class="fa-solid fa-pen-to-square"></i> Edit</a> --}}
+                                                    class="fa-solid fa-pen-to-square"></i> Edit</a>
                                             <a class="dropdown-item" href="#" data-bs-toggle="modal"
                                                 data-target="#deleteModal{{ $item->id }}"><i
                                                     class="fa-solid fa-trash"></i> Delete</a>
