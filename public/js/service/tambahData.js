@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Function to handle radio button change
     function handleRadioChange(isStock) {
-        pelangganInput.value = isStock ? "imin.id" : "";
+        pelangganInput.value = isStock ? "iMin ID" : "";
     }
 
     // Add event listeners to radio buttons

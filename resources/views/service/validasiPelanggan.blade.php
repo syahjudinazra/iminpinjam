@@ -363,13 +363,12 @@
                             <span>{{ $item->device }}</span>
                             <span>{{ $item->serialnumber }}</span>
                             <span>*Status :* {{ $item->status }}</span>
-                            &nbsp;
+                            <span> </span>
                             <span>*Kerusakan :* <br /> {{ $item->kerusakan }}</span>
-                            &nbsp;
+                            <span> </span>
                             <span>*Perbaikan :* <br /> {{ $item->perbaikan }}</span>
-                            &nbsp;
-                            <span>*Teknisi :* <br />{{ $item->teknisi }}</span>
-                            <span>*Catatan :* <br />{{ $item->catatan }}</span>
+                            <span> </span>
+                            <span>*Teknisi :* <br /> {{ $item->teknisi }}</span>
                         </pre>
                     </div>
                 </div>
@@ -600,18 +599,18 @@
                                         </a>
                                         <div class="dropdown-menu">
                                             <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                                data-target="#editModal{{ $item->id }}"><i
-                                                    class="fa-solid fa-pen-to-square"></i> Edit</a>
-                                            <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                                data-target="#deleteModal{{ $item->id }}"><i
-                                                    class="fa-solid fa-trash"></i> Delete</a>
-                                            <a class="dropdown-item" href="#" data-bs-toggle="modal"
                                                 data-target="#copyText{{ $item->id }}"><i class="fa-solid fa-clone"></i>
                                                 Copy</a>
                                             <a class="dropdown-item" href="#" data-bs-toggle="modal"
                                                 data-target="#moveModal{{ $item->id }}"><i
                                                     class="fa-solid fa-paper-plane"></i>
                                                 Move</a>
+                                            <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                                data-target="#editModal{{ $item->id }}"><i
+                                                    class="fa-solid fa-pen-to-square"></i> Edit</a>
+                                            <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                                data-target="#deleteModal{{ $item->id }}"><i
+                                                    class="fa-solid fa-trash"></i> Delete</a>
                                         </div>
                                     </div>
                                 </td>

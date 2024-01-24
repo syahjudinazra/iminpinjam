@@ -291,10 +291,8 @@
                             <span>{{ $item->device }}</span>
                             <span>{{ $item->serialnumber }}</span>
                             <span>*Status :* {{ $item->status }}</span>
-                            &nbsp;
+                            <span> </span>
                             <span>*Kerusakan :* <br /> {{ $item->kerusakan }}</span>
-                            &nbsp;
-                            <span>*Catatan :* <br />{{ $item->catatan }}</span>
                         </pre>
                     </div>
                 </div>
@@ -378,6 +376,11 @@
                                 <label for="snkanibal" class="form-label font-weight-bold">SN Kanibal</label>
                                 <input type="text" class="form-control shadow-none" id="snkanibal" name="snkanibal"
                                     placeholder="Masukan SN Kanibal" value="{{ $item->snkanibal }}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="tanggalkeluar" class="form-label font-weight-bold">Tanggal Selesai</label>
+                                <input type="date" class="form-control shadow-none" id="tanggalkeluar"
+                                    name="tanggalkeluar" value="{{ $item->tanggalkeluar }}">
                             </div>
                             <div class="mb-3">
                                 <label for="catatan" class="form-label font-weight-bold">Catatan</label>
@@ -557,18 +560,18 @@
                                         </a>
                                         <div class="dropdown-menu">
                                             <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                                data-target="#editModal{{ $item->id }}"><i
-                                                    class="fa-solid fa-pen-to-square"></i> Edit</a>
-                                            <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                                data-target="#deleteModal{{ $item->id }}"><i
-                                                    class="fa-solid fa-trash"></i> Delete</a>
-                                            <a class="dropdown-item" href="#" data-bs-toggle="modal"
                                                 data-target="#copyText{{ $item->id }}"><i class="fa-solid fa-clone"></i>
                                                 Copy</a>
                                             <a class="dropdown-item" href="#" data-bs-toggle="modal"
                                                 data-target="#moveModal{{ $item->id }}"><i
                                                     class="fa-solid fa-paper-plane"></i>
                                                 Move</a>
+                                            <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                                data-target="#editModal{{ $item->id }}"><i
+                                                    class="fa-solid fa-pen-to-square"></i> Edit</a>
+                                            <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                                data-target="#deleteModal{{ $item->id }}"><i
+                                                    class="fa-solid fa-trash"></i> Delete</a>
                                         </div>
                                     </div>
                                 </td>
