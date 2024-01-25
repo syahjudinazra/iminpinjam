@@ -36,7 +36,7 @@
                                     <input class="form-check-input mt-1" type="radio" id="customer" name="pemilik"
                                         value="customer"
                                         {{ in_array('customer', explode(',', $item->pemilik)) ? 'checked' : '' }}>
-                                    <label class="form-check-label" for="customer">Pelanggan</label>
+                                    <label class="form-check-label" for="customer">Customer</label>
                                 </div>
                             </div>
                             <div class="mb-3">

@@ -70,7 +70,7 @@
                     <div class="form-check form-check-inline">
                         <input class="form-check-input mt-1" type="radio" id="customer" name="pemilik[]"
                             value="customer">
-                        <label class="form-check-label" for="customer">Pelanggan</label>
+                        <label class="form-check-label" for="customer">Customer</label>
                     </div>
                 </div>
                 <div class="form-group" hidden>
