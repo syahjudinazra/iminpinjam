@@ -19,7 +19,7 @@ return new class extends Migration
             $table->date('tanggalmasuk');
             $table->date('tanggalkeluar')->nullable();
             $table->enum('pemilik', ['stock', 'customer']);
-            $table->enum('status', ['pending', 'validasi', 'selesai'])->default('pending');
+            $table->enum('status', ['antrian', 'validasi', 'selesai'])->default('antrian');
             $table->string('pelanggan');
             $table->string('device');
             $table->string('pemakaian');

@@ -189,10 +189,10 @@
                             <div class="form-group">
                                 <label class="font-weight-bold">Status</label><br />
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input mt-1" type="radio" id="pending" name="status"
-                                        value="pending"
-                                        {{ in_array('pending', explode(',', $item->status)) ? 'checked' : '' }}>
-                                    <label class="form-check-label" for="pending">Antrian</label>
+                                    <input class="form-check-input mt-1" type="radio" id="antrian" name="status"
+                                        value="antrian"
+                                        {{ in_array('antrian', explode(',', $item->status)) ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="antrian">Antrian</label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input mt-1" type="radio" id="validasi" name="status"

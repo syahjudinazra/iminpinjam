@@ -19,18 +19,20 @@ class ServiceController extends Controller
         return view('service.index');
     }
     //Pelanggan
-    public function pendingPelanggan()
+    public function antrianPelanggan()
     {
-        $pendingPelanggan = Service::where('status', 'pending')
+        $antrianPelanggan = Service::where('status', 'antrian')
                                     ->where('pemilik', 'customer')
+                                    ->orderBy('tanggalmasuk', 'desc')
                                     ->get();
-        return view('service.pendingPelanggan', compact('pendingPelanggan'));
+        return view('service.antrianPelanggan', compact('antrianPelanggan'));
     }
 
     public function validasiPelanggan()
     {
         $validasiPelanggan = Service::where('status', 'validasi')
                                     ->where('pemilik', 'customer')
+                                    ->orderBy('tanggalmasuk', 'desc')
                                     ->get();
         return view('service.validasiPelanggan', compact('validasiPelanggan'));
     }
@@ -38,22 +40,25 @@ class ServiceController extends Controller
     {
         $selesaiPelanggan = Service::where('status', 'selesai')
                                     ->where('pemilik', 'customer')
+                                    ->orderBy('tanggalmasuk', 'desc')
                                     ->get();
         return view('service.selesaiPelanggan', compact('selesaiPelanggan'));
     }
     //Stock
-    public function pendingStock()
+    public function antrianStock()
     {
-        $pendingStock = Service::where('status', 'pending')
+        $antrianStock = Service::where('status', 'antrian')
                                 ->where('pemilik', 'stock')
+                                ->orderBy('tanggalmasuk', 'desc')
                                 ->get();
 
-        return view('service.pendingStock', compact('pendingStock'));
+        return view('service.antrianStock', compact('antrianStock'));
     }
     public function validasiStock()
     {
         $validasiStock = Service::where('status', 'validasi')
                                 ->where('pemilik', 'stock')
+                                ->orderBy('tanggalmasuk', 'desc')
                                 ->get();
 
         return view('service.validasiStock', compact('validasiStock'));
@@ -62,6 +67,7 @@ class ServiceController extends Controller
     {
         $selesaiStock = Service::where('status', 'selesai')
                                 ->where('pemilik', 'stock')
+                                ->orderBy('tanggalmasuk', 'desc')
                                 ->get();
 
         return view('service.selesaiStock', compact('selesaiStock'));
@@ -209,7 +215,7 @@ class ServiceController extends Controller
                 case 'selesai':
                     $statusMessage = 'Selesai';
                     break;
-                case 'pending':
+                case 'antrian':
                     $statusMessage = 'Antrian';
                     break;
                 // Add more cases for other status values as needed

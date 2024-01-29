@@ -76,9 +76,9 @@
                 <div class="form-group" hidden>
                     <label class="font-weight-bold" for="status">Status</label><br />
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input mt-1" type="radio" id="pending" name="status[]" value="pending"
+                        <input class="form-check-input mt-1" type="radio" id="antrian" name="status[]" value="antrian"
                             checked>
-                        <label class="form-check-label" for="pending">Pending</label>
+                        <label class="form-check-label" for="antrian">Antrian</label>
                     </div>
                 </div>
                 <div class="form-group">

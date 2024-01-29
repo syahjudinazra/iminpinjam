@@ -4,12 +4,12 @@
 @section('content')
     <div class="container-fluid">
         <div class="row">
-            <h1>Pending Stock</h1>
+            <h1>Antrian Pelanggan</h1>
         </div>
     </div>
 
     <!-- Edit Data -->
-    @foreach ($pendingStock as $item)
+    @foreach ($antrianPelanggan as $item)
         <div class="modal fade" id="editModal{{ $item->id }}" tabindex="-1"
             aria-labelledby="editModalLabel{{ $item->id }}" aria-hidden="true">
             <div class="modal-dialog">
@@ -159,10 +159,10 @@
                             <div class="form-group" hidden>
                                 <label class="font-weight-bold">Status</label><br />
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input mt-1" type="radio" id="pending" name="status"
-                                        value="pending"
-                                        {{ in_array('pending', explode(',', $item->status)) ? 'checked' : '' }}>
-                                    <label class="form-check-label" for="pending">Antrian</label>
+                                    <input class="form-check-input mt-1" type="radio" id="antrian" name="status"
+                                        value="antrian"
+                                        {{ in_array('antrian', explode(',', $item->status)) ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="antrian">Antrian</label>
                                 </div>
                             </div>
                         </div>
@@ -178,7 +178,7 @@
     <!-- End Edit data -->
 
     <!-- view data -->
-    @foreach ($pendingStock as $item)
+    @foreach ($antrianPelanggan as $item)
         <div class="modal fade" id="viewModal{{ $item->id }}" tabindex="-1"
             aria-labelledby="viewModalLabel{{ $item->id }}" aria-hidden="true">
             <div class="modal-dialog">
@@ -239,7 +239,7 @@
     <!-- end view data -->
 
     <!-- delete data -->
-    @foreach ($pendingStock as $item)
+    @foreach ($antrianPelanggan as $item)
         <div class="modal fade" id="deleteModal{{ $item->id }}" tabindex="-1"
             aria-labelledby="deleteModalLabel{{ $item->id }}" aria-hidden="true">
             <div class="modal-dialog">
@@ -268,7 +268,7 @@
     <!-- end delete data -->
 
     <!-- Copy Text -->
-    @foreach ($pendingStock as $item)
+    @foreach ($antrianPelanggan as $item)
         <div class="modal fade" id="copyText{{ $item->id }}" tabindex="-1" role="dialog"
             aria-labelledby="copyModalLabel{{ $item->id }}" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -302,7 +302,7 @@
     <!-- End Copy Text -->
 
     <!-- Move Data -->
-    @foreach ($pendingStock as $item)
+    @foreach ($antrianPelanggan as $item)
         <div class="modal fade" id="moveModal{{ $item->id }}" tabindex="-1"
             aria-labelledby="moveModalLabel{{ $item->id }}" aria-hidden="true">
             <div class="modal-dialog">
@@ -537,12 +537,12 @@
                     <th>Action</th>
                 </thead>
                 <tbody>
-                    @empty($pendingStock)
+                    @empty($antrianPelanggan)
                         <tr>
                             <td colspan="6">No data found</td>
                         </tr>
                     @else
-                        @foreach ($pendingStock as $item)
+                        @foreach ($antrianPelanggan as $item)
                             <tr>
                                 <td>{{ $loop->index + 1 }}</td>
                                 <td>{{ \Carbon\Carbon::parse($item->tanggalmasuk)->format('d/m/Y') }}</td>

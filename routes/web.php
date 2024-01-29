@@ -182,15 +182,15 @@ Route::prefix('service')->group(function () {
         'show', 'edit', 'update', 'destroy',
     ]);
 
-    Route::get('/pendingPelanggan', [ServiceController::class, 'pendingPelanggan'])
-        ->name('service.pendingPelanggan');
+    Route::get('/antrianPelanggan', [ServiceController::class, 'antrianPelanggan'])
+        ->name('service.antrianPelanggan');
     Route::get('/validasiPelanggan', [ServiceController::class, 'validasiPelanggan'])
         ->name('service.validasiPelanggan');
     Route::get('/selesaiPelanggan', [ServiceController::class, 'selesaiPelanggan'])
         ->name('service.selesaiPelanggan');
 
-    Route::get('/pendingStock', [ServiceController::class, 'pendingStock'])
-        ->name('service.pendingStock');
+    Route::get('/antrianStock', [ServiceController::class, 'antrianStock'])
+        ->name('service.antrianStock');
     Route::get('/validasiStock', [ServiceController::class, 'validasiStock'])
         ->name('service.validasiStock');
     Route::get('/selesaiStock', [ServiceController::class, 'selesaiStock'])

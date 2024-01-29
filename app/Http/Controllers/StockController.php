@@ -19,14 +19,22 @@ class StockController extends Controller
      */
     public function index()
     {
-        $stockGudang = Stock::where('status', 'Gudang')->count();
-        $stockService = Stock::where('status', 'Service')->count();
-        $stockDipinjam = Stock::where('status', 'Dipinjam')->count();
-        $stockTerjual = Stock::where('status', 'Terjual')->count();
+        // Get the count of unique serial numbers for each status
+        $stockCounts = Stock::groupBy('status', 'tipe')
+            ->selectRaw('status, tipe, COUNT(*) as count')
+            ->get();
+
+        // Extract the counts for each status
+        $stockGudang = $stockCounts['Gudang'] ?? 0;
+        $stockService = $stockCounts['Service'] ?? 0;
+        $stockDipinjam = $stockCounts['Dipinjam'] ?? 0;
+        $stockTerjual = $stockCounts['Terjual'] ?? 0;
 
         $stock = Stock::all();
+
         return view('stock.monitor', compact('stock', 'stockGudang', 'stockService', 'stockDipinjam', 'stockTerjual'));
     }
+
 
     public function gudang()
     {

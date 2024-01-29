@@ -756,16 +756,10 @@
                         <tr>
                             <td>{{ $item->serialnumber }}</td>
                             <td>{{ $item->tipe }}</td>
-                            <td>{{ $item->noinvoice }}</td>
-                            <td>{{ \Carbon\Carbon::parse($item->tanggalmasuk)->format('d/m/Y') }}</td>
-                            <td>
-                                @if ($item->tanggalkeluar)
-                                    {{ \Carbon\Carbon::parse($item->tanggalkeluar)->format('d/m/Y') }}
-                                @else
-                                    &nbsp;
-                                @endif
-                            </td>
-                            <td>{{ $item->pelanggan }}</td>
+                            <td>{{ $stockGudang }}</td>
+                            <td>{{ $stockService }}</td>
+                            <td>{{ $stockDipinjam }}</td>
+                            <td>{{ $stockTerjual }}</td>
                             <td>
                                 <a href="#" class="btn btn-primary btn-sm" data-toggle="modal"
                                     data-target="#stockEditModal{{ $item->id }}" data-toggle="tooltip"
@@ -782,10 +776,10 @@
                     <tr>
                         <th>Serial Number</th>
                         <th>Tipe</th>
-                        <th>No Invoice</th>
-                        <th>Tanggal Masuk</th>
-                        <th>Tanggal Keluar</th>
-                        <th>Pelanggan</th>
+                        <th>Gudang</th>
+                        <th>Service</th>
+                        <th>Dipinjam</th>
+                        <th>Terjual</th>
                         <th>Action</th>
                     </tr>
                 </tfoot>
