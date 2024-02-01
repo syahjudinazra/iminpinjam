@@ -9,7 +9,7 @@
 
         <!-- Edit Data Stock -->
         @foreach ($stockDipinjam as $item)
-            <div class="modal fade" id="editModal{{ $item->id }}" tabindex="-1"
+            <div class="modal fade" id="stockEditModal{{ $item->id }}" tabindex="-1"
                 aria-labelledby="editModalLabel{{ $item->id }}" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -428,6 +428,70 @@
         @endforeach
         <!-- end edit data -->
 
+        <!-- View Data Stock -->
+        @foreach ($stockDipinjam as $item)
+            <div class="modal fade" id="stockViewModal{{ $item->id }}"
+                aria-labelledby="viewModalLabel{{ $item->id }}" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <form method="POST" action="{{ route('stock.update', $item->id) }}"
+                            enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT')
+
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="viewModalLabel{{ $item->id }}">View Data Stocks</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="serialnumber" class="form-label"><b>Serial Number</b></label>
+                                    <input type="text" class="form-control" id="serialnumber" name="serialnumber"
+                                        value="{{ $item->serialnumber }}" readonly>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="tipe" class="form-label"><b>Tipe Device</b></label>
+                                    <input type="text" class="form-control" id="tipe" name="tipe"
+                                        value="{{ $item->tipe }}" readonly>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="noinvoice" class="form-label"><b>No Invoice</b></label>
+                                    <input type="text" class="form-control" id="noinvoice" name="noinvoice"
+                                        value="{{ $item->noinvoice }}" readonly>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="tanggalmasuk" class="form-label"><b>Tanggal Masuk</b></label>
+                                    <input type="date" class="form-control" id="tanggalmasuk" name="tanggalmasuk"
+                                        value="{{ $item->tanggalmasuk }}" readonly>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="tanggalkeluar" class="form-label"><b>Tanggal Keluar</b></label>
+                                    <input type="date" class="form-control" id="tanggalkeluar" name="tanggalkeluar"
+                                        value="{{ $item->tanggalkeluar }}" readonly>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="pelanggan" class="form-label"><b>Pelanggan</b></label>
+                                    <input type="text" class="form-control" id="pelanggan" name="pelanggan"
+                                        value="{{ $item->pelanggan }}" readonly>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="status" class="form-label"><b>Status</b></label>
+                                    <input type="text" class="form-control" id="status" name="status"
+                                        value="{{ $item->status }}" readonly>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+        <!-- end View data -->
+
         <!-- delete data -->
         @foreach ($stockDipinjam as $item)
             <div class="modal fade" id="deleteModal{{ $item->id }}" tabindex="-1"
@@ -487,13 +551,29 @@
                         </td>
                         <td>{{ $item->pelanggan }}</td>
                         <td>
-                            <a href="#" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                                data-target="#editModal{{ $item->id }}" data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Edit"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <a href="#" class="btn btn-primary btn-sm" data-toggle="modal"
+                                data-target="#stockViewModal{{ $item->id }}" data-toggle="tooltip"
+                                data-placement="top" title="Edit"><i class="fa-solid fa-eye"></i></a>
+                            @auth
+                                @if (auth()->user()->hasRole('superadmin') ||
+                                        auth()->user()->hasRole('jeffri') ||
+                                        auth()->user()->hasRole('sylvi') ||
+                                        auth()->user()->hasRole('coni') ||
+                                        auth()->user()->hasRole('vivi'))
+                                    <a href="#" class="btn btn-warning btn-sm" data-bs-toggle="modal"
+                                        data-target="#stockEditModal{{ $item->id }}" data-bs-toggle="tooltip"
+                                        data-bs-placement="top" title="Edit"><i class="fa-solid fa-pen-to-square"></i></a>
+                                @endif
 
-                            <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                data-target="#deleteModal{{ $item->id }}" data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Delete"><i class="fa-solid fa-trash"></i></a>
+                                @if (auth()->user()->hasRole('superadmin') ||
+                                        auth()->user()->hasRole('jeffri') ||
+                                        auth()->user()->hasRole('sylvi') ||
+                                        auth()->user()->hasRole('coni'))
+                                    <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                        data-target="#deleteModal{{ $item->id }}" data-bs-toggle="tooltip"
+                                        data-bs-placement="top" title="Delete"><i class="fa-solid fa-trash"></i></a>
+                                @endif
+                            @endauth
                         </td>
                     </tr>
                 @endforeach

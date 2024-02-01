@@ -20,8 +20,6 @@ class KembaliController extends Controller
      */
     public function index()
     {
-        // $kembali = Kembali::all();
-        // return view('kembali.index')->with('kembali', $kembali);
 
         $pinjam = DB::table('pinjams')->orderBy('tanggal', 'desc')
             ->where('status', '1')

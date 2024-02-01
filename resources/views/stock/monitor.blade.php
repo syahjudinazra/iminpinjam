@@ -5,22 +5,29 @@
     <div class="container-fluid">
         <div class="row">
             <h1 class="h3 mb-3 text-gray-800">Monitor All Stocks</h1>
-            @if (Auth::check())
-                <div class="head-area">
-                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#stockModal">
-                        <i class="fa-solid fa-plus"></i> Tambah
-                    </button>
-                </div>
-            @endif
-            <div class="buttonarea d-flex gap-3 justify-content-end mb-3">
-                <button type="button" class="btn btn-success text-white" data-bs-toggle="modal"
-                    data-target="#importModal"><i class="fa-solid fa-file-import" style="color: #ffffff;"></i>
-                    Import Excel
-                </button>
-                <a href="{{ route('export.stocks') }}" class="btn btn text-white float-end"
-                    style="background-color: #F05025"><i class="fa-solid fa-download" style="color: #ffffff;"></i> Export
-                    Excel</a>
-            </div>
+            @auth
+                @if (auth()->user()->hasRole('superadmin') ||
+                        auth()->user()->hasRole('jeffri') ||
+                        auth()->user()->hasRole('sylvi') ||
+                        auth()->user()->hasRole('coni'))
+                    <div class="head-area">
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#stockModal">
+                            <i class="fa-solid fa-plus"></i> Tambah
+                        </button>
+                    </div>
+
+                    <div class="buttonarea d-flex gap-3 justify-content-end mb-3">
+                        <button type="button" class="btn btn-success text-white" data-bs-toggle="modal"
+                            data-target="#importModal"><i class="fa-solid fa-file-import" style="color: #ffffff;"></i>
+                            Import Excel
+                        </button>
+                        <a href="{{ route('export.stocks') }}" class="btn btn text-white float-end"
+                            style="background-color: #F05025"><i class="fa-solid fa-download" style="color: #ffffff;"></i>
+                            Export
+                            Excel</a>
+                    </div>
+                @endif
+            @endauth
         </div>
     </div>
 
@@ -710,6 +717,69 @@
     @endforeach
     <!-- end edit data -->
 
+    <!-- View Data Stock -->
+    @foreach ($stock as $item)
+        <div class="modal fade" id="stockViewModal{{ $item->id }}"
+            aria-labelledby="viewModalLabel{{ $item->id }}" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form method="POST" action="{{ route('stock.update', $item->id) }}" enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
+
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="viewModalLabel{{ $item->id }}">View Data Stocks</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="serialnumber" class="form-label"><b>Serial Number</b></label>
+                                <input type="text" class="form-control" id="serialnumber" name="serialnumber"
+                                    value="{{ $item->serialnumber }}" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="tipe" class="form-label"><b>Tipe Device</b></label>
+                                <input type="text" class="form-control" id="tipe" name="tipe"
+                                    value="{{ $item->tipe }}" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="noinvoice" class="form-label"><b>No Invoice</b></label>
+                                <input type="text" class="form-control" id="noinvoice" name="noinvoice"
+                                    value="{{ $item->noinvoice }}" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="tanggalmasuk" class="form-label"><b>Tanggal Masuk</b></label>
+                                <input type="date" class="form-control" id="tanggalmasuk" name="tanggalmasuk"
+                                    value="{{ $item->tanggalmasuk }}" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="tanggalkeluar" class="form-label"><b>Tanggal Keluar</b></label>
+                                <input type="date" class="form-control" id="tanggalkeluar" name="tanggalkeluar"
+                                    value="{{ $item->tanggalkeluar }}" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="pelanggan" class="form-label"><b>Pelanggan</b></label>
+                                <input type="text" class="form-control" id="pelanggan" name="pelanggan"
+                                    value="{{ $item->pelanggan }}" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="status" class="form-label"><b>Status</b></label>
+                                <input type="text" class="form-control" id="status" name="status"
+                                    value="{{ $item->status }}" readonly>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    @endforeach
+    <!-- end View data -->
+
     <!-- delete data -->
     @foreach ($stock as $item)
         <div class="modal fade" id="deleteModal{{ $item->id }}"
@@ -756,18 +826,28 @@
                         <tr>
                             <td>{{ $item->serialnumber }}</td>
                             <td>{{ $item->tipe }}</td>
-                            <td>{{ $stockGudang }}</td>
-                            <td>{{ $stockService }}</td>
-                            <td>{{ $stockDipinjam }}</td>
-                            <td>{{ $stockTerjual }}</td>
+                            <td>{{ $stockGudang[$item->status]['count'] ?? 0 }}</td>
+                            <td>{{ $stockService[$item->status]['count'] ?? 0 }}</td>
+                            <td>{{ $stockDipinjam[$item->status]['count'] ?? 0 }}</td>
+                            <td>{{ $stockTerjual[$item->status]['count'] ?? 0 }}</td>
                             <td>
                                 <a href="#" class="btn btn-primary btn-sm" data-toggle="modal"
-                                    data-target="#stockEditModal{{ $item->id }}" data-toggle="tooltip"
-                                    data-placement="top" title="Edit"><i class="fa-solid fa-pen-to-square"></i></a>
+                                    data-target="#stockViewModal{{ $item->id }}" data-toggle="tooltip"
+                                    data-placement="top" title="Edit"><i class="fa-solid fa-eye"></i></a>
+                                @auth
+                                    @if (auth()->user()->hasRole('superadmin') ||
+                                            auth()->user()->hasRole('jeffri') ||
+                                            auth()->user()->hasRole('sylvi') ||
+                                            auth()->user()->hasRole('coni'))
+                                        <a href="#" class="btn btn-warning btn-sm" data-toggle="modal"
+                                            data-target="#stockEditModal{{ $item->id }}" data-toggle="tooltip"
+                                            data-placement="top" title="Edit"><i class="fa-solid fa-pen-to-square"></i></a>
 
-                                <a href="#" class="btn btn-danger btn-sm" data-toggle="modal"
-                                    data-target="#deleteModal{{ $item->id }}" data-toggle="tooltip"
-                                    data-placement="top" title="Delete"><i class="fa-solid fa-trash"></i></a>
+                                        <a href="#" class="btn btn-danger btn-sm" data-toggle="modal"
+                                            data-target="#deleteModal{{ $item->id }}" data-toggle="tooltip"
+                                            data-placement="top" title="Delete"><i class="fa-solid fa-trash"></i></a>
+                                    @endif
+                                @endauth
                             </td>
                         </tr>
                     @endforeach

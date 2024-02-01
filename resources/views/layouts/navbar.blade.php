@@ -115,9 +115,10 @@
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-
-                        <a class="collapse-item {{ Request::is('service') ? 'active' : '' }}" href="/service">Tambah
-                            Baru</a>
+                        @can('tambah-service')
+                            <a class="collapse-item {{ Request::is('service') ? 'active' : '' }}" href="/service">Tambah
+                                Baru</a>
+                        @endcan
                         <h5 class="collapse-header font-weight-bold text-white bg-secondary">Pelanggan</h5>
                         <a class="collapse-item {{ Request::is('service/antrianPelanggan*') ? 'active' : '' }}"
                             href="/service/antrianPelanggan">Antrian</a>

@@ -5,22 +5,27 @@
     <div class="container-fluid">
         <div class="row">
             <h1 class="h3 mb-3 text-gray-800">Spare Parts</h1>
-            @if (Auth::check())
-                <div class="head-area">
-                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-target="#sparepartmodal">
-                        <i class="fa-solid fa-plus"></i> Tambah
-                    </button>
-                </div>
-            @endif
-            <div class="buttonarea d-flex gap-3 justify-content-end mb-3">
-                <button type="button" class="btn btn-success text-white" data-bs-toggle="modal"
-                    data-target="#importModal"><i class="fa-solid fa-file-import" style="color: #ffffff;"></i>
-                    Import Excel
-                </button>
-                <a href="{{ route('export.spareparts') }}" class="btn btn text-white float-end"
-                    style="background-color: #F05025"><i class="fa-solid fa-download" style="color: #ffffff;"></i> Export
-                    Excel</a>
-            </div>
+            @auth
+                @if (auth()->user()->hasRole('superadmin') ||
+                        auth()->user()->hasRole('jeffri'))
+                    <div class="head-area">
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-target="#sparepartmodal">
+                            <i class="fa-solid fa-plus"></i> Tambah
+                        </button>
+                    </div>
+
+                    <div class="buttonarea d-flex gap-3 justify-content-end mb-3">
+                        <button type="button" class="btn btn-success text-white" data-bs-toggle="modal"
+                            data-target="#importModal"><i class="fa-solid fa-file-import" style="color: #ffffff;"></i>
+                            Import Excel
+                        </button>
+                        <a href="{{ route('export.spareparts') }}" class="btn btn text-white float-end"
+                            style="background-color: #F05025"><i class="fa-solid fa-download" style="color: #ffffff;"></i>
+                            Export
+                            Excel</a>
+                    </div>
+                @endif
+            @endauth
         </div>
     </div>
 
@@ -258,21 +263,26 @@
                         <td>{{ $item->quantity }}</td>
                         <td>{{ $item->harga }}</td>
                         <td>
-                            <a href="#" class="btn btn-warning btn-sm" data-bs-toggle="modal"
-                                data-target="#editModalQuantityReduce{{ $item->id }}" data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Quantity"><i class="fa-solid fa-minus"></i></a>
+                            @auth
+                                @if (auth()->user()->hasRole('superadmin') ||
+                                        auth()->user()->hasRole('jeffri'))
+                                    <a href="#" class="btn btn-warning btn-sm" data-bs-toggle="modal"
+                                        data-target="#editModalQuantityReduce{{ $item->id }}" data-bs-toggle="tooltip"
+                                        data-bs-placement="top" title="Quantity"><i class="fa-solid fa-minus"></i></a>
 
-                            <a href="#" class="btn btn-success btn-sm" data-bs-toggle="modal"
-                                data-target="#editModalQuantity{{ $item->id }}" data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Quantity"><i class="fa-solid fa-plus"></i></a>
+                                    <a href="#" class="btn btn-success btn-sm" data-bs-toggle="modal"
+                                        data-target="#editModalQuantity{{ $item->id }}" data-bs-toggle="tooltip"
+                                        data-bs-placement="top" title="Quantity"><i class="fa-solid fa-plus"></i></a>
 
-                            <a href="#" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                                data-target="#editModal{{ $item->id }}" data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Edit"><i class="fa-solid fa-pen-to-square"></i></a>
+                                    <a href="#" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                                        data-target="#editModal{{ $item->id }}" data-bs-toggle="tooltip"
+                                        data-bs-placement="top" title="Edit"><i class="fa-solid fa-pen-to-square"></i></a>
 
-                            <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                data-target="#deleteModal{{ $item->id }}" data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Delete"><i class="fa-solid fa-trash"></i></a>
+                                    <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                        data-target="#deleteModal{{ $item->id }}" data-bs-toggle="tooltip"
+                                        data-bs-placement="top" title="Delete"><i class="fa-solid fa-trash"></i></a>
+                                @endif
+                            @endauth
                         </td>
                     </tr>
                 @endforeach

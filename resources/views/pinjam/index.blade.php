@@ -14,29 +14,36 @@
                 <h1 class="h3 mb-0 text-gray-800">Pengembalian Barang</h1>
             @endif
 
-            <a href="{{ route('export-pinjam') }}" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm">
-                <i class="fas fa-download fa-sm text-white-50"></i> Generate Excel</a>
+            @auth
+                @if (request()->is('pinjam') &&
+                        (auth()->user()->hasRole('superadmin') ||
+                            auth()->user()->hasRole('jeffri') ||
+                            auth()->user()->hasRole('sylvi') ||
+                            auth()->user()->hasRole('coni') ||
+                            auth()->user()->hasRole('vivi')))
+                    <a href="{{ route('export-pinjam') }}" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm">
+                        <i class="fas fa-download fa-sm text-white-50"></i> Generate Excel</a>
+                @endif
+            @endauth
         </div>
+        @auth
+            @if (request()->is('pinjam') &&
+                    (auth()->user()->hasRole('superadmin') ||
+                        auth()->user()->hasRole('jeffri') ||
+                        auth()->user()->hasRole('sylvi') ||
+                        auth()->user()->hasRole('coni') ||
+                        auth()->user()->hasRole('vivi')))
+                <div class="searchpinjam">
+                    @if (Auth::check() && request()->is('pinjam'))
+                        <button type="button" id="addpinjam" class="btn btn-danger mb-2" data-bs-toggle="modal"
+                            data-target="#exampleModal">
+                            <i class="fa-solid fa-plus"></i> Tambah Produk
+                        </button>
+                    @endif
+                </div>
+            @endif
+        @endauth
 
-        @if (Auth::check())
-            <div class="searchpinjam">
-                @if (Auth::check() && request()->is('pinjam'))
-                    <button type="button" id="addpinjam" class="btn btn-danger mb-2" data-bs-toggle="modal"
-                        data-target="#exampleModal">
-                        <i class="fa-solid fa-plus"></i> Tambah Produk
-                    </button>
-                @endif
-            </div>
-        @else
-            <div class="searchpinjam">
-                @if (Auth::check() && request()->is('pinjam'))
-                    <button type="button" id="addpinjam" class="btn btn-danger mb-2" data-bs-toggle="modal"
-                        data-target="#exampleModal">
-                        <i class="fa-solid fa-plus"></i> Tambah Produk
-                    </button>
-                @endif
-            </div>
-        @endif
         <!-- Tambah Data -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -996,7 +1003,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="viewModalLabel{{ $item->id }}">View Data Pinjam</h5>
+                        <h5 class="modal-title" id="viewModalLabel{{ $item->id }}">View Data Kembali</h5>
                         <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -1095,7 +1102,7 @@
                         @csrf
                         @method('PUT')
                         <div class="modal-header">
-                            <h5 class="modal-title" id="editModalLabel{{ $item->id }}">Edit Data Pinjam</h5>
+                            <h5 class="modal-title" id="editModalLabel{{ $item->id }}">Edit Data Kembali</h5>
                             <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -1574,8 +1581,6 @@
             <thead class="headfix">
                 <th>No</th>
                 <th>Tanggal</th>
-                {{-- <th>Gambar</th> --}}
-
                 <th>Serial Number</th>
                 <th>Tipe Device</th>
                 <th>Customer</th>
@@ -1591,53 +1596,69 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d/m/Y') }}</td>
-                            {{-- <td>
-                    <img src="{{ url('/storage/gambar/'. $item->gambar ) }}" width= '60' height='60' class="img img-responsive" />
-                </td> --}}
                             <td>{{ $item->serialnumber }}</td>
                             <td>{{ $item->device }}</td>
                             <td>{{ $item->customer }}</td>
                             <td>
+                                @auth
+                                    @if (request()->is('pinjam') &&
+                                            (auth()->user()->hasRole('superadmin') ||
+                                                auth()->user()->hasRole('jeffri') ||
+                                                auth()->user()->hasRole('sylvi') ||
+                                                auth()->user()->hasRole('coni') ||
+                                                auth()->user()->hasRole('vivi')))
+                                        <a href="#" class="btn btn-warning btn-sm" data-bs-toggle="modal"
+                                            data-target="#editModal{{ $item->id }}"><i
+                                                class="fa-solid fa-pen-to-square"></i></a>
+                                    @endif
 
-                                @if (Auth::check() && request()->is('pinjam'))
-                                    <a href="#" class="btn btn-warning btn-sm" data-bs-toggle="modal"
-                                        data-target="#editModal{{ $item->id }}"><i
-                                            class="fa-solid fa-pen-to-square"></i></a>
-                                @endif
+                                    @if (request()->is('kembali') &&
+                                            (auth()->user()->hasRole('superadmin') ||
+                                                auth()->user()->hasRole('jeffri') ||
+                                                auth()->user()->hasRole('sylvi') ||
+                                                auth()->user()->hasRole('coni') ||
+                                                auth()->user()->hasRole('vivi')))
+                                        <a href="#" class="btn btn-warning btn-sm" data-bs-toggle="modal"
+                                            data-target="#editkembaliModal{{ $item->id }}"><i
+                                                class="fa-solid fa-pen-to-square"></i></a>
+                                    @endif
 
-                                @if (Auth::check() && request()->is('kembali'))
-                                    <a href="#" class="btn btn-warning btn-sm" data-bs-toggle="modal"
-                                        data-target="#editkembaliModal{{ $item->id }}"><i
-                                            class="fa-solid fa-pen-to-square"></i></a>
-                                @endif
+                                    @if (request()->is('pinjam'))
+                                        <a href="#" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                                            data-target="#viewModal{{ $item->id }}"><i class="fa-solid fa-eye"></i></a>
+                                    @else
+                                        <a href="#" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                                            data-target="#viewkembaliModal{{ $item->id }}"><i
+                                                class="fa-solid fa-eye"></i></a>
+                                    @endif
 
-                                @if (request()->is('pinjam'))
-                                    <a href="#" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                                        data-target="#viewModal{{ $item->id }}"><i class="fa-solid fa-eye"></i></a>
-                                @else
-                                    <a href="#" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                                        data-target="#viewkembaliModal{{ $item->id }}"><i
-                                            class="fa-solid fa-eye"></i></a>
-                                @endif
+                                    @if (auth()->user()->hasRole('superadmin') ||
+                                            auth()->user()->hasRole('jeffri') ||
+                                            auth()->user()->hasRole('sylvi') ||
+                                            auth()->user()->hasRole('coni') ||
+                                            auth()->user()->hasRole('vivi'))
+                                        <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                            data-target="#deleteModal{{ $item->id }}"><i
+                                                class="fa-solid fa-trash"></i></a>
+                                    @endif
 
-                                @if (Auth::check())
-                                    <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                        data-target="#deleteModal{{ $item->id }}"><i
-                                            class="fa-solid fa-trash"></i></a>
-                                @endif
+                                    @if (request()->is('pinjam') &&
+                                            (auth()->user()->hasRole('superadmin') ||
+                                                auth()->user()->hasRole('jeffri') ||
+                                                auth()->user()->hasRole('sylvi') ||
+                                                auth()->user()->hasRole('coni') ||
+                                                auth()->user()->hasRole('vivi')))
+                                        <a href="#" class="btn btn-success btn-sm" data-bs-toggle="modal"
+                                            data-target="#moveModal{{ $item->id }}"><i
+                                                class="fa-solid fa-paper-plane"></i></a>
+                                    @endif
 
-                                @if (Auth::check() && request()->is('pinjam'))
-                                    <a href="#" class="btn btn-success btn-sm" data-bs-toggle="modal"
-                                        data-target="#moveModal{{ $item->id }}"><i
-                                            class="fa-solid fa-paper-plane"></i></a>
-                                @endif
-
-                                @if (Auth::check())
-                                    <a href="{{ url('generate-pdf', $item->id) }}" class="btn btn-secondary btn-sm"
-                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Download PDF"><i
-                                            class="fa-solid fa-file-pdf"></i></a>
-                                @endif
-
+                                    @if (Auth::check())
+                                        <a href="{{ url('generate-pdf', $item->id) }}" class="btn btn-secondary btn-sm"
+                                            data-bs-toggle="tooltip" data-bs-placement="top" title="Download PDF"><i
+                                                class="fa-solid fa-file-pdf"></i></a>
+                                    @endif
+                                @endauth
                             </td>
                         </tr>
                     @endforeach
