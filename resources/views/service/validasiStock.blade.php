@@ -61,9 +61,18 @@
                                     </option>
                                     <option value="D3-504" {{ $item->device == 'D3-504' ? 'selected' : '' }}>D3-504
                                     </option>
+                                    <option value="D3-504 Lama" {{ $item->device == 'D3-504 Lama' ? 'selected' : '' }}>
+                                        D3-504 Lama
+                                    </option>
                                     <option value="D3-505" {{ $item->device == 'D3-505' ? 'selected' : '' }}>D3-505
                                     </option>
+                                    <option value="D3-505 Lama" {{ $item->device == 'D3-505 Lama' ? 'selected' : '' }}>
+                                        D3-505 Lama
+                                    </option>
                                     <option value="D3-506" {{ $item->device == 'D3-506' ? 'selected' : '' }}>D3-506
+                                    </option>
+                                    <option value="D3-506 Lama" {{ $item->device == 'D3-506 Lama' ? 'selected' : '' }}>
+                                        D3-506 Lama
                                     </option>
                                     <option value="D4-502" {{ $item->device == 'D4-502' ? 'selected' : '' }}>D4-502
                                     </option>
@@ -465,9 +474,18 @@
                                     </option>
                                     <option value="D3-504" {{ $item->device == 'D3-504' ? 'selected' : '' }}>D3-504
                                     </option>
+                                    <option value="D3-504 Lama" {{ $item->device == 'D3-504 Lama' ? 'selected' : '' }}>
+                                        D3-504 Lama
+                                    </option>
                                     <option value="D3-505" {{ $item->device == 'D3-505' ? 'selected' : '' }}>D3-505
                                     </option>
+                                    <option value="D3-505 Lama" {{ $item->device == 'D3-505 Lama' ? 'selected' : '' }}>
+                                        D3-505 Lama
+                                    </option>
                                     <option value="D3-506" {{ $item->device == 'D3-506' ? 'selected' : '' }}>D3-506
+                                    </option>
+                                    <option value="D3-506 Lama" {{ $item->device == 'D3-506 Lama' ? 'selected' : '' }}>
+                                        D3-506 Lama
                                     </option>
                                     <option value="D4-502" {{ $item->device == 'D4-502' ? 'selected' : '' }}>D4-502
                                     </option>

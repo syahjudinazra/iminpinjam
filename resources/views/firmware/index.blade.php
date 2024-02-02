@@ -8,13 +8,16 @@
                 <div class="head-title">
                     <h3>Firmware</h3>
                 </div>
-                @if (Auth::check())
-                    <div class="edit-firmware">
-                        <a href="/firmware/table" class="btn btn-success">
-                            <h5>Firmware Data</h5>
-                        </a>
-                    </div>
-                @endif
+                @auth
+                    @if (auth()->user()->hasRole('superadmin') ||
+                            auth()->user()->hasRole('jeffri'))
+                        <div class="edit-firmware">
+                            <a href="/firmware/table" class="btn btn-success">
+                                <h5>Firmware Data</h5>
+                            </a>
+                        </div>
+                    @endif
+                @endauth
             </div>
 
             <main>

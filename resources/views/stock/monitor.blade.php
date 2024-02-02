@@ -826,10 +826,10 @@
                         <tr>
                             <td>{{ $item->serialnumber }}</td>
                             <td>{{ $item->tipe }}</td>
-                            <td>{{ $stockGudang[$item->status]['count'] ?? 0 }}</td>
-                            <td>{{ $stockService[$item->status]['count'] ?? 0 }}</td>
-                            <td>{{ $stockDipinjam[$item->status]['count'] ?? 0 }}</td>
-                            <td>{{ $stockTerjual[$item->status]['count'] ?? 0 }}</td>
+                            <td>{{ $item->gudang }}</td>
+                            <td>{{ $item->service }}</td>
+                            <td>{{ $item->dipinjam }}</td>
+                            <td>{{ $item->terjual }}</td>
                             <td>
                                 <a href="#" class="btn btn-primary btn-sm" data-toggle="modal"
                                     data-target="#stockViewModal{{ $item->id }}" data-toggle="tooltip"

@@ -97,10 +97,10 @@
                         <option value="D3-501">D3-501</option>
                         <option value="D3-503">D3-503</option>
                         <option value="D3-504">D3-504</option>
-                        <option value="D3-505">D3-505</option>
-                        <option value="D3-506">D3-506</option>
                         <option value="D3-504 lama">D3-504 lama</option>
+                        <option value="D3-505">D3-505</option>
                         <option value="D3-505 lama">D3-505 lama</option>
+                        <option value="D3-506">D3-506</option>
                         <option value="D3-506 lama">D3-506 lama</option>
                         <option value="D4-502">D4-502</option>
                         <option value="D4-503">D4-503</option>

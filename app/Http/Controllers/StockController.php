@@ -9,6 +9,7 @@ use App\Imports\StockImport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Database\Eloquent\Builder;
 
 class StockController extends Controller
 {
@@ -19,26 +20,18 @@ class StockController extends Controller
      */
     public function index()
     {
-        // Get the count of unique tipe for each status
-        $stockCounts = Stock::selectRaw('status, tipe, COUNT(*) as count')
-            ->groupBy('status', 'tipe')
-            ->get();
+        $stock = Stock::withCount(['tipe' => function(Builder $query) {
+            $query->where('status', 'Gudang');
+        }, 'tipe' => function(Builder $query) {
+            $query->where('status', 'Service');
+        }, 'tipe' => function(Builder $query) {
+            $query->where('status', 'Dipinjam');
+        }, 'tipe' => function(Builder $query) {
+            $query->where('status', 'Terjual');
+        }])->get();
 
-        // Extract the counts for each status
-        $stockCountsArray = $stockCounts->toArray();
-        $stockCountsData = array_column($stockCountsArray, null, 'status');
-
-        $stockGudang = $stockCountsData['Gudang'] ?? [];
-        $stockService = $stockCountsData['Service'] ?? [];
-        $stockDipinjam = $stockCountsData['Dipinjam'] ?? [];
-        $stockTerjual = $stockCountsData['Terjual'] ?? [];
-
-        $stock = Stock::all();
-
-        return view('stock.monitor', compact('stock', 'stockGudang', 'stockService', 'stockDipinjam', 'stockTerjual'));
+        return view('stock.monitor', compact('stock'));
     }
-
-
 
     public function gudang()
     {
