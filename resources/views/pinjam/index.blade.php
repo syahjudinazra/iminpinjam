@@ -58,17 +58,18 @@
                         @csrf
                         <div class="modal-body">
                             <div class="mb-3">
-                                <label for="tanggal" class="form-label"><b>Tanggal</b></label>
-                                <input type="date" class="form-control" id="tanggal" name="tanggal">
+                                <label for="tanggal" class="form-label font-weight-bold">Tanggal</label>
+                                <input type="date" class="form-control shadow-none" id="tanggal" name="tanggal">
                             </div>
                             <div class="mb-3">
-                                <label for="serialnumber" class="form-label"><b>Serial Number</b></label>
-                                <input type="text" class="form-control" id="serialnumber" name="serialnumber"
+                                <label for="serialnumber" class="form-label font-weight-bold">Serial Number</label>
+                                <input type="text" class="form-control shadow-none" id="serialnumber" name="serialnumber"
                                     placeholder="Masukan Serial Number">
                             </div>
                             <div class="form-group mb-3">
-                                <label for="device"><b>Tipe Device</b></label>
-                                <select class="form-select form-control-chosen" name="device" id="device"required>
+                                <label class="font-weight-bold" for="device">Tipe Device</label>
+                                <select class="form-select form-control-chosen shadow-none" name="device"
+                                    id="device"required>
                                     <option value="Pilih Device">Pilih Device</option>
                                     <option value="A4-101 Handle">A4-101 Handle</option>
                                     <option value="A4-102 Desktop Stand">A4-102 Desktop Stand</option>
@@ -246,9 +247,9 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="ram"><b>RAM/Storage</b></label>
-                                <select class="form-select" id="ram" name="ram" value="{{ old('ram') }}"
-                                    required>
+                                <label class="font-weight-bold" for="ram">RAM/Storage</label>
+                                <select class="form-select shadow-none" id="ram" name="ram"
+                                    value="{{ old('ram') }}" required>
                                     <option>Pilih RAM/Storage</option>
                                     <option>-</option>
                                     <option>1/8</option>
@@ -261,9 +262,9 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="android"><b>Versi Android</b></label>
-                                <select class="form-select" id="android" name="android" value="{{ old('android') }}"
-                                    required>
+                                <label class="font-weight-bold" for="android">Versi Android</label>
+                                <select class="form-select shadow-none" id="android" name="android"
+                                    value="{{ old('android') }}" required>
                                     <option>Pilih Versi Android</option>
                                     <option>-</option>
                                     <option>Android 7</option>
@@ -274,37 +275,39 @@
                                 </select>
                             </div>
                             <div class="mb-3">
-                                <label for="customer" class="form-label"><b>Customer</b></label>
-                                <input type="text" class="form-control" id="customer" name="customer"
+                                <label for="customer" class="form-label font-weight-bold">Customer</label>
+                                <input type="text" class="form-control shadow-none" id="customer" name="customer"
                                     placeholder="Masukan Nama Customer">
                             </div>
                             <div class="mb-3">
-                                <label for="alamat" class="form-label"><b>Alamat</b></label>
-                                <textarea class="form-control" id="alamat" name="alamat" rows="3" placeholder="Jl. Pergudangan Ecopark"></textarea>
+                                <label for="alamat" class="form-label font-weight-bold">Alamat</label>
+                                <textarea class="form-control shadow-none" id="alamat" name="alamat" rows="3"
+                                    placeholder="Jl. Pergudangan Ecopark"></textarea>
                             </div>
                             <div class="mb-3">
-                                <label for="sales" class="form-label"><b>Sales</b></label>
-                                <input type="text" class="form-control" id="sales" name="sales"
+                                <label for="sales" class="form-label font-weight-bold">Sales</label>
+                                <input type="text" class="form-control shadow-none" id="sales" name="sales"
                                     placeholder="Masukan Nama Sales">
                             </div>
                             <div class="mb-3">
-                                <label for="telp" class="form-label"><b>No Telp</b></label>
-                                <input type="number" class="form-control" id="telp" name="telp"
+                                <label for="telp" class="form-label font-weight-bold">No Telp</label>
+                                <input type="number" class="form-control shadow-none" id="telp" name="telp"
                                     placeholder="Masukan No Telp">
                             </div>
                             <div class="mb-3">
-                                <label for="pengirim" class="form-label"><b>Pengirim</b></label>
-                                <input type="text" class="form-control" id="pengirim" name="pengirim"
+                                <label for="pengirim" class="form-label font-weight-bold">Pengirim</label>
+                                <input type="text" class="form-control shadow-none" id="pengirim" name="pengirim"
                                     placeholder="Masukan Nama Pengirim">
                             </div>
                             <div class="mb-3">
-                                <label for="kelengkapankirim" class="form-label"><b>Kelengkapan Kirim</b></label>
-                                <textarea class="form-control" id="kelengkapankirim" name="kelengkapankirim" rows="3"
+                                <label for="kelengkapankirim" class="form-label font-weight-bold">Kelengkapan
+                                    Kirim</label>
+                                <textarea class="form-control shadow-none" id="kelengkapankirim" name="kelengkapankirim" rows="3"
                                     placeholder="Contoh:Adaptor,Dus,Docking"></textarea>
                             </div>
                             <div class="mb-3">
-                                <label for="gambar" class="form-label"><b>Gambar</b></label>
-                                <input class="form-control" type="file" id="gambar" name="gambar">
+                                <label for="gambar" class="form-label font-weight-bold">Gambar</label>
+                                <input class="form-control shadow-none" type="file" id="gambar" name="gambar">
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -336,18 +339,19 @@
                         </div>
                         <div class="modal-body">
                             <div class="mb-3">
-                                <label for="tanggal" class="form-label"><b>Tanggal</b></label>
-                                <input type="date" class="form-control" id="tanggal" name="tanggal"
+                                <label for="tanggal" class="form-label font-weight-bold">Tanggal</label>
+                                <input type="date" class="form-control shadow-none" id="tanggal" name="tanggal"
                                     value="{{ $item->tanggal }}">
                             </div>
                             <div class="mb-3">
-                                <label for="serialnumber" class="form-label"><b>Serial Number</b></label>
-                                <input type="text" class="form-control" id="serialnumber" name="serialnumber"
-                                    value="{{ $item->serialnumber }}">
+                                <label for="serialnumber" class="form-label font-weight-bold">Serial Number</label>
+                                <input type="text" class="form-control shadow-none" id="serialnumber"
+                                    name="serialnumber" value="{{ $item->serialnumber }}">
                             </div>
                             <div class="form-group mb-3">
-                                <label for="device"><b>Tipe Device</b></label>
-                                <select class="form-select form-control-chosen" name="device" id="device" required>
+                                <label class="font-weight-bold" for="device">Tipe Device</label>
+                                <select class="form-select form-control-chosen shadow-none" name="device" id="device"
+                                    required>
                                     <option value="Pilih Model">Pilih Model</option>
                                     <option value="A4-101 Handle" data-tokens="A4-101 Handle"
                                         {{ $item->device == 'A4-101 Handle' ? 'selected' : '' }}>A4-101 Handle</option>
@@ -665,8 +669,8 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="ram"><b>RAM/Storage</b></label>
-                                <select class="form-control" id="ram" name="ram" required>
+                                <label class="font-weight-bold" for="ram">RAM/Storage</label>
+                                <select class="form-control shadow-none" id="ram" name="ram" required>
                                     <option value="Pilih RAM/Storage">Pilih RAM/Storage</option>
                                     <option value="-" data-tokens="-" {{ $item->ram == '-' ? 'selected' : '' }}>
                                         -
@@ -702,8 +706,8 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="android"><b>Versi Android</b></label>
-                                <select class="form-control" id="android" name="android" required>
+                                <label class="font-weight-bold" for="android">Versi Android</label>
+                                <select class="form-control shadow-none" id="android" name="android" required>
                                     <option value="Pilih Android">Pilih Android</option>
                                     <option value="-" data-tokens="-"
                                         {{ $item->android == '-' ? 'selected' : '' }}>
@@ -732,41 +736,42 @@
                                 </select>
                             </div>
                             <div class="mb-3">
-                                <label for="customer" class="form-label"><b>Customer</b></label>
-                                <input type="text" class="form-control" id="customer" name="customer"
+                                <label for="customer" class="form-label font-weight-bold">Customer</label>
+                                <input type="text" class="form-control shadow-none" id="customer" name="customer"
                                     value="{{ $item->customer }}">
                             </div>
                             <div class="mb-3">
-                                <label for="alamat" class="form-label"><b>Alamat</b></label>
-                                <textarea class="form-control" id="alamat" name="alamat" rows="3">{{ $item->alamat }}</textarea>
+                                <label for="alamat" class="form-label font-weight-bold">Alamat</label>
+                                <textarea class="form-control shadow-none" id="alamat" name="alamat" rows="3">{{ $item->alamat }}</textarea>
                             </div>
                             <div class="mb-3">
-                                <label for="sales" class="form-label"><b>Sales</b></label>
-                                <input type="text" class="form-control" id="sales" name="sales"
+                                <label for="sales" class="form-label font-weight-bold">Sales</label>
+                                <input type="text" class="form-control shadow-none" id="sales" name="sales"
                                     value="{{ $item->sales }}">
                             </div>
                             <div class="mb-3">
-                                <label for="telp" class="form-label"><b>No Telp</b></label>
-                                <input type="number" class="form-control" id="telp" name="telp"
+                                <label for="telp" class="form-label font-weight-bold">No Telp</label>
+                                <input type="number" class="form-control shadow-none" id="telp" name="telp"
                                     value="{{ $item->telp }}">
                             </div>
                             <div class="mb-3">
-                                <label for="pengirim" class="form-label"><b>Pengirim</b></label>
-                                <input type="text" class="form-control" id="pengirim" name="pengirim"
+                                <label for="pengirim" class="form-label font-weight-bold">Pengirim</label>
+                                <input type="text" class="form-control shadow-none" id="pengirim" name="pengirim"
                                     value="{{ $item->pengirim }}">
                             </div>
                             <div class="mb-3">
-                                <label for="kelengkapankirim" class="form-label"><b>Kelengkapan Kirim</b></label>
-                                <textarea class="form-control" id="kelengkapankirim" name="kelengkapankirim" rows="3">{{ $item->kelengkapankirim }}</textarea>
+                                <label for="kelengkapankirim" class="form-label font-weight-bold">Kelengkapan
+                                    Kirim</label>
+                                <textarea class="form-control shadow-none" id="kelengkapankirim" name="kelengkapankirim" rows="3">{{ $item->kelengkapankirim }}</textarea>
                             </div>
                             <div class="mb-3" hidden>
-                                <label for="status" class="form-label"><b>Status</b></label>
-                                <input type="text" class="form-control" id="status" name="status"
+                                <label for="status" class="form-label font-weight-bold">Status</label>
+                                <input type="text" class="form-control shadow-none" id="status" name="status"
                                     value="{{ $item->status }}" readonly>
                             </div>
                             <div class="mb-3">
-                                <label for="gambar" class="form-label"><b>Gambar</b></label><br>
-                                <input class="form-control" type="file" id="gambar" name="gambar">
+                                <label for="gambar" class="form-label font-weight-bold">Gambar</label><br>
+                                <input class="form-control shadow-none" type="file" id="gambar" name="gambar">
                                 {{-- <img src="{{ asset('storage/gambar/'.$item->gambar) }}" width= '60' height='60' class="img img-responsive"> --}}
                             </div>
                         </div>
@@ -795,60 +800,60 @@
                     </div>
                     <div class="modal-body">
                         <div class="mb-3">
-                            <label for="tanggal" class="form-label"><b>Tanggal</b></label>
-                            <input type="date" class="form-control" id="tanggal" name="tanggal"
+                            <label for="tanggal" class="form-label font-weight-bold">Tanggal</label>
+                            <input type="date" class="form-control shadow-none" id="tanggal" name="tanggal"
                                 value="{{ $item->tanggal }}" readonly>
                         </div>
                         <div class="mb-3">
-                            <label for="serialnumber" class="form-label"><b>Serial Number</b></label>
-                            <input type="text" class="form-control" id="serialnumber" name="serialnumber"
+                            <label for="serialnumber" class="form-label font-weight-bold">Serial Number</label>
+                            <input type="text" class="form-control shadow-none" id="serialnumber" name="serialnumber"
                                 value="{{ $item->serialnumber }}" readonly>
                         </div>
                         <div class="mb-3">
-                            <label for="device" class="form-label"><b>Device</b></label>
-                            <input type="text" class="form-control" id="device" name="device"
+                            <label for="device" class="form-label font-weight-bold">Device</label>
+                            <input type="text" class="form-control shadow-none" id="device" name="device"
                                 value="{{ $item->device }}" readonly>
                         </div>
                         <div class="mb-3">
-                            <label for="ram" class="form-label"><b>RAM</b></label>
-                            <input type="text" class="form-control" id="ram" name="ram"
+                            <label for="ram" class="form-label font-weight-bold">RAM</label>
+                            <input type="text" class="form-control shadow-none" id="ram" name="ram"
                                 value="{{ $item->ram }}" readonly>
                         </div>
                         <div class="mb-3">
-                            <label for="android" class="form-label"><b>Android</b></label>
-                            <input type="text" class="form-control" id="android" name="android"
+                            <label for="android" class="form-label font-weight-bold">Android</label>
+                            <input type="text" class="form-control shadow-none" id="android" name="android"
                                 value="{{ $item->android }}" readonly>
                         </div>
                         <div class="mb-3">
-                            <label for="customer" class="form-label"><b>Customer</b></label>
-                            <input type="text" class="form-control" id="customer" name="customer"
+                            <label for="customer" class="form-label font-weight-bold">Customer</label>
+                            <input type="text" class="form-control shadow-none" id="customer" name="customer"
                                 value="{{ $item->customer }}" readonly>
                         </div>
                         <div class="mb-3">
-                            <label for="alamat" class="form-label"><b>Alamat</b></label>
-                            <textarea class="form-control" id="alamat" name="alamat" rows="3" readonly>{{ $item->alamat }}</textarea>
+                            <label for="alamat" class="form-label font-weight-bold">Alamat</label>
+                            <textarea class="form-control shadow-none" id="alamat" name="alamat" rows="3" readonly>{{ $item->alamat }}</textarea>
                         </div>
                         <div class="mb-3">
-                            <label for="sales" class="form-label"><b>Sales</b></label>
-                            <input type="text" class="form-control" id="sales" name="sales"
+                            <label for="sales" class="form-label font-weight-bold">Sales</label>
+                            <input type="text" class="form-control shadow-none" id="sales" name="sales"
                                 value="{{ $item->sales }}" readonly>
                         </div>
                         <div class="mb-3">
-                            <label for="telp" class="form-label"><b>No Telp</b></label>
-                            <input type="number" class="form-control" id="telp" name="telp"
+                            <label for="telp" class="form-label font-weight-bold">No Telp</label>
+                            <input type="number" class="form-control shadow-none" id="telp" name="telp"
                                 value="{{ $item->telp }}" readonly>
                         </div>
                         <div class="mb-3">
-                            <label for="pengirim" class="form-label"><b>Pengirim</b></label>
-                            <input type="text" class="form-control" id="pengirim" name="pengirim"
+                            <label for="pengirim" class="form-label font-weight-bold">Pengirim</label>
+                            <input type="text" class="form-control shadow-none" id="pengirim" name="pengirim"
                                 value="{{ $item->pengirim }}" readonly>
                         </div>
                         <div class="mb-3">
-                            <label for="kelengkapankirim" class="form-label"><b>Kelengkapan Kirim</b></label>
-                            <textarea class="form-control" id="kelengkapankirim" name="kelengkapankirim" rows="3" readonly>{{ $item->kelengkapankirim }}</textarea>
+                            <label for="kelengkapankirim" class="form-label font-weight-bold">Kelengkapan Kirim</label>
+                            <textarea class="form-control shadow-none" id="kelengkapankirim" name="kelengkapankirim" rows="3" readonly>{{ $item->kelengkapankirim }}</textarea>
                         </div>
                         <div class="mb-3">
-                            <label for="gambar" class="form-label"><b>Gambar</b></label><br>
+                            <label for="gambar" class="form-label font-weight-bold">Gambar</label><br>
                             <img src="{{ asset('storage/gambar/' . $item->gambar) }}" width='60' height='60'
                                 class="img img-responsive" id="gambar" name="gambar">
                         </div>
@@ -908,79 +913,82 @@
                         </div>
                         <div class="modal-body">
                             <div class="mb-3">
-                                <label for="tanggal" class="form-label"><b>Tanggal</b></label>
-                                <input type="date" class="form-control" id="tanggal" name="tanggal"
+                                <label for="tanggal" class="form-label font-weight-bold">Tanggal</label>
+                                <input type="date" class="form-control shadow-none" id="tanggal" name="tanggal"
                                     value="{{ $item->tanggal }}"readonly>
                             </div>
                             <div class="mb-3">
-                                <label for="serialnumber" class="form-label"><b>Serial Number</b></label>
-                                <input type="text" class="form-control" id="serialnumber" name="serialnumber"
-                                    value="{{ $item->serialnumber }}"readonly>
+                                <label for="serialnumber" class="form-label font-weight-bold">Serial Number</label>
+                                <input type="text" class="form-control shadow-none" id="serialnumber"
+                                    name="serialnumber" value="{{ $item->serialnumber }}"readonly>
                             </div>
                             <div class="mb-3">
-                                <label for="device" class="form-label"><b>Device</b></label>
-                                <input type="text" class="form-control" id="device" name="device"
+                                <label for="device" class="form-label font-weight-bold">Device</label>
+                                <input type="text" class="form-control shadow-none" id="device" name="device"
                                     value="{{ $item->device }}"readonly>
                             </div>
                             <div class="mb-3">
-                                <label for="ram" class="form-label"><b>RAM</b></label>
-                                <input type="text" class="form-control" id="ram" name="ram"
+                                <label for="ram" class="form-label font-weight-bold">RAM</label>
+                                <input type="text" class="form-control shadow-none" id="ram" name="ram"
                                     value="{{ $item->ram }}" readonly>
                             </div>
                             <div class="mb-3">
-                                <label for="android" class="form-label"><b>Android</b></label>
-                                <input type="text" class="form-control" id="android" name="android"
+                                <label for="android" class="form- font-weight-bold">Android</label>
+                                <input type="text" class="form-control shadow-none" id="android" name="android"
                                     value="{{ $item->android }}" readonly>
                             </div>
                             <div class="mb-3">
-                                <label for="customer" class="form-label"><b>Customer</b></label>
-                                <input type="text" class="form-control" id="customer" name="customer"
+                                <label for="customer" class="form- font-weight-bold">Customer</label>
+                                <input type="text" class="form-control shadow-none" id="customer" name="customer"
                                     value="{{ $item->customer }}"readonly>
                             </div>
                             <div class="mb-3">
-                                <label for="alamat" class="form-label"><b>Alamat</b></label>
+                                <label for="alamat" class="form-label font-weight-bold">Alamat</label>
                                 <textarea class="form-control" id="alamat" name="alamat" rows="3" readonly>{{ $item->alamat }}</textarea>
                             </div>
                             <div class="mb-3">
-                                <label for="sales" class="form-label"><b>Sales</b></label>
-                                <input type="text" class="form-control" id="sales" name="sales"
+                                <label for="sales" class="form-label font-weight-bold">Sales</label>
+                                <input type="text" class="form-control shadow-none" id="sales" name="sales"
                                     value="{{ $item->sales }}"readonly>
                             </div>
                             <div class="mb-3">
-                                <label for="telp" class="form-label"><b>No Telp</b></label>
-                                <input type="number" class="form-control" id="telp" name="telp"
+                                <label for="telp" class="form-label font-weight-bold">No Telp</label>
+                                <input type="number" class="form-control shadow-none" id="telp" name="telp"
                                     value="{{ $item->telp }}"readonly>
                             </div>
                             <div class="mb-3">
-                                <label for="pengirim" class="form-label"><b>Pengirim</b></label>
-                                <input type="text" class="form-control" id="pengirim" name="pengirim"
+                                <label for="pengirim" class="form-label font-weight-bold">Pengirim</label>
+                                <input type="text" class="form-control shadow-none" id="pengirim" name="pengirim"
                                     value="{{ $item->pengirim }}"readonly>
                             </div>
                             <div class="mb-3">
-                                <label for="kelengkapankirim" class="form-label"><b>Kelengkapan Kirim</b></label>
-                                <textarea class="form-control" id="kelengkapankirim" name="kelengkapankirim" rows="3" readonly>{{ $item->kelengkapankirim }}</textarea>
+                                <label for="kelengkapankirim" class="form-label font-weight-bold">Kelengkapan
+                                    Kirim</label>
+                                <textarea class="form-control shadow-none" id="kelengkapankirim" name="kelengkapankirim" rows="3" readonly>{{ $item->kelengkapankirim }}</textarea>
                             </div>
                             <div class="mb-3">
-                                <label for="tanggalkembali" class="form-label"><b>Tanggal Kembali</b></label>
-                                <input type="date" class="form-control" id="tanggalkembali" name="tanggalkembali">
+                                <label for="tanggalkembali" class="form-label font-weight-bold">Tanggal Kembali</label>
+                                <input type="date" class="form-control shadow-none" id="tanggalkembali"
+                                    name="tanggalkembali">
                             </div>
                             <div class="mb-3">
-                                <label for="penerima" class="form-label"><b>Penerima</b></label>
-                                <input type="text" class="form-control" id="penerima" name="penerima"
+                                <label for="penerima" class="form-label font-weight-bold">Penerima</label>
+                                <input type="text" class="form-control shadow-none" id="penerima" name="penerima"
                                     placeholder="Masukan Nama Penerima">
                             </div>
                             <div class="mb-3">
-                                <label for="kelengkapankembali" class="form-label"><b>Kelengkapan Kembali</b></label>
-                                <textarea class="form-control" id="kelengkapankembali" name="kelengkapankembali" rows="3"
+                                <label for="kelengkapankembali" class="form-label font-weight-bold">Kelengkapan
+                                    Kembali</label><br />
+                                <textarea class="form-control shadow-none" id="kelengkapankembali" name="kelengkapankembali" rows="3"
                                     placeholder="Contoh:Adaptor,Dus,Docking"></textarea>
                             </div>
                             <div class="mb-3" hidden>
-                                <label for="status" class="form-label"><b>Status</b></label>
-                                <input type="text" class="form-control" id="status" name="status" value="1"
-                                    readonly>
+                                <label for="status" class="form-label font-weight-bold">Status</label>
+                                <input type="text" class="form-control shadow-none" id="status" name="status"
+                                    value="1" readonly>
                             </div>
                             <div class="mb-3">
-                                <label for="gambar" class="form-label"><b>Gambar</b></label><br>
+                                <label for="gambar" class="form-label font-weight-bold">Gambar</label><br>
                                 <img src="{{ asset('storage/gambar/' . $item->gambar) }}" width='60' height='60'
                                     class="img img-responsive" id="gambar" name="gambar">
                             </div>
@@ -1010,74 +1018,77 @@
                     </div>
                     <div class="modal-body">
                         <div class="mb-3">
-                            <label for="tanggal" class="form-label"><b>Tanggal</b></label>
-                            <input type="date" class="form-control" id="tanggal" name="tanggal"
+                            <label for="tanggal" class="form- font-weight-bold">Tanggal</label>
+                            <input type="date" class="form-control shadow-none" id="tanggal" name="tanggal"
                                 value="{{ $item->tanggal }}" readonly>
                         </div>
                         <div class="mb-3">
-                            <label for="serialnumber" class="form-label"><b>Serial Number</b></label>
-                            <input type="text" class="form-control" id="serialnumber" name="serialnumber"
+                            <label for="serialnumber" class="form-label font-weight-bold">Serial Number</label>
+                            <input type="text" class="form-control shadow-none" id="serialnumber" name="serialnumber"
                                 value="{{ $item->serialnumber }}" readonly>
                         </div>
                         <div class="mb-3">
-                            <label for="device" class="form-label"><b>Device</b></label>
-                            <input type="text" class="form-control" id="device" name="device"
+                            <label for="device" class="form-label font-weight-bold">Device</label>
+                            <input type="text" class="form-control shadow-none" id="device" name="device"
                                 value="{{ $item->device }}" readonly>
                         </div>
                         <div class="mb-3">
-                            <label for="ram" class="form-label"><b>RAM</b></label>
-                            <input type="text" class="form-control" id="ram" name="ram"
+                            <label for="ram" class="form-label font-weight-bold">RAM</label>
+                            <input type="text" class="form-control shadow-none" id="ram" name="ram"
                                 value="{{ $item->ram }}" readonly>
                         </div>
                         <div class="mb-3">
-                            <label for="android" class="form-label"><b>Android</b></label>
-                            <input type="text" class="form-control" id="android" name="android"
+                            <label for="android" class="form-label font-weight-bold">Android</label>
+                            <input type="text" class="form-control shadow-none" id="android" name="android"
                                 value="{{ $item->android }}" readonly>
                         </div>
                         <div class="mb-3">
-                            <label for="customer" class="form-label"><b>Customer</b></label>
-                            <input type="text" class="form-control" id="customer" name="customer"
+                            <label for="customer" class="form-label font-weight-bold">Customer</label>
+                            <input type="text" class="form-control shadow-none" id="customer" name="customer"
                                 value="{{ $item->customer }}" readonly>
                         </div>
                         <div class="mb-3">
-                            <label for="alamat" class="form-label"><b>Alamat</b></label>
-                            <textarea class="form-control" id="alamat" name="alamat" rows="3" readonly>{{ $item->alamat }}</textarea>
+                            <label for="alamat" class="form-label font-weight-bold">Alamat</label>
+                            <textarea class="form-control shadow-none" id="alamat" name="alamat" rows="3" readonly>{{ $item->alamat }}</textarea>
                         </div>
                         <div class="mb-3">
-                            <label for="sales" class="form-label"><b>Sales</b></label>
-                            <input type="text" class="form-control" id="sales" name="sales"
+                            <label for="sales" class="form-label font-weight-bold">Sales</label>
+                            <input type="text" class="form-control shadow-none" id="sales" name="sales"
                                 value="{{ $item->sales }}" readonly>
                         </div>
                         <div class="mb-3">
-                            <label for="telp" class="form-label"><b>No Telp</b></label>
-                            <input type="number" class="form-control" id="telp" name="telp"
+                            <label for="telp" class="form-label font-weight-bold">No Telp</label>
+                            <input type="number" class="form-control shadow-none" id="telp" name="telp"
                                 value="{{ $item->telp }}" readonly>
                         </div>
                         <div class="mb-3">
-                            <label for="pengirim" class="form-label"><b>Pengirim</b></label>
-                            <input type="text" class="form-control" id="pengirim" name="pengirim"
+                            <label for="pengirim" class="form-label font-weight-bold">Pengirim</label>
+                            <input type="text" class="form-control shadow-none" id="pengirim" name="pengirim"
                                 value="{{ $item->pengirim }}" readonly>
                         </div>
                         <div class="mb-3">
-                            <label for="kelengkapankirim" class="form-label"><b>Kelengkapan Kirim</b></label>
-                            <textarea class="form-control" id="kelengkapankirim" name="kelengkapankirim" rows="3" readonly>{{ $item->kelengkapankirim }}</textarea>
+                            <label for="kelengkapankirim" class="form-label font-weight-bold">Kelengkapan Kirim</label>
+                            <textarea class="form-control shadow-none" id="kelengkapankirim" name="kelengkapankirim" rows="3"
+                                readonly>{{ $item->kelengkapankirim }}</textarea>
                         </div>
                         <div class="mb-3">
-                            <label for="tanggalkembali" class="form-label"><b>Tanggal Kembali</b></label>
-                            <input type="date" class="form-control" id="tanggalkembali" name="tanggalkembali"
-                                value="{{ $item->tanggalkembali }}" readonly>
+                            <label for="tanggalkembali" class="form-label font-weight-bold">Tanggal Kembali</label>
+                            <input type="date" class="form-control shadow-none" id="tanggalkembali"
+                                name="tanggalkembali" value="{{ $item->tanggalkembali }}" readonly>
                         </div>
                         <div class="mb-3">
-                            <label for="penerima" class="form-label"><b>Penerima</b></label>
-                            <input type="text" class="form-control" id="penerima" name="penerima"
+                            <label for="penerima" class="form-label font-weight-bold">Penerima</label>
+                            <input type="text" class="form-control shadow-none" id="penerima" name="penerima"
                                 value="{{ $item->penerima }}" readonly>
                         </div>
                         <div class="mb-3">
-                            <label for="kelengkapankembali" class="form-label"><b>Kelengkapan Kembali</b></label>
-                            <textarea class="form-control" id="kelengkapankembali" name="kelengkapankembali" rows="3" readonly>{{ $item->kelengkapankembali }}</textarea>
+                            <label for="kelengkapankembali" class="form-label font-weight-bold">Kelengkapan
+                                Kembali</label>
+                            <textarea class="form-control shadow-none" id="kelengkapankembali" name="kelengkapankembali" rows="3"
+                                readonly>{{ $item->kelengkapankembali }}</textarea>
                         </div>
                         <div class="mb-3">
-                            <label for="gambar" class="form-label"><b>Gambar</b></label><br>
+                            <label for="gambar" class="form-label font-weight-bold">Gambar</label><br>
                             <img src="{{ asset('storage/gambar/' . $item->gambar) }}" width='60' height='60'
                                 class="img img-responsive" id="gambar" name="gambar">
                         </div>
@@ -1109,19 +1120,19 @@
                         </div>
                         <div class="modal-body">
                             <div class="mb-3">
-                                <label for="tanggal" class="form-label"><b>Tanggal</b></label>
-                                <input type="date" class="form-control" id="tanggal" name="tanggal"
+                                <label for="tanggal" class="form-label font-weight-bold">Tanggal</label>
+                                <input type="date" class="form-control shadow-none" id="tanggal" name="tanggal"
                                     value="{{ $item->tanggal }}">
                             </div>
                             <div class="mb-3">
-                                <label for="serialnumber" class="form-label"><b>Serial Number</b></label>
-                                <input type="text" class="form-control" id="serialnumber" name="serialnumber"
-                                    value="{{ $item->serialnumber }}">
+                                <label for="serialnumber" class="form-label font-weight-bold">Serial Number</label>
+                                <input type="text" class="form-control shadow-none" id="serialnumber"
+                                    name="serialnumber" value="{{ $item->serialnumber }}">
                             </div>
                             <div class="form-group mb-3">
-                                <label for="device"><b>Tipe Device</b></label>
-                                <select class="form-select form-control-chosen" name="device" id="device"
-                                    required>
+                                <label class="font-weight-bold" for="device">Tipe Device</label>
+                                <select class="form-select form-control-chosen shadow-none" name="device"
+                                    id="device" required>
                                     <option value="Pilih Model">Pilih Model</option>
                                     <option value="A4-101 Handle" data-tokens="A4-101 Handle"
                                         {{ $item->device == 'A4-101 Handle' ? 'selected' : '' }}>A4-101 Handle</option>
@@ -1446,8 +1457,8 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="ram"><b>RAM/Storage</b></label>
-                                <select class="form-control" id="ram" name="ram" required>
+                                <label class="font-weight-bold" for="ram">RAM/Storage</label>
+                                <select class="form-control shadow-none" id="ram" name="ram" required>
                                     <option value="Pilih RAM/Storage">Pilih RAM/Storage</option>
                                     <option value="-" data-tokens="-" {{ $item->ram == '-' ? 'selected' : '' }}>
                                         -
@@ -1483,8 +1494,8 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="android"><b>Versi Android</b></label>
-                                <select class="form-control" id="android" name="android" required>
+                                <label class="font-weight-bold" for="android">Versi Android</label>
+                                <select class="form-control shadow-none" id="android" name="android" required>
                                     <option value="Pilih Android">Pilih Android</option>
                                     <option value="-" data-tokens="-"
                                         {{ $item->android == '-' ? 'selected' : '' }}>
@@ -1513,56 +1524,60 @@
                                 </select>
                             </div>
                             <div class="mb-3">
-                                <label for="customer" class="form-label"><b>Customer</b></label>
-                                <input type="text" class="form-control" id="customer" name="customer"
-                                    value="{{ $item->customer }}">
+                                <label for="customer" class="form-label font-weight-bold">Customer</label>
+                                <input type="text" class="form-control shadow-none" id="customer"
+                                    name="customer" value="{{ $item->customer }}">
                             </div>
                             <div class="mb-3">
-                                <label for="alamat" class="form-label"><b>Alamat</b></label>
-                                <textarea class="form-control" id="alamat" name="alamat" rows="3">{{ $item->alamat }}</textarea>
+                                <label for="alamat" class="form-label font-weight-bold">Alamat</label>
+                                <textarea class="form-control shadow-none" id="alamat" name="alamat" rows="3">{{ $item->alamat }}</textarea>
                             </div>
                             <div class="mb-3">
-                                <label for="sales" class="form-label"><b>Sales</b></label>
-                                <input type="text" class="form-control" id="sales" name="sales"
+                                <label for="sales" class="form-label font-weight-bold">Sales</label>
+                                <input type="text" class="form-control shadow-none" id="sales" name="sales"
                                     value="{{ $item->sales }}">
                             </div>
                             <div class="mb-3">
-                                <label for="telp" class="form-label"><b>No Telp</b></label>
-                                <input type="number" class="form-control" id="telp" name="telp"
+                                <label for="telp" class="form-label font-weight-bold">No Telp</label>
+                                <input type="number" class="form-control shadow-none" id="telp" name="telp"
                                     value="{{ $item->telp }}">
                             </div>
                             <div class="mb-3">
-                                <label for="pengirim" class="form-label"><b>Pengirim</b></label>
-                                <input type="text" class="form-control" id="pengirim" name="pengirim"
-                                    value="{{ $item->pengirim }}">
+                                <label for="pengirim" class="form-label font-weight-bold">Pengirim</label>
+                                <input type="text" class="form-control shadow-none" id="pengirim"
+                                    name="pengirim" value="{{ $item->pengirim }}">
                             </div>
                             <div class="mb-3">
-                                <label for="kelengkapankirim" class="form-label"><b>Kelengkapan Kirim</b></label>
-                                <textarea class="form-control" id="kelengkapankirim" name="kelengkapankirim" rows="3">{{ $item->kelengkapankirim }}</textarea>
+                                <label for="kelengkapankirim" class="form-label font-weight-bold">Kelengkapan
+                                    Kirim</label>
+                                <textarea class="form-control shadow-none" id="kelengkapankirim" name="kelengkapankirim" rows="3">{{ $item->kelengkapankirim }}</textarea>
                             </div>
                             <div class="mb-3">
-                                <label for="tanggalkembali" class="form-label"><b>Tanggal Kembali</b></label>
-                                <input type="date" class="form-control" id="tanggalkembali" name="tanggalkembali"
-                                    value="{{ $item->tanggalkembali }}">
+                                <label for="tanggalkembali" class="form-label font-weight-bold">Tanggal Kembali</label>
+                                <input type="date" class="form-control shadow-none" id="tanggalkembali"
+                                    name="tanggalkembali" value="{{ $item->tanggalkembali }}">
                             </div>
                             <div class="mb-3">
-                                <label for="penerima" class="form-label"><b>Penerima</b></label>
-                                <input type="text" class="form-control" id="penerima" name="penerima"
-                                    placeholder="Masukan Nama Penerima" value="{{ $item->penerima }}">
+                                <label for="penerima" class="form-label font-weight-bold">Penerima</label>
+                                <input type="text" class="form-control shadow-none" id="penerima"
+                                    name="penerima" placeholder="Masukan Nama Penerima"
+                                    value="{{ $item->penerima }}">
                             </div>
                             <div class="mb-3">
-                                <label for="kelengkapankembali" class="form-label"><b>Kelengkapan Kembali</b></label>
-                                <textarea class="form-control" id="kelengkapankembali" name="kelengkapankembali" rows="3"
+                                <label for="kelengkapankembali" class="form-label font-weight-bold">Kelengkapan
+                                    Kembali</label><br />
+                                <textarea class="form-control shadow-none" id="kelengkapankembali" name="kelengkapankembali" rows="3"
                                     placeholder="Contoh:Adaptor,Dus,Docking">{{ $item->kelengkapankembali }}</textarea>
                             </div>
                             <div class="mb-3" hidden>
-                                <label for="status" class="form-label"><b>Status</b></label>
-                                <input type="text" class="form-control" id="status" name="status"
+                                <label for="status" class="form-label font-weight-bold">Status</label>
+                                <input type="text" class="form-control shadow-none" id="status" name="status"
                                     value="{{ $item->status }}" readonly>
                             </div>
                             <div class="mb-3">
-                                <label for="gambar" class="form-label"><b>Gambar</b></label><br>
-                                <input class="form-control" type="file" id="gambar" name="gambar">
+                                <label for="gambar" class="form-label font-weight-bold">Gambar</label><br>
+                                <input class="form-control shadow-none" type="file" id="gambar"
+                                    name="gambar">
                             </div>
                         </div>
                         <div class="modal-footer">

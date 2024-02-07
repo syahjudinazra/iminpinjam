@@ -2,7 +2,7 @@
 @extends('layouts.navbar')
 
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <h1 class="h3 mb-3 text-gray-800">History SpareParts</h1>
             <div class="buttonarea d-flex gap-3 justify-content-end mb-3">
@@ -13,12 +13,13 @@
         </div>
     </div>
 
-    <div class="container">
+    <div class="container-fluid">
         <table id="hometable" class="table table-striped table-bordered" style="width:100%">
             <thead>
                 <tr>
                     <th>User</th>
                     <th>No SpareParts</th>
+                    <th>Tipe</th>
                     <th>Before</th>
                     <th>After</th>
                     <th>Description</th>
@@ -30,6 +31,7 @@
                     <tr>
                         <td>{{ $item->causer->name }}</td>
                         <td>{{ $item->subject->nospareparts }}</td>
+                        <td>{{ $item->subject->tipe }}</td>
                         <td>
                             @if (@is_array($item->changes['old']))
                                 @foreach ($item->changes['old'] as $key => $itemChange)
@@ -53,6 +55,7 @@
                 <tr>
                     <th>User</th>
                     <th>No SpareParts</th>
+                    <th>Tipe</th>
                     <th>Before</th>
                     <th>After</th>
                     <th>Description</th>

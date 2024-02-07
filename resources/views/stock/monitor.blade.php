@@ -25,11 +25,113 @@
                             style="background-color: #F05025"><i class="fa-solid fa-download" style="color: #ffffff;"></i>
                             Export
                             Excel</a>
+                        <button type="button" class="btn btn-danger text-white" data-bs-toggle="modal" data-target="#moveSN"><i
+                                class="fa-solid fa-truck-fast" style="color: #ffffff;"></i>
+                            Move SN
+                        </button>
                     </div>
                 @endif
             @endauth
         </div>
     </div>
+
+    <!-- Move SN Modal -->
+    <div class="modal fade" id="moveSN" tabindex="-1" aria-labelledby="moveSNLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="moveSNLabel">Add</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex gap-4">
+                        <textarea class="p-2 rounded" id="w3review" name="w3review" rows="5" cols="30"
+                            placeholder="Enter the SN (Multiple Sns Separated by enter)."></textarea>
+                        <table class="table table-bordered">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>SN</th>
+                                    <th>Pelanggan</th>
+                                    <th>Tipe</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>123</td>
+                                    <td>azra</td>
+                                    <td>Model 1</td>
+                                    <td>Action</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <button type="button" class="btn btn-outline-danger mt-2">Add SN</button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                        data-target="#moveSNext">Next</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="moveSNext" tabindex="-1" aria-labelledby="moveSNextLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="moveSNextLabel">Add</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="font-weight-bold" for="status">Status</label><br />
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input mt-1" type="radio" id="gudang" name="status[]"
+                                value="Gudang">
+                            <label class="form-check-label" for="gudang">Gudang</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input mt-1" type="radio" id="service" name="status[]"
+                                value="Service">
+                            <label class="form-check-label" for="service">Service</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input mt-1" type="radio" id="dipinjam" name="status[]"
+                                value="Dipinjam">
+                            <label class="form-check-label" for="dipinjam">Dipinjam</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input mt-1" type="radio" id="terjual" name="status[]"
+                                value="Terjual">
+                            <label class="form-check-label" for="terjual">Terjual</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="font-weight-bold" for="pelanggan">Pelanggan</label>
+                        <input type="text" class="form-control shadow-none" id="pelanggan" name="pelanggan"
+                            placeholder="Masukan Pelanggan" value="{{ old('pelanggan') }}">
+                    </div>
+                    <div class="form-group">
+                        <label class="font-weight-bold" for="tanggalkeluar">Tanggal Keluar</label>
+                        <input type="date" class="form-control shadow-none" id="tanggalkeluar" name="tanggalkeluar"
+                            placeholder="Masukan Tanggal Keluar" value="{{ old('tanggalkeluar') }}">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal"
+                        data-target="#moveSN">Prev</button>
+                    <button type="button" class="btn btn-danger">Next</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Move SN Modal -->
 
     <!-- Import Excel Modal -->
     <div class="modal fade" id="importModal" tabindex="-1" aria-labelledby="importModal" aria-hidden="true">
@@ -75,13 +177,13 @@
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="serialnumber"><b>Serial Number</b></label>
-                            <input type="text" class="form-control" id="serialnumber" name="serialnumber"
+                            <label class="font-weight-bold" for="serialnumber">Serial Number</label>
+                            <input type="text" class="form-control shadow-none" id="serialnumber" name="serialnumber"
                                 placeholder="Masukan Serial Number" required value="{{ old('serialnumber') }}">
                         </div>
                         <div class="form-group">
-                            <label for="tipe"><b>Tipe Device</b></label><br />
-                            <select id="tipe" class="form-control form-control-chosen" name="tipe"
+                            <label class="font-weight-bold" for="tipe">Tipe Device</label><br />
+                            <select id="tipe" class="form-control form-control-chosen shadow-none" name="tipe"
                                 data-placeholder="Pilih Tipe Device" required>
                                 <option value="Null">Pilih Tipe Device</option>
                                 <option value="A4-101" data-tokens="A4-101">A4-101</option>
@@ -245,27 +347,28 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="noinvoice"><b>No Invoice</b></label>
-                            <input type="text" class="form-control" id="noinvoice" name="noinvoice"
+                            <label class="font-weight-bold" for="noinvoice">No Invoice</label>
+                            <input type="text" class="form-control shadow-none" id="noinvoice" name="noinvoice"
                                 placeholder="Masukan No Invoice" value="{{ old('noinvoice') }}">
                         </div>
                         <div class="form-group">
-                            <label for="tanggalmasuk"><b>Tanggal Masuk</b></label>
-                            <input type="date" class="form-control" id="tanggalmasuk" name="tanggalmasuk"
+                            <label class="font-weight-bold" for="tanggalmasuk">Tanggal Masuk</label>
+                            <input type="date" class="form-control shadow-none" id="tanggalmasuk" name="tanggalmasuk"
                                 placeholder="Masukan Tanggal Masuk" value="{{ old('tanggalmasuk') }}">
                         </div>
                         <div class="form-group">
-                            <label for="tanggalkeluar"><b>Tanggal Keluar</b></label>
-                            <input type="date" class="form-control" id="tanggalkeluar" name="tanggalkeluar"
-                                placeholder="Masukan Tanggal Keluar" value="{{ old('tanggalkeluar') }}" readonly>
+                            <label class="font-weight-bold" for="tanggalkeluar">Tanggal Keluar</label>
+                            <input type="date" class="form-control shadow-none" id="tanggalkeluar"
+                                name="tanggalkeluar" placeholder="Masukan Tanggal Keluar"
+                                value="{{ old('tanggalkeluar') }}" readonly>
                         </div>
                         <div class="form-group">
-                            <label for="pelanggan"><b>Pelanggan</b></label>
-                            <input type="text" class="form-control" id="pelanggan" name="pelanggan"
+                            <label class="font-weight-bold" for="pelanggan">Pelanggan</label>
+                            <input type="text" class="form-control shadow-none" id="pelanggan" name="pelanggan"
                                 placeholder="Masukan Pelanggan" value="{{ old('pelanggan') }}">
                         </div>
                         <div class="form-group">
-                            <label for="status"><b>Status</b></label><br />
+                            <label class="font-weight-bold" for="status">Status</label><br />
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input mt-1" type="radio" id="gudang" name="status[]"
                                     value="Gudang">
@@ -316,13 +419,14 @@
                         </div>
                         <div class="modal-body">
                             <div class="mb-3">
-                                <label for="serialnumber" class="form-label"><b>Serial Number</b></label>
-                                <input type="text" class="form-control" id="serialnumber" name="serialnumber"
-                                    value="{{ $item->serialnumber }}">
+                                <label for="serialnumber" class="form-label font-weight-bold">Serial Number</label>
+                                <input type="text" class="form-control shadow-none" id="serialnumber"
+                                    name="serialnumber" value="{{ $item->serialnumber }}">
                             </div>
                             <div class="form-group mb-3">
-                                <label for="tipe"><b>Tipe Device</b></label><br />
-                                <select id="tipe" class="form-control form-control-chosen" name="tipe" required>
+                                <label class="font-weight-bold" for="tipe">Tipe Device</label><br />
+                                <select id="tipe" class="form-control form-control-chosen shadow-none"
+                                    name="tipe" required>
                                     <option value="Null">Pilih Tipe Device</option>
                                     <option value="A4-101" data-tokens="A4-101"
                                         {{ $item->tipe == 'A4-101' ? 'selected' : '' }}>
@@ -659,27 +763,27 @@
                                 </select>
                             </div>
                             <div class="mb-3">
-                                <label for="noinvoice" class="form-label"><b>No Invoice</b></label>
-                                <input type="text" class="form-control" id="noinvoice" name="noinvoice"
+                                <label for="noinvoice" class="form-label font-weight-bold">No Invoice</label>
+                                <input type="text" class="form-control shadow-none" id="noinvoice" name="noinvoice"
                                     value="{{ $item->noinvoice }}">
                             </div>
                             <div class="mb-3">
-                                <label for="tanggalmasuk" class="form-label"><b>Tanggal Masuk</b></label>
-                                <input type="date" class="form-control" id="tanggalmasuk" name="tanggalmasuk"
-                                    value="{{ $item->tanggalmasuk }}">
+                                <label for="tanggalmasuk" class="form-label font-weight-bold">Tanggal Masuk</label>
+                                <input type="date" class="form-control shadow-none" id="tanggalmasuk"
+                                    name="tanggalmasuk" value="{{ $item->tanggalmasuk }}">
                             </div>
                             <div class="mb-3">
-                                <label for="tanggalkeluar" class="form-label"><b>Tanggal Keluar</b></label>
-                                <input type="date" class="form-control" id="tanggalkeluar" name="tanggalkeluar"
-                                    value="{{ $item->tanggalkeluar }}">
+                                <label for="tanggalkeluar" class="form-label font-weight-bold">Tanggal Keluar</label>
+                                <input type="date" class="form-control shadow-none" id="tanggalkeluar"
+                                    name="tanggalkeluar" value="{{ $item->tanggalkeluar }}">
                             </div>
                             <div class="mb-3">
-                                <label for="pelanggan" class="form-label"><b>Pelanggan</b></label>
-                                <input type="text" class="form-control" id="pelanggan" name="pelanggan"
+                                <label for="pelanggan" class="form-label font-weight-bold">Pelanggan</label>
+                                <input type="text" class="form-control shadow-none" id="pelanggan" name="pelanggan"
                                     value="{{ $item->pelanggan }}">
                             </div>
                             <div class="form-group">
-                                <label><b>Status</b></label><br />
+                                <label class="font-weight-bold">Status</label><br />
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input mt-1" type="radio" id="gudang" name="status"
                                         value="Gudang"
@@ -735,38 +839,38 @@
                         </div>
                         <div class="modal-body">
                             <div class="mb-3">
-                                <label for="serialnumber" class="form-label"><b>Serial Number</b></label>
-                                <input type="text" class="form-control" id="serialnumber" name="serialnumber"
-                                    value="{{ $item->serialnumber }}" readonly>
+                                <label for="serialnumber" class="form-label font-weight-bold">Serial Number</label>
+                                <input type="text" class="form-control shadow-none" id="serialnumber"
+                                    name="serialnumber" value="{{ $item->serialnumber }}" readonly>
                             </div>
                             <div class="mb-3">
-                                <label for="tipe" class="form-label"><b>Tipe Device</b></label>
-                                <input type="text" class="form-control" id="tipe" name="tipe"
+                                <label for="tipe" class="form-label font-weight-bold">Tipe Device</label>
+                                <input type="text" class="form-control shadow-none" id="tipe" name="tipe"
                                     value="{{ $item->tipe }}" readonly>
                             </div>
                             <div class="mb-3">
-                                <label for="noinvoice" class="form-label"><b>No Invoice</b></label>
-                                <input type="text" class="form-control" id="noinvoice" name="noinvoice"
+                                <label for="noinvoice" class="form-label font-weight-bold">No Invoice</label>
+                                <input type="text" class="form-control shadow-none" id="noinvoice" name="noinvoice"
                                     value="{{ $item->noinvoice }}" readonly>
                             </div>
                             <div class="mb-3">
-                                <label for="tanggalmasuk" class="form-label"><b>Tanggal Masuk</b></label>
-                                <input type="date" class="form-control" id="tanggalmasuk" name="tanggalmasuk"
-                                    value="{{ $item->tanggalmasuk }}" readonly>
+                                <label for="tanggalmasuk" class="form-label font-weight-bold">Tanggal Masuk</label>
+                                <input type="date" class="form-control shadow-none" id="tanggalmasuk"
+                                    name="tanggalmasuk" value="{{ $item->tanggalmasuk }}" readonly>
                             </div>
                             <div class="mb-3">
-                                <label for="tanggalkeluar" class="form-label"><b>Tanggal Keluar</b></label>
-                                <input type="date" class="form-control" id="tanggalkeluar" name="tanggalkeluar"
-                                    value="{{ $item->tanggalkeluar }}" readonly>
+                                <label for="tanggalkeluar" class="form-label font-weight-bold">Tanggal Keluar</label>
+                                <input type="date" class="form-control shadow-none" id="tanggalkeluar"
+                                    name="tanggalkeluar" value="{{ $item->tanggalkeluar }}" readonly>
                             </div>
                             <div class="mb-3">
-                                <label for="pelanggan" class="form-label"><b>Pelanggan</b></label>
-                                <input type="text" class="form-control" id="pelanggan" name="pelanggan"
+                                <label for="pelanggan" class="form-label font-weight-bold">Pelanggan</label>
+                                <input type="text" class="form-control shadow-none" id="pelanggan" name="pelanggan"
                                     value="{{ $item->pelanggan }}" readonly>
                             </div>
                             <div class="mb-3">
-                                <label for="status" class="form-label"><b>Status</b></label>
-                                <input type="text" class="form-control" id="status" name="status"
+                                <label for="status" class="form-label font-weight-bold">Status</label>
+                                <input type="text" class="form-control shadow-none" id="status" name="status"
                                     value="{{ $item->status }}" readonly>
                             </div>
                         </div>
@@ -813,54 +917,61 @@
         <div style="overflow: auto">
             <table id="hometable" class="table table-striped table-bordered" style="width:100%">
                 <thead>
-                    <th>Serial Number</th>
                     <th>Tipe</th>
                     <th>Gudang</th>
                     <th>Service</th>
                     <th>Dipinjam</th>
                     <th>Terjual</th>
-                    <th>Action</th>
+                    {{-- <th>Action</th> --}}
                 </thead>
                 <tbody>
+                    @php
+                        $displayedTipes = [];
+                    @endphp
                     @foreach ($stock as $item)
-                        <tr>
-                            <td>{{ $item->serialnumber }}</td>
-                            <td>{{ $item->tipe }}</td>
-                            <td>{{ $item->gudang }}</td>
-                            <td>{{ $item->service }}</td>
-                            <td>{{ $item->dipinjam }}</td>
-                            <td>{{ $item->terjual }}</td>
-                            <td>
-                                <a href="#" class="btn btn-primary btn-sm" data-toggle="modal"
-                                    data-target="#stockViewModal{{ $item->id }}" data-toggle="tooltip"
-                                    data-placement="top" title="Edit"><i class="fa-solid fa-eye"></i></a>
-                                @auth
-                                    @if (auth()->user()->hasRole('superadmin') ||
-                                            auth()->user()->hasRole('jeffri') ||
-                                            auth()->user()->hasRole('sylvi') ||
-                                            auth()->user()->hasRole('coni'))
-                                        <a href="#" class="btn btn-warning btn-sm" data-toggle="modal"
-                                            data-target="#stockEditModal{{ $item->id }}" data-toggle="tooltip"
-                                            data-placement="top" title="Edit"><i class="fa-solid fa-pen-to-square"></i></a>
+                        @if (!in_array($item->tipe, $displayedTipes))
+                            <tr>
+                                <td>{{ $item->tipe }}</td>
+                                <td>{{ $countByStatus['Gudang'][$item->tipe] ?? 0 }}</td>
+                                <td>{{ $countByStatus['Service'][$item->tipe] ?? 0 }}</td>
+                                <td>{{ $countByStatus['Dipinjam'][$item->tipe] ?? 0 }}</td>
+                                <td>{{ $countByStatus['Terjual'][$item->tipe] ?? 0 }}</td>
+                                {{-- <td>
+                                    <a href="#" class="btn btn-primary btn-sm" data-toggle="modal"
+                                        data-target="#stockViewModal{{ $item->id }}" data-toggle="tooltip"
+                                        data-placement="top" title="Edit"><i class="fa-solid fa-eye"></i></a>
+                                    @auth
+                                        @if (auth()->user()->hasRole('superadmin') ||
+    auth()->user()->hasRole('jeffri') ||
+    auth()->user()->hasRole('sylvi') ||
+    auth()->user()->hasRole('coni'))
+                                            <a href="#" class="btn btn-warning btn-sm" data-toggle="modal"
+                                                data-target="#stockEditModal{{ $item->id }}" data-toggle="tooltip"
+                                                data-placement="top" title="Edit"><i
+                                                    class="fa-solid fa-pen-to-square"></i></a>
 
-                                        <a href="#" class="btn btn-danger btn-sm" data-toggle="modal"
-                                            data-target="#deleteModal{{ $item->id }}" data-toggle="tooltip"
-                                            data-placement="top" title="Delete"><i class="fa-solid fa-trash"></i></a>
-                                    @endif
-                                @endauth
-                            </td>
-                        </tr>
+                                            <a href="#" class="btn btn-danger btn-sm" data-toggle="modal"
+                                                data-target="#deleteModal{{ $item->id }}" data-toggle="tooltip"
+                                                data-placement="top" title="Delete"><i class="fa-solid fa-trash"></i></a>
+                                        @endif
+                                    @endauth
+                                </td> --}}
+                            </tr>
+                            @php
+                                $displayedTipes[] = $item->tipe;
+                            @endphp
+                        @endif
                     @endforeach
                 </tbody>
+
                 <tfoot>
                     <tr>
-                        <th>Serial Number</th>
                         <th>Tipe</th>
                         <th>Gudang</th>
                         <th>Service</th>
                         <th>Dipinjam</th>
                         <th>Terjual</th>
-                        <th>Action</th>
+                        {{-- <th>Action</th> --}}
                     </tr>
                 </tfoot>
             </table>

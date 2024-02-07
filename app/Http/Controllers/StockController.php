@@ -20,18 +20,23 @@ class StockController extends Controller
      */
     public function index()
     {
-        $stock = Stock::withCount(['tipe' => function(Builder $query) {
-            $query->where('status', 'Gudang');
-        }, 'tipe' => function(Builder $query) {
-            $query->where('status', 'Service');
-        }, 'tipe' => function(Builder $query) {
-            $query->where('status', 'Dipinjam');
-        }, 'tipe' => function(Builder $query) {
-            $query->where('status', 'Terjual');
-        }])->get();
+        $statusValues = ['Gudang', 'Service', 'Dipinjam', 'Terjual'];
 
-        return view('stock.monitor', compact('stock'));
+        $stockCounts = Stock::whereIn('status', $statusValues)
+            ->groupBy('status', 'tipe')
+            ->selectRaw('status, tipe, COUNT(*) as count')
+            ->get();
+
+        $countByStatus = [];
+
+        foreach ($stockCounts as $count) {
+            $countByStatus[$count->status][$count->tipe] = $count->count;
+        }
+
+        $stock = Stock::all();
+        return view('stock.monitor', compact('stock', 'countByStatus'));
     }
+
 
     public function gudang()
     {
@@ -113,7 +118,7 @@ class StockController extends Controller
 
     public function templateImportStock($filename)
     {
-        $filePath = storage_path('app/template/' . $filename); // Adjust the path if needed
+        $filePath = storage_path('app/template/' . $filename);
 
         if (file_exists($filePath)) {
             return response()->download($filePath);

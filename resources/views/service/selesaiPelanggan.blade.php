@@ -463,6 +463,7 @@
                     @endempty
                 </tbody>
             </table>
+            {{ $selesaiPelanggan->links() }}
         </div>
     </div>
 @endsection

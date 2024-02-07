@@ -18,7 +18,8 @@
         "psr/simple-cache": "2.0",
         "realrashid/sweet-alert": "^7.0",
         "spatie/laravel-activitylog": "^4.7",
-        "spatie/laravel-permission": "^6.3"
+        "spatie/laravel-permission": "^6.3",
+        "yajra/laravel-datatables": "9.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.9",

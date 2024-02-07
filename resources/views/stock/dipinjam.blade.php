@@ -9,8 +9,8 @@
 
         <!-- Edit Data Stock -->
         @foreach ($stockDipinjam as $item)
-            <div class="modal fade" id="stockEditModal{{ $item->id }}" tabindex="-1"
-                aria-labelledby="editModalLabel{{ $item->id }}" aria-hidden="true">
+            <div class="modal fade" id="stockEditModal{{ $item->id }}" aria-labelledby="editModalLabel{{ $item->id }}"
+                aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <form method="POST" action="{{ route('stock.update', $item->id) }}" enctype="multipart/form-data">
@@ -25,13 +25,14 @@
                             </div>
                             <div class="modal-body">
                                 <div class="mb-3">
-                                    <label for="serialnumber" class="form-label"><b>Serial Number</b></label>
-                                    <input type="text" class="form-control" id="serialnumber" name="serialnumber"
-                                        value="{{ $item->serialnumber }}">
+                                    <label for="serialnumber" class="form-label font-weight-bold">Serial Number</label>
+                                    <input type="text" class="form-control shadow-none" id="serialnumber"
+                                        name="serialnumber" value="{{ $item->serialnumber }}">
                                 </div>
                                 <div class="form-group mb-3">
-                                    <label for="tipe"><b>Tipe Device</b></label>
-                                    <select id="tipe" class="form-control form-control-chosen" name="tipe" required>
+                                    <label class="font-weight-bold" for="tipe">Tipe Device</label><br />
+                                    <select id="tipe" class="form-control form-control-chosen shadow-none"
+                                        name="tipe" required>
                                         <option value="Null">Pilih Tipe Device</option>
                                         <option value="A4-101" data-tokens="A4-101"
                                             {{ $item->tipe == 'A4-101' ? 'selected' : '' }}>
@@ -370,27 +371,27 @@
                                     </select>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="noinvoice" class="form-label"><b>No Invoice</b></label>
-                                    <input type="text" class="form-control" id="noinvoice" name="noinvoice"
-                                        value="{{ $item->noinvoice }}">
+                                    <label for="noinvoice" class="form-label font-weight-bold">No Invoice</label>
+                                    <input type="text" class="form-control shadow-none" id="noinvoice"
+                                        name="noinvoice" value="{{ $item->noinvoice }}">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="tanggalmasuk" class="form-label"><b>Tanggal Masuk</b></label>
-                                    <input type="date" class="form-control" id="tanggalmasuk" name="tanggalmasuk"
-                                        value="{{ $item->tanggalmasuk }}">
+                                    <label for="tanggalmasuk" class="form-label font-weight-bold">Tanggal Masuk</label>
+                                    <input type="date" class="form-control shadow-none" id="tanggalmasuk"
+                                        name="tanggalmasuk" value="{{ $item->tanggalmasuk }}">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="tanggalkeluar" class="form-label"><b>Tanggal Keluar</b></label>
-                                    <input type="date" class="form-control" id="tanggalkeluar" name="tanggalkeluar"
-                                        value="{{ $item->tanggalkeluar }}">
+                                    <label for="tanggalkeluar" class="form-label font-weight-bold">Tanggal Keluar</label>
+                                    <input type="date" class="form-control shadow-none" id="tanggalkeluar"
+                                        name="tanggalkeluar" value="{{ $item->tanggalkeluar }}">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="pelanggan" class="form-label"><b>Pelanggan</b></label>
-                                    <input type="text" class="form-control" id="pelanggan" name="pelanggan"
-                                        value="{{ $item->pelanggan }}">
+                                    <label for="pelanggan" class="form-label font-weight-bold">Pelanggan</label>
+                                    <input type="text" class="form-control shadow-none" id="pelanggan"
+                                        name="pelanggan" value="{{ $item->pelanggan }}">
                                 </div>
                                 <div class="form-group">
-                                    <label><b>Status</b></label><br />
+                                    <label class="font-weight-bold">Status</label><br />
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input mt-1" type="radio" id="gudang"
                                             name="status" value="Gudang"
@@ -447,38 +448,39 @@
                             </div>
                             <div class="modal-body">
                                 <div class="mb-3">
-                                    <label for="serialnumber" class="form-label"><b>Serial Number</b></label>
-                                    <input type="text" class="form-control" id="serialnumber" name="serialnumber"
-                                        value="{{ $item->serialnumber }}" readonly>
+                                    <label for="serialnumber" class="form-label font-weight-bold">Serial Number</label>
+                                    <input type="text" class="form-control shadow-none" id="serialnumber"
+                                        name="serialnumber" value="{{ $item->serialnumber }}" readonly>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="tipe" class="form-label"><b>Tipe Device</b></label>
-                                    <input type="text" class="form-control" id="tipe" name="tipe"
+                                    <label for="tipe" class="form-label font-weight-bold">Tipe Device</label>
+                                    <input type="text" class="form-control shadow-none" id="tipe" name="tipe"
                                         value="{{ $item->tipe }}" readonly>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="noinvoice" class="form-label"><b>No Invoice</b></label>
-                                    <input type="text" class="form-control" id="noinvoice" name="noinvoice"
-                                        value="{{ $item->noinvoice }}" readonly>
+                                    <label for="noinvoice" class="form-label font-weight-bold">No Invoice</label>
+                                    <input type="text" class="form-control shadow-none" id="noinvoice"
+                                        name="noinvoice" value="{{ $item->noinvoice }}" readonly>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="tanggalmasuk" class="form-label"><b>Tanggal Masuk</b></label>
-                                    <input type="date" class="form-control" id="tanggalmasuk" name="tanggalmasuk"
-                                        value="{{ $item->tanggalmasuk }}" readonly>
+                                    <label for="tanggalmasuk" class="form-label font-weight-bold">Tanggal Masuk</label>
+                                    <input type="date" class="form-control shadow-none" id="tanggalmasuk"
+                                        name="tanggalmasuk" value="{{ $item->tanggalmasuk }}" readonly>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="tanggalkeluar" class="form-label"><b>Tanggal Keluar</b></label>
-                                    <input type="date" class="form-control" id="tanggalkeluar" name="tanggalkeluar"
-                                        value="{{ $item->tanggalkeluar }}" readonly>
+                                    <label for="tanggalkeluar" class="form-label font-weight-bold">Tanggal
+                                        Keluar</label>
+                                    <input type="date" class="form-control shadow-none" id="tanggalkeluar"
+                                        name="tanggalkeluar" value="{{ $item->tanggalkeluar }}" readonly>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="pelanggan" class="form-label"><b>Pelanggan</b></label>
-                                    <input type="text" class="form-control" id="pelanggan" name="pelanggan"
-                                        value="{{ $item->pelanggan }}" readonly>
+                                    <label for="pelanggan" class="form-label font-weight-bold">Pelanggan</label>
+                                    <input type="text" class="form-control shadow-none" id="pelanggan"
+                                        name="pelanggan" value="{{ $item->pelanggan }}" readonly>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="status" class="form-label"><b>Status</b></label>
-                                    <input type="text" class="form-control" id="status" name="status"
+                                    <label for="status" class="form-label font-weight-bold">Status</label>
+                                    <input type="text" class="form-control shadow-none" id="status" name="status"
                                         value="{{ $item->status }}" readonly>
                                 </div>
                             </div>

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use App\Exports\ServiceExport;
+use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ServiceController extends Controller
@@ -18,6 +20,7 @@ class ServiceController extends Controller
     {
         return view('service.index');
     }
+
     //Pelanggan
     public function antrianPelanggan()
     {
@@ -36,14 +39,34 @@ class ServiceController extends Controller
                                     ->get();
         return view('service.validasiPelanggan', compact('validasiPelanggan'));
     }
-    public function selesaiPelanggan()
+
+    public function selesaiPelanggan(Request $request)
     {
         $selesaiPelanggan = Service::where('status', 'selesai')
-                                    ->where('pemilik', 'customer')
-                                    ->orderBy('tanggalmasuk', 'desc')
-                                    ->get();
-        return view('service.selesaiPelanggan', compact('selesaiPelanggan'));
+        ->where('pemilik', 'customer')
+        ->orderByDesc('tanggalmasuk')
+        ->paginate(10);
+
+    return view('service.selesaiPelanggan', compact('selesaiPelanggan'));
+
     }
+
+    private function handleAjaxRequest()
+    {
+        try {
+            $data = Service::where('status', 'selesai')
+                ->where('pemilik', 'customer')
+                ->orderBy('tanggalmasuk', 'desc');
+
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->make(true);
+        } catch (\Exception $e) {
+            // Handle AJAX request error
+            return response()->json(['error' => 'Error processing AJAX request'], 500);
+        }
+    }
+
     //Stock
     public function antrianStock()
     {

@@ -77,31 +77,6 @@
                 </div>
             </li>
 
-
-            {{-- <div class="sidebar-heading">
-                Service Barang
-            </div>
-            <!-- Nav Item - Services -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-target="#collapseUtilities"
-                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Services</span>
-                </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">List Services</h6>
-                        <a class="collapse-item {{ Request::is('monitor*') ? 'active' : '' }}" href="/monitor">Monitor</a>
-                        <a class="collapse-item {{ Request::is('servicedone*') ? 'active' : '' }}"
-                            href="/servicedone">Service Done</a>
-                        <a class="collapse-item {{ Request::is('servicepending*') ? 'active' : '' }}"
-                            href="/servicepending">Service Pending</a>
-                        <a class="collapse-item {{ Request::is('kanibal*') ? 'active' : '' }}" href="/kanibal">Kanibal</a>
-                    </div>
-                </div>
-            </li> --}}
-
             <div class="sidebar-heading">
                 Service
             </div>
@@ -176,13 +151,13 @@
             @auth
                 @if (auth()->user()->hasRole('superadmin'))
                     <div class="sidebar-heading">
-                        Users Settings
+                        Users Management
                     </div>
                     <!-- Nav Item - User -->
                     <li class="nav-item">
                         <a class="nav-link {{ Request::is('user*') ? 'active' : '' }}" href="/user">
                             <i class="fas fa-fw fa-user"></i>
-                            <span>User Settings</span>
+                            <span>User Management</span>
                         </a>
                     </li>
                 @endif
@@ -280,18 +255,14 @@
                                         </a>
                                 </div>
                                 </form>
-
                 </div>
                 </li>
 
             @endguest
             </ul>
-
             </nav>
-
             <div>
                 @yield('content')
             </div>
-
         </div>
     @endsection
