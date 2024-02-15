@@ -428,25 +428,20 @@
                                         data-target="#viewModal{{ $item->id }}"><i class="fa-solid fa-eye"></i> View</a>
                                     @auth
                                         <div class="dropdown dropright">
-                                            @if (auth()->user()->hasRole('superadmin') ||
-                                                    auth()->user()->hasRole('jeffri') ||
-                                                    auth()->user()->hasRole('maulana'))
+                                            @if (auth()->user()->hasRole('superadmin') || auth()->user()->hasRole('jeffri') || auth()->user()->hasRole('maulana'))
                                                 <a href="#" class="text-decoration-none dropdown-toggle"
                                                     data-toggle="dropdown" aria-expanded="false">
                                                     More
                                                 </a>
                                             @endif
                                             <div class="dropdown-menu">
-                                                @if (auth()->user()->hasRole('superadmin') ||
-                                                        auth()->user()->hasRole('jeffri') ||
-                                                        auth()->user()->hasRole('maulana'))
+                                                @if (auth()->user()->hasRole('superadmin') || auth()->user()->hasRole('jeffri') || auth()->user()->hasRole('maulana'))
                                                     <a class="dropdown-item" href="#" data-bs-toggle="modal"
                                                         data-target="#copyText{{ $item->id }}"><i
                                                             class="fa-solid fa-clone"></i>
                                                         Copy</a>
                                                 @endif
-                                                @if (auth()->user()->hasRole('superadmin') ||
-                                                        auth()->user()->hasRole('jeffri'))
+                                                @if (auth()->user()->hasRole('superadmin') || auth()->user()->hasRole('jeffri'))
                                                     <a class="dropdown-item" href="#" data-bs-toggle="modal"
                                                         data-target="#editModal{{ $item->id }}"><i
                                                             class="fa-solid fa-pen-to-square"></i> Edit</a>
@@ -463,7 +458,6 @@
                     @endempty
                 </tbody>
             </table>
-            {{ $selesaiPelanggan->links() }}
         </div>
     </div>
 @endsection

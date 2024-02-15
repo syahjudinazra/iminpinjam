@@ -45,26 +45,10 @@ class ServiceController extends Controller
         $selesaiPelanggan = Service::where('status', 'selesai')
         ->where('pemilik', 'customer')
         ->orderByDesc('tanggalmasuk')
-        ->paginate(10);
+        ->get();
 
     return view('service.selesaiPelanggan', compact('selesaiPelanggan'));
 
-    }
-
-    private function handleAjaxRequest()
-    {
-        try {
-            $data = Service::where('status', 'selesai')
-                ->where('pemilik', 'customer')
-                ->orderBy('tanggalmasuk', 'desc');
-
-            return Datatables::of($data)
-                ->addIndexColumn()
-                ->make(true);
-        } catch (\Exception $e) {
-            // Handle AJAX request error
-            return response()->json(['error' => 'Error processing AJAX request'], 500);
-        }
     }
 
     //Stock

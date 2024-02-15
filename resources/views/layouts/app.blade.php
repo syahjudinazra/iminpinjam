@@ -60,18 +60,22 @@
     <script src="{{ asset('js/importSpareparts.js') }}" defer></script>
     <script src="{{ asset('js/login/passwordView.js') }}" defer></script>
     <script src="{{ asset('js/service/tambahData.js') }}" defer></script>
+    <script src="{{ asset('js/updateMultipleSN/validateSN.js') }}" defer></script>
+    <script src="{{ asset('js/updateMultipleSN/updateSN.js') }}" defer></script>
 
     <!-- Jquery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
-    </script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
         integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"
         integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous">
     </script>
+    <!-- SweetAlert2 JavaScript-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Core plugin JavaScript-->
     <script src="{{ asset('sb2admin/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
     <!-- Custom scripts for all pages-->
@@ -115,10 +119,35 @@
     </script>
     <script>
         new DataTable("#secondTable", {
-            info: false,
+            info: true,
             ordering: true,
-            paging: false,
+            paging: true,
             responsive: true,
+            "fnServerData": function(sUrl, aoData, fnCallback, oSettings) {
+                oSettings.jqXHR = $.ajax({
+                    "url": sUrl,
+                    "data": aoData,
+                    "success": function(json) {
+                        if (json.sError) {
+                            oSettings.oApi._fnLog(oSettings, 0, json.sError);
+                        }
+
+                        $(oSettings.oInstance).trigger('xhr', [oSettings, json]);
+                        fnCallback(json);
+                    },
+                    "dataType": "json",
+                    "cache": true, // Enable caching
+                    "type": oSettings.sServerMethod,
+                    "error": function(xhr, error, thrown) {
+                        if (error == "parsererror") {
+                            oSettings.oApi._fnLog(oSettings, 0,
+                                "DataTables warning: JSON data from " +
+                                "server could not be parsed. This is caused by a JSON formatting error."
+                            );
+                        }
+                    }
+                });
+            },
             initComplete: function() {
                 var r = $("#secondTable tfoot tr");
                 r.find("th").each(function() {
@@ -150,76 +179,6 @@
     <script>
         $(".form-control-chosen").chosen();
     </script>
-    {{-- <script>
-        $(document).ready(function() {
-            $('#servicetables').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: "{{ route('service.selesaiPelanggan') }}",
-                columns: [{
-                        data: 'DT_RowIndex',
-                        name: 'DT_RowIndex'
-                    },
-                    {
-                        data: 'serialnumber',
-                        name: 'serialnumber'
-                    },
-                    {
-                        data: 'tanggalmasuk',
-                        name: 'tanggalmasuk'
-                    },
-                    {
-                        data: 'tanggalkeluar',
-                        name: 'tanggalkeluar'
-                    },
-                    {
-                        data: 'pemilik',
-                        name: 'pemilik'
-                    },
-                    {
-                        data: 'status',
-                        name: 'status'
-                    },
-                    {
-                        data: 'pelanggan',
-                        name: 'pelanggan'
-                    },
-                    {
-                        data: 'device',
-                        name: 'device'
-                    },
-                    {
-                        data: 'pemakaian',
-                        name: 'pemakaian'
-                    },
-                    {
-                        data: 'kerusakan',
-                        name: 'kerusakan'
-                    },
-                    {
-                        data: 'perbaikan',
-                        name: 'perbaikan'
-                    },
-                    {
-                        data: 'nosparepart',
-                        name: 'nosparepart'
-                    },
-                    {
-                        data: 'snkanibal',
-                        name: 'snkanibal'
-                    },
-                    {
-                        data: 'teknisi',
-                        name: 'teknisi'
-                    },
-                    {
-                        data: 'catatan',
-                        name: 'catatan'
-                    },
-                ]
-            });
-        });
-    </script> --}}
 </body>
 
 </html>

@@ -40,93 +40,77 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="moveSNLabel">Add</h5>
+                    <h5 class="modal-title" id="moveSNLabel">Add Serial Numbers</h5>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="d-flex gap-4">
-                        <textarea class="p-2 rounded" id="w3review" name="w3review" rows="5" cols="30"
-                            placeholder="Enter the SN (Multiple Sns Separated by enter)."></textarea>
-                        <table class="table table-bordered">
-                            <thead class="table-light">
-                                <tr>
-                                    <th>SN</th>
-                                    <th>Pelanggan</th>
-                                    <th>Tipe</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>123</td>
-                                    <td>azra</td>
-                                    <td>Model 1</td>
-                                    <td>Action</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <button type="button" class="btn btn-outline-danger mt-2">Add SN</button>
+                    <form id="serialNumberForm" action="{{ route('stock.checkSerialnumbers') }}" method="POST">
+                        @csrf
+                        <div class="d-flex gap-4">
+                            <textarea class="form-control w-50 shadow-none" id="serialnumber" name="serialnumber" rows="5" cols="30"
+                                placeholder="Enter the SN (Multiple Sns Separated by enter)."></textarea>
+                            <table class="table table-bordered">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>SN</th>
+                                        <th>Pelanggan</th>
+                                        <th>Tipe</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="serialNumberTableBody">
+                                    <!-- Serial numbers will be dynamically added here -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <div id="formValidationInput">
+
+                        </div>
+                        <button type="button" id="validateSerialNumber" class="btn btn-outline-danger mt-2">Add SN</button>
+
+                        <div class="form-group mt-4">
+                            <label class="font-weight-bold" for="status">Status</label><br />
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input mt-1" type="radio" id="gudang" name="status[]"
+                                    value="Gudang">
+                                <label class="form-check-label" for="gudang">Gudang</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input mt-1" type="radio" id="service" name="status[]"
+                                    value="Service">
+                                <label class="form-check-label" for="service">Service</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input mt-1" type="radio" id="dipinjam" name="status[]"
+                                    value="Dipinjam">
+                                <label class="form-check-label" for="dipinjam">Dipinjam</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input mt-1" type="radio" id="terjual" name="status[]"
+                                    value="Terjual">
+                                <label class="form-check-label" for="terjual">Terjual</label>
+                            </div>
+                            <div class="form-group mt-3">
+                                <label class="font-weight-bold" for="pelanggan">Pelanggan</label>
+                                <input type="text" class="form-control shadow-none" id="pelanggan" name="pelanggan"
+                                    placeholder="Masukan Pelanggan" value="{{ old('pelanggan') }}">
+                            </div>
+                            <div class="form-group">
+                                <label class="font-weight-bold" for="tanggalkeluar">Tanggal Keluar</label>
+                                <input type="date" class="form-control shadow-none" id="tanggalkeluar"
+                                    name="tanggalkeluar" placeholder="Masukan Tanggal Keluar"
+                                    value="{{ old('tanggalkeluar') }}">
+                            </div>
+                        </div>
+                    </form>
                 </div>
+
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                        data-target="#moveSNext">Next</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="moveSNext" tabindex="-1" aria-labelledby="moveSNextLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="moveSNextLabel">Add</h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label class="font-weight-bold" for="status">Status</label><br />
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input mt-1" type="radio" id="gudang" name="status[]"
-                                value="Gudang">
-                            <label class="form-check-label" for="gudang">Gudang</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input mt-1" type="radio" id="service" name="status[]"
-                                value="Service">
-                            <label class="form-check-label" for="service">Service</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input mt-1" type="radio" id="dipinjam" name="status[]"
-                                value="Dipinjam">
-                            <label class="form-check-label" for="dipinjam">Dipinjam</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input mt-1" type="radio" id="terjual" name="status[]"
-                                value="Terjual">
-                            <label class="form-check-label" for="terjual">Terjual</label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="font-weight-bold" for="pelanggan">Pelanggan</label>
-                        <input type="text" class="form-control shadow-none" id="pelanggan" name="pelanggan"
-                            placeholder="Masukan Pelanggan" value="{{ old('pelanggan') }}">
-                    </div>
-                    <div class="form-group">
-                        <label class="font-weight-bold" for="tanggalkeluar">Tanggal Keluar</label>
-                        <input type="date" class="form-control shadow-none" id="tanggalkeluar" name="tanggalkeluar"
-                            placeholder="Masukan Tanggal Keluar" value="{{ old('tanggalkeluar') }}">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal"
-                        data-target="#moveSN">Prev</button>
-                    <button type="button" class="btn btn-danger">Next</button>
+                    <button type="button" id="submitBtn" class="btn btn-danger" data-bs-toggle="modal"
+                        data-route="{{ route('update.data') }}" data-csrf="{{ csrf_token() }}">Submit</button>
                 </div>
             </div>
         </div>
@@ -922,7 +906,6 @@
                     <th>Service</th>
                     <th>Dipinjam</th>
                     <th>Terjual</th>
-                    {{-- <th>Action</th> --}}
                 </thead>
                 <tbody>
                     @php
@@ -936,26 +919,6 @@
                                 <td>{{ $countByStatus['Service'][$item->tipe] ?? 0 }}</td>
                                 <td>{{ $countByStatus['Dipinjam'][$item->tipe] ?? 0 }}</td>
                                 <td>{{ $countByStatus['Terjual'][$item->tipe] ?? 0 }}</td>
-                                {{-- <td>
-                                    <a href="#" class="btn btn-primary btn-sm" data-toggle="modal"
-                                        data-target="#stockViewModal{{ $item->id }}" data-toggle="tooltip"
-                                        data-placement="top" title="Edit"><i class="fa-solid fa-eye"></i></a>
-                                    @auth
-                                        @if (auth()->user()->hasRole('superadmin') ||
-    auth()->user()->hasRole('jeffri') ||
-    auth()->user()->hasRole('sylvi') ||
-    auth()->user()->hasRole('coni'))
-                                            <a href="#" class="btn btn-warning btn-sm" data-toggle="modal"
-                                                data-target="#stockEditModal{{ $item->id }}" data-toggle="tooltip"
-                                                data-placement="top" title="Edit"><i
-                                                    class="fa-solid fa-pen-to-square"></i></a>
-
-                                            <a href="#" class="btn btn-danger btn-sm" data-toggle="modal"
-                                                data-target="#deleteModal{{ $item->id }}" data-toggle="tooltip"
-                                                data-placement="top" title="Delete"><i class="fa-solid fa-trash"></i></a>
-                                        @endif
-                                    @endauth
-                                </td> --}}
                             </tr>
                             @php
                                 $displayedTipes[] = $item->tipe;
@@ -971,7 +934,6 @@
                         <th>Service</th>
                         <th>Dipinjam</th>
                         <th>Terjual</th>
-                        {{-- <th>Action</th> --}}
                     </tr>
                 </tfoot>
             </table>
@@ -982,4 +944,5 @@
 @push('js')
     <script src="{{ asset('js/stockMonitor/searchDevice.js') }}"></script>
     <script src="{{ asset('js/stockMonitor/importViewStocks.js') }}"></script>
+    <script src="{{ asset('js/updateMultipleSN/MoveSN.js') }}"></script>
 @endpush

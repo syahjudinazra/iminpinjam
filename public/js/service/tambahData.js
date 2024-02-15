@@ -18,3 +18,12 @@ document.addEventListener("DOMContentLoaded", function () {
         handleRadioChange(!customerRadio.checked);
     });
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Get the textarea element
+    var catatanTextarea = document.getElementById("catatan");
+
+    var defaultValues = "Tanggal Pembelian: \nKelengkapan: ";
+
+    catatanTextarea.value = defaultValues;
+});

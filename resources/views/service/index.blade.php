@@ -145,8 +145,7 @@
                 </div>
                 <div class="form-group">
                     <label class="font-weight-bold" for="catatan">Catatan</label>
-                    <textarea type="text" class="form-control shadow-none" id="catatan" name="catatan"
-                        placeholder="Masukan Catatan" required>{{ old('catatan') }}</textarea>
+                    <textarea type="text" class="form-control shadow-none" id="catatan" name="catatan" required>{{ old('catatan') }}</textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>

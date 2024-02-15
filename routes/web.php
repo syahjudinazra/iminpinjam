@@ -131,6 +131,10 @@ Route::prefix('stock')->group(function () {
         Route::post('/import-stocks', [StockController::class, 'importStocks'])->middleware('auth')->name('import.stocks');
         Route::get('/export-stocks', [StockController::class, 'exportStocks'])->middleware('auth')->name('export.stocks');
         Route::get('download/{filename}', [StockController::class, 'templateImportStock'])->name('template.stocks');
+        Route::post('/check-serial-numbers', [StockController::class, 'checkSerialNumbers'])->name('stock.checkSerialnumbers');
+        Route::post('/update-data', [StockController::class, 'updateData'])->name('update.data');
+
+
 });
 
 //Service

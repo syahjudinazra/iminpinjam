@@ -9,6 +9,7 @@ use App\Imports\StockImport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Database\Eloquent\Builder;
 
 class StockController extends Controller
@@ -37,6 +38,53 @@ class StockController extends Controller
         return view('stock.monitor', compact('stock', 'countByStatus'));
     }
 
+    public function checkSerialNumbers(Request $request)
+    {
+        $serialNumbers = preg_split("/\\r\\n|\\r|\\n/", $request->input('serialnumber'));
+        $validationResults = [];
+
+        foreach ($serialNumbers as $serialNumber) {
+            // Perform your validation logic here to check if the serial number exists in the database
+            $stock = Stock::where('serialnumber', $serialNumber)->first();
+
+            if ($stock) {
+                // If the stock with the given serial number exists, fetch customer data and type
+                $customer = $stock->pelanggan;
+                $type = $stock->tipe;
+
+                $message = "Serial number exists in the database";
+                $exists = true;
+            } else {
+                $message = 'Serial number does not exist in the database.';
+                $exists = false;
+            }
+
+            $validationResults[] = [
+                'serialNumber' => $serialNumber,
+                'exists' => $exists,
+                'message' => $message,
+                'pelanggan' => $customer ?? null,
+                'tipe' => $type ?? null
+            ];
+        }
+
+        // Return validation results as JSON response
+        return response()->json(['validationResults' => $validationResults]);
+    }
+
+    public function updateData(Request $request)
+    {
+        foreach ($request->serialnumbers as $serialnumber) {
+            Stock::where('serialnumber', $serialnumber)
+                     ->update([
+                         'status' => $request->status,
+                         'tanggalkeluar' => $request->tanggalkeluar,
+                         'pelanggan' => $request->pelanggan
+                     ]);
+        }
+
+        return response()->json(['message' => 'Data updated successfully']);
+    }
 
     public function gudang()
     {
@@ -60,16 +108,6 @@ class StockController extends Controller
     {
         $stockTerjual = Stock::where('status', 'terjual')->get();
         return view('stock.terjual', compact('stockTerjual'));
-    }
-
-    public function total(Request $request)
-    {
-        $stockGudang = Stock::count();
-        $stockService = Stock::count();
-        $stockDipinjam = Stock::count();
-        $stockTerjual = Stock::count();
-
-        return view ('stock.monitor', compact('stock'));
     }
 
     public function exportStocks()
@@ -203,7 +241,6 @@ class StockController extends Controller
      */
     public function update(Request $request, Stock $stock, $id)
     {
-        {
             $request->validate([
                 'serialnumber' => 'required|max:255',
                 'tipe' => 'required|max:255',
@@ -225,7 +262,6 @@ class StockController extends Controller
 
             $stock->update();
             return redirect()->back()->with('success', 'Data berhasil diubah');
-        }
     }
 
     /**
