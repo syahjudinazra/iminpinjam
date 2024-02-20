@@ -10,55 +10,55 @@
     <div class="ag-format-container">
         <div class="ag-courses_box">
             <div class="ag-courses_item">
-                <a href="/servicedone" class="ag-courses-item_link">
+                <a href="/service" class="ag-courses-item_link">
                     <div class="ag-courses-item_bg"></div>
 
                     <div class="ag-courses-item_title">
-                        {{ $servicedone->total() }}
+                        {{ $service->total() }}
                     </div>
 
                     <div class="ag-courses-item_date-box">
                         Jumlah Data:
                         <span class="ag-courses-item_date">
-                            Service Done
+                            Service
                         </span>
                     </div>
                 </a>
             </div>
 
             <div class="ag-courses_item">
-                <a href="/servicepending" class="ag-courses-item_link">
+                <a href="/stock" class="ag-courses-item_link">
                     <div class="ag-courses-item_bg"></div>
 
                     <div class="ag-courses-item_title">
-                        {{ $servicepending->total() }}
+                        {{ $stock->total() }}
                     </div>
 
                     <div class="ag-courses-item_date-box">
                         Jumlah Data:
                         <span class="ag-courses-item_date">
-                            Service Pending
+                            Stock
                         </span>
                     </div>
                 </a>
             </div>
 
-            <div class="ag-courses_item">
+            {{-- <div class="ag-courses_item">
                 <a href="/kanibal" class="ag-courses-item_link">
                     <div class="ag-courses-item_bg"></div>
 
                     <div class="ag-courses-item_title">
-                        {{ $kanibal->total() }}
+                        {{ $selesaiPelanggan->total() }}
                     </div>
 
                     <div class="ag-courses-item_date-box">
                         Jumlah Data:
                         <span class="ag-courses-item_date">
-                            Kanibal
+                            Service Selesai Pelanggan
                         </span>
                     </div>
                 </a>
-            </div>
+            </div> --}}
 
             <div class="ag-courses_item">
                 <a href="/pinjam" class="ag-courses-item_link">

@@ -57,8 +57,12 @@ class SparePartsController extends Controller
 
     public function exportSpareParts()
     {
-        return Excel::download(new SparePartsExport, 'DataSpareParts.xlsx');
+        $timestamp = now()->format('d-m-Y');
+        $fileName = 'DataSpareParts_' . $timestamp . '.xlsx';
+
+        return Excel::download(new SparePartsExport, $fileName);
     }
+
 
     public function updateQuantity(Request $request, $id)
     {

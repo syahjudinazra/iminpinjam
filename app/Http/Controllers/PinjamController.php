@@ -31,7 +31,10 @@ class PinjamController extends Controller
 
     public function exportPinjam()
     {
-        return Excel::download(new ExportPinjam, 'DataPinjam.xlsx');
+        $timestamp = now()->format('d-m-Y');
+        $fileName = 'DataPinjam_' . $timestamp . '.xlsx';
+
+        return Excel::download(new ExportPinjam, $fileName);
     }
 
     public function search()

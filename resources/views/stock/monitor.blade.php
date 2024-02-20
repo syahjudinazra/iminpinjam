@@ -50,7 +50,7 @@
                         @csrf
                         <div class="d-flex gap-4">
                             <textarea class="form-control w-50 shadow-none" id="serialnumber" name="serialnumber" rows="5" cols="30"
-                                placeholder="Enter the SN (Multiple Sns Separated by enter)."></textarea>
+                                placeholder="Enter the SN (Multiple Sns Separated by enter)." required></textarea>
                             <table class="table table-bordered">
                                 <thead class="table-light">
                                     <tr>
@@ -95,13 +95,13 @@
                             <div class="form-group mt-3">
                                 <label class="font-weight-bold" for="pelanggan">Pelanggan</label>
                                 <input type="text" class="form-control shadow-none" id="pelanggan" name="pelanggan"
-                                    placeholder="Masukan Pelanggan" value="{{ old('pelanggan') }}">
+                                    placeholder="Masukan Pelanggan" value="{{ old('pelanggan') }}" required>
                             </div>
                             <div class="form-group">
                                 <label class="font-weight-bold" for="tanggalkeluar">Tanggal Keluar</label>
                                 <input type="date" class="form-control shadow-none" id="tanggalkeluar"
                                     name="tanggalkeluar" placeholder="Masukan Tanggal Keluar"
-                                    value="{{ old('tanggalkeluar') }}">
+                                    value="{{ old('tanggalkeluar') }}" required>
                             </div>
                         </div>
                     </form>

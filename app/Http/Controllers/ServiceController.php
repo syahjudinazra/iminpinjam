@@ -44,7 +44,7 @@ class ServiceController extends Controller
     {
         $selesaiPelanggan = Service::where('status', 'selesai')
         ->where('pemilik', 'customer')
-        ->orderByDesc('tanggalmasuk')
+        ->orderByDesc('tanggalkeluar')
         ->get();
 
     return view('service.selesaiPelanggan', compact('selesaiPelanggan'));
@@ -74,7 +74,7 @@ class ServiceController extends Controller
     {
         $selesaiStock = Service::where('status', 'selesai')
                                 ->where('pemilik', 'stock')
-                                ->orderBy('tanggalmasuk', 'desc')
+                                ->orderBy('tanggalkeluar', 'desc')
                                 ->get();
 
         return view('service.selesaiStock', compact('selesaiStock'));
@@ -85,9 +85,17 @@ class ServiceController extends Controller
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
 
-        $data = Service::whereBetween('tanggalmasuk', [$startDate, $endDate])->get();
-        return Excel::download(new ServiceExport($data), 'DataService.xlsx');
+        $data = Service::whereBetween('tanggalkeluar', [$startDate, $endDate])->get();
+
+        // Generate a datetime stamp
+        $timestamp = now()->format('d-m-Y');
+
+        // Construct the file name with the datetime stamp
+        $fileName = 'DataService_' . $timestamp . '.xlsx';
+
+        return Excel::download(new ServiceExport($data), $fileName);
     }
+
 
     /**
      * Show the form for creating a new resource.

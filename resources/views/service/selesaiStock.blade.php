@@ -49,7 +49,7 @@
                                 <select class="form-select form-control-chosen" name="device" id="device" required>
                                     <option value="Null">Pilih Tipe Device</option>
                                     <option value="D1" {{ $item->device == 'D1' ? 'selected' : '' }}>D1</option>
-                                    <option value="D1 Pro" {{ $item->device == 'D1 Pro' ? 'selected' : '' }}>D1 Pro</option>
+                                    <option value="D1-Pro" {{ $item->device == 'D1-Pro' ? 'selected' : '' }}>D1-Pro</option>
                                     <option value="D1w" {{ $item->device == 'D1w' ? 'selected' : '' }}>D1w</option>
                                     <option value="D1w-702" {{ $item->device == 'D1w-702' ? 'selected' : '' }}>D1w-702
                                     </option>
@@ -127,10 +127,28 @@
                                 <input type="text" class="form-control shadow-none" id="serialnumber" name="serialnumber"
                                     value="{{ $item->serialnumber }}">
                             </div>
-                            <div class="mb-3">
-                                <label for="pemakaian" class="form-label font-weight-bold">Pemakaian</label>
-                                <input type="text" class="form-control shadow-none" id="pemakaian" name="pemakaian"
-                                    value="{{ $item->pemakaian }}">
+                            <div class="form-group mb-3">
+                                <label class="font-weight-bold" for="pemakaian">Pemakaian</label>
+                                <select class="form-select shadow-none" id="pemakaian" name="pemakaian"
+                                    value="{{ old('pemakaian') }}" required>
+                                    <option value="Null">Pilih Lama Pemakaian</option>
+                                    <option
+                                        value="Baru Di Unboxing"{{ $item->pemakaian == 'Baru Di Unboxing' ? 'selected' : '' }}>
+                                        Baru Di Unboxing
+                                    </option>
+                                    <option
+                                        value="7 Hari Kurang"{{ $item->pemakaian == '7 Hari Kurang' ? 'selected' : '' }}>
+                                        7 Hari Kurang
+                                    </option>
+                                    <option
+                                        value="1 Tahun Kurang"{{ $item->pemakaian == '1 Tahun Kurang' ? 'selected' : '' }}>
+                                        1 Tahun Kurang
+                                    </option>
+                                    <option
+                                        value="1 Tahun Lebih"{{ $item->pemakaian == '1 Tahun Lebih' ? 'selected' : '' }}>
+                                        1 Tahun Lebih
+                                    </option>
+                                </select>
                             </div>
                             <div class="mb-3">
                                 <label for="kerusakan" class="form-label font-weight-bold">Kerusakan</label>
@@ -227,6 +245,7 @@
         </div>
     @endforeach
     <!-- End Edit data -->
+
     <!-- view data -->
     @foreach ($selesaiStock as $item)
         <div class="modal fade" id="viewModal{{ $item->id }}" tabindex="-1"
@@ -386,7 +405,7 @@
             <table id="secondTable" class="table table-striped table-bordered nowrap" style="width:100%">
                 <thead>
                     <th>No</th>
-                    <th>Tanggal</th>
+                    <th>Tanggal Selesai</th>
                     <th>Serial Number</th>
                     <th>Pelanggan</th>
                     <th>Device</th>
@@ -401,7 +420,8 @@
                         @foreach ($selesaiStock as $item)
                             <tr>
                                 <td>{{ $loop->index + 1 }}</td>
-                                <td>{{ \Carbon\Carbon::parse($item->tanggalmasuk)->format('d/m/Y') }}</td>
+                                <td>{{ $item->tanggalkeluar ? \Carbon\Carbon::parse($item->tanggalkeluar)->format('d/m/Y') : ' ' }}
+                                </td>
                                 <td>{{ $item->serialnumber }}</td>
                                 <td>{{ $item->pelanggan }}</td>
                                 <td>{{ $item->device }}</td>
@@ -410,25 +430,19 @@
                                         data-target="#viewModal{{ $item->id }}"><i class="fa-solid fa-eye"></i> View</a>
                                     @auth
                                         <div class="dropdown dropright">
-                                            @if (auth()->user()->hasRole('superadmin') ||
-                                                    auth()->user()->hasRole('jeffri') ||
-                                                    auth()->user()->hasRole('maulana'))
+                                            @if (auth()->user()->hasRole('superadmin') || auth()->user()->hasRole('jeffri') || auth()->user()->hasRole('maulana'))
                                                 <a href="#" class="text-decoration-none dropdown-toggle"
                                                     data-toggle="dropdown" aria-expanded="false">
                                                     More
                                                 </a>
                                             @endif
                                             <div class="dropdown-menu">
-                                                @if (auth()->user()->hasRole('superadmin') ||
-                                                        auth()->user()->hasRole('jeffri') ||
-                                                        auth()->user()->hasRole('maulana'))
+                                                @if (auth()->user()->hasRole('superadmin') || auth()->user()->hasRole('jeffri') || auth()->user()->hasRole('maulana'))
                                                     <a class="dropdown-item" href="#" data-bs-toggle="modal"
                                                         data-target="#copyText{{ $item->id }}"><i
-                                                            class="fa-solid fa-clone"></i>
-                                                        Copy</a>
+                                                            class="fa-solid fa-clone"></i> Copy</a>
                                                 @endif
-                                                @if (auth()->user()->hasRole('superadmin') ||
-                                                        auth()->user()->hasRole('jeffri'))
+                                                @if (auth()->user()->hasRole('superadmin') || auth()->user()->hasRole('jeffri'))
                                                     <a class="dropdown-item" href="#" data-bs-toggle="modal"
                                                         data-target="#editModal{{ $item->id }}"><i
                                                             class="fa-solid fa-pen-to-square"></i> Edit</a>

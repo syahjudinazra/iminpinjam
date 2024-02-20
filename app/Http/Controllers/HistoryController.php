@@ -18,7 +18,11 @@ class HistoryController extends Controller
 
     public function SparePartsActivity()
     {
+        $timestamp = now()->format('d-m-Y');
+        $fileName = 'HistorySpareParts_' . $timestamp . '.xlsx';
+
         $historyLogs = Activity::all();
-        return Excel::download(new SparepartsActivityExport($historyLogs), 'SparepartsActivity.xlsx');
+        return Excel::download(new SparepartsActivityExport($historyLogs), $fileName);
     }
+
 }

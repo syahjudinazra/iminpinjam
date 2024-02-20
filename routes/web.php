@@ -1,20 +1,21 @@
 <?php
 
-use App\Http\Controllers\Auth\ForgotPasswordController;
-use App\Http\Controllers\Auth\ResetPasswordController;
-use App\Http\Controllers\FirmwareController;
-use App\Http\Controllers\HistoryController;
-use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\StockController;
 use App\Http\Controllers\PinjamController;
+use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\KembaliController;
 use App\Http\Controllers\MonitorController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\FirmwareController;
 use App\Http\Controllers\SparePartsController;
-use App\Http\Controllers\StockController;
+use App\Http\Controllers\MaintenanceController;
 use App\Http\Controllers\UserSettingsController;
+use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
 
 // Route::get('/', function () {
 //     // return view('auth.login');
@@ -27,6 +28,11 @@ Route::prefix('user')->group(function () {
         'show', 'edit', 'update', 'destroy',
     ]);
 
+});
+
+//Maintenance
+Route::get('/maintenance', function () {
+    return view('maintenance');
 });
 
 //Dashboard
@@ -42,9 +48,6 @@ Route::post('/reset-password', [ResetPasswordController::class, 'resetvalidasi']
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Route::resource('/product', ProductController::class);
-
 
 //Monitor
 Route::get('/monitor', [MonitorController::class, 'index']);

@@ -49,7 +49,7 @@
                                 <select class="form-select form-control-chosen" name="device" id="device" required>
                                     <option value="Null">Pilih Tipe Device</option>
                                     <option value="D1" {{ $item->device == 'D1' ? 'selected' : '' }}>D1</option>
-                                    <option value="D1 Pro" {{ $item->device == 'D1 Pro' ? 'selected' : '' }}>D1 Pro</option>
+                                    <option value="D1-Pro" {{ $item->device == 'D1-Pro' ? 'selected' : '' }}>D1-Pro</option>
                                     <option value="D1w" {{ $item->device == 'D1w' ? 'selected' : '' }}>D1w</option>
                                     <option value="D1w-702" {{ $item->device == 'D1w-702' ? 'selected' : '' }}>D1w-702
                                     </option>
@@ -133,8 +133,8 @@
                                     value="{{ old('pemakaian') }}" required>
                                     <option value="Null">Pilih Lama Pemakaian</option>
                                     <option
-                                        value="Baru di Unboxing"{{ $item->pemakaian == 'Baru di Unboxing' ? 'selected' : '' }}>
-                                        Baru di Unboxing
+                                        value="Baru Di Unboxing"{{ $item->pemakaian == 'Baru Di Unboxing' ? 'selected' : '' }}>
+                                        Baru Di Unboxing
                                     </option>
                                     <option
                                         value="7 Hari Kurang"{{ $item->pemakaian == '7 Hari Kurang' ? 'selected' : '' }}>
@@ -461,7 +461,7 @@
                                 <select class="form-select form-control-chosen" name="device" id="device" required>
                                     <option value="Null">Pilih Tipe Device</option>
                                     <option value="D1" {{ $item->device == 'D1' ? 'selected' : '' }}>D1</option>
-                                    <option value="D1 Pro" {{ $item->device == 'D1 Pro' ? 'selected' : '' }}>D1 Pro
+                                    <option value="D1-Pro" {{ $item->device == 'D1-Pro' ? 'selected' : '' }}>D1-Pro
                                     </option>
                                     <option value="D1w" {{ $item->device == 'D1w' ? 'selected' : '' }}>D1w</option>
                                     <option value="D1w-702" {{ $item->device == 'D1w-702' ? 'selected' : '' }}>D1w-702
@@ -545,8 +545,8 @@
                                     value="{{ old('pemakaian') }}" required>
                                     <option value="Null">Pilih Lama Pemakaian</option>
                                     <option
-                                        value="Baru di Unboxing"{{ $item->pemakaian == 'Baru di Unboxing' ? 'selected' : '' }}>
-                                        Baru di Unboxing
+                                        value="Baru Di Unboxing"{{ $item->pemakaian == 'Baru Di Unboxing' ? 'selected' : '' }}>
+                                        Baru Di Unboxing
                                     </option>
                                     <option
                                         value="7 Hari Kurang"{{ $item->pemakaian == '7 Hari Kurang' ? 'selected' : '' }}>
@@ -589,7 +589,7 @@
             <table id="secondTable" class="table table-striped table-bordered nowrap" style="width:100%">
                 <thead>
                     <th>No</th>
-                    <th>Tanggal</th>
+                    <th>Tanggal Masuk</th>
                     <th>Serial Number</th>
                     <th>Pelanggan</th>
                     <th>Device</th>
@@ -613,39 +613,31 @@
                                         data-target="#viewModal{{ $item->id }}"><i class="fa-solid fa-eye"></i> View</a>
                                     @auth
                                         <div class="dropdown dropright">
-                                            @if (auth()->user()->hasRole('superadmin') ||
-                                                    auth()->user()->hasRole('jeffri') ||
-                                                    auth()->user()->hasRole('maulana'))
+                                            @if (auth()->user()->hasRole('superadmin') || auth()->user()->hasRole('jeffri') || auth()->user()->hasRole('maulana'))
                                                 <a href="#" class="text-decoration-none dropdown-toggle"
                                                     data-toggle="dropdown" aria-expanded="false">
                                                     More
                                                 </a>
                                             @endif
                                             <div class="dropdown-menu">
-                                                @if (auth()->user()->hasRole('superadmin') ||
-                                                        auth()->user()->hasRole('jeffri') ||
-                                                        auth()->user()->hasRole('maulana'))
+                                                @if (auth()->user()->hasRole('superadmin') || auth()->user()->hasRole('jeffri') || auth()->user()->hasRole('maulana'))
                                                     <a class="dropdown-item" href="#" data-bs-toggle="modal"
                                                         data-target="#copyText{{ $item->id }}"><i
                                                             class="fa-solid fa-clone"></i>
                                                         Copy</a>
                                                 @endif
-                                                @if (auth()->user()->hasRole('superadmin') ||
-                                                        auth()->user()->hasRole('jeffri'))
+                                                @if (auth()->user()->hasRole('superadmin') || auth()->user()->hasRole('jeffri'))
                                                     <a class="dropdown-item" href="#" data-bs-toggle="modal"
                                                         data-target="#moveModal{{ $item->id }}"><i
                                                             class="fa-solid fa-paper-plane"></i>
                                                         Move</a>
                                                 @endif
-                                                @if (auth()->user()->hasRole('superadmin') ||
-                                                        auth()->user()->hasRole('jeffri') ||
-                                                        auth()->user()->hasRole('maulana'))
+                                                @if (auth()->user()->hasRole('superadmin') || auth()->user()->hasRole('jeffri') || auth()->user()->hasRole('maulana'))
                                                     <a class="dropdown-item" href="#" data-bs-toggle="modal"
                                                         data-target="#editModal{{ $item->id }}"><i
                                                             class="fa-solid fa-pen-to-square"></i> Edit</a>
                                                 @endif
-                                                @if (auth()->user()->hasRole('superadmin') ||
-                                                        auth()->user()->hasRole('jeffri'))
+                                                @if (auth()->user()->hasRole('superadmin') || auth()->user()->hasRole('jeffri'))
                                                     <a class="dropdown-item" href="#" data-bs-toggle="modal"
                                                         data-target="#deleteModal{{ $item->id }}"><i
                                                             class="fa-solid fa-trash"></i> Delete</a>

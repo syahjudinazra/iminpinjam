@@ -91,8 +91,9 @@
                     <select class="form-select form-control-chosen shadow-none" name="device" id="device" required>
                         <option value="Null">Pilih Tipe Device</option>
                         <option value="D1">D1</option>
-                        <option value="D1-Pro">D1 Pro</option>
-                        <option value="D1w">D1w-702</option>
+                        <option value="D1-Pro">D1-Pro</option>
+                        <option value="D1w">D1w</option>
+                        <option value="D1w-702">D1w-702</option>
                         <option value="D2-402">D2-402</option>
                         <option value="D3-501">D3-501</option>
                         <option value="D3-503">D3-503</option>
@@ -106,9 +107,8 @@
                         <option value="D4-503">D4-503</option>
                         <option value="D4-504">D4-504</option>
                         <option value="D4-505">D4-505</option>
-                        <option value="M2-202">M2-202</option>
                         <option value="K1-101">K1-101</option>
-                        <option value="K1-201">K1-201</option>
+                        <option value="K2-201">K2-201</option>
                         <option value="M2-202">M2-202</option>
                         <option value="M2-203">M2-203</option>
                         <option value="M2 Pro">M2 Pro</option>

@@ -44,3 +44,40 @@ document
             })
             .catch((error) => console.error("Error:", error));
     });
+
+$(document).ready(function () {
+    $("#submitBtn").prop("disabled", true);
+    function checkFields() {
+        var textareaValue = $("#serialnumber").val().trim();
+        var radioValue = $('input[name="status[]"]:checked').val();
+        var pelangganValue = $("#pelanggan").val().trim();
+        var tanggalKeluarValue = $("#tanggalkeluar").val().trim();
+
+        if (
+            textareaValue !== "" &&
+            radioValue &&
+            pelangganValue !== "" &&
+            tanggalKeluarValue !== ""
+        ) {
+            $("#submitBtn").prop("disabled", false);
+        } else {
+            $("#submitBtn").prop("disabled", true);
+        }
+    }
+
+    $('#serialnumber, input[name="status[]"], #pelanggan, #tanggalkeluar').on(
+        "keyup change",
+        function () {
+            checkFields();
+        }
+    );
+
+    $("#submitBtn").click(function () {
+        if ($(this).prop("disabled")) {
+            alert("Please fill in all fields before submitting.");
+            return false;
+        }
+
+        return true;
+    });
+});

@@ -49,7 +49,7 @@
                                 <select class="form-select form-control-chosen" name="device" id="device" required>
                                     <option value="Null">Pilih Tipe Device</option>
                                     <option value="D1" {{ $item->device == 'D1' ? 'selected' : '' }}>D1</option>
-                                    <option value="D1 Pro" {{ $item->device == 'D1 Pro' ? 'selected' : '' }}>D1 Pro</option>
+                                    <option value="D1-Pro" {{ $item->device == 'D1-Pro' ? 'selected' : '' }}>D1-Pro</option>
                                     <option value="D1w" {{ $item->device == 'D1w' ? 'selected' : '' }}>D1w</option>
                                     <option value="D1w-702" {{ $item->device == 'D1w-702' ? 'selected' : '' }}>D1w-702
                                     </option>
@@ -133,8 +133,8 @@
                                     value="{{ old('pemakaian') }}" required>
                                     <option value="Null">Pilih Lama Pemakaian</option>
                                     <option
-                                        value="Baru di Unboxing"{{ $item->pemakaian == 'Baru di Unboxing' ? 'selected' : '' }}>
-                                        Baru di Unboxing
+                                        value="Baru Di Unboxing"{{ $item->pemakaian == 'Baru Di Unboxing' ? 'selected' : '' }}>
+                                        Baru Di Unboxing
                                     </option>
                                     <option
                                         value="7 Hari Kurang"{{ $item->pemakaian == '7 Hari Kurang' ? 'selected' : '' }}>
@@ -404,7 +404,7 @@
             <table id="secondTable" class="table table-striped table-bordered nowrap" style="width:100%">
                 <thead>
                     <th>No</th>
-                    <th>Tanggal</th>
+                    <th>Tanggal Selesai</th>
                     <th>Serial Number</th>
                     <th>Pelanggan</th>
                     <th>Device</th>
@@ -419,7 +419,8 @@
                         @foreach ($selesaiPelanggan as $item)
                             <tr>
                                 <td>{{ $loop->index + 1 }}</td>
-                                <td>{{ \Carbon\Carbon::parse($item->tanggalmasuk)->format('d/m/Y') }}</td>
+                                <td>{{ $item->tanggalkeluar ? \Carbon\Carbon::parse($item->tanggalkeluar)->format('d/m/Y') : ' ' }}
+                                </td>
                                 <td>{{ $item->serialnumber }}</td>
                                 <td>{{ $item->pelanggan }}</td>
                                 <td>{{ $item->device }}</td>

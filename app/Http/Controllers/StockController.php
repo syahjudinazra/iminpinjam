@@ -112,7 +112,10 @@ class StockController extends Controller
 
     public function exportStocks()
     {
-        return Excel::download(new StockExport, 'DataStock.xlsx');
+        $timestamp = now()->format('d-m-Y');
+        $fileName = 'DataStock_' . $timestamp . '.xlsx';
+
+        return Excel::download(new StockExport, $fileName);
     }
 
     public function importStocks(Request $request)
