@@ -432,7 +432,7 @@
                                 <select class="form-select form-control-chosen" name="device" id="device" required>
                                     <option value="Null">Pilih Tipe Device</option>
                                     <option value="D1" {{ $item->device == 'D1' ? 'selected' : '' }}>D1</option>
-                                    <option value="D1 Pro" {{ $item->device == 'D1 Pro' ? 'selected' : '' }}>D1 Pro
+                                    <option value="D1-Pro" {{ $item->device == 'D1-Pro' ? 'selected' : '' }}>D1-Pro
                                     </option>
                                     <option value="D1w" {{ $item->device == 'D1w' ? 'selected' : '' }}>D1w</option>
                                     <option value="D1w-702" {{ $item->device == 'D1w-702' ? 'selected' : '' }}>D1w-702

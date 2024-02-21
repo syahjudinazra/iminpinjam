@@ -179,36 +179,6 @@
     <script>
         $(".form-control-chosen").chosen();
     </script>
-    <script>
-        function validateForm() {
-            var serialNumber = document.getElementById('serialnumber').value;
-            var statusChecked = document.querySelector('input[name="status[]"]:checked');
-            var pelanggan = document.getElementById('pelanggan').value;
-            var tanggalkeluar = document.getElementById('tanggalkeluar').value;
-
-            if (serialNumber.trim() === '') {
-                alert("Please enter serial number(s).");
-                return false;
-            }
-
-            if (!statusChecked) {
-                alert("Please select a status.");
-                return false;
-            }
-
-            if (pelanggan.trim() === '') {
-                alert("Please enter the customer's name.");
-                return false;
-            }
-
-            if (tanggalkeluar.trim() === '') {
-                alert("Please select the departure date.");
-                return false;
-            }
-
-            return true; // Form will be submitted
-        }
-    </script>
 </body>
 
 </html>

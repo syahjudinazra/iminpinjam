@@ -57,7 +57,7 @@
                                         <th>SN</th>
                                         <th>Pelanggan</th>
                                         <th>Tipe</th>
-                                        <th>Action</th>
+                                        <th>Message</th>
                                     </tr>
                                 </thead>
                                 <tbody id="serialNumberTableBody">
