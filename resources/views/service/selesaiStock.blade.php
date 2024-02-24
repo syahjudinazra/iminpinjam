@@ -19,7 +19,7 @@
                         @method('PUT')
                         <div class="modal-header">
                             <h5 class="modal-title" id="editModalLabel{{ $item->id }}">Edit Data</h5>
-                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
@@ -236,7 +236,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                             <button type="submit" class="btn btn-primary">Save Changes</button>
                         </div>
                     </form>
@@ -254,7 +254,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="viewModalLabel{{ $item->id }}">View Data </h5>
-                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -323,7 +323,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
@@ -339,7 +339,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="deleteModalLabel{{ $item->id }}">Delete Data</h5>
-                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -347,7 +347,7 @@
                         Are you sure you want to delete this Data?
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                         <form action="{{ route('service.destroy', $item->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
@@ -368,7 +368,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="copyModalLabel{{ $item->id }}">Copy Data</h5>
-                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -402,63 +402,13 @@
 
     <div class="container-fluid mt-3">
         <div style="overflow: auto">
-            <table id="secondTable" class="table table-striped table-bordered nowrap" style="width:100%">
-                <thead>
-                    <th>No</th>
-                    <th>Tanggal Selesai</th>
-                    <th>Serial Number</th>
-                    <th>Pelanggan</th>
-                    <th>Device</th>
-                    <th>Action</th>
-                </thead>
-                <tbody>
-                    @empty($selesaiStock)
-                        <tr>
-                            <td colspan="6">No data found</td>
-                        </tr>
-                    @else
-                        @foreach ($selesaiStock as $item)
-                            <tr>
-                                <td>{{ $loop->index + 1 }}</td>
-                                <td>{{ $item->tanggalkeluar ? \Carbon\Carbon::parse($item->tanggalkeluar)->format('d/m/Y') : ' ' }}
-                                </td>
-                                <td>{{ $item->serialnumber }}</td>
-                                <td>{{ $item->pelanggan }}</td>
-                                <td>{{ $item->device }}</td>
-                                <td class="d-flex align-items-center gap-3">
-                                    <a href="#" class="text-decoration-none" data-bs-toggle="modal"
-                                        data-target="#viewModal{{ $item->id }}"><i class="fa-solid fa-eye"></i> View</a>
-                                    @auth
-                                        <div class="dropdown dropright">
-                                            @if (auth()->user()->hasRole('superadmin') || auth()->user()->hasRole('jeffri') || auth()->user()->hasRole('maulana'))
-                                                <a href="#" class="text-decoration-none dropdown-toggle"
-                                                    data-toggle="dropdown" aria-expanded="false">
-                                                    More
-                                                </a>
-                                            @endif
-                                            <div class="dropdown-menu">
-                                                @if (auth()->user()->hasRole('superadmin') || auth()->user()->hasRole('jeffri') || auth()->user()->hasRole('maulana'))
-                                                    <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                                        data-target="#copyText{{ $item->id }}"><i
-                                                            class="fa-solid fa-clone"></i> Copy</a>
-                                                @endif
-                                                @if (auth()->user()->hasRole('superadmin') || auth()->user()->hasRole('jeffri'))
-                                                    <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                                        data-target="#editModal{{ $item->id }}"><i
-                                                            class="fa-solid fa-pen-to-square"></i> Edit</a>
-                                                    <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                                        data-target="#deleteModal{{ $item->id }}"><i
-                                                            class="fa-solid fa-trash"></i> Delete</a>
-                                                @endif
-                                            </div>
-                                        </div>
-                                    @endauth
-                                </td>
-                            </tr>
-                        @endforeach
-                    @endempty
-                </tbody>
+            <table id="service-table" class="table table-striped table-bordered nowrap" style="width:100%">
+                {{ $dataTable->table() }}
             </table>
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    {{ $dataTable->scripts(attributes: ['type' => 'module']) }}
+@endpush

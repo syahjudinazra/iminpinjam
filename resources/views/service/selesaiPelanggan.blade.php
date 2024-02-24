@@ -401,64 +401,21 @@
 
     <div class="container-fluid mt-3">
         <div style="overflow: auto">
-            <table id="secondTable" class="table table-striped table-bordered nowrap" style="width:100%">
-                <thead>
-                    <th>No</th>
-                    <th>Tanggal Selesai</th>
-                    <th>Serial Number</th>
-                    <th>Pelanggan</th>
-                    <th>Device</th>
-                    <th>Action</th>
-                </thead>
-                <tbody>
-                    @empty($selesaiPelanggan)
-                        <tr>
-                            <td colspan="6">No data found</td>
-                        </tr>
-                    @else
-                        @foreach ($selesaiPelanggan as $item)
-                            <tr>
-                                <td>{{ $loop->index + 1 }}</td>
-                                <td>{{ $item->tanggalkeluar ? \Carbon\Carbon::parse($item->tanggalkeluar)->format('d/m/Y') : ' ' }}
-                                </td>
-                                <td>{{ $item->serialnumber }}</td>
-                                <td>{{ $item->pelanggan }}</td>
-                                <td>{{ $item->device }}</td>
-                                <td class="d-flex align-items-center gap-3">
-                                    <a href="#" class="text-decoration-none" data-bs-toggle="modal"
-                                        data-target="#viewModal{{ $item->id }}"><i class="fa-solid fa-eye"></i> View</a>
-                                    @auth
-                                        <div class="dropdown dropright">
-                                            @if (auth()->user()->hasRole('superadmin') || auth()->user()->hasRole('jeffri') || auth()->user()->hasRole('maulana'))
-                                                <a href="#" class="text-decoration-none dropdown-toggle"
-                                                    data-toggle="dropdown" aria-expanded="false">
-                                                    More
-                                                </a>
-                                            @endif
-                                            <div class="dropdown-menu">
-                                                @if (auth()->user()->hasRole('superadmin') || auth()->user()->hasRole('jeffri') || auth()->user()->hasRole('maulana'))
-                                                    <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                                        data-target="#copyText{{ $item->id }}"><i
-                                                            class="fa-solid fa-clone"></i>
-                                                        Copy</a>
-                                                @endif
-                                                @if (auth()->user()->hasRole('superadmin') || auth()->user()->hasRole('jeffri'))
-                                                    <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                                        data-target="#editModal{{ $item->id }}"><i
-                                                            class="fa-solid fa-pen-to-square"></i> Edit</a>
-                                                    <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                                        data-target="#deleteModal{{ $item->id }}"><i
-                                                            class="fa-solid fa-trash"></i> Delete</a>
-                                                @endif
-                                            </div>
-                                        </div>
-                                    @endauth
-                                </td>
-                            </tr>
-                        @endforeach
-                    @endempty
-                </tbody>
+            <table id="servicepelanggan-table" class="table table-striped table-bordered nowrap" style="width:100%">
+                {{ $dataTable->table() }}
             </table>
         </div>
     </div>
+
+    {{-- <div class="container">
+        <div class="card">
+            <div class="card-header">Manage Users</div>
+            <div class="card-body">
+                {{ $dataTable->table() }}
+            </div>
+        </div>
+    </div> --}}
 @endsection
+@push('scripts')
+    {{ $dataTable->scripts(attributes: ['type' => 'module']) }}
+@endpush

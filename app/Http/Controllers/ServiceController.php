@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\ServiceDataTable;
+use App\DataTables\ServicePelangganDataTable;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use App\Exports\ServiceExport;
@@ -40,15 +42,14 @@ class ServiceController extends Controller
         return view('service.validasiPelanggan', compact('validasiPelanggan'));
     }
 
-    public function selesaiPelanggan(Request $request)
+    public function selesaiPelanggan(ServicePelangganDataTable $dataTable)
     {
         $selesaiPelanggan = Service::where('status', 'selesai')
         ->where('pemilik', 'customer')
         ->orderByDesc('tanggalkeluar')
         ->get();
 
-    return view('service.selesaiPelanggan', compact('selesaiPelanggan'));
-
+        return $dataTable->render('service.selesaiPelanggan', compact('selesaiPelanggan'));
     }
 
     //Stock
@@ -70,14 +71,14 @@ class ServiceController extends Controller
 
         return view('service.validasiStock', compact('validasiStock'));
     }
-    public function selesaiStock()
+    public function selesaiStock(ServiceDataTable $dataTable)
     {
         $selesaiStock = Service::where('status', 'selesai')
                                 ->where('pemilik', 'stock')
                                 ->orderBy('tanggalkeluar', 'desc')
                                 ->get();
 
-        return view('service.selesaiStock', compact('selesaiStock'));
+        return $dataTable->render('service.selesaiStock', compact('selesaiStock'));
     }
 
     public function exportService(Request $request)

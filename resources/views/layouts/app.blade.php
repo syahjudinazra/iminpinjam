@@ -179,6 +179,7 @@
     <script>
         $(".form-control-chosen").chosen();
     </script>
+    @stack('scripts')
 </body>
 
 </html>

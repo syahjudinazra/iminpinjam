@@ -49,10 +49,6 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-//Monitor
-Route::get('/monitor', [MonitorController::class, 'index']);
-Route::get('/monitor/total', [MonitorController::class, 'total']);
-
 //PINJAM
 Route::get('/export-pinjam', [PinjamController::class, 'exportPinjam'])->name('export-pinjam');
 Route::get('/pinjam/search', [PinjamController::class, 'search'])->name('search.index');
@@ -160,7 +156,7 @@ Route::prefix('service')->group(function () {
     Route::get('/selesaiStock', [ServiceController::class, 'selesaiStock'])
         ->name('service.selesaiStock');
 
-
+        Route::get('/{id}', [ServiceController::class, 'show'])->middleware('auth')->name('service.show');
         Route::get('/{id}/edit', [ServiceController::class, 'edit'])->middleware('auth')->name('service.edit');
         Route::put('/{id}', [ServiceController::class, 'update'])->middleware('auth')->name('service.update');
         Route::delete('/{id}', [ServiceController::class, 'destroy'])->middleware('auth')->name('service.destroy');
