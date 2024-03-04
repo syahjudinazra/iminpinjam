@@ -36,8 +36,8 @@ Route::get('/maintenance', function () {
 });
 
 //Dashboard
-Route::get('/', [HomeController::class, 'index']);
-Route::get('/home/total', [HomeController::class, 'total']);
+Route::get('/', [HomeController::class, 'index'])->middleware('auth');
+Route::get('/home/total', [HomeController::class, 'total'])->middleware('auth');
 
 //Lupa Password
 Route::get('/forgot-password', [ForgotPasswordController::class, 'index'])->middleware('guest')->name('forgot.password');
@@ -47,34 +47,23 @@ Route::post('/reset-password', [ResetPasswordController::class, 'resetvalidasi']
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('auth')->name('home');
 
 //PINJAM
-Route::get('/export-pinjam', [PinjamController::class, 'exportPinjam'])->name('export-pinjam');
-Route::get('/pinjam/search', [PinjamController::class, 'search'])->name('search.index');
-Route::resource('/pinjam', PinjamController::class)->except([
-    'show', 'edit', 'update', 'destroy',
-]);
-
-Route::get('/pinjam/{id}/edit', [PinjamController::class, 'edit'])->middleware('auth')->name('users.edit');
-Route::put('/pinjam/{id}', [PinjamController::class, 'update'])->middleware('auth')->name('users.update');
-Route::delete('/pinjam/{id}', [PinjamController::class, 'destroy'])->middleware('auth')->name('users.destroy');
-Route::get('/pinjam/{id}', [PinjamController::class, 'show'])->name('users.show');
-Route::get('/generate-pdf/{id}', [PinjamController::class, 'generatePdf']);
-
-//KEMBALI
-Route::get('/export-kembali', [KembaliController::class, 'exportKembali'])->name('export-kembali');
-Route::resource('/kembali', KembaliController::class)->except([
-    'show', 'edit', 'update', 'destroy',
-]);
-
-Route::get('/kembali/{id}/edit', [KembaliController::class, 'edit'])->middleware('auth')->name('kembali.edit');
-Route::put('/kembali/{id}', [KembaliController::class, 'update'])->middleware('auth')->name('kembali.update');
-Route::delete('/kembali/{id}', [KembaliController::class, 'destroy'])->middleware('auth')->name('kembali.destroy');
-Route::get('/kembali/{id}', [KembaliController::class, 'show'])->name('kembali.show');
+Route::middleware('auth')->group(function () {
+    Route::get('/export-pinjam', [PinjamController::class, 'exportPinjam'])->name('export-pinjam');
+    Route::get('/pinjam/search', [PinjamController::class, 'search'])->name('search.index');
+    Route::resource('/pinjam', PinjamController::class)->except(['show', 'edit', 'update', 'destroy']);
+    Route::get('pinjam/kembali', [PinjamController::class, 'kembaliPinjam'])->name('pinjam.kembali');
+    Route::get('/pinjam/{id}/edit', [PinjamController::class, 'edit'])->name('users.edit');
+    Route::put('/pinjam/{id}', [PinjamController::class, 'update'])->name('users.update');
+    Route::delete('/pinjam/{id}', [PinjamController::class, 'destroy'])->name('users.destroy');
+    Route::get('/pinjam/{id}', [PinjamController::class, 'show'])->name('users.show');
+    Route::get('/generate-pdf/{id}', [PinjamController::class, 'generatePdf']);
+});
 
 //SPAREPARTS
-Route::resource('/spareparts', SparePartsController::class)->except([
+Route::resource('/spareparts', SparePartsController::class)->middleware('auth')->except([
     'show', 'edit', 'update', 'destroy',
 ]);
 
@@ -83,45 +72,54 @@ Route::put('/spareparts/{id}', [SparePartsController::class, 'update'])->middlew
 Route::delete('/spareparts/{id}', [SparePartsController::class, 'destroy'])->middleware('auth')->name('spareparts.destroy');
 Route::post('/import-spareparts', [SparePartsController::class, 'importSpareParts'])->middleware('auth')->name('import.spareparts');
 Route::get('/export-spareparts', [SparePartsController::class, 'exportSpareParts'])->middleware('auth')->name('export.spareparts');
-Route::get('/spareparts/{id}', [SparePartsController::class, 'show'])->name('spareparts.show');
+Route::get('/spareparts/{id}', [SparePartsController::class, 'show'])->middleware('auth')->name('spareparts.show');
 Route::post('/spareparts/{id}', [SparePartsController::class, 'updateQuantity'])->middleware('auth')->name('update.quantity');
-Route::get('download/{filename}', [SparePartsController::class, 'templateImport'])->name('download.template');
+Route::get('download/{filename}', [SparePartsController::class, 'templateImport'])->middleware('auth')->name('download.template');
 
 //History
-Route::resource('/history', HistoryController::class)->except([
+Route::resource('/history', HistoryController::class)->middleware('auth')->except([
     'show', 'edit', 'update', 'destroy',
 ]);
 
 Route::get('/export-sparepartsactivity', [HistoryController::class, 'SparePartsActivity'])->middleware('auth')->name('export.sparepartsactivity');
 
 //Firmware
-Route::prefix('firmware')->group(function () {
+Route::prefix('firmware')->middleware('auth')->group(function () {
     Route::resource('/', FirmwareController::class)->except([
         'show', 'edit', 'update', 'destroy',
     ]);
 
     Route::get('/table', [FirmwareController::class, 'table'])
-        ->middleware('auth')
+    ->middleware('auth')
         ->name('firmware.table');
 
-        Route::get('/{id}/edit', [FirmwareController::class, 'edit'])->middleware('auth')->name('firmware.edit');
-        Route::put('/{id}', [FirmwareController::class, 'update'])->middleware('auth')->name('firmware.update');
-        Route::delete('/{id}', [FirmwareController::class, 'destroy'])->middleware('auth')->name('firmware.destroy');
+    Route::get('/{id}/edit', [FirmwareController::class, 'edit'])
+    ->middleware('auth')
+        ->name('firmware.edit');
+
+    Route::put('/{id}', [FirmwareController::class, 'update'])
+    ->middleware('auth')
+        ->name('firmware.update');
+
+    Route::delete('/{id}', [FirmwareController::class, 'destroy'])
+    ->middleware('auth')
+        ->name('firmware.destroy');
 });
 
+
 //Stock
-Route::prefix('stock')->group(function () {
+Route::prefix('stock')->middleware('auth')->group(function () {
     Route::resource('/', StockController::class)->except([
         'show', 'edit', 'update', 'destroy',
     ]);
 
-    Route::get('/gudang', [StockController::class, 'gudang'])
+    Route::get('/gudang', [StockController::class, 'gudang'])->middleware('auth')
         ->name('stock.gudang');
-    Route::get('/service', [StockController::class, 'service'])
+    Route::get('/service', [StockController::class, 'service'])->middleware('auth')
         ->name('stock.service');
-    Route::get('/dipinjam', [StockController::class, 'dipinjam'])
+    Route::get('/dipinjam', [StockController::class, 'dipinjam'])->middleware('auth')
         ->name('stock.dipinjam');
-    Route::get('/terjual', [StockController::class, 'terjual'])
+    Route::get('/terjual', [StockController::class, 'terjual'])->middleware('auth')
         ->name('stock.terjual');
 
         Route::get('/{id}/edit', [StockController::class, 'edit'])->middleware('auth')->name('stock.edit');
@@ -129,40 +127,45 @@ Route::prefix('stock')->group(function () {
         Route::delete('/{id}', [StockController::class, 'destroy'])->middleware('auth')->name('stock.destroy');
         Route::post('/import-stocks', [StockController::class, 'importStocks'])->middleware('auth')->name('import.stocks');
         Route::get('/export-stocks', [StockController::class, 'exportStocks'])->middleware('auth')->name('export.stocks');
-        Route::get('download/{filename}', [StockController::class, 'templateImportStock'])->name('template.stocks');
-        Route::post('/check-serial-numbers', [StockController::class, 'checkSerialNumbers'])->name('stock.checkSerialnumbers');
-        Route::post('/update-data', [StockController::class, 'updateData'])->name('update.data');
+        Route::get('download/{filename}', [StockController::class, 'templateImportStock'])->middleware('auth')->name('template.stocks');
+        Route::post('/check-serial-numbers', [StockController::class, 'checkSerialNumbers'])->middleware('auth')->name('stock.checkSerialnumbers');
+        Route::post('/update-data', [StockController::class, 'updateData'])->middleware('auth')->name('update.data');
 
 
 });
 
 //Service
-Route::prefix('service')->group(function () {
+Route::prefix('service')->middleware('auth')->group(function () {
     Route::resource('/', ServiceController::class)->except([
         'show', 'edit', 'update', 'destroy',
     ]);
 
     Route::get('/antrianPelanggan', [ServiceController::class, 'antrianPelanggan'])
+        ->middleware('auth')
         ->name('service.antrianPelanggan');
     Route::get('/validasiPelanggan', [ServiceController::class, 'validasiPelanggan'])
+        ->middleware('auth')
         ->name('service.validasiPelanggan');
     Route::get('/selesaiPelanggan', [ServiceController::class, 'selesaiPelanggan'])
+        ->middleware('auth')
         ->name('service.selesaiPelanggan');
 
     Route::get('/antrianStock', [ServiceController::class, 'antrianStock'])
+        ->middleware('auth')
         ->name('service.antrianStock');
     Route::get('/validasiStock', [ServiceController::class, 'validasiStock'])
+        ->middleware('auth')
         ->name('service.validasiStock');
     Route::get('/selesaiStock', [ServiceController::class, 'selesaiStock'])
+        ->middleware('auth')
         ->name('service.selesaiStock');
 
         Route::get('/{id}', [ServiceController::class, 'show'])->middleware('auth')->name('service.show');
         Route::get('/{id}/edit', [ServiceController::class, 'edit'])->middleware('auth')->name('service.edit');
         Route::put('/{id}', [ServiceController::class, 'update'])->middleware('auth')->name('service.update');
         Route::delete('/{id}', [ServiceController::class, 'destroy'])->middleware('auth')->name('service.destroy');
-    //     Route::post('/import-stocks', [ServiceController::class, 'importStocks'])->middleware('auth')->name('import.stocks');
         Route::get('/export-service', [ServiceController::class, 'exportService'])->middleware('auth')->name('export.service');
-    //     Route::get('download/{filename}', [ServiceController::class, 'templateImportStock'])->name('template.stocks');
+        Route::get('/export-all', [ServiceController::class, 'exportAll'])->middleware('auth')->name('export.allservice');
 });
 
 

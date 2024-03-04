@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Yajra\DataTables\DataTables;
 
 class PinjamController extends Controller
 {
@@ -17,18 +18,121 @@ class PinjamController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
 
-        $pinjam = DB::table('pinjams')->orderBy('tanggal', 'desc')
-            ->where('status', '0')
+        if ($request->ajax()) {
+            $pinjam = Pinjam::where('status', '0')
+            ->orderBy('tanggal', 'desc')
             ->get();
 
-        // $pinjam = DB::table('pinjams')->paginate(5);
+            $pinjamsDevice =DB::table('pinjams_device')->select('name')->get();
 
-        return view('pinjam.index', compact('pinjam'));
+            return Datatables::of($pinjam)
+                    ->addIndexColumn()
+                    ->addColumn('action', function ($pinjam) {
+                        $actionHtml = '<div class="d-flex align-items-center gap-3">';
+                        if (request()->is('pinjam')) {
+                            $actionHtml .= '<a href="#" class="text-decoration-none" data-toggle="modal" data-target="#viewModal' . $pinjam->id . '"><i class="fa-solid fa-eye"></i>View</a>';
+                        } else {
+                            $actionHtml .= '<a href="#" class="text-decoration-none" data-toggle="modal" data-target="#viewkembaliModal' . $pinjam->id . '"><i class="fa-solid fa-eye"></i>View</a>';
+                        }
+
+                        if (auth()->check()) {
+                            $user = auth()->user();
+
+                            if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('sylvi') || $user->hasRole('coni') || $user->hasRole('vivi')) {
+                                $actionHtml .= '
+                                <div class="dropdown dropright">
+                                    <a href="#" class="text-decoration-none dropdown-toggle"
+                                        data-toggle="dropdown" aria-expanded="false">
+                                        More
+                                    </a>
+                                    <div class="dropdown-menu">';
+
+                                if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('sylvi') || $user->hasRole('coni') || $user->hasRole('vivi')) {
+                                    $actionHtml .= '<a class="dropdown-item" href="#" data-bs-toggle="modal" data-target="#moveModal' . $pinjam->id . '"><i class="fa-solid fa-paper-plane"></i> Move</a>' .
+                                    '<a class="dropdown-item" href="#" data-bs-toggle="modal" data-target="#editModal' . $pinjam->id . '"><i class="fa-solid fa-pen-to-square"></i> Edit</a>' .
+                                    '<a class="dropdown-item" href="' . url('generate-pdf', $pinjam->id) . '"><i class="fa-solid fa-file-pdf"></i> Download PDF</a>' .
+                                    '<a class="dropdown-item" href="#" data-bs-toggle="modal" data-target="#deleteModal' . $pinjam->id . '"><i class="fa-solid fa-trash"></i> Delete</a>';
+                                }
+
+                                $actionHtml .= '</div>
+                                </div>';
+                            }
+                        }
+                        $actionHtml .= '</div>';
+                        return $actionHtml;
+
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
+
+        $pinjam = Pinjam::where('status', '0')
+        ->orderBy('tanggal', 'desc')
+        ->get();
+
+        $pinjamsDevice =DB::table('pinjams_device')->select('name')->get();
+        return view('pinjam.index', compact('pinjam', 'pinjamsDevice'));
     }
 
+    public function kembaliPinjam(Request $request)
+    {
+        if ($request->ajax()) {
+            $kembaliPinjam = Pinjam::where('status', '1')
+            ->orderBy('tanggal', 'desc')
+            ->get();
+
+
+            $pinjamsDevice =DB::table('pinjams_device')->select('name')->get();
+
+            return Datatables::of($kembaliPinjam)
+                    ->addIndexColumn()
+                    ->addColumn('action', function ($kembaliPinjam) {
+                        $actionHtml = '<div class="d-flex align-items-center gap-3">';
+                        $actionHtml .= '<a href="#" class="text-decoration-none" data-toggle="modal" data-target="#viewkembaliModal' . $kembaliPinjam->id . '"><i class="fa-solid fa-eye"></i>View</a>';
+
+                        if (auth()->check()) {
+                            $user = auth()->user();
+
+                            if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('sylvi') || $user->hasRole('coni') || $user->hasRole('vivi')) {
+                                $actionHtml .= '
+                                <div class="dropdown dropright">
+                                    <a href="#" class="text-decoration-none dropdown-toggle"
+                                        data-toggle="dropdown" aria-expanded="false">
+                                        More
+                                    </a>
+                                    <div class="dropdown-menu">';
+
+                                if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('sylvi') || $user->hasRole('coni') || $user->hasRole('vivi')) {
+                                    $actionHtml .= '<a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                                    data-target="#editkembaliModal' . $kembaliPinjam->id . '"><i
+                                                        class="fa-solid fa-pen-to-square"></i> Edit</a>
+                                                    <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                                    data-target="#deleteModal' . $kembaliPinjam->id . '"><i
+                                                        class="fa-solid fa-trash"></i> Delete</a>';
+                                }
+
+                                $actionHtml .= '</div>
+                                </div>';
+                            }
+                        }
+                        $actionHtml .= '</div>';
+                        return $actionHtml;
+
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
+
+        $kembaliPinjam = Pinjam::where('status', '1')
+        ->orderBy('tanggal', 'desc')
+        ->get();
+
+        $pinjamsDevice =DB::table('pinjams_device')->select('name')->get();
+        return view('pinjam.kembali', compact('kembaliPinjam', 'pinjamsDevice'));
+    }
     public function exportPinjam()
     {
         $timestamp = now()->format('d-m-Y');

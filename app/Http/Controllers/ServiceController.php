@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\AntrianPelangganDataTable;
 use App\DataTables\ServiceDataTable;
 use App\DataTables\ServicePelangganDataTable;
+use App\Exports\ServiceAllExport;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use App\Exports\ServiceExport;
@@ -20,65 +22,400 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        return view('service.index');
+        $serviceDevice =DB::table('services_device')->select('name')->get();
+        return view('service.index', compact('serviceDevice'));
     }
 
     //Pelanggan
-    public function antrianPelanggan()
+    public function antrianPelanggan(Request $request)
     {
+        if ($request->ajax()) {
+            $antrianPelanggan = Service::where('status', 'antrian')
+                                        ->where('pemilik', 'customer')
+                                        ->orderByDesc('tanggalmasuk')
+                                        ->get();
+
+            $serviceDevice = DB::table('services_device')->select('name')->get();
+
+            return Datatables::of($antrianPelanggan)
+                    ->addIndexColumn()
+                    ->addColumn('action', function ($service) {
+                        $actionHtml = '<div class="d-flex align-items-center gap-3">';
+                        $actionHtml .= '<a href="#" class="text-decoration-none" data-toggle="modal" data-target="#viewModal' . $service->id . '"><i class="fa-solid fa-eye"></i>View</a>';
+
+                        if (auth()->check()) {
+                            $user = auth()->user();
+
+                            if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
+                                $actionHtml .= '
+                                <div class="dropdown dropright">
+                                    <a href="#" class="text-decoration-none dropdown-toggle"
+                                        data-toggle="dropdown" aria-expanded="false">
+                                        More
+                                    </a>
+                                    <div class="dropdown-menu">';
+
+                                if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
+                                    $actionHtml .= '<a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                                    data-target="#copyText' . $service->id . '"><i
+                                                        class="fa-solid fa-clone"></i> Copy</a>';
+                                }
+                                if ($user->hasRole('superadmin') || $user->hasRole('jeffri')) {
+                                    $actionHtml .= '<a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                                    data-target="#moveModal' . $service->id . '"><i
+                                                        class="fa-solid fa-paper-plane"></i> Move</a>
+                                                    <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                                    data-target="#editModal' . $service->id . '"><i
+                                                        class="fa-solid fa-pen-to-square"></i> Edit</a>
+                                                    <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                                    data-target="#deleteModal' . $service->id . '"><i
+                                                        class="fa-solid fa-trash"></i> Delete</a>';
+                                }
+
+                                $actionHtml .= '</div>
+                                </div>';
+                            }
+                        }
+                        $actionHtml .= '</div>';
+                        return $actionHtml;
+
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
+
         $antrianPelanggan = Service::where('status', 'antrian')
                                     ->where('pemilik', 'customer')
-                                    ->orderBy('tanggalmasuk', 'desc')
+                                    ->orderByDesc('tanggalmasuk')
                                     ->get();
-        return view('service.antrianPelanggan', compact('antrianPelanggan'));
+
+        $serviceDevice = DB::table('services_device')->select('name')->get();
+
+        return view('service.antrianPelanggan', compact('antrianPelanggan', 'serviceDevice'));
     }
 
-    public function validasiPelanggan()
+    public function validasiPelanggan(Request $request)
     {
+        if ($request->ajax()) {
+            $validasiPelanggan = Service::where('status', 'validasi')
+                                        ->where('pemilik', 'customer')
+                                        ->orderByDesc('tanggalmasuk')
+                                        ->get();
+
+            $serviceDevice = DB::table('services_device')->select('name')->get();
+
+            return Datatables::of($validasiPelanggan)
+                    ->addIndexColumn()
+                    ->addColumn('action', function ($service) {
+                        $actionHtml = '<div class="d-flex align-items-center gap-3">';
+                        $actionHtml .= '<a href="#" class="text-decoration-none" data-toggle="modal" data-target="#viewModal' . $service->id . '"><i class="fa-solid fa-eye"></i>View</a>';
+
+                        if (auth()->check()) {
+                            $user = auth()->user();
+
+                            if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
+                                $actionHtml .= '
+                                <div class="dropdown dropright">
+                                    <a href="#" class="text-decoration-none dropdown-toggle"
+                                        data-toggle="dropdown" aria-expanded="false">
+                                        More
+                                    </a>
+                                    <div class="dropdown-menu">';
+
+                                if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
+                                    $actionHtml .= '<a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                                    data-target="#copyText' . $service->id . '"><i
+                                                        class="fa-solid fa-clone"></i> Copy</a>';
+                                }
+                                if ($user->hasRole('superadmin') || $user->hasRole('jeffri')) {
+                                    $actionHtml .= '<a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                                        data-target="#moveModal' . $service->id . '"><i
+                                                        class="fa-solid fa-paper-plane"></i> Move</a>
+                                                    <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                                        data-target="#editModal' . $service->id . '"><i
+                                                        class="fa-solid fa-pen-to-square"></i> Edit</a>
+                                                    <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                                        data-target="#deleteModal' . $service->id . '"><i
+                                                        class="fa-solid fa-trash"></i> Delete</a>';
+                                }
+
+                                $actionHtml .= '</div>
+                                </div>';
+                            }
+                        }
+                        $actionHtml .= '</div>';
+                        return $actionHtml;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
+
         $validasiPelanggan = Service::where('status', 'validasi')
                                     ->where('pemilik', 'customer')
-                                    ->orderBy('tanggalmasuk', 'desc')
+                                    ->orderByDesc('tanggalmasuk')
                                     ->get();
-        return view('service.validasiPelanggan', compact('validasiPelanggan'));
+
+        $serviceDevice = DB::table('services_device')->select('name')->get();
+
+        return view('service.validasiPelanggan', compact('validasiPelanggan', 'serviceDevice'));
     }
 
-    public function selesaiPelanggan(ServicePelangganDataTable $dataTable)
+    public function selesaiPelanggan(Request $request)
     {
-        $selesaiPelanggan = Service::where('status', 'selesai')
-        ->where('pemilik', 'customer')
-        ->orderByDesc('tanggalkeluar')
-        ->get();
+        if ($request->ajax()) {
+            $selesaiPelanggan = Service::where('status', 'selesai')
+                                        ->where('pemilik', 'customer')
+                                        ->orderByDesc('tanggalkeluar')
+                                        ->get();
 
-        return $dataTable->render('service.selesaiPelanggan', compact('selesaiPelanggan'));
+            $serviceDevice = DB::table('services_device')->select('name')->get();
+
+            return Datatables::of($selesaiPelanggan)
+                    ->addIndexColumn()
+                    ->addColumn('action', function ($service) {
+                        $actionHtml = '<div class="d-flex align-items-center gap-3">';
+                        $actionHtml .= '<a href="#" class="text-decoration-none" data-toggle="modal" data-target="#viewModal' . $service->id . '"><i class="fa-solid fa-eye"></i>View</a>';
+
+                        if (auth()->check()) {
+                            $user = auth()->user();
+
+                            if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
+                                $actionHtml .= '
+                                <div class="dropdown dropright">
+                                    <a href="#" class="text-decoration-none dropdown-toggle"
+                                        data-toggle="dropdown" aria-expanded="false">
+                                        More
+                                    </a>
+                                    <div class="dropdown-menu">';
+
+                                if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
+                                    $actionHtml .= '<a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                                    data-target="#copyText' . $service->id . '"><i
+                                                        class="fa-solid fa-clone"></i> Copy</a>';
+                                }
+                                if ($user->hasRole('superadmin') || $user->hasRole('jeffri')) {
+                                    $actionHtml .= '<a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                                    data-target="#editModal' . $service->id . '"><i
+                                                        class="fa-solid fa-pen-to-square"></i> Edit</a>
+                                                    <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                                    data-target="#deleteModal' . $service->id . '"><i
+                                                        class="fa-solid fa-trash"></i> Delete</a>';
+                                }
+
+                                $actionHtml .= '</div>
+                                </div>';
+                            }
+                        }
+                        $actionHtml .= '</div>';
+                        return $actionHtml;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
+
+        $selesaiPelanggan = Service::where('status', 'selesai')
+                                    ->where('pemilik', 'customer')
+                                    ->orderByDesc('tanggalkeluar')
+                                    ->get();
+
+        $serviceDevice = DB::table('services_device')->select('name')->get();
+
+        return view('service.selesaiPelanggan', compact('selesaiPelanggan', 'serviceDevice'));
     }
 
     //Stock
-    public function antrianStock()
+    public function antrianStock(Request $request)
     {
+        if ($request->ajax()) {
+            $antrianStock = Service::where('status', 'antrian')
+                                        ->where('pemilik', 'stock')
+                                        ->orderByDesc('tanggalmasuk')
+                                        ->get();
+
+            $serviceDevice = DB::table('services_device')->select('name')->get();
+
+            return Datatables::of($antrianStock)
+                    ->addIndexColumn()
+                    ->addColumn('action', function ($service) {
+                        $actionHtml = '<div class="d-flex align-items-center gap-3">';
+                        $actionHtml .= '<a href="#" class="text-decoration-none" data-toggle="modal" data-target="#viewModal' . $service->id . '"><i class="fa-solid fa-eye"></i>View</a>';
+
+                        if (auth()->check()) {
+                            $user = auth()->user();
+
+                            if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
+                                $actionHtml .= '
+                                <div class="dropdown dropright">
+                                    <a href="#" class="text-decoration-none dropdown-toggle"
+                                        data-toggle="dropdown" aria-expanded="false">
+                                        More
+                                    </a>
+                                    <div class="dropdown-menu">';
+
+                                if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
+                                    $actionHtml .= '<a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                                    data-target="#copyText' . $service->id . '"><i
+                                                        class="fa-solid fa-clone"></i> Copy</a>';
+                                }
+                                if ($user->hasRole('superadmin') || $user->hasRole('jeffri')) {
+                                    $actionHtml .= '<a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                                    data-target="#moveModal' . $service->id . '"><i
+                                                        class="fa-solid fa-paper-plane"></i> Move</a>
+                                                    <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                                    data-target="#editModal' . $service->id . '"><i
+                                                        class="fa-solid fa-pen-to-square"></i> Edit</a>
+                                                    <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                                    data-target="#deleteModal' . $service->id . '"><i
+                                                        class="fa-solid fa-trash"></i> Delete</a>';
+                                }
+
+                                $actionHtml .= '</div>
+                                </div>';
+                            }
+                        }
+                        $actionHtml .= '</div>';
+                        return $actionHtml;
+
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
+
         $antrianStock = Service::where('status', 'antrian')
-                                ->where('pemilik', 'stock')
-                                ->orderBy('tanggalmasuk', 'desc')
-                                ->get();
+                                    ->where('pemilik', 'stock')
+                                    ->orderByDesc('tanggalmasuk')
+                                    ->get();
 
-        return view('service.antrianStock', compact('antrianStock'));
+        $serviceDevice = DB::table('services_device')->select('name')->get();
+
+        return view('service.antrianStock', compact('antrianStock', 'serviceDevice'));
     }
-    public function validasiStock()
+    public function validasiStock(Request $request)
     {
+        if ($request->ajax()) {
+            $validasiStock = Service::where('status', 'validasi')
+                                        ->where('pemilik', 'stock')
+                                        ->orderByDesc('tanggalmasuk')
+                                        ->get();
+
+            $serviceDevice = DB::table('services_device')->select('name')->get();
+
+            return Datatables::of($validasiStock)
+                    ->addIndexColumn()
+                    ->addColumn('action', function ($service) {
+                        $actionHtml = '<div class="d-flex align-items-center gap-3">';
+                        $actionHtml .= '<a href="#" class="text-decoration-none" data-toggle="modal" data-target="#viewModal' . $service->id . '"><i class="fa-solid fa-eye"></i>View</a>';
+
+                        if (auth()->check()) {
+                            $user = auth()->user();
+
+                            if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
+                                $actionHtml .= '
+                                <div class="dropdown dropright">
+                                    <a href="#" class="text-decoration-none dropdown-toggle"
+                                        data-toggle="dropdown" aria-expanded="false">
+                                        More
+                                    </a>
+                                    <div class="dropdown-menu">';
+
+                                if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
+                                    $actionHtml .= '<a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                                    data-target="#copyText' . $service->id . '"><i
+                                                        class="fa-solid fa-clone"></i> Copy</a>';
+                                }
+                                if ($user->hasRole('superadmin') || $user->hasRole('jeffri')) {
+                                    $actionHtml .= '<a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                                        data-target="#moveModal' . $service->id . '"><i
+                                                        class="fa-solid fa-paper-plane"></i> Move</a>
+                                                    <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                                        data-target="#editModal' . $service->id . '"><i
+                                                        class="fa-solid fa-pen-to-square"></i> Edit</a>
+                                                    <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                                        data-target="#deleteModal' . $service->id . '"><i
+                                                        class="fa-solid fa-trash"></i> Delete</a>';
+                                }
+
+                                $actionHtml .= '</div>
+                                </div>';
+                            }
+                        }
+                        $actionHtml .= '</div>';
+                        return $actionHtml;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
+
         $validasiStock = Service::where('status', 'validasi')
-                                ->where('pemilik', 'stock')
-                                ->orderBy('tanggalmasuk', 'desc')
-                                ->get();
+                                    ->where('pemilik', 'stock')
+                                    ->orderByDesc('tanggalmasuk')
+                                    ->get();
 
-        return view('service.validasiStock', compact('validasiStock'));
+        $serviceDevice = DB::table('services_device')->select('name')->get();
+
+        return view('service.validasiStock', compact('validasiStock', 'serviceDevice'));
     }
-    public function selesaiStock(ServiceDataTable $dataTable)
+    public function selesaiStock(Request $request)
     {
-        $selesaiStock = Service::where('status', 'selesai')
-                                ->where('pemilik', 'stock')
-                                ->orderBy('tanggalkeluar', 'desc')
-                                ->get();
+        if ($request->ajax()) {
+            $selesaiStock = Service::where('status', 'selesai')
+                                        ->where('pemilik', 'stock')
+                                        ->orderByDesc('tanggalkeluar')
+                                        ->get();
 
-        return $dataTable->render('service.selesaiStock', compact('selesaiStock'));
+            $serviceDevice = DB::table('services_device')->select('name')->get();
+
+            return Datatables::of($selesaiStock)
+                    ->addIndexColumn()
+                    ->addColumn('action', function ($service) {
+                        $actionHtml = '<div class="d-flex align-items-center gap-3">';
+                        $actionHtml .= '<a href="#" class="text-decoration-none" data-toggle="modal" data-target="#viewModal' . $service->id . '"><i class="fa-solid fa-eye"></i>View</a>';
+
+                        if (auth()->check()) {
+                            $user = auth()->user();
+
+                            if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
+                                $actionHtml .= '
+                                <div class="dropdown dropright">
+                                    <a href="#" class="text-decoration-none dropdown-toggle"
+                                        data-toggle="dropdown" aria-expanded="false">
+                                        More
+                                    </a>
+                                    <div class="dropdown-menu">';
+
+                                if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
+                                    $actionHtml .= '<a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                                    data-target="#copyText' . $service->id . '"><i
+                                                        class="fa-solid fa-clone"></i> Copy</a>';
+                                }
+                                if ($user->hasRole('superadmin') || $user->hasRole('jeffri')) {
+                                    $actionHtml .= '<a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                                    data-target="#editModal' . $service->id . '"><i
+                                                        class="fa-solid fa-pen-to-square"></i> Edit</a>
+                                                    <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                                    data-target="#deleteModal' . $service->id . '"><i
+                                                        class="fa-solid fa-trash"></i> Delete</a>';
+                                }
+
+                                $actionHtml .= '</div>
+                                </div>';
+                            }
+                        }
+                        $actionHtml .= '</div>';
+                        return $actionHtml;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
+
+        $selesaiStock = Service::where('status', 'selesai')
+                                    ->where('pemilik', 'stock')
+                                    ->orderByDesc('tanggalkeluar')
+                                    ->get();
+
+        $serviceDevice = DB::table('services_device')->select('name')->get();
+
+        return view('service.selesaiStock', compact('selesaiStock', 'serviceDevice'));
     }
 
     public function exportService(Request $request)
@@ -97,6 +434,13 @@ class ServiceController extends Controller
         return Excel::download(new ServiceExport($data), $fileName);
     }
 
+    public function exportAll()
+    {
+        $timestamp = now()->format('d-m-Y');
+        $fileName = 'DataAllService' . $timestamp . '.xlsx';
+
+        return Excel::download(new ServiceAllExport, $fileName);
+    }
 
     /**
      * Show the form for creating a new resource.

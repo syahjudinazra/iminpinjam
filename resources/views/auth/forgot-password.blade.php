@@ -35,11 +35,11 @@
                             @csrf
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
-                                <input type="email" id="email" class="form-control" name="email"
+                                <input type="email" id="email" class="form-control shadow-none" name="email"
                                     placeholder="Enter Your Email" required="">
                             </div>
                             <div class="mb-3 d-grid">
-                                <button type="submit" class="btn btn-primary" value="Request Password Reset">
+                                <button type="submit" class="btn btn-danger" value="Request Password Reset">
                                     Reset Password
                                 </button>
                             </div>

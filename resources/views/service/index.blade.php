@@ -42,10 +42,16 @@
         <div class="row addDataForms">
             <div class="d-flex justify-content-between mb-2">
                 <h1 class="h3 mb-3 text-gray-800">Tambah Data Service</h1>
-                <button type="button" class="btn btn-success btn-sm font-weight-bold text-white" data-bs-toggle="modal"
-                    data-target="#exportModal"><i class="fa-solid fa-download" style="color: #ffffff;"></i>
-                    Export Excel
-                </button>
+                <div class="d-flex align-items-center gap-3">
+                    <a type="button" class="btn btn-success btn-sm font-weight-bold text-white" data-bs-toggle="modal"
+                        data-target="#exportModal"><i class="fa-regular fa-calendar-days" style="color: #ffffff;"></i>
+                        Export By Date
+                    </a>
+                    <a href="{{ route('export.allservice') }}" class="btn btn-success btn-sm font-weight-bold text-white"><i
+                            class="fa-solid fa-download" style="color: #ffffff;"></i>
+                        Export All
+                    </a>
+                </div>
 
             </div>
             <hr style="width: -webkit-fill-available;">
@@ -90,42 +96,10 @@
                     <label class="font-weight-bold" for="device">Tipe Device</label>
                     <select class="form-select form-control-chosen shadow-none" name="device" id="device" required>
                         <option value="Null">Pilih Tipe Device</option>
-                        <option value="D1">D1</option>
-                        <option value="D1-Pro">D1-Pro</option>
-                        <option value="D1w">D1w</option>
-                        <option value="D1w-702">D1w-702</option>
-                        <option value="D2-402">D2-402</option>
-                        <option value="D3-501">D3-501</option>
-                        <option value="D3-503">D3-503</option>
-                        <option value="D3-504">D3-504</option>
-                        <option value="D3-504 lama">D3-504 lama</option>
-                        <option value="D3-505">D3-505</option>
-                        <option value="D3-505 lama">D3-505 lama</option>
-                        <option value="D3-506">D3-506</option>
-                        <option value="D3-506 lama">D3-506 lama</option>
-                        <option value="D4-502">D4-502</option>
-                        <option value="D4-503">D4-503</option>
-                        <option value="D4-504">D4-504</option>
-                        <option value="D4-505">D4-505</option>
-                        <option value="K1-101">K1-101</option>
-                        <option value="K2-201">K2-201</option>
-                        <option value="M2-202">M2-202</option>
-                        <option value="M2-203">M2-203</option>
-                        <option value="M2 Pro">M2 Pro</option>
-                        <option value="M2 Max">M2 Max</option>
-                        <option value="S1-701">S1-701</option>
-                        <option value="Swan 1">Swan 1</option>
-                        <option value="Swan 1K">Swan 1K</option>
-                        <option value="Swan 1 Pro">Swan 1 Pro</option>
-                        <option value="Swift 1">Swift 1</option>
-                        <option value="Swift 1 Pro">Swift 1 Pro</option>
-                        <option value="Swift 2">Swift 2</option>
-                        <option value="Swift 2 Pro">Swift 2 Pro</option>
-                        <option value="Falcon 1">Falcon 1</option>
-                        <option value="Crane 1 16">Crane 1 16</option>
-                        <option value="Crane 1 21.5">Crane 1 21.5</option>
-                        <option value="Crane 1 27">Crane 1 27</option>
-                        <option value="Crane 1 32">Crane 1 32</option>
+                        @foreach ($serviceDevice as $device)
+                            <option value="{{ $device->name }}">{{ $device->name }}
+                            </option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="form-group">

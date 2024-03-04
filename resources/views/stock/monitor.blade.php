@@ -899,7 +899,7 @@
 
     <div class="container-fluid mt-3">
         <div style="overflow: auto">
-            <table id="hometable" class="table table-striped table-bordered" style="width:100%">
+            <table id="stockTable" class="table table-striped table-bordered" style="width:100%">
                 <thead>
                     <th>Tipe</th>
                     <th>Gudang</th>
@@ -926,16 +926,6 @@
                         @endif
                     @endforeach
                 </tbody>
-
-                <tfoot>
-                    <tr>
-                        <th>Tipe</th>
-                        <th>Gudang</th>
-                        <th>Service</th>
-                        <th>Dipinjam</th>
-                        <th>Terjual</th>
-                    </tr>
-                </tfoot>
             </table>
         </div>
     </div>

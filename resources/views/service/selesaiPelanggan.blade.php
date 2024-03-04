@@ -45,81 +45,14 @@
                                     value="{{ $item->pelanggan }}">
                             </div>
                             <div class="form-group mb-3">
-                                <label for="device"><b>Tipe Device</b></label>
+                                <label class="font-weight-bold" for="device">Tipe Device</label>
                                 <select class="form-select form-control-chosen" name="device" id="device" required>
                                     <option value="Null">Pilih Tipe Device</option>
-                                    <option value="D1" {{ $item->device == 'D1' ? 'selected' : '' }}>D1</option>
-                                    <option value="D1-Pro" {{ $item->device == 'D1-Pro' ? 'selected' : '' }}>D1-Pro</option>
-                                    <option value="D1w" {{ $item->device == 'D1w' ? 'selected' : '' }}>D1w</option>
-                                    <option value="D1w-702" {{ $item->device == 'D1w-702' ? 'selected' : '' }}>D1w-702
-                                    </option>
-                                    <option value="D2-402" {{ $item->device == 'D2-402' ? 'selected' : '' }}>D2-402
-                                    </option>
-                                    <option value="D3-501" {{ $item->device == 'D3-501' ? 'selected' : '' }}>D3-501
-                                    </option>
-                                    <option value="D3-503" {{ $item->device == 'D3-503' ? 'selected' : '' }}>D3-503
-                                    </option>
-                                    <option value="D3-504" {{ $item->device == 'D3-504' ? 'selected' : '' }}>D3-504
-                                    </option>
-                                    <option value="D3-504 Lama" {{ $item->device == 'D3-504 Lama' ? 'selected' : '' }}>
-                                        D3-504 Lama
-                                    </option>
-                                    <option value="D3-505" {{ $item->device == 'D3-505' ? 'selected' : '' }}>D3-505
-                                    </option>
-                                    <option value="D3-505 Lama" {{ $item->device == 'D3-505 Lama' ? 'selected' : '' }}>
-                                        D3-505 Lama
-                                    </option>
-                                    <option value="D3-506" {{ $item->device == 'D3-506' ? 'selected' : '' }}>D3-506
-                                    </option>
-                                    <option value="D3-506 Lama" {{ $item->device == 'D3-506 Lama' ? 'selected' : '' }}>
-                                        D3-506 Lama
-                                    </option>
-                                    <option value="D4-502" {{ $item->device == 'D4-502' ? 'selected' : '' }}>D4-502
-                                    </option>
-                                    <option value="D4-503" {{ $item->device == 'D4-503' ? 'selected' : '' }}>D4-503
-                                    </option>
-                                    <option value="D4-504" {{ $item->device == 'D4-504' ? 'selected' : '' }}>D4-504
-                                    </option>
-                                    <option value="D4-505" {{ $item->device == 'D4-505' ? 'selected' : '' }}>D4-505
-                                    </option>
-                                    <option value="K1-101" {{ $item->device == 'K1-101' ? 'selected' : '' }}>K1-101
-                                    </option>
-                                    <option value="K2-201" {{ $item->device == 'K2-201' ? 'selected' : '' }}>K2-201
-                                    </option>
-                                    <option value="M2-202" {{ $item->device == 'M2-202' ? 'selected' : '' }}>M2-202
-                                    </option>
-                                    <option value="M2-203" {{ $item->device == 'M2-203' ? 'selected' : '' }}>M2-203
-                                    </option>
-                                    <option value="M2 Pro" {{ $item->device == 'M2 Pro' ? 'selected' : '' }}>M2 Pro
-                                    </option>
-                                    <option value="M2 Max" {{ $item->device == 'M2 Max' ? 'selected' : '' }}>M2 Max
-                                    </option>
-                                    <option value="S1-701" {{ $item->device == 'S1-701' ? 'selected' : '' }}>S1-701
-                                    </option>
-                                    <option value="Swan 1" {{ $item->device == 'Swan 1' ? 'selected' : '' }}>Swan 1
-                                    </option>
-                                    <option value="Swan 1K" {{ $item->device == 'Swan 1K' ? 'selected' : '' }}>Swan 1K
-                                    </option>
-                                    <option value="Swan 1 Pro" {{ $item->device == 'Swan 1 Pro' ? 'selected' : '' }}>Swan 1
-                                        Pro</option>
-                                    <option value="Swift 1" {{ $item->device == 'Swift 1' ? 'selected' : '' }}>Swift 1
-                                    </option>
-                                    <option value="Swift 1 Pro" {{ $item->device == 'Swift 1 Pro' ? 'selected' : '' }}>
-                                        Swift 1 Pro</option>
-                                    <option value="Swift 2" {{ $item->device == 'Swift 2' ? 'selected' : '' }}>Swift 2
-                                    </option>
-                                    <option value="Swift 2 Pro" {{ $item->device == 'Swift 2 Pro' ? 'selected' : '' }}>
-                                        Swift 2 Pro</option>
-                                    <option value="Falcon 1" {{ $item->device == 'Falcon 1' ? 'selected' : '' }}>Falcon 1
-                                    </option>
-                                    <option value="Crane 1 16" {{ $item->device == 'Crane 1 16' ? 'selected' : '' }}>Crane
-                                        1 16</option>
-                                    <option value="Crane 1 21.5" {{ $item->device == 'Crane 1 21.5' ? 'selected' : '' }}>
-                                        Crane 1 21.5</option>
-                                    <option value="Crane 1 27" {{ $item->device == 'Crane 1 27' ? 'selected' : '' }}>Crane
-                                        1 27</option>
-                                    <option value="Crane 1 32" {{ $item->device == 'Crane 1 32' ? 'selected' : '' }}>Crane
-                                        1 32</option>
+                                    @foreach ($serviceDevice as $device)
+                                        <option value="{{ $device->name }}"
+                                            {{ $item->device == $device->name ? 'selected' : '' }}>{{ $device->name }}
+                                        </option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="mb-3">
@@ -243,10 +176,9 @@
                 </div>
             </div>
         </div>
-    @endforeach
-    <!-- End Edit data -->
-    <!-- view data -->
-    @foreach ($selesaiPelanggan as $item)
+        <!-- End Edit data -->
+
+        <!-- view data -->
         <div class="modal fade" id="viewModal{{ $item->id }}" tabindex="-1"
             aria-labelledby="viewModalLabel{{ $item->id }}" aria-hidden="true">
             <div class="modal-dialog">
@@ -327,11 +259,9 @@
                 </div>
             </div>
         </div>
-    @endforeach
-    <!-- end view data -->
+        <!-- end view data -->
 
-    <!-- delete data -->
-    @foreach ($selesaiPelanggan as $item)
+        <!-- delete data -->
         <div class="modal fade" id="deleteModal{{ $item->id }}" tabindex="-1"
             aria-labelledby="deleteModalLabel{{ $item->id }}" aria-hidden="true">
             <div class="modal-dialog">
@@ -356,11 +286,9 @@
                 </div>
             </div>
         </div>
-    @endforeach
-    <!-- end delete data -->
+        <!-- end delete data -->
 
-    <!-- Copy Text -->
-    @foreach ($selesaiPelanggan as $item)
+        <!-- Copy Text -->
         <div class="modal fade" id="copyText{{ $item->id }}" tabindex="-1" role="dialog"
             aria-labelledby="copyModalLabel{{ $item->id }}" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -401,21 +329,80 @@
 
     <div class="container-fluid mt-3">
         <div style="overflow: auto">
-            <table id="servicepelanggan-table" class="table table-striped table-bordered nowrap" style="width:100%">
-                {{ $dataTable->table() }}
+            <table id="selesaiPelanggan-table" class="table table-striped table-bordered nowrap" style="width:100%">
+                <thead>
+                    <th>No</th>
+                    <th>Tanggal Selesai</th>
+                    <th>Serial Number</th>
+                    <th>Pelanggan</th>
+                    <th>Device</th>
+                    <th>Action</th>
+                </thead>
+
             </table>
         </div>
     </div>
-
-    {{-- <div class="container">
-        <div class="card">
-            <div class="card-header">Manage Users</div>
-            <div class="card-body">
-                {{ $dataTable->table() }}
-            </div>
-        </div>
-    </div> --}}
 @endsection
 @push('scripts')
-    {{ $dataTable->scripts(attributes: ['type' => 'module']) }}
+    <script>
+        $(document).ready(function() {
+            $('#selesaiPelanggan-table').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: '{!! route('service.selesaiPelanggan') !!}',
+                columns: [{
+                        data: 'DT_RowIndex',
+                        name: 'DT_RowIndex'
+                    },
+                    {
+                        data: 'tanggalkeluar',
+                        name: 'tanggalkeluar'
+                    },
+                    {
+                        data: 'serialnumber',
+                        name: 'serialnumber'
+                    },
+                    {
+                        data: 'pelanggan',
+                        name: 'pelanggan'
+                    },
+                    {
+                        data: 'device',
+                        name: 'device'
+                    },
+                    {
+                        data: 'action',
+                        name: 'action',
+                        orderable: false,
+                        searchable: false
+                    },
+                ]
+            });
+
+            $(document).ready(function() {
+                $('.viewModal').on('click', function() {
+                    var id = $(this).data('id');
+                    $('#viewModal' + id).modal('show');
+                });
+            });
+            $(document).ready(function() {
+                $('.editModal').on('click', function() {
+                    var id = $(this).data('id');
+                    $('#editModal' + id).modal('show');
+                });
+            });
+            $(document).ready(function() {
+                $('.copyText').on('click', function() {
+                    var id = $(this).data('id');
+                    $('#copyText' + id).modal('show');
+                });
+            });
+            $(document).ready(function() {
+                $('.deleteModal').on('click', function() {
+                    var id = $(this).data('id');
+                    $('#deleteModal' + id).modal('show');
+                });
+            });
+        });
+    </script>
 @endpush

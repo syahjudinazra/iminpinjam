@@ -70,9 +70,9 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">List Pinjam:</h6>
-                        <a class="collapse-item {{ Request::is('pinjam*') ? 'active' : '' }}" href="/pinjam">DiPinjam</a>
-                        <a class="collapse-item {{ Request::is('kembali*') ? 'active' : '' }}"
-                            href="/kembali">DiKembalikan</a>
+                        <a class="collapse-item {{ Request::is('pinjam') ? 'active' : '' }}" href="/pinjam">DiPinjam</a>
+                        <a class="collapse-item {{ Request::is('pinjam/kembali*') ? 'active' : '' }}"
+                            href="/pinjam/kembali">DiKembalikan</a>
                     </div>
                 </div>
             </li>

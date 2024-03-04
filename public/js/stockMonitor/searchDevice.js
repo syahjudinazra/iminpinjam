@@ -1,1 +1,0 @@
-$(".form-control-chosen").chosen();
