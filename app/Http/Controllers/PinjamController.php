@@ -32,11 +32,7 @@ class PinjamController extends Controller
                     ->addIndexColumn()
                     ->addColumn('action', function ($pinjam) {
                         $actionHtml = '<div class="d-flex align-items-center gap-3">';
-                        if (request()->is('pinjam')) {
-                            $actionHtml .= '<a href="#" class="text-decoration-none" data-toggle="modal" data-target="#viewModal' . $pinjam->id . '"><i class="fa-solid fa-eye"></i>View</a>';
-                        } else {
-                            $actionHtml .= '<a href="#" class="text-decoration-none" data-toggle="modal" data-target="#viewkembaliModal' . $pinjam->id . '"><i class="fa-solid fa-eye"></i>View</a>';
-                        }
+                        $actionHtml .= '<a href="#" class="text-decoration-none" data-toggle="modal" data-target="#viewModal' . $pinjam->id . '"><i class="fa-solid fa-eye"></i>View</a>';
 
                         if (auth()->check()) {
                             $user = auth()->user();
@@ -84,7 +80,6 @@ class PinjamController extends Controller
             ->orderBy('tanggal', 'desc')
             ->get();
 
-
             $pinjamsDevice =DB::table('pinjams_device')->select('name')->get();
 
             return Datatables::of($kembaliPinjam)
@@ -105,14 +100,11 @@ class PinjamController extends Controller
                                     </a>
                                     <div class="dropdown-menu">';
 
-                                if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('sylvi') || $user->hasRole('coni') || $user->hasRole('vivi')) {
-                                    $actionHtml .= '<a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                                    data-target="#editkembaliModal' . $kembaliPinjam->id . '"><i
-                                                        class="fa-solid fa-pen-to-square"></i> Edit</a>
-                                                    <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                                    data-target="#deleteModal' . $kembaliPinjam->id . '"><i
-                                                        class="fa-solid fa-trash"></i> Delete</a>';
-                                }
+                                    if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('sylvi') || $user->hasRole('coni') || $user->hasRole('vivi')) {
+                                        $actionHtml .= '<a class="dropdown-item" href="#" data-bs-toggle="modal" data-target="#editkembaliModal' . $kembaliPinjam->id . '"><i class="fa-solid fa-pen-to-square"></i> Edit</a>' .
+                                                        '<a class="dropdown-item" href="' . url('generate-pdf', $kembaliPinjam->id) . '"><i class="fa-solid fa-file-pdf"></i> Download PDF</a>' .
+                                                        '<a class="dropdown-item" href="#" data-bs-toggle="modal" data-target="#deleteModal' . $kembaliPinjam->id . '"><i class="fa-solid fa-trash"></i> Delete</a>';
+                                    }
 
                                 $actionHtml .= '</div>
                                 </div>';
@@ -139,20 +131,6 @@ class PinjamController extends Controller
         $fileName = 'DataPinjam_' . $timestamp . '.xlsx';
 
         return Excel::download(new ExportPinjam, $fileName);
-    }
-
-    public function search()
-    {
-        $pinjam = Pinjam::latest();
-        if (request()->has('search')) {
-            $pinjam->where('tanggal', 'Like', '%' . request()->input('search') . '%');
-            $pinjam->orWhere('serialnumber', 'Like', '%' . request()->input('search') . '%');
-            $pinjam->orWhere('device', 'Like', '%' . request()->input('search') . '%');
-            $pinjam->orWhere('customer', 'Like', '%' . request()->input('search') . '%');
-        }
-        $pinjam = $pinjam->paginate(10);
-        return view('pinjam.index', compact('pinjam'));
-        // ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     public function generatePdf($id)

@@ -118,94 +118,6 @@
     </div>
 
     @foreach ($kembaliPinjam as $item)
-        <!-- add edit Data -->
-        <div class="modal fade" id="editModal{{ $item->id }}" tabindex="-1"
-            aria-labelledby="editModalLabel{{ $item->id }}" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <form method="POST" action="{{ route('users.update', $item->id) }}" enctype="multipart/form-data">
-                        @csrf
-                        @method('PUT')
-
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="editModalLabel{{ $item->id }}">Edit Data Pinjam</h5>
-                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="mb-3">
-                                <label for="tanggal" class="form-label font-weight-bold">Tanggal</label>
-                                <input type="date" class="form-control shadow-none" id="tanggal" name="tanggal"
-                                    value="{{ $item->tanggal }}">
-                            </div>
-                            <div class="mb-3">
-                                <label for="serialnumber" class="form-label font-weight-bold">Serial Number</label>
-                                <input type="text" class="form-control shadow-none" id="serialnumber"
-                                    name="serialnumber" value="{{ $item->serialnumber }}">
-                            </div>
-                            <div class="form-group mb-3">
-                                <label class="font-weight-bold" for="device">Tipe Device</label>
-                                <select class="form-select form-control-chosen shadow-none" name="device" id="device"
-                                    required>
-                                    <option value="Null">Pilih Model</option>
-                                    @foreach ($pinjamsDevice as $device)
-                                        <option value="{{ $device->name }}"
-                                            {{ $item->device == $device->name ? 'selected' : '' }}>{{ $device->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label for="customer" class="form-label font-weight-bold">Customer</label>
-                                <input type="text" class="form-control shadow-none" id="customer" name="customer"
-                                    value="{{ $item->customer }}">
-                            </div>
-                            <div class="mb-3">
-                                <label for="alamat" class="form-label font-weight-bold">Alamat</label>
-                                <textarea class="form-control shadow-none" id="alamat" name="alamat" rows="3">{{ $item->alamat }}</textarea>
-                            </div>
-                            <div class="mb-3">
-                                <label for="sales" class="form-label font-weight-bold">Sales</label>
-                                <input type="text" class="form-control shadow-none" id="sales" name="sales"
-                                    value="{{ $item->sales }}">
-                            </div>
-                            <div class="mb-3">
-                                <label for="telp" class="form-label font-weight-bold">No Telp</label>
-                                <input type="number" class="form-control shadow-none" id="telp" name="telp"
-                                    value="{{ $item->telp }}">
-                            </div>
-                            <div class="mb-3">
-                                <label for="pengirim" class="form-label font-weight-bold">Pengirim</label>
-                                <input type="text" class="form-control shadow-none" id="pengirim" name="pengirim"
-                                    value="{{ $item->pengirim }}">
-                            </div>
-                            <div class="mb-3">
-                                <label for="kelengkapankirim" class="form-label font-weight-bold">Kelengkapan
-                                    Kirim</label>
-                                <textarea class="form-control shadow-none" id="kelengkapankirim" name="kelengkapankirim" rows="3">{{ $item->kelengkapankirim }}</textarea>
-                            </div>
-                            <div class="mb-3" hidden>
-                                <label for="status" class="form-label font-weight-bold">Status</label>
-                                <input type="text" class="form-control shadow-none" id="status" name="status"
-                                    value="{{ $item->status }}" readonly>
-                            </div>
-                            <div class="mb-3">
-                                <label for="gambar" class="form-label font-weight-bold">Gambar</label><br>
-                                <input class="form-control shadow-none" type="file" id="gambar" name="gambar">
-                                {{-- <img src="{{ asset('storage/gambar/'.$item->gambar) }}" width= '60' height='60' class="img img-responsive"> --}}
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-primary">Save Changes</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <!-- end edit data -->
-
         <!-- delete data -->
         <div class="modal fade" id="deleteModal{{ $item->id }}" tabindex="-1"
             aria-labelledby="deleteModalLabel{{ $item->id }}" aria-hidden="true">
@@ -523,7 +435,10 @@
                     },
                     {
                         data: 'tanggal',
-                        name: 'tanggal'
+                        name: 'tanggal',
+                        render: function(data) {
+                            return moment(data).format('DD-MM-YYYY');
+                        }
                     },
                     {
                         data: 'serialnumber',

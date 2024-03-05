@@ -52,7 +52,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->midd
 //PINJAM
 Route::middleware('auth')->group(function () {
     Route::get('/export-pinjam', [PinjamController::class, 'exportPinjam'])->name('export-pinjam');
-    Route::get('/pinjam/search', [PinjamController::class, 'search'])->name('search.index');
     Route::resource('/pinjam', PinjamController::class)->except(['show', 'edit', 'update', 'destroy']);
     Route::get('pinjam/kembali', [PinjamController::class, 'kembaliPinjam'])->name('pinjam.kembali');
     Route::get('/pinjam/{id}/edit', [PinjamController::class, 'edit'])->name('users.edit');

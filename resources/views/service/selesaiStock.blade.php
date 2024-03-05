@@ -359,7 +359,10 @@
                     },
                     {
                         data: 'tanggalkeluar',
-                        name: 'tanggalkeluar'
+                        name: 'tanggalkeluar',
+                        render: function(data) {
+                            return moment(data).format('DD-MM-YYYY');
+                        }
                     },
                     {
                         data: 'serialnumber',

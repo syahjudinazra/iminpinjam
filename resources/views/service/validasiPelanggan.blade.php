@@ -467,7 +467,10 @@
                     },
                     {
                         data: 'tanggalmasuk',
-                        name: 'tanggalmasuk'
+                        name: 'tanggalmasuk',
+                        render: function(data) {
+                            return moment(data).format('DD-MM-YYYY');
+                        }
                     },
                     {
                         data: 'serialnumber',
