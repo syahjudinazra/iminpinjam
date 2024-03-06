@@ -8,8 +8,8 @@
         </div>
     </div>
 
-    <!-- Edit Data -->
     @foreach ($selesaiPelanggan as $item)
+        <!-- Edit Data -->
         <div class="modal fade" id="editModal{{ $item->id }}" tabindex="-1"
             aria-labelledby="editModalLabel{{ $item->id }}" aria-hidden="true">
             <div class="modal-dialog">
@@ -324,8 +324,8 @@
                 </div>
             </div>
         </div>
+        <!-- End Copy Text -->
     @endforeach
-    <!-- End Copy Text -->
 
     <div class="container-fluid mt-3">
         <div style="overflow: auto">

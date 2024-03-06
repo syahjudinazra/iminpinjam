@@ -54,7 +54,6 @@
     </div>
     <!-- Internal JS -->
     <script src="{{ asset('js/app.js') }}"></script>
-    <script src="{{ asset('js/stockMonitor/searchDevice.js') }}" defer></script>
     <script src="{{ asset('js/stockMonitor/importViewStocks.js') }}" defer></script>
     <script src="{{ asset('js/copyText.js') }}" defer></script>
     <script src="{{ asset('js/importSpareparts.js') }}" defer></script>

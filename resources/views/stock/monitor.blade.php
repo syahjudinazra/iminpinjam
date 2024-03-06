@@ -932,7 +932,6 @@
 @endsection
 
 @push('js')
-    <script src="{{ asset('js/stockMonitor/searchDevice.js') }}"></script>
     <script src="{{ asset('js/stockMonitor/importViewStocks.js') }}"></script>
     <script src="{{ asset('js/updateMultipleSN/MoveSN.js') }}"></script>
 @endpush

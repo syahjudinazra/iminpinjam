@@ -16,6 +16,7 @@ use App\Http\Controllers\MaintenanceController;
 use App\Http\Controllers\UserSettingsController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\ServiceTestController;
 
 // Route::get('/', function () {
 //     // return view('auth.login');
@@ -138,6 +139,8 @@ Route::prefix('service')->middleware('auth')->group(function () {
     Route::resource('/', ServiceController::class)->except([
         'show', 'edit', 'update', 'destroy',
     ]);
+    Route::get('/export-service', [ServiceController::class, 'exportService'])->middleware('auth')->name('export.service');
+    Route::get('/export-all', [ServiceController::class, 'exportAll'])->middleware('auth')->name('export.allservice');
 
     Route::get('/antrianPelanggan', [ServiceController::class, 'antrianPelanggan'])
         ->middleware('auth')
@@ -163,8 +166,15 @@ Route::prefix('service')->middleware('auth')->group(function () {
         Route::get('/{id}/edit', [ServiceController::class, 'edit'])->middleware('auth')->name('service.edit');
         Route::put('/{id}', [ServiceController::class, 'update'])->middleware('auth')->name('service.update');
         Route::delete('/{id}', [ServiceController::class, 'destroy'])->middleware('auth')->name('service.destroy');
-        Route::get('/export-service', [ServiceController::class, 'exportService'])->middleware('auth')->name('export.service');
-        Route::get('/export-all', [ServiceController::class, 'exportAll'])->middleware('auth')->name('export.allservice');
 });
 
+//ServiceTest
+Route::prefix('serviceTest')->middleware('auth')->group(function () {
+
+        Route::get('/', [ServiceTestController::class, 'index'])->name('serviceTest.index');
+        Route::get('/{id}', [ServiceTestController::class, 'show'])->middleware('auth')->name('servicetest.show');
+        Route::get('/{id}/edit', [ServiceTestController::class, 'edit'])->middleware('auth')->name('servicetest.edit');
+        Route::put('/{id}', [ServiceTestController::class, 'update'])->middleware('auth')->name('servicetest.update');
+        Route::delete('/{id}', [ServiceTestController::class, 'destroy'])->middleware('auth')->name('servicetest.destroy');
+});
 

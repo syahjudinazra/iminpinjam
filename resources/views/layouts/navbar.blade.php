@@ -148,6 +148,14 @@
 
             <hr class="sidebar-divider">
 
+            <li class="nav-item">
+                <a class="nav-link {{ Request::is('serviceTest*') ? 'active' : '' }}" href="/serviceTest">
+                    <i class="fas fa-fw fa-microchip"></i>
+                    <span>Service Test</span></a>
+            </li>
+
+            <hr class="sidebar-divider">
+
             @auth
                 @if (auth()->user()->hasRole('superadmin'))
                     <div class="sidebar-heading">

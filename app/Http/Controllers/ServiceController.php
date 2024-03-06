@@ -60,7 +60,7 @@ class ServiceController extends Controller
                                                     data-target="#copyText' . $service->id . '"><i
                                                         class="fa-solid fa-clone"></i> Copy</a>';
                                 }
-                                if ($user->hasRole('superadmin') || $user->hasRole('jeffri')) {
+                                if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
                                     $actionHtml .= '<a class="dropdown-item" href="#" data-bs-toggle="modal"
                                                     data-target="#moveModal' . $service->id . '"><i
                                                         class="fa-solid fa-paper-plane"></i> Move</a>
@@ -113,7 +113,9 @@ class ServiceController extends Controller
                         if (auth()->check()) {
                             $user = auth()->user();
 
-                            if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
+                            $allowedRoles = ['superadmin', 'jeffri', 'maulana'];
+
+                            if ($user->hasAnyRole($allowedRoles)) {
                                 $actionHtml .= '
                                 <div class="dropdown dropright">
                                     <a href="#" class="text-decoration-none dropdown-toggle"
@@ -122,19 +124,26 @@ class ServiceController extends Controller
                                     </a>
                                     <div class="dropdown-menu">';
 
-                                if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
+                                if ($user->hasAnyRole(['superadmin', 'maulana'])) {
                                     $actionHtml .= '<a class="dropdown-item" href="#" data-bs-toggle="modal"
                                                     data-target="#copyText' . $service->id . '"><i
                                                         class="fa-solid fa-clone"></i> Copy</a>';
                                 }
-                                if ($user->hasRole('superadmin') || $user->hasRole('jeffri')) {
+                                if ($user->hasAnyRole(['superadmin', 'jeffri'])) {
                                     $actionHtml .= '<a class="dropdown-item" href="#" data-bs-toggle="modal"
                                                         data-target="#moveModal' . $service->id . '"><i
-                                                        class="fa-solid fa-paper-plane"></i> Move</a>
-                                                    <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                                        class="fa-solid fa-paper-plane"></i> Move</a>';
+                                }
+
+                                if ($user->hasAnyRole($allowedRoles)) {
+                                    $actionHtml .= '<a class="dropdown-item" href="#" data-bs-toggle="modal"
                                                         data-target="#editModal' . $service->id . '"><i
-                                                        class="fa-solid fa-pen-to-square"></i> Edit</a>
-                                                    <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                                        class="fa-solid fa-pen-to-square"></i> Edit</a>';
+
+                                }
+
+                                if ($user->hasAnyRole(['superadmin', 'jeffri'])) {
+                                    $actionHtml .= '<a class="dropdown-item" href="#" data-bs-toggle="modal"
                                                         data-target="#deleteModal' . $service->id . '"><i
                                                         class="fa-solid fa-trash"></i> Delete</a>';
                                 }
@@ -257,7 +266,7 @@ class ServiceController extends Controller
                                                     data-target="#copyText' . $service->id . '"><i
                                                         class="fa-solid fa-clone"></i> Copy</a>';
                                 }
-                                if ($user->hasRole('superadmin') || $user->hasRole('jeffri')) {
+                                if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
                                     $actionHtml .= '<a class="dropdown-item" href="#" data-bs-toggle="modal"
                                                     data-target="#moveModal' . $service->id . '"><i
                                                         class="fa-solid fa-paper-plane"></i> Move</a>
@@ -309,7 +318,9 @@ class ServiceController extends Controller
                         if (auth()->check()) {
                             $user = auth()->user();
 
-                            if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
+                            $allowedRoles = ['superadmin', 'jeffri', 'maulana'];
+
+                            if ($user->hasAnyRole($allowedRoles)) {
                                 $actionHtml .= '
                                 <div class="dropdown dropright">
                                     <a href="#" class="text-decoration-none dropdown-toggle"
@@ -318,19 +329,26 @@ class ServiceController extends Controller
                                     </a>
                                     <div class="dropdown-menu">';
 
-                                if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
+                                if ($user->hasAnyRole(['superadmin', 'maulana'])) {
                                     $actionHtml .= '<a class="dropdown-item" href="#" data-bs-toggle="modal"
                                                     data-target="#copyText' . $service->id . '"><i
                                                         class="fa-solid fa-clone"></i> Copy</a>';
                                 }
-                                if ($user->hasRole('superadmin') || $user->hasRole('jeffri')) {
+                                if ($user->hasAnyRole(['superadmin', 'jeffri'])) {
                                     $actionHtml .= '<a class="dropdown-item" href="#" data-bs-toggle="modal"
                                                         data-target="#moveModal' . $service->id . '"><i
-                                                        class="fa-solid fa-paper-plane"></i> Move</a>
-                                                    <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                                        class="fa-solid fa-paper-plane"></i> Move</a>';
+                                }
+
+                                if ($user->hasAnyRole($allowedRoles)) {
+                                    $actionHtml .= '<a class="dropdown-item" href="#" data-bs-toggle="modal"
                                                         data-target="#editModal' . $service->id . '"><i
-                                                        class="fa-solid fa-pen-to-square"></i> Edit</a>
-                                                    <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                                        class="fa-solid fa-pen-to-square"></i> Edit</a>';
+
+                                }
+
+                                if ($user->hasAnyRole(['superadmin', 'jeffri'])) {
+                                    $actionHtml .= '<a class="dropdown-item" href="#" data-bs-toggle="modal"
                                                         data-target="#deleteModal' . $service->id . '"><i
                                                         class="fa-solid fa-trash"></i> Delete</a>';
                                 }
@@ -339,6 +357,7 @@ class ServiceController extends Controller
                                 </div>';
                             }
                         }
+
                         $actionHtml .= '</div>';
                         return $actionHtml;
                     })
