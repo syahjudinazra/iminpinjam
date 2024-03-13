@@ -20,7 +20,6 @@ class PinjamController extends Controller
      */
     public function index(Request $request)
     {
-
         if ($request->ajax()) {
             $pinjam = Pinjam::where('status', '0')
             ->orderBy('tanggal', 'desc')
@@ -32,7 +31,8 @@ class PinjamController extends Controller
                     ->addIndexColumn()
                     ->addColumn('action', function ($pinjam) {
                         $actionHtml = '<div class="d-flex align-items-center gap-3">';
-                        $actionHtml .= '<a href="#" class="text-decoration-none" data-toggle="modal" data-target="#viewModal' . $pinjam->id . '"><i class="fa-solid fa-eye"></i>View</a>';
+                        $actionHtml .= '<a href="' . route('pinjam.showDipinjam', ['id' => $pinjam->id]) . '"
+                        class="text-decoration-none"><i class="fa-solid fa-eye"></i> View</a>';
 
                         if (auth()->check()) {
                             $user = auth()->user();
@@ -46,12 +46,14 @@ class PinjamController extends Controller
                                     </a>
                                     <div class="dropdown-menu">';
 
-                                if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('sylvi') || $user->hasRole('coni') || $user->hasRole('vivi')) {
-                                    $actionHtml .= '<a class="dropdown-item" href="#" data-bs-toggle="modal" data-target="#moveModal' . $pinjam->id . '"><i class="fa-solid fa-paper-plane"></i> Move</a>' .
-                                    '<a class="dropdown-item" href="#" data-bs-toggle="modal" data-target="#editModal' . $pinjam->id . '"><i class="fa-solid fa-pen-to-square"></i> Edit</a>' .
-                                    '<a class="dropdown-item" href="' . url('generate-pdf', $pinjam->id) . '"><i class="fa-solid fa-file-pdf"></i> Download PDF</a>' .
-                                    '<a class="dropdown-item" href="#" data-bs-toggle="modal" data-target="#deleteModal' . $pinjam->id . '"><i class="fa-solid fa-trash"></i> Delete</a>';
-                                }
+                                    if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('sylvi') || $user->hasRole('coni') || $user->hasRole('vivi')) {
+                                        $actionHtml .=  '<a class="dropdown-item" href="' . route('pinjam.moveDipinjam', ['id' => $pinjam->id]) . '
+                                                        "><i class="fa-solid fa-paper-plane"></i> Move</a>'.
+                                                        '<a class="dropdown-item" href="' . route('pinjam.editDipinjam', ['id' => $pinjam->id]) . '
+                                                        "><i class="fa-solid fa-pen-to-square"></i> Edit</a>'.
+                                                        '<a class="dropdown-item" href="' . route('pinjam.generate-pdf', ['id' => $pinjam->id]) . '"><i class="fa-solid fa-file-pdf"></i> Download PDF</a>' .
+                                                        '<a class="dropdown-item" href="#" data-bs-toggle="modal" data-target="#deleteModal' . $pinjam->id . '"><i class="fa-solid fa-trash"></i> Delete</a>';
+                                    }
 
                                 $actionHtml .= '</div>
                                 </div>';
@@ -70,7 +72,7 @@ class PinjamController extends Controller
         ->get();
 
         $pinjamsDevice =DB::table('pinjams_device')->select('name')->get();
-        return view('pinjam.index', compact('pinjam', 'pinjamsDevice'));
+        return view('pinjam.Dipinjam.index', compact('pinjam', 'pinjamsDevice'));
     }
 
     public function kembaliPinjam(Request $request)
@@ -86,7 +88,8 @@ class PinjamController extends Controller
                     ->addIndexColumn()
                     ->addColumn('action', function ($kembaliPinjam) {
                         $actionHtml = '<div class="d-flex align-items-center gap-3">';
-                        $actionHtml .= '<a href="#" class="text-decoration-none" data-toggle="modal" data-target="#viewkembaliModal' . $kembaliPinjam->id . '"><i class="fa-solid fa-eye"></i>View</a>';
+                        $actionHtml .= '<a href="' . route('pinjam.showDikembalikan', ['id' => $kembaliPinjam->id]) . '"
+                        class="text-decoration-none"><i class="fa-solid fa-eye"></i> View</a>';
 
                         if (auth()->check()) {
                             $user = auth()->user();
@@ -101,8 +104,9 @@ class PinjamController extends Controller
                                     <div class="dropdown-menu">';
 
                                     if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('sylvi') || $user->hasRole('coni') || $user->hasRole('vivi')) {
-                                        $actionHtml .= '<a class="dropdown-item" href="#" data-bs-toggle="modal" data-target="#editkembaliModal' . $kembaliPinjam->id . '"><i class="fa-solid fa-pen-to-square"></i> Edit</a>' .
-                                                        '<a class="dropdown-item" href="' . url('generate-pdf', $kembaliPinjam->id) . '"><i class="fa-solid fa-file-pdf"></i> Download PDF</a>' .
+                                        $actionHtml .= '<a class="dropdown-item" href="' . route('pinjam.editDikembalikan', ['id' => $kembaliPinjam->id]) . '
+                                                        "><i class="fa-solid fa-pen-to-square"></i> Edit</a>'.
+                                                        '<a class="dropdown-item" href="' . route('pinjam.generate-pdf', ['id' => $kembaliPinjam->id]) . '"><i class="fa-solid fa-file-pdf"></i> Download PDF</a>' .
                                                         '<a class="dropdown-item" href="#" data-bs-toggle="modal" data-target="#deleteModal' . $kembaliPinjam->id . '"><i class="fa-solid fa-trash"></i> Delete</a>';
                                     }
 
@@ -123,8 +127,9 @@ class PinjamController extends Controller
         ->get();
 
         $pinjamsDevice =DB::table('pinjams_device')->select('name')->get();
-        return view('pinjam.kembali', compact('kembaliPinjam', 'pinjamsDevice'));
+        return view('pinjam.Dikembalikan.index', compact('kembaliPinjam', 'pinjamsDevice'));
     }
+
     public function exportPinjam()
     {
         $timestamp = now()->format('d-m-Y');
@@ -207,10 +212,16 @@ class PinjamController extends Controller
      * @param  \App\Models\Pinjam  $pinjam
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function showDipinjam($id)
     {
         $pinjam = Pinjam::findOrFail($id);
-        return view('pinjam.index', compact('pinjam'));
+        return view('pinjam.Dipinjam.view', compact('pinjam'));
+    }
+
+    public function showDikembalikan($id)
+    {
+        $pinjam = Pinjam::findOrFail($id);
+        return view('pinjam.Dikembalikan.view', compact('pinjam'));
     }
 
     /**
@@ -219,12 +230,25 @@ class PinjamController extends Controller
      * @param  \App\Models\Pinjam  $pinjam
      * @return \Illuminate\Http\Response
      */
-    public function edit(Pinjam $pinjam, $id)
+    public function editDipinjam(Pinjam $pinjam, $id)
     {
-        // $pinjam = Pinjam::find($id);
-        // return response()->json($pinjam);
         $pinjam = Pinjam::findOrFail($id);
-        return view('pinjam.index', compact('pinjam'));
+        $pinjamsDevice =DB::table('pinjams_device')->select('name')->get();
+        return view('pinjam.Dipinjam.edit', compact('pinjam', 'pinjamsDevice'));
+    }
+
+    public function editDikembalikan(Pinjam $pinjam, $id)
+    {
+        $pinjam = Pinjam::findOrFail($id);
+        $pinjamsDevice =DB::table('pinjams_device')->select('name')->get();
+        return view('pinjam.Dikembalikan.edit', compact('pinjam', 'pinjamsDevice'));
+    }
+
+    public function moveDipinjam(Pinjam $pinjam, $id)
+    {
+        $pinjam = Pinjam::findOrFail($id);
+        $pinjamsDevice =DB::table('pinjams_device')->select('name')->get();
+        return view('pinjam.Dipinjam.move', compact('pinjam', 'pinjamsDevice'));
     }
 
     /**

@@ -60,7 +60,7 @@ class ServiceController extends Controller
                                                         class="fa-solid fa-clone"></i> Copy</a>';
                                 }
                                 if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
-                                    $actionHtml .= '  <a class="dropdown-item" href="' . route('service.moveAntrianPelanggan', ['id' => $antrianPelanggan->id]) . '
+                                    $actionHtml .= '<a class="dropdown-item" href="' . route('service.moveAntrianPelanggan', ['id' => $antrianPelanggan->id]) . '
                                     " target="_blank" ><i class="fa-solid fa-paper-plane"></i> Move</a>
                                                     <a class="dropdown-item" href="' . route('service.editAntrianPelanggan', ['id' => $antrianPelanggan->id]) . '
                                                     " target="_blank" ><i class="fa-solid fa-pen-to-square"></i> Edit</a>

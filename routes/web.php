@@ -51,15 +51,23 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('auth')->name('home');
 
 //PINJAM
-Route::middleware('auth')->group(function () {
-    Route::get('/export-pinjam', [PinjamController::class, 'exportPinjam'])->name('export-pinjam');
-    Route::resource('/pinjam', PinjamController::class)->except(['show', 'edit', 'update', 'destroy']);
-    Route::get('pinjam/kembali', [PinjamController::class, 'kembaliPinjam'])->name('pinjam.kembali');
-    Route::get('/pinjam/{id}/edit', [PinjamController::class, 'edit'])->name('users.edit');
-    Route::put('/pinjam/{id}', [PinjamController::class, 'update'])->name('users.update');
-    Route::delete('/pinjam/{id}', [PinjamController::class, 'destroy'])->name('users.destroy');
-    Route::get('/pinjam/{id}', [PinjamController::class, 'show'])->name('users.show');
-    Route::get('/generate-pdf/{id}', [PinjamController::class, 'generatePdf']);
+Route::prefix('pinjam')->middleware('auth')->group(function () {
+    Route::resource('/', PinjamController::class)->except([
+    'show', 'edit', 'update', 'destroy']);
+    Route::get('/export-pinjam', [PinjamController::class, 'exportPinjam'])->name('pinjam.export-pinjam');
+
+    Route::get('/kembali', [PinjamController::class, 'kembaliPinjam'])->name('pinjam.kembali');
+    Route::get('/Dipinjam', [PinjamController::class, 'index'])->name('pinjam.Dipinjam');
+
+    Route::get('/dipinjam/{id}', [PinjamController::class, 'showDipinjam'])->name('pinjam.showDipinjam');
+    Route::get('/dikembalikan/{id}', [PinjamController::class, 'showDikembalikan'])->name('pinjam.showDikembalikan');
+
+    Route::get('/dipinjam/{id}/edit', [PinjamController::class, 'editDipinjam'])->name('pinjam.editDipinjam');
+    Route::get('/dikembalikan/{id}/edit', [PinjamController::class, 'editDikembalikan'])->name('pinjam.editDikembalikan');
+    Route::get('/dipinjam/{id}/move', [PinjamController::class, 'moveDipinjam'])->name('pinjam.moveDipinjam');
+        Route::put('/{id}', [PinjamController::class, 'update'])->name('pinjam.update');
+        Route::delete('/{id}', [PinjamController::class, 'destroy'])->name('pinjam.destroy');
+        Route::get('/generate-pdf/{id}', [PinjamController::class, 'generatePdf'])->name('pinjam.generate-pdf');
 });
 
 //SPAREPARTS
@@ -89,21 +97,17 @@ Route::prefix('firmware')->middleware('auth')->group(function () {
         'show', 'edit', 'update', 'destroy',
     ]);
 
-    Route::get('/table', [FirmwareController::class, 'table'])
-    ->middleware('auth')
-        ->name('firmware.table');
+    Route::get('/table', [FirmwareController::class, 'table'])->middleware('auth')
+    ->name('firmware.table');
 
-    Route::get('/{id}/edit', [FirmwareController::class, 'edit'])
-    ->middleware('auth')
-        ->name('firmware.edit');
+    Route::get('/{id}/edit', [FirmwareController::class, 'edit'])->middleware('auth')
+    ->name('firmware.edit');
 
-    Route::put('/{id}', [FirmwareController::class, 'update'])
-    ->middleware('auth')
-        ->name('firmware.update');
+    Route::put('/{id}', [FirmwareController::class, 'update'])->middleware('auth')
+    ->name('firmware.update');
 
-    Route::delete('/{id}', [FirmwareController::class, 'destroy'])
-    ->middleware('auth')
-        ->name('firmware.destroy');
+    Route::delete('/{id}', [FirmwareController::class, 'destroy'])->middleware('auth')
+    ->name('firmware.destroy');
 });
 
 
@@ -183,14 +187,3 @@ Route::prefix('service')->middleware('auth')->group(function () {
         Route::put('/{id}', [ServiceController::class, 'update'])->middleware('auth')->name('service.update');
         Route::delete('/{id}', [ServiceController::class, 'destroy'])->middleware('auth')->name('service.destroy');
 });
-
-//ServiceTest
-Route::prefix('serviceTest')->middleware('auth')->group(function () {
-
-        Route::get('/', [ServiceTestController::class, 'index'])->name('serviceTest.index');
-        Route::get('/{id}', [ServiceTestController::class, 'show'])->middleware('auth')->name('servicetest.show');
-        Route::get('/{id}/edit', [ServiceTestController::class, 'edit'])->middleware('auth')->name('servicetest.edit');
-        Route::put('/{id}', [ServiceTestController::class, 'update'])->middleware('auth')->name('servicetest.update');
-        Route::delete('/{id}', [ServiceTestController::class, 'destroy'])->middleware('auth')->name('servicetest.destroy');
-});
-

@@ -70,7 +70,8 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">List Pinjam:</h6>
-                        <a class="collapse-item {{ Request::is('pinjam') ? 'active' : '' }}" href="/pinjam">DiPinjam</a>
+                        <a class="collapse-item {{ Request::is('pinjam/Dipinjam') ? 'active' : '' }}"
+                            href="/pinjam/Dipinjam">DiPinjam</a>
                         <a class="collapse-item {{ Request::is('pinjam/kembali*') ? 'active' : '' }}"
                             href="/pinjam/kembali">DiKembalikan</a>
                     </div>
@@ -146,13 +147,13 @@
                     <span>Firmware</span></a>
             </li>
 
-            <hr class="sidebar-divider">
+            {{-- <hr class="sidebar-divider">
 
             <li class="nav-item">
                 <a class="nav-link {{ Request::is('serviceTest*') ? 'active' : '' }}" href="/serviceTest">
                     <i class="fas fa-fw fa-microchip"></i>
                     <span>Service Test</span></a>
-            </li>
+            </li> --}}
 
             <hr class="sidebar-divider">
 
