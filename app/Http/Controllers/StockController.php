@@ -202,7 +202,6 @@ class StockController extends Controller
         $stock->tanggalmasuk = $request->input('tanggalmasuk');
         $stock->tanggalkeluar = $request->input('tanggalkeluar');
         $stock->pelanggan = $request->input('pelanggan');
-
         $statusValues = $request->input('status');
         $statusString = implode(',', $statusValues);
         $stock->status = $statusString;

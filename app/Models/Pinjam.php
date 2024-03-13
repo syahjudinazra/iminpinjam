@@ -11,7 +11,6 @@ class Pinjam extends Model
 
     protected $table = 'pinjams';
     protected $primaryKey = 'id';
-    protected $dates = ['tanggal'];
 
     protected $fillable = [
         'tanggal',

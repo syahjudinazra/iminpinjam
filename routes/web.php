@@ -162,8 +162,24 @@ Route::prefix('service')->middleware('auth')->group(function () {
         ->middleware('auth')
         ->name('service.selesaiStock');
 
-        Route::get('/{id}', [ServiceController::class, 'show'])->middleware('auth')->name('service.show');
-        Route::get('/{id}/edit', [ServiceController::class, 'edit'])->middleware('auth')->name('service.edit');
+        Route::get('/antrian-pelanggan/{id}', [ServiceController::class, 'showAntrianPelanggan'])->middleware('auth')->name('service.showAntrianPelanggan');
+        Route::get('/validasi-pelanggan/{id}', [ServiceController::class, 'showValidasiPelanggan'])->middleware('auth')->name('service.showValidasiPelanggan');
+        Route::get('/selesai-pelanggan/{id}', [ServiceController::class, 'showSelesaiPelanggan'])->middleware('auth')->name('service.showSelesaiPelanggan');
+        Route::get('/antrian-stock/{id}', [ServiceController::class, 'showAntrianStock'])->middleware('auth')->name('service.showAntrianStock');
+        Route::get('/validasi-stock/{id}', [ServiceController::class, 'showValidasiStock'])->middleware('auth')->name('service.showValidasiStock');
+        Route::get('/selesai-stock/{id}', [ServiceController::class, 'showSelesaiStock'])->middleware('auth')->name('service.showSelesaiStock');
+
+        Route::get('/antrian-pelanggan/{id}/edit', [ServiceController::class, 'editAntrianPelanggan'])->middleware('auth')->name('service.editAntrianPelanggan');
+        Route::get('/validasi-pelanggan/{id}/edit', [ServiceController::class, 'editValidasiPelanggan'])->middleware('auth')->name('service.editValidasiPelanggan');
+        Route::get('/selesai-pelanggan/{id}/edit', [ServiceController::class, 'editSelesaiPelanggan'])->middleware('auth')->name('service.editSelesaiPelanggan');
+        Route::get('/antrian-stock/{id}/edit', [ServiceController::class, 'editAntrianStock'])->middleware('auth')->name('service.editAntrianStock');
+        Route::get('/validasi-stock/{id}/edit', [ServiceController::class, 'editValidasiStock'])->middleware('auth')->name('service.editValidasiStock');
+        Route::get('/selesai-stock/{id}/edit', [ServiceController::class, 'editSelesaiStock'])->middleware('auth')->name('service.editSelesaiStock');
+
+        Route::get('antrian-pelanggan/{id}/move', [ServiceController::class, 'moveAntrianPelanggan'])->middleware('auth')->name('service.moveAntrianPelanggan');
+        Route::get('validasi-pelanggan/{id}/move', [ServiceController::class, 'moveValidasiPelanggan'])->middleware('auth')->name('service.moveValidasiPelanggan');
+        Route::get('antrian-stock/{id}/move', [ServiceController::class, 'moveAntrianStock'])->middleware('auth')->name('service.moveAntrianStock');
+        Route::get('validasi-stock/{id}/move', [ServiceController::class, 'moveValidasiStock'])->middleware('auth')->name('service.moveValidasiStock');
         Route::put('/{id}', [ServiceController::class, 'update'])->middleware('auth')->name('service.update');
         Route::delete('/{id}', [ServiceController::class, 'destroy'])->middleware('auth')->name('service.destroy');
 });

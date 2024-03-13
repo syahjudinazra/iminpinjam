@@ -434,8 +434,8 @@
                         name: 'DT_RowIndex'
                     },
                     {
-                        data: 'tanggal',
-                        name: 'tanggal',
+                        data: 'tanggalkembali',
+                        name: 'tanggalkembali',
                         render: function(data) {
                             return moment(data).format('DD-MM-YYYY');
                         }

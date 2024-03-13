@@ -162,7 +162,7 @@
                                     name="serialnumber" value="{{ $item->serialnumber }}">
                             </div>
                             <div class="form-group mb-3">
-                                <label class="font-weight-bold" for="device">Tipe Device</label>
+                                <label class="font-weight-bold" for="device">Device</label>
                                 <select class="form-select form-control-chosen shadow-none" name="device" id="device"
                                     required>
                                     <option value="Null">Pilih Model</option>
@@ -172,6 +172,16 @@
                                         </option>
                                     @endforeach
                                 </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="ram" class="form-label font-weight-bold">RAM</label>
+                                <input type="text" class="form-control shadow-none" id="ram" name="ram"
+                                    value="{{ $item->ram }}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="android" class="form- font-weight-bold">Android</label>
+                                <input type="text" class="form-control shadow-none" id="android" name="android"
+                                    value="{{ $item->android }}">
                             </div>
                             <div class="mb-3">
                                 <label for="customer" class="form-label font-weight-bold">Customer</label>

@@ -140,7 +140,6 @@ class PinjamController extends Controller
         return $pdf->download('test.pdf');
     }
 
-
     /**
      * Show the form for creating a new resource.
      *
@@ -210,10 +209,7 @@ class PinjamController extends Controller
      */
     public function show($id)
     {
-        // Find the data by id
         $pinjam = Pinjam::findOrFail($id);
-
-        // // Return the view with the data
         return view('pinjam.index', compact('pinjam'));
     }
 
