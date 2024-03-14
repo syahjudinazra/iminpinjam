@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Database\Eloquent\Builder;
+use Yajra\DataTables\DataTables;
 
 class StockController extends Controller
 {
@@ -86,28 +87,206 @@ class StockController extends Controller
         return response()->json(['message' => 'Data updated successfully']);
     }
 
-    public function gudang()
+    public function gudang(Request $request)
     {
+        if ($request->ajax()) {
+            $stockGudang = Stock::where('status', 'gudang')->get();
+            $stockDevice =DB::table('stocks_device')->select('name')->get();
+
+            return Datatables::of($stockGudang)
+                    ->addIndexColumn()
+                    ->addColumn('action', function ($stockGudang) {
+                        $actionHtml = '<div class="d-flex align-items-center gap-3">';
+                        $actionHtml .= '<a href="' . route('stock.showGudang', ['id' => $stockGudang->id]) . '"
+                        class="text-decoration-none"><i class="fa-solid fa-eye"></i> View</a>';
+
+                        if (auth()->check()) {
+                            $user = auth()->user();
+
+                            if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('sylvi') || $user->hasRole('coni') || $user->hasRole('vivi')) {
+                                $actionHtml .= '
+                                <div class="dropdown dropright">
+                                    <a href="#" class="text-decoration-none dropdown-toggle"
+                                        data-toggle="dropdown" aria-expanded="false">
+                                        More
+                                    </a>
+                                    <div class="dropdown-menu">';
+
+                                    if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('sylvi') || $user->hasRole('coni') || $user->hasRole('vivi')) {
+                                        $actionHtml .=  '<a class="dropdown-item" href="' . route('stock.editGudang', ['id' => $stockGudang->id]) . '
+                                                        "><i class="fa-solid fa-pen-to-square"></i> Edit</a>'.
+                                                        '<a class="dropdown-item" href="#" data-bs-toggle="modal" data-target="#deleteModal' . $stockGudang->id . '"><i class="fa-solid fa-trash"></i> Delete</a>';
+                                    }
+
+                                $actionHtml .= '</div>
+                                </div>';
+                            }
+                        }
+                        $actionHtml .= '</div>';
+                        return $actionHtml;
+
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
         $stockGudang = Stock::where('status', 'gudang')->get();
-        return view('stock.gudang', compact('stockGudang'));
+        $stockDevice =DB::table('stocks_device')->select('name')->get();
+
+        return view('stock.digudang.index', compact('stockGudang',  'stockGudang'));
     }
 
-    public function service()
+    public function service(Request $request)
     {
-        $stockService = Stock::where('status', 'service')->get();
-        return view('stock.service', compact('stockService'));
+        {
+            if ($request->ajax()) {
+                $stockService = Stock::where('status', 'service')->get();
+                $stockDevice =DB::table('stocks_device')->select('name')->get();
+
+                return Datatables::of($stockService)
+                        ->addIndexColumn()
+                        ->addColumn('action', function ($stockService) {
+                            $actionHtml = '<div class="d-flex align-items-center gap-3">';
+                            $actionHtml .= '<a href="' . route('stock.showDiservice', ['id' => $stockService->id]) . '"
+                            class="text-decoration-none"><i class="fa-solid fa-eye"></i> View</a>';
+
+                            if (auth()->check()) {
+                                $user = auth()->user();
+
+                                if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('sylvi') || $user->hasRole('coni') || $user->hasRole('vivi')) {
+                                    $actionHtml .= '
+                                    <div class="dropdown dropright">
+                                        <a href="#" class="text-decoration-none dropdown-toggle"
+                                            data-toggle="dropdown" aria-expanded="false">
+                                            More
+                                        </a>
+                                        <div class="dropdown-menu">';
+
+                                        if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('sylvi') || $user->hasRole('coni') || $user->hasRole('vivi')) {
+                                            $actionHtml .=  '<a class="dropdown-item" href="' . route('stock.editDiservice', ['id' => $stockService->id]) . '
+                                                            "><i class="fa-solid fa-pen-to-square"></i> Edit</a>'.
+                                                            '<a class="dropdown-item" href="#" data-bs-toggle="modal" data-target="#deleteModal' . $stockService->id . '"><i class="fa-solid fa-trash"></i> Delete</a>';
+                                        }
+
+                                    $actionHtml .= '</div>
+                                    </div>';
+                                }
+                            }
+                            $actionHtml .= '</div>';
+                            return $actionHtml;
+
+                        })
+                        ->rawColumns(['action'])
+                        ->make(true);
+            }
+            $stockService = Stock::where('status', 'service')->get();
+            $stockDevice =DB::table('stocks_device')->select('name')->get();
+
+            return view('stock.diservice.index', compact('stockService', 'stockDevice'));
+        }
     }
 
-    public function dipinjam()
+    public function dipinjam(Request $request)
     {
-        $stockDipinjam = Stock::where('status', 'dipinjam')->get();
-        return view('stock.dipinjam', compact('stockDipinjam'));
+        {
+            {
+                if ($request->ajax()) {
+                    $stockDipinjam = Stock::where('status', 'dipinjam')->get();
+                    $stockDevice =DB::table('stocks_device')->select('name')->get();
+
+                    return Datatables::of($stockDipinjam)
+                            ->addIndexColumn()
+                            ->addColumn('action', function ($stockDipinjam) {
+                                $actionHtml = '<div class="d-flex align-items-center gap-3">';
+                                $actionHtml .= '<a href="' . route('stock.showPinjam', ['id' => $stockDipinjam->id]) . '"
+                                class="text-decoration-none"><i class="fa-solid fa-eye"></i> View</a>';
+
+                                if (auth()->check()) {
+                                    $user = auth()->user();
+
+                                    if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('sylvi') || $user->hasRole('coni') || $user->hasRole('vivi')) {
+                                        $actionHtml .= '
+                                        <div class="dropdown dropright">
+                                            <a href="#" class="text-decoration-none dropdown-toggle"
+                                                data-toggle="dropdown" aria-expanded="false">
+                                                More
+                                            </a>
+                                            <div class="dropdown-menu">';
+
+                                            if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('sylvi') || $user->hasRole('coni') || $user->hasRole('vivi')) {
+                                                $actionHtml .=  '<a class="dropdown-item" href="' . route('stock.editPinjam', ['id' => $stockDipinjam->id]) . '
+                                                                "><i class="fa-solid fa-pen-to-square"></i> Edit</a>'.
+                                                                '<a class="dropdown-item" href="#" data-bs-toggle="modal" data-target="#deleteModal' . $stockDipinjam->id . '"><i class="fa-solid fa-trash"></i> Delete</a>';
+                                            }
+
+                                        $actionHtml .= '</div>
+                                        </div>';
+                                    }
+                                }
+                                $actionHtml .= '</div>';
+                                return $actionHtml;
+
+                            })
+                            ->rawColumns(['action'])
+                            ->make(true);
+                }
+                $stockDipinjam = Stock::where('status', 'dipinjam')->get();
+                $stockDevice =DB::table('stocks_device')->select('name')->get();
+
+                return view('stock.dipinjam.index', compact('stockDipinjam', 'stockDevice'));
+            }
+        }
     }
 
-    public function terjual()
+    public function terjual(Request $request)
     {
-        $stockTerjual = Stock::where('status', 'terjual')->get();
-        return view('stock.terjual', compact('stockTerjual'));
+        {
+            {
+                if ($request->ajax()) {
+                    $stockTerjual = Stock::where('status', 'terjual')->get();
+                    $stockDevice =DB::table('stocks_device')->select('name')->get();
+
+                    return Datatables::of($stockTerjual)
+                            ->addIndexColumn()
+                            ->addColumn('action', function ($stockTerjual) {
+                                $actionHtml = '<div class="d-flex align-items-center gap-3">';
+                                $actionHtml .= '<a href="' . route('stock.showTerjual', ['id' => $stockTerjual->id]) . '"
+                                class="text-decoration-none"><i class="fa-solid fa-eye"></i> View</a>';
+
+                                if (auth()->check()) {
+                                    $user = auth()->user();
+
+                                    if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('sylvi') || $user->hasRole('coni') || $user->hasRole('vivi')) {
+                                        $actionHtml .= '
+                                        <div class="dropdown dropright">
+                                            <a href="#" class="text-decoration-none dropdown-toggle"
+                                                data-toggle="dropdown" aria-expanded="false">
+                                                More
+                                            </a>
+                                            <div class="dropdown-menu">';
+
+                                            if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('sylvi') || $user->hasRole('coni') || $user->hasRole('vivi')) {
+                                                $actionHtml .=  '<a class="dropdown-item" href="' . route('stock.editTerjual', ['id' => $stockTerjual->id]) . '
+                                                                "><i class="fa-solid fa-pen-to-square"></i> Edit</a>'.
+                                                                '<a class="dropdown-item" href="#" data-bs-toggle="modal" data-target="#deleteModal' . $stockTerjual->id . '"><i class="fa-solid fa-trash"></i> Delete</a>';
+                                            }
+
+                                        $actionHtml .= '</div>
+                                        </div>';
+                                    }
+                                }
+                                $actionHtml .= '</div>';
+                                return $actionHtml;
+
+                            })
+                            ->rawColumns(['action'])
+                            ->make(true);
+                }
+                $stockTerjual = Stock::where('status', 'terjual')->get();
+                $stockDevice =DB::table('stocks_device')->select('name')->get();
+
+                return view('stock.terjual.index', compact('stockTerjual', 'stockDevice'));
+            }
+        }
     }
 
     public function exportStocks()
@@ -216,10 +395,28 @@ class StockController extends Controller
      * @param  \App\Models\Stock  $stock
      * @return \Illuminate\Http\Response
      */
-    public function show(Stock $stock, $id)
+    public function showGudang(Stock $stock, $id)
     {
         $stock = Stock::findOrFail($id);
-        return view('stock.monitor', compact('stock'));
+        return view('stock.digudang.view', compact('stock'));
+    }
+
+    public function showPinjam(Stock $stock, $id)
+    {
+        $stock = Stock::findOrFail($id);
+        return view('stock.dipinjam.view', compact('stock'));
+    }
+
+    public function showDiservice(Stock $stock, $id)
+    {
+        $stock = Stock::findOrFail($id);
+        return view('stock.diservice.view', compact('stock'));
+    }
+
+    public function showTerjual(Stock $stock, $id)
+    {
+        $stock = Stock::findOrFail($id);
+        return view('stock.terjual.view', compact('stock'));
     }
 
     /**
@@ -228,10 +425,36 @@ class StockController extends Controller
      * @param  \App\Models\Stock  $stock
      * @return \Illuminate\Http\Response
      */
-    public function edit(Stock $stock, $id)
+    public function editGudang(Stock $stock, $id)
     {
         $stock = Stock::findOrFail($id);
-        return view('stock.monitor', compact('stock'));
+        $stockDevice =DB::table('stocks_device')->select('name')->get();
+
+        return view('stock.digudang.edit', compact('stock', 'stockDevice'));
+    }
+
+    public function editPinjam(Stock $stock, $id)
+    {
+        $stock = Stock::findOrFail($id);
+        $stockDevice =DB::table('stocks_device')->select('name')->get();
+
+        return view('stock.dipinjam.edit', compact('stock', 'stockDevice'));
+    }
+
+    public function editDiservice(Stock $stock, $id)
+    {
+        $stock = Stock::findOrFail($id);
+        $stockDevice =DB::table('stocks_device')->select('name')->get();
+
+        return view('stock.diservice.edit', compact('stock', 'stockDevice'));
+    }
+
+    public function editTerjual(Stock $stock, $id)
+    {
+        $stock = Stock::findOrFail($id);
+        $stockDevice =DB::table('stocks_device')->select('name')->get();
+
+        return view('stock.terjual.edit', compact('stock', 'stockDevice'));
     }
 
     /**

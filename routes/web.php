@@ -6,17 +6,12 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\PinjamController;
 use App\Http\Controllers\HistoryController;
-use App\Http\Controllers\KembaliController;
-use App\Http\Controllers\MonitorController;
-use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\FirmwareController;
 use App\Http\Controllers\SparePartsController;
-use App\Http\Controllers\MaintenanceController;
 use App\Http\Controllers\UserSettingsController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
-use App\Http\Controllers\ServiceTestController;
 
 // Route::get('/', function () {
 //     // return view('auth.login');
@@ -41,10 +36,10 @@ Route::get('/', [HomeController::class, 'index'])->middleware('auth');
 Route::get('/home/total', [HomeController::class, 'total'])->middleware('auth');
 
 //Lupa Password
-Route::get('/forgot-password', [ForgotPasswordController::class, 'index'])->middleware('guest')->name('forgot.password');
-Route::post('/forgot-password', [ForgotPasswordController::class, 'resetvalidasi'])->middleware('guest')->name('password.email');
-Route::get('/reset-password/{token}', [ResetPasswordController::class, 'index'])->middleware('guest')->name('password-reset');
-Route::post('/reset-password', [ResetPasswordController::class, 'resetvalidasi'])->middleware('guest')->name('update.password');
+Route::get('/forgot-password', [ForgotPasswordController::class, 'index'])->name('forgot.password');
+Route::post('/forgot-password', [ForgotPasswordController::class, 'resetvalidasi'])->name('password.email');
+Route::get('/reset-password/{token}', [ResetPasswordController::class, 'index'])->name('password-reset');
+Route::post('/reset-password', [ResetPasswordController::class, 'resetvalidasi'])->name('update.password');
 
 Auth::routes();
 
@@ -65,9 +60,9 @@ Route::prefix('pinjam')->middleware('auth')->group(function () {
     Route::get('/dipinjam/{id}/edit', [PinjamController::class, 'editDipinjam'])->name('pinjam.editDipinjam');
     Route::get('/dikembalikan/{id}/edit', [PinjamController::class, 'editDikembalikan'])->name('pinjam.editDikembalikan');
     Route::get('/dipinjam/{id}/move', [PinjamController::class, 'moveDipinjam'])->name('pinjam.moveDipinjam');
-        Route::put('/{id}', [PinjamController::class, 'update'])->name('pinjam.update');
-        Route::delete('/{id}', [PinjamController::class, 'destroy'])->name('pinjam.destroy');
-        Route::get('/generate-pdf/{id}', [PinjamController::class, 'generatePdf'])->name('pinjam.generate-pdf');
+    Route::put('/{id}', [PinjamController::class, 'update'])->name('pinjam.update');
+    Route::delete('/{id}', [PinjamController::class, 'destroy'])->name('pinjam.destroy');
+    Route::get('/generate-pdf/{id}', [PinjamController::class, 'generatePdf'])->name('pinjam.generate-pdf');
 });
 
 //SPAREPARTS
@@ -97,16 +92,16 @@ Route::prefix('firmware')->middleware('auth')->group(function () {
         'show', 'edit', 'update', 'destroy',
     ]);
 
-    Route::get('/table', [FirmwareController::class, 'table'])->middleware('auth')
+    Route::get('/table', [FirmwareController::class, 'table'])
     ->name('firmware.table');
 
-    Route::get('/{id}/edit', [FirmwareController::class, 'edit'])->middleware('auth')
+    Route::get('/{id}/edit', [FirmwareController::class, 'edit'])
     ->name('firmware.edit');
 
-    Route::put('/{id}', [FirmwareController::class, 'update'])->middleware('auth')
+    Route::put('/{id}', [FirmwareController::class, 'update'])
     ->name('firmware.update');
 
-    Route::delete('/{id}', [FirmwareController::class, 'destroy'])->middleware('auth')
+    Route::delete('/{id}', [FirmwareController::class, 'destroy'])
     ->name('firmware.destroy');
 });
 
@@ -117,25 +112,31 @@ Route::prefix('stock')->middleware('auth')->group(function () {
         'show', 'edit', 'update', 'destroy',
     ]);
 
-    Route::get('/gudang', [StockController::class, 'gudang'])->middleware('auth')
+    Route::get('/gudang', [StockController::class, 'gudang'])
         ->name('stock.gudang');
-    Route::get('/service', [StockController::class, 'service'])->middleware('auth')
+    Route::get('/service', [StockController::class, 'service'])
         ->name('stock.service');
-    Route::get('/dipinjam', [StockController::class, 'dipinjam'])->middleware('auth')
+    Route::get('/dipinjam', [StockController::class, 'dipinjam'])
         ->name('stock.dipinjam');
-    Route::get('/terjual', [StockController::class, 'terjual'])->middleware('auth')
+    Route::get('/terjual', [StockController::class, 'terjual'])
         ->name('stock.terjual');
 
-        Route::get('/{id}/edit', [StockController::class, 'edit'])->middleware('auth')->name('stock.edit');
-        Route::put('/{id}', [StockController::class, 'update'])->middleware('auth')->name('stock.update');
-        Route::delete('/{id}', [StockController::class, 'destroy'])->middleware('auth')->name('stock.destroy');
-        Route::post('/import-stocks', [StockController::class, 'importStocks'])->middleware('auth')->name('import.stocks');
-        Route::get('/export-stocks', [StockController::class, 'exportStocks'])->middleware('auth')->name('export.stocks');
-        Route::get('download/{filename}', [StockController::class, 'templateImportStock'])->middleware('auth')->name('template.stocks');
-        Route::post('/check-serial-numbers', [StockController::class, 'checkSerialNumbers'])->middleware('auth')->name('stock.checkSerialnumbers');
-        Route::post('/update-data', [StockController::class, 'updateData'])->middleware('auth')->name('update.data');
+        Route::get('/gudang/{id}', [StockController::class, 'showGudang'])->name('stock.showGudang');
+        Route::get('/dipinjam/{id}', [StockController::class, 'showPinjam'])->name('stock.showPinjam');
+        Route::get('/diservice/{id}', [StockController::class, 'showDiservice'])->name('stock.showDiservice');
+        Route::get('/terjual/{id}', [StockController::class, 'showTerjual'])->name('stock.showTerjual');
 
-
+        Route::get('/gudang/{id}/edit', [StockController::class, 'editGudang'])->name('stock.editGudang');
+        Route::get('/dipinjam/{id}/edit', [StockController::class, 'editPinjam'])->name('stock.editPinjam');
+        Route::get('/diservice/{id}/edit', [StockController::class, 'editDiservice'])->name('stock.editDiservice');
+        Route::get('/terjual/{id}/edit', [StockController::class, 'editTerjual'])->name('stock.editTerjual');
+        Route::put('/{id}', [StockController::class, 'update'])->name('stock.update');
+        Route::delete('/{id}', [StockController::class, 'destroy'])->name('stock.destroy');
+        Route::post('/import-stocks', [StockController::class, 'importStocks'])->name('import.stocks');
+        Route::get('/export-stocks', [StockController::class, 'exportStocks'])->name('export.stocks');
+        Route::get('download/{filename}', [StockController::class, 'templateImportStock'])->name('template.stocks');
+        Route::post('/check-serial-numbers', [StockController::class, 'checkSerialNumbers'])->name('stock.checkSerialnumbers');
+        Route::post('/update-data', [StockController::class, 'updateData'])->name('update.data');
 });
 
 //Service
@@ -143,47 +144,40 @@ Route::prefix('service')->middleware('auth')->group(function () {
     Route::resource('/', ServiceController::class)->except([
         'show', 'edit', 'update', 'destroy',
     ]);
-    Route::get('/export-service', [ServiceController::class, 'exportService'])->middleware('auth')->name('export.service');
-    Route::get('/export-all', [ServiceController::class, 'exportAll'])->middleware('auth')->name('export.allservice');
+    Route::get('/export-service', [ServiceController::class, 'exportService'])->name('export.service');
+    Route::get('/export-all', [ServiceController::class, 'exportAll'])->name('export.allservice');
 
     Route::get('/antrianPelanggan', [ServiceController::class, 'antrianPelanggan'])
-        ->middleware('auth')
-        ->name('service.antrianPelanggan');
+    ->name('service.antrianPelanggan');
     Route::get('/validasiPelanggan', [ServiceController::class, 'validasiPelanggan'])
-        ->middleware('auth')
-        ->name('service.validasiPelanggan');
+    ->name('service.validasiPelanggan');
     Route::get('/selesaiPelanggan', [ServiceController::class, 'selesaiPelanggan'])
-        ->middleware('auth')
-        ->name('service.selesaiPelanggan');
-
+    ->name('service.selesaiPelanggan');
     Route::get('/antrianStock', [ServiceController::class, 'antrianStock'])
-        ->middleware('auth')
-        ->name('service.antrianStock');
+    ->name('service.antrianStock');
     Route::get('/validasiStock', [ServiceController::class, 'validasiStock'])
-        ->middleware('auth')
-        ->name('service.validasiStock');
+    ->name('service.validasiStock');
     Route::get('/selesaiStock', [ServiceController::class, 'selesaiStock'])
-        ->middleware('auth')
-        ->name('service.selesaiStock');
+    ->name('service.selesaiStock');
 
-        Route::get('/antrian-pelanggan/{id}', [ServiceController::class, 'showAntrianPelanggan'])->middleware('auth')->name('service.showAntrianPelanggan');
-        Route::get('/validasi-pelanggan/{id}', [ServiceController::class, 'showValidasiPelanggan'])->middleware('auth')->name('service.showValidasiPelanggan');
-        Route::get('/selesai-pelanggan/{id}', [ServiceController::class, 'showSelesaiPelanggan'])->middleware('auth')->name('service.showSelesaiPelanggan');
-        Route::get('/antrian-stock/{id}', [ServiceController::class, 'showAntrianStock'])->middleware('auth')->name('service.showAntrianStock');
-        Route::get('/validasi-stock/{id}', [ServiceController::class, 'showValidasiStock'])->middleware('auth')->name('service.showValidasiStock');
-        Route::get('/selesai-stock/{id}', [ServiceController::class, 'showSelesaiStock'])->middleware('auth')->name('service.showSelesaiStock');
+        Route::get('/antrian-pelanggan/{id}', [ServiceController::class, 'showAntrianPelanggan'])->name('service.showAntrianPelanggan');
+        Route::get('/validasi-pelanggan/{id}', [ServiceController::class, 'showValidasiPelanggan'])->name('service.showValidasiPelanggan');
+        Route::get('/selesai-pelanggan/{id}', [ServiceController::class, 'showSelesaiPelanggan'])->name('service.showSelesaiPelanggan');
+        Route::get('/antrian-stock/{id}', [ServiceController::class, 'showAntrianStock'])->name('service.showAntrianStock');
+        Route::get('/validasi-stock/{id}', [ServiceController::class, 'showValidasiStock'])->name('service.showValidasiStock');
+        Route::get('/selesai-stock/{id}', [ServiceController::class, 'showSelesaiStock'])->name('service.showSelesaiStock');
 
-        Route::get('/antrian-pelanggan/{id}/edit', [ServiceController::class, 'editAntrianPelanggan'])->middleware('auth')->name('service.editAntrianPelanggan');
-        Route::get('/validasi-pelanggan/{id}/edit', [ServiceController::class, 'editValidasiPelanggan'])->middleware('auth')->name('service.editValidasiPelanggan');
-        Route::get('/selesai-pelanggan/{id}/edit', [ServiceController::class, 'editSelesaiPelanggan'])->middleware('auth')->name('service.editSelesaiPelanggan');
-        Route::get('/antrian-stock/{id}/edit', [ServiceController::class, 'editAntrianStock'])->middleware('auth')->name('service.editAntrianStock');
-        Route::get('/validasi-stock/{id}/edit', [ServiceController::class, 'editValidasiStock'])->middleware('auth')->name('service.editValidasiStock');
-        Route::get('/selesai-stock/{id}/edit', [ServiceController::class, 'editSelesaiStock'])->middleware('auth')->name('service.editSelesaiStock');
+        Route::get('/antrian-pelanggan/{id}/edit', [ServiceController::class, 'editAntrianPelanggan'])->name('service.editAntrianPelanggan');
+        Route::get('/validasi-pelanggan/{id}/edit', [ServiceController::class, 'editValidasiPelanggan'])->name('service.editValidasiPelanggan');
+        Route::get('/selesai-pelanggan/{id}/edit', [ServiceController::class, 'editSelesaiPelanggan'])->name('service.editSelesaiPelanggan');
+        Route::get('/antrian-stock/{id}/edit', [ServiceController::class, 'editAntrianStock'])->name('service.editAntrianStock');
+        Route::get('/validasi-stock/{id}/edit', [ServiceController::class, 'editValidasiStock'])->name('service.editValidasiStock');
+        Route::get('/selesai-stock/{id}/edit', [ServiceController::class, 'editSelesaiStock'])->name('service.editSelesaiStock');
 
-        Route::get('antrian-pelanggan/{id}/move', [ServiceController::class, 'moveAntrianPelanggan'])->middleware('auth')->name('service.moveAntrianPelanggan');
-        Route::get('validasi-pelanggan/{id}/move', [ServiceController::class, 'moveValidasiPelanggan'])->middleware('auth')->name('service.moveValidasiPelanggan');
-        Route::get('antrian-stock/{id}/move', [ServiceController::class, 'moveAntrianStock'])->middleware('auth')->name('service.moveAntrianStock');
-        Route::get('validasi-stock/{id}/move', [ServiceController::class, 'moveValidasiStock'])->middleware('auth')->name('service.moveValidasiStock');
-        Route::put('/{id}', [ServiceController::class, 'update'])->middleware('auth')->name('service.update');
-        Route::delete('/{id}', [ServiceController::class, 'destroy'])->middleware('auth')->name('service.destroy');
+        Route::get('antrian-pelanggan/{id}/move', [ServiceController::class, 'moveAntrianPelanggan'])->name('service.moveAntrianPelanggan');
+        Route::get('validasi-pelanggan/{id}/move', [ServiceController::class, 'moveValidasiPelanggan'])->name('service.moveValidasiPelanggan');
+        Route::get('antrian-stock/{id}/move', [ServiceController::class, 'moveAntrianStock'])->name('service.moveAntrianStock');
+        Route::get('validasi-stock/{id}/move', [ServiceController::class, 'moveValidasiStock'])->name('service.moveValidasiStock');
+        Route::put('/{id}', [ServiceController::class, 'update'])->name('service.update');
+        Route::delete('/{id}', [ServiceController::class, 'destroy'])->name('service.destroy');
 });
