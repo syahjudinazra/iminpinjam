@@ -13,7 +13,7 @@
                 </div>
             </div>
             <hr style="width: -webkit-fill-available;">
-            <form method="POST" action="{{ route('pinjam.update', $pinjam->id) }}">
+            <form method="POST" action="{{ route('pinjam.updateDipinjam', $pinjam->id) }}">
                 @csrf
                 @method('PUT')
                 <div class="mb-3">

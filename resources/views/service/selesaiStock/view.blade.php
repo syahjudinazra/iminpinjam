@@ -7,7 +7,7 @@
             <div class="d-flex justify-content-between mb-2">
                 <h1 class="h3 mb-3 text-gray-800">Lihat Data Service Selesai Stock</h1>
                 <div class="d-flex align-items-center gap-3">
-                    <a href="/service/validasiStock" class="btn btn-danger btn-sm font-weight-bold text-white">
+                    <a href="/service/selesaiStock" class="btn btn-danger btn-sm font-weight-bold text-white">
                         Back
                     </a>
                 </div>

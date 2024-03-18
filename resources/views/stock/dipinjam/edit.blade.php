@@ -13,7 +13,7 @@
                 </div>
             </div>
             <hr style="width: -webkit-fill-available;">
-            <form method="POST" action="{{ route('stock.update', $stock->id) }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('stock.updateDipinjam', $stock->id) }}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="mb-3">

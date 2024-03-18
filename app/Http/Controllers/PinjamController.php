@@ -258,7 +258,7 @@ class PinjamController extends Controller
      * @param  \App\Models\Pinjam  $pinjam
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function updateDipinjam(Request $request, $id)
     {
         $request->validate([
             'tanggal' => 'required|max:255',
@@ -307,7 +307,59 @@ class PinjamController extends Controller
         $pinjam->status = $request->input('status');
 
         $pinjam->update();
-        return redirect()->back()->with('success', 'Data berhasil diubah');
+        return redirect('pinjam/Dipinjam')->with('success', 'Data berhasil diubah');
+    }
+
+    public function updateDikembalikan(Request $request, $id)
+    {
+        $request->validate([
+            'tanggal' => 'required|max:255',
+            'gambar' => 'image|mimes:jpeg,png,jpg|max:2048',
+            'serialnumber' => 'required|max:255',
+            'device' => 'required|max:255',
+            'customer' => 'required|max:255',
+            'telp' => 'required|max:255',
+            'pengirim' => 'required|max:255',
+            'kelengkapankirim' => 'required|max:255',
+            'tanggalkembali' => 'max:255',
+            'penerima' => 'max:255',
+            'kelengkapankembali' => 'max:255',
+            'status' => 'max:255',
+        ]);
+
+        $pinjam = Pinjam::find($id);
+
+        if ($request->hasFile('gambar')) {
+            $destination = 'storage/gambar/' . $pinjam->gambar;
+            if (File::exists($destination)) {
+                File::delete($destination);
+            }
+
+            $file = $request->file('gambar');
+            $extention = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extention;
+            $file->move('storage/gambar/', $filename);
+            $pinjam->gambar = $filename;
+        }
+
+        $pinjam->tanggal = $request->input('tanggal');
+        $pinjam->serialnumber = $request->input('serialnumber');
+        $pinjam->device = $request->input('device');
+        $pinjam->ram = $request->input('ram');
+        $pinjam->android = $request->input('android');
+        $pinjam->customer = $request->input('customer');
+        $pinjam->alamat = $request->input('alamat');
+        $pinjam->sales = $request->input('sales');
+        $pinjam->telp = $request->input('telp');
+        $pinjam->pengirim = $request->input('pengirim');
+        $pinjam->kelengkapankirim = $request->input('kelengkapankirim');
+        $pinjam->tanggalkembali = $request->input('tanggalkembali');
+        $pinjam->penerima = $request->input('penerima');
+        $pinjam->kelengkapankembali = $request->input('kelengkapankembali');
+        $pinjam->status = $request->input('status');
+
+        $pinjam->update();
+        return redirect('pinjam/kembali')->with('success', 'Data berhasil diubah');
     }
 
     /**

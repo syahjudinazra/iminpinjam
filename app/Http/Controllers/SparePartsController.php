@@ -122,7 +122,7 @@ class SparePartsController extends Controller
             'harga' => 'numeric',
         ]);
 
-        $spareParts = new spareParts();
+        $spareParts = new SpareParts();
         $spareParts->nospareparts = $request->input('nospareparts');
         $spareParts->tipe = $request->input('tipe');
         $spareParts->nama = $request->input('nama');

@@ -223,8 +223,9 @@
                                         {{ $pinjam->alamat }}</b></p>
                             </td>
                             <td>
-                                <p style="font-size: 10px; margin-left:-20px"><b>Date :
-                                        {{ $pinjam->tanggal->format('d-m-Y') }} </b></p>
+                                <p style="font-size: 10px; margin-left:-20px">
+                                    <b>Date: {{ (new DateTime($pinjam->tanggal))->format('d-m-Y') }}</b>
+                                </p>
                                 <p style="font-size: 10px; margin-top:-10px; margin-left:-20px"><b>Sales Rep :
                                         {{ Auth::user()->name }}</b>
                                 </p>

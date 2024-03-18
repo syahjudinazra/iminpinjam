@@ -428,7 +428,7 @@ class StockController extends Controller
     public function editGudang(Stock $stock, $id)
     {
         $stock = Stock::findOrFail($id);
-        $stockDevice =DB::table('stocks_device')->select('name')->get();
+        $stockDevice = DB::table('stocks_device')->select('name')->get();
 
         return view('stock.digudang.edit', compact('stock', 'stockDevice'));
     }
@@ -464,7 +464,7 @@ class StockController extends Controller
      * @param  \App\Models\Stock  $stock
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Stock $stock, $id)
+    public function updateGudang(Request $request, Stock $stock, $id)
     {
             $request->validate([
                 'serialnumber' => 'required|max:255',
@@ -486,7 +486,82 @@ class StockController extends Controller
             $stock->status = $request->input('status');
 
             $stock->update();
-            return redirect()->back()->with('success', 'Data berhasil diubah');
+            return redirect('stock/gudang')->with('success', 'Data berhasil diubah');
+    }
+
+    public function updateDipinjam(Request $request, Stock $stock, $id)
+    {
+            $request->validate([
+                'serialnumber' => 'required|max:255',
+                'tipe' => 'required|max:255',
+                'noinvoice' => 'required|max:255',
+                'tanggalmasuk' => 'required|max:255',
+                'tanggalkeluar' => 'max:255',
+                'pelanggan' => 'max:255',
+                'status' => 'required|max:255',
+            ]);
+
+            $stock = Stock::find($id);
+            $stock->serialnumber = $request->input('serialnumber');
+            $stock->tipe = $request->input('tipe');
+            $stock->noinvoice = $request->input('noinvoice');
+            $stock->tanggalmasuk = $request->input('tanggalmasuk');
+            $stock->tanggalkeluar = $request->input('tanggalkeluar');
+            $stock->pelanggan = $request->input('pelanggan');
+            $stock->status = $request->input('status');
+
+            $stock->update();
+            return redirect('stock/dipinjam')->with('success', 'Data berhasil diubah');
+    }
+
+    public function updateDiservice(Request $request, Stock $stock, $id)
+    {
+            $request->validate([
+                'serialnumber' => 'required|max:255',
+                'tipe' => 'required|max:255',
+                'noinvoice' => 'required|max:255',
+                'tanggalmasuk' => 'required|max:255',
+                'tanggalkeluar' => 'max:255',
+                'pelanggan' => 'max:255',
+                'status' => 'required|max:255',
+            ]);
+
+            $stock = Stock::find($id);
+            $stock->serialnumber = $request->input('serialnumber');
+            $stock->tipe = $request->input('tipe');
+            $stock->noinvoice = $request->input('noinvoice');
+            $stock->tanggalmasuk = $request->input('tanggalmasuk');
+            $stock->tanggalkeluar = $request->input('tanggalkeluar');
+            $stock->pelanggan = $request->input('pelanggan');
+            $stock->status = $request->input('status');
+
+            $stock->update();
+            return redirect('stock/service')->with('success', 'Data berhasil diubah');
+    }
+
+    public function updateTerjual(Request $request, Stock $stock, $id)
+    {
+            $request->validate([
+                'serialnumber' => 'required|max:255',
+                'tipe' => 'required|max:255',
+                'noinvoice' => 'required|max:255',
+                'tanggalmasuk' => 'required|max:255',
+                'tanggalkeluar' => 'max:255',
+                'pelanggan' => 'max:255',
+                'status' => 'required|max:255',
+            ]);
+
+            $stock = Stock::find($id);
+            $stock->serialnumber = $request->input('serialnumber');
+            $stock->tipe = $request->input('tipe');
+            $stock->noinvoice = $request->input('noinvoice');
+            $stock->tanggalmasuk = $request->input('tanggalmasuk');
+            $stock->tanggalkeluar = $request->input('tanggalkeluar');
+            $stock->pelanggan = $request->input('pelanggan');
+            $stock->status = $request->input('status');
+
+            $stock->update();
+            return redirect('stock/terjual')->with('success', 'Data berhasil diubah');
     }
 
     /**

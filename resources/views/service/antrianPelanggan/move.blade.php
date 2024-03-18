@@ -13,7 +13,8 @@
                 </div>
             </div>
             <hr style="width: -webkit-fill-available;">
-            <form method="POST" action="{{ route('service.update', $service->id) }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('service.updateAntrianPelanggan', $service->id) }}"
+                enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="mb-3">

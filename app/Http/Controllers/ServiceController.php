@@ -616,7 +616,7 @@ class ServiceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function updateAntrianPelanggan(Request $request, $id)
     {
         $request->validate([
             'serialnumber' => 'required|max:255',
@@ -636,18 +636,12 @@ class ServiceController extends Controller
         ]);
 
         $service = Service::find($id);
-
-        // Store the original 'status' value
         $originalStatus = $service->status;
-
-        // Update the service with the new values
         $service->fill($request->all())->save();
 
-        // Check if 'status' field is changed
         if ($originalStatus !== $service->status) {
             $statusMessage = '';
 
-            // Check the updated 'status' value and set the appropriate message
             switch ($service->status) {
                 case 'validasi':
                     $statusMessage = 'Validasi';
@@ -658,20 +652,251 @@ class ServiceController extends Controller
                 case 'antrian':
                     $statusMessage = 'Antrian';
                     break;
-                // Add more cases for other status values as needed
-
-                // Default case if no specific status is matched
                 default:
                     $statusMessage = 'Status';
                     break;
             }
 
-            return redirect()->back()->with('success', "Status berhasil diubah ke $statusMessage");
+            return redirect('service/antrianPelanggan')->with('success', "Status berhasil diubah ke $statusMessage");
         } else {
-            return redirect()->back()->with('success', 'Data berhasil diubah');
+            return redirect('service/antrianPelanggan')->with('success', 'Data berhasil diubah');
         }
     }
 
+    public function updateValidasiPelanggan(Request $request, $id)
+    {
+        $request->validate([
+            'serialnumber' => 'required|max:255',
+            'tanggalmasuk' => 'required|max:255',
+            'tanggalkeluar' => 'max:255',
+            'pemilik' => 'required|max:255',
+            'status' => 'required|max:255',
+            'pelanggan' => 'required|max:255',
+            'device' => 'required|max:255',
+            'pemakaian' => 'required|max:255',
+            'kerusakan' => 'required|max:255',
+            'perbaikan' => 'max:255',
+            'nosparepart' => 'max:255',
+            'snkanibal' => 'max:255',
+            'teknisi' => 'max:255',
+            'catatan' => 'required|max:255',
+        ]);
+
+        $service = Service::find($id);
+        $originalStatus = $service->status;
+        $service->fill($request->all())->save();
+
+        if ($originalStatus !== $service->status) {
+            $statusMessage = '';
+
+            switch ($service->status) {
+                case 'validasi':
+                    $statusMessage = 'Validasi';
+                    break;
+                case 'selesai':
+                    $statusMessage = 'Selesai';
+                    break;
+                case 'antrian':
+                    $statusMessage = 'Antrian';
+                    break;
+                default:
+                    $statusMessage = 'Status';
+                    break;
+            }
+
+            return redirect('service/validasiPelanggan')->with('success', "Status berhasil diubah ke $statusMessage");
+        } else {
+            return redirect('service/validasiPelanggan')->with('success', 'Data berhasil diubah');
+        }
+    }
+
+    public function updateSelesaiPelanggan(Request $request, $id)
+    {
+        $request->validate([
+            'serialnumber' => 'required|max:255',
+            'tanggalmasuk' => 'required|max:255',
+            'tanggalkeluar' => 'max:255',
+            'pemilik' => 'required|max:255',
+            'status' => 'required|max:255',
+            'pelanggan' => 'required|max:255',
+            'device' => 'required|max:255',
+            'pemakaian' => 'required|max:255',
+            'kerusakan' => 'required|max:255',
+            'perbaikan' => 'max:255',
+            'nosparepart' => 'max:255',
+            'snkanibal' => 'max:255',
+            'teknisi' => 'max:255',
+            'catatan' => 'required|max:255',
+        ]);
+
+        $service = Service::find($id);
+        $originalStatus = $service->status;
+        $service->fill($request->all())->save();
+
+        if ($originalStatus !== $service->status) {
+            $statusMessage = '';
+
+            switch ($service->status) {
+                case 'validasi':
+                    $statusMessage = 'Validasi';
+                    break;
+                case 'selesai':
+                    $statusMessage = 'Selesai';
+                    break;
+                case 'antrian':
+                    $statusMessage = 'Antrian';
+                    break;
+                default:
+                    $statusMessage = 'Status';
+                    break;
+            }
+
+            return redirect('service/selesaiPelanggan')->with('success', "Status berhasil diubah ke $statusMessage");
+        } else {
+            return redirect('service/selesaiPelanggan')->with('success', 'Data berhasil diubah');
+        }
+    }
+
+    public function updateAntrianStock(Request $request, $id)
+    {
+        $request->validate([
+            'serialnumber' => 'required|max:255',
+            'tanggalmasuk' => 'required|max:255',
+            'tanggalkeluar' => 'max:255',
+            'pemilik' => 'required|max:255',
+            'status' => 'required|max:255',
+            'pelanggan' => 'required|max:255',
+            'device' => 'required|max:255',
+            'pemakaian' => 'required|max:255',
+            'kerusakan' => 'required|max:255',
+            'perbaikan' => 'max:255',
+            'nosparepart' => 'max:255',
+            'snkanibal' => 'max:255',
+            'teknisi' => 'max:255',
+            'catatan' => 'required|max:255',
+        ]);
+
+        $service = Service::find($id);
+        $originalStatus = $service->status;
+        $service->fill($request->all())->save();
+
+        if ($originalStatus !== $service->status) {
+            $statusMessage = '';
+
+            switch ($service->status) {
+                case 'validasi':
+                    $statusMessage = 'Validasi';
+                    break;
+                case 'selesai':
+                    $statusMessage = 'Selesai';
+                    break;
+                case 'antrian':
+                    $statusMessage = 'Antrian';
+                    break;
+                default:
+                    $statusMessage = 'Status';
+                    break;
+            }
+
+            return redirect('service/antrianStock')->with('success', "Status berhasil diubah ke $statusMessage");
+        } else {
+            return redirect('service/antrianStock')->with('success', 'Data berhasil diubah');
+        }
+    }
+
+    public function updateValidasiStock(Request $request, $id)
+    {
+        $request->validate([
+            'serialnumber' => 'required|max:255',
+            'tanggalmasuk' => 'required|max:255',
+            'tanggalkeluar' => 'max:255',
+            'pemilik' => 'required|max:255',
+            'status' => 'required|max:255',
+            'pelanggan' => 'required|max:255',
+            'device' => 'required|max:255',
+            'pemakaian' => 'required|max:255',
+            'kerusakan' => 'required|max:255',
+            'perbaikan' => 'max:255',
+            'nosparepart' => 'max:255',
+            'snkanibal' => 'max:255',
+            'teknisi' => 'max:255',
+            'catatan' => 'required|max:255',
+        ]);
+
+        $service = Service::find($id);
+        $originalStatus = $service->status;
+        $service->fill($request->all())->save();
+
+        if ($originalStatus !== $service->status) {
+            $statusMessage = '';
+
+            switch ($service->status) {
+                case 'validasi':
+                    $statusMessage = 'Validasi';
+                    break;
+                case 'selesai':
+                    $statusMessage = 'Selesai';
+                    break;
+                case 'antrian':
+                    $statusMessage = 'Antrian';
+                    break;
+                default:
+                    $statusMessage = 'Status';
+                    break;
+            }
+
+            return redirect('service/validasiStock')->with('success', "Status berhasil diubah ke $statusMessage");
+        } else {
+            return redirect('service/validasiStock')->with('success', 'Data berhasil diubah');
+        }
+    }
+
+    public function updateSelesaiStock(Request $request, $id)
+    {
+        $request->validate([
+            'serialnumber' => 'required|max:255',
+            'tanggalmasuk' => 'required|max:255',
+            'tanggalkeluar' => 'max:255',
+            'pemilik' => 'required|max:255',
+            'status' => 'required|max:255',
+            'pelanggan' => 'required|max:255',
+            'device' => 'required|max:255',
+            'pemakaian' => 'required|max:255',
+            'kerusakan' => 'required|max:255',
+            'perbaikan' => 'max:255',
+            'nosparepart' => 'max:255',
+            'snkanibal' => 'max:255',
+            'teknisi' => 'max:255',
+            'catatan' => 'required|max:255',
+        ]);
+
+        $service = Service::find($id);
+        $originalStatus = $service->status;
+        $service->fill($request->all())->save();
+
+        if ($originalStatus !== $service->status) {
+            $statusMessage = '';
+
+            switch ($service->status) {
+                case 'validasi':
+                    $statusMessage = 'Validasi';
+                    break;
+                case 'selesai':
+                    $statusMessage = 'Selesai';
+                    break;
+                case 'antrian':
+                    $statusMessage = 'Antrian';
+                    break;
+                default:
+                    $statusMessage = 'Status';
+                    break;
+            }
+
+            return redirect('service/selesaiStock')->with('success', "Status berhasil diubah ke $statusMessage");
+        } else {
+            return redirect('service/selesaiStock')->with('success', 'Data berhasil diubah');
+        }
+    }
     /**
      * Remove the specified resource from storage.
      *

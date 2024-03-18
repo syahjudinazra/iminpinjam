@@ -60,7 +60,9 @@ Route::prefix('pinjam')->middleware('auth')->group(function () {
     Route::get('/dipinjam/{id}/edit', [PinjamController::class, 'editDipinjam'])->name('pinjam.editDipinjam');
     Route::get('/dikembalikan/{id}/edit', [PinjamController::class, 'editDikembalikan'])->name('pinjam.editDikembalikan');
     Route::get('/dipinjam/{id}/move', [PinjamController::class, 'moveDipinjam'])->name('pinjam.moveDipinjam');
-    Route::put('/{id}', [PinjamController::class, 'update'])->name('pinjam.update');
+
+    Route::put('/dipinjam/{id}', [PinjamController::class, 'updateDipinjam'])->name('pinjam.updateDipinjam');
+    Route::put('/dikembalikan/{id}', [PinjamController::class, 'updateDikembalikan'])->name('pinjam.updateDikembalikan');
     Route::delete('/{id}', [PinjamController::class, 'destroy'])->name('pinjam.destroy');
     Route::get('/generate-pdf/{id}', [PinjamController::class, 'generatePdf'])->name('pinjam.generate-pdf');
 });
@@ -130,7 +132,12 @@ Route::prefix('stock')->middleware('auth')->group(function () {
         Route::get('/dipinjam/{id}/edit', [StockController::class, 'editPinjam'])->name('stock.editPinjam');
         Route::get('/diservice/{id}/edit', [StockController::class, 'editDiservice'])->name('stock.editDiservice');
         Route::get('/terjual/{id}/edit', [StockController::class, 'editTerjual'])->name('stock.editTerjual');
-        Route::put('/{id}', [StockController::class, 'update'])->name('stock.update');
+
+        Route::put('/gudang/{id}', [StockController::class, 'updateGudang'])->name('stock.updateGudang');
+        Route::put('/dipinjam/{id}', [StockController::class, 'updateDipinjam'])->name('stock.updateDipinjam');
+        Route::put('/diservice/{id}', [StockController::class, 'updateDiservice'])->name('stock.updateDiservice');
+        Route::put('/terjual/{id}', [StockController::class, 'updateTerjual'])->name('stock.updateTerjual');
+
         Route::delete('/{id}', [StockController::class, 'destroy'])->name('stock.destroy');
         Route::post('/import-stocks', [StockController::class, 'importStocks'])->name('import.stocks');
         Route::get('/export-stocks', [StockController::class, 'exportStocks'])->name('export.stocks');
@@ -178,6 +185,12 @@ Route::prefix('service')->middleware('auth')->group(function () {
         Route::get('validasi-pelanggan/{id}/move', [ServiceController::class, 'moveValidasiPelanggan'])->name('service.moveValidasiPelanggan');
         Route::get('antrian-stock/{id}/move', [ServiceController::class, 'moveAntrianStock'])->name('service.moveAntrianStock');
         Route::get('validasi-stock/{id}/move', [ServiceController::class, 'moveValidasiStock'])->name('service.moveValidasiStock');
-        Route::put('/{id}', [ServiceController::class, 'update'])->name('service.update');
+
+        Route::put('/antrian-pelanggan/{id}', [ServiceController::class, 'updateAntrianPelanggan'])->name('service.updateAntrianPelanggan');
+        Route::put('/validasi-pelanggan/{id}', [ServiceController::class, 'updateValidasiPelanggan'])->name('service.updateValidasiPelanggan');
+        Route::put('/selesai-pelanggan/{id}', [ServiceController::class, 'updateSelesaiPelanggan'])->name('service.updateSelesaiPelanggan');
+        Route::put('/antrian-stock/{id}', [ServiceController::class, 'updateAntrianStock'])->name('service.updateAntrianStock');
+        Route::put('/validasi-stock/{id}', [ServiceController::class, 'updateValidasiStock'])->name('service.updateValidasiStock');
+        Route::put('/selesai-stock/{id}', [ServiceController::class, 'updateSelesaiStock'])->name('service.updateSelesaiStock');
         Route::delete('/{id}', [ServiceController::class, 'destroy'])->name('service.destroy');
 });

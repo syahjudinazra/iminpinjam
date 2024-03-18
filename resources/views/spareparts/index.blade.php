@@ -6,8 +6,7 @@
         <div class="row">
             <h1 class="h3 mb-3 text-gray-800">Spare Parts</h1>
             @auth
-                @if (auth()->user()->hasRole('superadmin') ||
-                        auth()->user()->hasRole('jeffri'))
+                @if (auth()->user()->hasRole('superadmin') || auth()->user()->hasRole('jeffri'))
                     <div class="head-area">
                         <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-target="#sparepartmodal">
                             <i class="fa-solid fa-plus"></i> Tambah
@@ -73,27 +72,27 @@
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="nospareparts"><b>No Spare Parts</b></label>
+                            <label class="font-weight-bold" for="nospareparts">No Spare Parts</label>
                             <input type="text" class="form-control" id="nospareparts" name="nospareparts"
                                 placeholder="Masukan Nomor Spare Parts" required value="{{ old('nospareparts') }}">
                         </div>
                         <div class="form-group">
-                            <label for="tipe"><b>Tipe</b></label>
+                            <label class="font-weight-bold" for="tipe">Tipe</label>
                             <input type="text" class="form-control" id="tipe" name="tipe"
                                 placeholder="Masukan Nama Tipe" value="{{ old('tipe') }}">
                         </div>
                         <div class="form-group">
-                            <label for="nama"><b>Nama</b></label>
+                            <label class="font-weight-bold" for="nama">Nama</label>
                             <input type="text" class="form-control" id="nama" name="nama"
                                 placeholder="Masukan Nama" value="{{ old('nama') }}">
                         </div>
                         <div class="form-group">
-                            <label for="quantity"><b>Quantity</b></label>
+                            <label class="font-weight-bold" for="quantity">Quantity</label>
                             <input type="number" class="form-control" id="quantity" name="quantity" min="0"
                                 placeholder="Masukan Quantity" value="{{ old('quantity') }}">
                         </div>
                         <div class="form-group">
-                            <label for="harga"><b>Harga</b></label>
+                            <label class="font-weight-bold" for="harga">Harga</label>
                             <input type="number" class="form-control" id="harga" name="harga"
                                 placeholder="Masukan Harga" value="{{ old('harga') }}">
                         </div>
@@ -264,8 +263,7 @@
                         <td>{{ $item->harga }}</td>
                         <td>
                             @auth
-                                @if (auth()->user()->hasRole('superadmin') ||
-                                        auth()->user()->hasRole('jeffri'))
+                                @if (auth()->user()->hasRole('superadmin') || auth()->user()->hasRole('jeffri'))
                                     <a href="#" class="btn btn-warning btn-sm" data-bs-toggle="modal"
                                         data-target="#editModalQuantityReduce{{ $item->id }}" data-bs-toggle="tooltip"
                                         data-bs-placement="top" title="Quantity"><i class="fa-solid fa-minus"></i></a>

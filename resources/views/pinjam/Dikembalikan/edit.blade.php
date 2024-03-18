@@ -13,7 +13,7 @@
                 </div>
             </div>
             <hr style="width: -webkit-fill-available;">
-            <form method="POST" action="{{ route('pinjam.update', $pinjam->id) }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('pinjam.updateDikembalikan', $pinjam->id) }}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="modal-body">
