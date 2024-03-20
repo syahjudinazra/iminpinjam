@@ -141,8 +141,11 @@ class PinjamController extends Controller
     public function generatePdf($id)
     {
         $pinjam = Pinjam::findOrFail($id);
-        $pdf = pdf::loadView('pdf.generate', ['pinjam' => $pinjam]);
-        return $pdf->download('test.pdf');
+        $pdf = PDF::loadView('pdf.generate', ['pinjam' => $pinjam]);
+        $currentDate = date('d-m-Y');
+        $pdfName = 'PinjamData_' . $currentDate . '.pdf';
+
+        return $pdf->download($pdfName);
     }
 
     /**

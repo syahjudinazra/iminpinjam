@@ -30,8 +30,16 @@
                 @foreach ($historyLog as $item)
                     <tr>
                         <td>{{ $item->causer->name }}</td>
-                        <td>{{ $item->subject->nospareparts }}</td>
-                        <td>{{ $item->subject->tipe }}</td>
+                        <td>
+                            @if ($item->subject)
+                                {{ $item->subject->nospareparts }}
+                            @endif
+                        </td>
+                        <td>
+                            @if ($item->subject)
+                                {{ $item->subject->tipe }}
+                            @endif
+                        </td>
                         <td>
                             @if (@is_array($item->changes['old']))
                                 @foreach ($item->changes['old'] as $key => $itemChange)
@@ -51,6 +59,7 @@
                     </tr>
                 @endforeach
             </tbody>
+
             <tfoot>
                 <tr>
                     <th>User</th>

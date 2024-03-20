@@ -16,7 +16,7 @@
                         auth()->user()->hasRole('vivi'))
                     <a href="{{ route('pinjam.export-pinjam') }}"
                         class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm">
-                        <i class="fas fa-download fa-sm text-white-50"></i> Generate Excel</a>
+                        <i class="fas fa-download fa-sm text-white-50"></i> Export Excel</a>
             </div>
             <div class="addPinjam">
                 <button type="button" id="addpinjam" class="btn btn-danger mb-2" data-bs-toggle="modal"
