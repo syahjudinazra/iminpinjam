@@ -133,7 +133,7 @@
                                 style="width: auto">
                         </div>
                         <a href="{{ route('template.stocks', ['filename' => 'templatestocks.xlsx']) }}"
-                            class="d-flex justify-content-center">Download
+                            class="d-flex justify-content-center text-decoration-none">Download
                             template</a>
                         <div class="table table-bordered mt-2" id="preview"></div>
                     </div>
@@ -352,6 +352,11 @@
                                 placeholder="Masukan Pelanggan" value="{{ old('pelanggan') }}">
                         </div>
                         <div class="form-group">
+                            <label class="font-weight-bold" for="keterangan">Keterangan</label>
+                            <textarea type="text" class="form-control shadow-none" id="keterangan" name="keterangan"
+                                placeholder="Masukan Keterangan">{{ old('keterangan') }}</textarea>
+                        </div>
+                        <div class="form-group">
                             <label class="font-weight-bold" for="status">Status</label><br />
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input mt-1" type="radio" id="gudang" name="status[]"
@@ -394,10 +399,12 @@
                     <th>Service</th>
                     <th>Dipinjam</th>
                     <th>Terjual</th>
+                    <th>Total</th>
                 </thead>
                 <tbody>
                     @php
                         $displayedTipes = [];
+                        $totalCounts = ['Gudang' => 0, 'Service' => 0, 'Dipinjam' => 0, 'Terjual' => 0];
                     @endphp
                     @foreach ($stock as $item)
                         @if (!in_array($item->tipe, $displayedTipes))
@@ -407,14 +414,37 @@
                                 <td>{{ $countByStatus['Service'][$item->tipe] ?? 0 }}</td>
                                 <td>{{ $countByStatus['Dipinjam'][$item->tipe] ?? 0 }}</td>
                                 <td>{{ $countByStatus['Terjual'][$item->tipe] ?? 0 }}</td>
+                                <td>
+                                    @php
+                                        $totalCount =
+                                            ($countByStatus['Gudang'][$item->tipe] ?? 0) +
+                                            ($countByStatus['Service'][$item->tipe] ?? 0) +
+                                            ($countByStatus['Dipinjam'][$item->tipe] ?? 0) +
+                                            ($countByStatus['Terjual'][$item->tipe] ?? 0);
+                                        $totalCounts['Gudang'] += $countByStatus['Gudang'][$item->tipe] ?? 0;
+                                        $totalCounts['Service'] += $countByStatus['Service'][$item->tipe] ?? 0;
+                                        $totalCounts['Dipinjam'] += $countByStatus['Dipinjam'][$item->tipe] ?? 0;
+                                        $totalCounts['Terjual'] += $countByStatus['Terjual'][$item->tipe] ?? 0;
+                                    @endphp
+                                    {{ $totalCount }}
+                                </td>
                             </tr>
                             @php
                                 $displayedTipes[] = $item->tipe;
                             @endphp
                         @endif
                     @endforeach
+                    <tr>
+                        <td><strong>Total</strong></td>
+                        <td>{{ $totalCounts['Gudang'] }}</td>
+                        <td>{{ $totalCounts['Service'] }}</td>
+                        <td>{{ $totalCounts['Dipinjam'] }}</td>
+                        <td>{{ $totalCounts['Terjual'] }}</td>
+                        <td>{{ array_sum($totalCounts) }}</td>
+                    </tr>
                 </tbody>
             </table>
+
         </div>
     </div>
 @endsection

@@ -50,6 +50,10 @@
                     value="{{ $stock->pelanggan }}" readonly>
             </div>
             <div class="form-group">
+                <label for="keterangan" class="form-label font-weight-bold">Keterangan</label>
+                <textarea class="form-control shadow-none" id="keterangan" name="keterangan" readonly>{{ $stock->keterangan }}</textarea>
+            </div>
+            <div class="form-group">
                 <label for="status" class="form-label font-weight-bold">
                     Status</label>
                 <input type="text" class="form-control shadow-none" id="status" name="status"

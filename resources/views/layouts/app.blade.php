@@ -177,9 +177,6 @@
         });
     </script>
     <script>
-        new DataTable('#stockTable');
-    </script>
-    <script>
         $(".form-control-chosen").chosen();
     </script>
     @stack('scripts')

@@ -61,10 +61,13 @@
             $('#kembali-table').DataTable({
                 processing: true,
                 serverSide: true,
+                pagingType: 'simple_numbers',
+                paging: true,
+                pageLength: 10,
                 ajax: '{!! route('pinjam.kembali') !!}',
                 columns: [{
-                        data: 'DT_RowIndex',
-                        name: 'DT_RowIndex'
+                        data: 'id',
+                        name: 'id'
                     },
                     {
                         data: 'tanggalkembali',

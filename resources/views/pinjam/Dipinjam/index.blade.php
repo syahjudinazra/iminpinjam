@@ -185,10 +185,13 @@
             $('#pinjams-table').DataTable({
                 processing: true,
                 serverSide: true,
+                pagingType: 'simple_numbers',
+                paging: true,
+                pageLength: 10,
                 ajax: '{!! route('pinjam.Dipinjam') !!}',
                 columns: [{
-                        data: 'DT_RowIndex',
-                        name: 'DT_RowIndex'
+                        data: 'id',
+                        name: 'id'
                     },
                     {
                         data: 'tanggal',

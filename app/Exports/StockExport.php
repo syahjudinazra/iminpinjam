@@ -14,11 +14,11 @@ class StockExport implements FromCollection, WithHeadings
     public function collection()
     {
         // return Stock::all();
-        return Stock::select("serialnumber", "tipe", "noinvoice", "tanggalmasuk", "tanggalkeluar", "pelanggan", "status")->get();
+        return Stock::select("serialnumber", "tipe", "noinvoice", "tanggalmasuk", "tanggalkeluar", "pelanggan", "keterangan", "status")->get();
     }
 
     public function headings(): array
     {
-        return ["serialnumber", "tipe", "noinvoice", "tanggalmasuk", "tanggalkeluar", "pelanggan", "status"];
+        return ["serialnumber", "tipe", "noinvoice", "tanggalmasuk", "tanggalkeluar", "pelanggan", "keterangan", "status"];
     }
 }

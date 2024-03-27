@@ -17,7 +17,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="deleteModalLabel{{ $item->id }}">Delete Data Pinjam</h5>
+                            <h5 class="modal-title" id="deleteModalLabel{{ $item->id }}">Delete Data Stocks</h5>
                             <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -27,7 +27,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <form action="{{ route('pinjam.destroy', $item->id) }}" method="POST">
+                            <form action="{{ route('stock.destroy', $item->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Delete</button>
@@ -49,6 +49,7 @@
                     <th>Tanggal Masuk</th>
                     <th>Tanggal Keluar</th>
                     <th>Pelanggan</th>
+                    <th>Keterangan</th>
                     <th>Action</th>
                 </thead>
             </table>
@@ -61,10 +62,13 @@
                 $('#dipinjam-table').DataTable({
                     processing: true,
                     serverSide: true,
+                    pagingType: 'simple_numbers',
+                    paging: true,
+                    pageLength: 10,
                     ajax: '{!! route('stock.dipinjam') !!}',
                     columns: [{
-                            data: 'DT_RowIndex',
-                            name: 'DT_RowIndex'
+                            data: 'id',
+                            name: 'id'
                         },
                         {
                             data: 'serialnumber',
@@ -97,6 +101,10 @@
                             name: 'pelanggan'
                         },
                         {
+                            data: 'keterangan',
+                            name: 'keterangan'
+                        },
+                        {
                             data: 'action',
                             name: 'action',
                             orderable: false,
@@ -104,11 +112,10 @@
                         },
                     ]
                 });
-                $(document).ready(function() {
-                    $('.deleteModal').on('click', function() {
-                        var id = $(this).data('id');
-                        $('#deleteModal' + id).modal('show');
-                    });
+
+                $(document).on('click', '.deleteModal', function() {
+                    var id = $(this).data('id');
+                    $('#deleteModal' + id).modal('show');
                 });
             });
         </script>

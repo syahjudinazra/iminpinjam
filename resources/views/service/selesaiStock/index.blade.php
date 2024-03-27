@@ -98,10 +98,13 @@
             $('#selesaiStock-table').DataTable({
                 processing: true,
                 serverSide: true,
+                pagingType: 'simple_numbers',
+                paging: true,
+                pageLength: 10,
                 ajax: '{!! route('service.selesaiStock') !!}',
                 columns: [{
-                        data: 'DT_RowIndex',
-                        name: 'DT_RowIndex'
+                        data: 'id',
+                        name: 'id'
                     },
                     {
                         data: 'tanggalkeluar',

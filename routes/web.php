@@ -127,6 +127,7 @@ Route::prefix('stock')->middleware('auth')->group(function () {
         Route::get('/dipinjam/{id}', [StockController::class, 'showPinjam'])->name('stock.showPinjam');
         Route::get('/diservice/{id}', [StockController::class, 'showDiservice'])->name('stock.showDiservice');
         Route::get('/terjual/{id}', [StockController::class, 'showTerjual'])->name('stock.showTerjual');
+        // Route::get('/{id}', [StockController::class, 'show'])->name('stock.show');
 
         Route::get('/gudang/{id}/edit', [StockController::class, 'editGudang'])->name('stock.editGudang');
         Route::get('/dipinjam/{id}/edit', [StockController::class, 'editPinjam'])->name('stock.editPinjam');

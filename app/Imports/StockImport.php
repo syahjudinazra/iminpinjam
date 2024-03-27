@@ -23,6 +23,7 @@ class StockImport implements ToModel, WithHeadingRow
             'tanggalmasuk' => $row['tanggalmasuk'],
             'tanggalkeluar' => $row['tanggalkeluar'],
             'pelanggan' => $row['pelanggan'],
+            'keterangan' => $row['keterangan'],
             'status' => $row['status'],
         ]);
     }

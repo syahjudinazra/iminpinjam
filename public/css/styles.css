@@ -52,10 +52,6 @@
     -webkit-box-align: start;
     -ms-flex-align: start;
     align-items: flex-start;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-
-    padding: 50px 0;
 }
 .ag-courses_item {
     -ms-flex-preferred-size: calc(33.33333% - 30px);

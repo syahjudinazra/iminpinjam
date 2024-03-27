@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Kanibal;
+use App\Models\Stock;
 use App\Models\Pinjam;
+use App\Models\Kanibal;
 use App\Models\Service;
+use Illuminate\View\View;
+use App\Models\SpareParts;
 use App\Models\ServiceDone;
 use Illuminate\Http\Request;
 use App\Models\ServicePending;
-use App\Models\SpareParts;
-use App\Models\Stock;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -51,4 +52,5 @@ class HomeController extends Controller
             compact('services', 'pinjams', 'spareparts')
         );
     }
+
 }

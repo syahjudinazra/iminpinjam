@@ -7,7 +7,7 @@
             <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
         </div>
     </div>
-    <div class="ag-format-container">
+    <div class="ag-format">
         <div class="ag-courses_box">
             <div class="ag-courses_item">
                 <a href="/service" class="ag-courses-item_link">
@@ -43,23 +43,6 @@
                 </a>
             </div>
 
-            {{-- <div class="ag-courses_item">
-                <a href="/kanibal" class="ag-courses-item_link">
-                    <div class="ag-courses-item_bg"></div>
-
-                    <div class="ag-courses-item_title">
-                        {{ $selesaiPelanggan->total() }}
-                    </div>
-
-                    <div class="ag-courses-item_date-box">
-                        Jumlah Data:
-                        <span class="ag-courses-item_date">
-                            Service Selesai Pelanggan
-                        </span>
-                    </div>
-                </a>
-            </div> --}}
-
             <div class="ag-courses_item">
                 <a href="/pinjam" class="ag-courses-item_link">
                     <div class="ag-courses-item_bg"></div>
@@ -71,7 +54,7 @@
                     <div class="ag-courses-item_date-box">
                         Jumlah Data:
                         <span class="ag-courses-item_date">
-                            Pinjam & Kembali
+                            Pinjam
                         </span>
                     </div>
                 </a>

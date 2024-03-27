@@ -11,13 +11,74 @@
         </div>
 
         @foreach ($stockTerjual as $item)
+            <!-- view data -->
+            <div class="modal fade" id="stockViewModal{{ $item->id }}" tabindex="-1"
+                aria-labelledby="viewModalLabel{{ $item->id }}" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="viewModalLabel{{ $item->id }}">View Data </h5>
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="serialnumber" class="form-label font-weight-bold">Serial Number</label>
+                                <input type="text" class="form-control shadow-none" id="serialnumber" name="serialnumber"
+                                    value="{{ $item->serialnumber }}" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="tipe" class="form-label font-weight-bold">Tipe Device</label>
+                                <input type="text" class="form-control shadow-none" id="tipe" name="tipe"
+                                    value="{{ $item->tipe }}" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="noinvoice" class="form-label font-weight-bold">No Invoice</label>
+                                <input type="text" class="form-control shadow-none" id="noinvoice" name="noinvoice"
+                                    value="{{ $item->noinvoice }}" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="tanggalmasuk" class="form-label font-weight-bold">Tanggal Masuk</label>
+                                <input type="date" class="form-control shadow-none" id="tanggalmasuk" name="tanggalmasuk"
+                                    value="{{ $item->tanggalmasuk }}" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="tanggalkeluar" class="form-label font-weight-bold">Tanggal Keluar</label>
+                                <input type="date" class="form-control shadow-none" id="tanggalkeluar"
+                                    name="tanggalkeluar" value="{{ $item->tanggalkeluar }}" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="pelanggan" class="form-label font-weight-bold">Pelanggan</label>
+                                <input type="text" class="form-control shadow-none" id="pelanggan" name="pelanggan"
+                                    value="{{ $item->pelanggan }}" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="keterangan" class="form-label font-weight-bold">Keterangan</label>
+                                <input type="text" class="form-control shadow-none" id="keterangan" name="keterangan"
+                                    value="{{ $item->keterangan }}" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="status" class="form-label font-weight-bold">Status</label>
+                                <input type="text" class="form-control shadow-none" id="status" name="status"
+                                    value="{{ $item->status }}" readonly>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end view data -->
+
             <!-- delete data -->
             <div class="modal fade" id="deleteModal{{ $item->id }}" tabindex="-1"
                 aria-labelledby="deleteModalLabel{{ $item->id }}" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="deleteModalLabel{{ $item->id }}">Delete Data Pinjam</h5>
+                            <h5 class="modal-title" id="deleteModalLabel{{ $item->id }}">Delete Data Stocks</h5>
                             <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -27,7 +88,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <form action="{{ route('pinjam.destroy', $item->id) }}" method="POST">
+                            <form action="{{ route('stock.destroy', $item->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Delete</button>
@@ -49,6 +110,7 @@
                     <th>Tanggal Masuk</th>
                     <th>Tanggal Keluar</th>
                     <th>Pelanggan</th>
+                    <th>Keterangan</th>
                     <th>Action</th>
                 </thead>
             </table>
@@ -61,10 +123,13 @@
                 $('#terjual-table').DataTable({
                     processing: true,
                     serverSide: true,
+                    pagingType: 'simple_numbers',
+                    paging: true,
+                    pageLength: 10,
                     ajax: '{!! route('stock.terjual') !!}',
                     columns: [{
-                            data: 'DT_RowIndex',
-                            name: 'DT_RowIndex'
+                            data: 'id',
+                            name: 'id'
                         },
                         {
                             data: 'serialnumber',
@@ -97,18 +162,28 @@
                             name: 'pelanggan'
                         },
                         {
+                            data: 'keterangan',
+                            name: 'keterangan'
+                        },
+                        {
                             data: 'action',
                             name: 'action',
                             orderable: false,
                             searchable: false
                         },
-                    ]
+                    ],
                 });
+
                 $(document).ready(function() {
-                    $('.deleteModal').on('click', function() {
+                    $('.viewModal').on('click', function() {
                         var id = $(this).data('id');
-                        $('#deleteModal' + id).modal('show');
+                        $('#stockViewModal' + id).modal('show');
                     });
+                });
+
+                $(document).on('click', '.deleteModal', function() {
+                    var id = $(this).data('id');
+                    $('#deleteModal' + id).modal('show');
                 });
             });
         </script>
