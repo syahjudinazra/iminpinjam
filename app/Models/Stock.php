@@ -22,6 +22,7 @@ class Stock extends Model
         'tanggalmasuk',
         'tanggalkeluar',
         'pelanggan',
+        'lokasi',
         'keterangan',
         'status'
     ];

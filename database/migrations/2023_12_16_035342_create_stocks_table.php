@@ -21,6 +21,7 @@ return new class extends Migration
             $table->date('tanggalmasuk');
             $table->date('tanggalkeluar')->nullable();
             $table->string('pelanggan')->nullable();
+            $table->string('lokasi');
             $table->string('keterangan')->nullable();
             $table->string('status');
             $table->timestamps();

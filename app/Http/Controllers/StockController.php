@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\DataTables;
+use Illuminate\Http\RedirectResponse;
 
 class StockController extends Controller
 {
@@ -109,7 +110,11 @@ class StockController extends Controller
 
                             if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('sylvi') || $user->hasRole('coni') || $user->hasRole('vivi')) {
                                 $actionHtml .= '<a class="dropdown-item" href="' . route('stock.editGudang', ['id' => $row->id]) . '"><i class="fa-solid fa-pen-to-square"></i> Edit</a>'.
-                                               '<a class="dropdown-item" href="#" data-bs-toggle="modal" data-target="#deleteModal' . $row->id . '"><i class="fa-solid fa-trash"></i> Delete</a>';
+                                                '<form action="' . route('stock.destroy', ['id' => $row->id]) . '" method="POST" onsubmit="return confirm(\'Yakin mau hapus data ini?\');">
+                                                ' . csrf_field() . '
+                                                <input type="hidden" name="_method" value="DELETE">
+                                                <button type="submit" class="dropdown-item"><i class="fa-solid fa-trash"></i> Delete</button>
+                                                </form>';
                             }
 
                             $actionHtml .= '</div>
@@ -126,6 +131,7 @@ class StockController extends Controller
         // If it's not an AJAX request, return the view with paginated data
         $stockGudang = Stock::where('status', 'gudang')->orderBy('created_at', 'desc');
         $stockDevice = DB::table('stocks_device')->select('name')->get();
+        $stockLokasi = DB::table('device_location')->select('name')->get();
 
         return view('stock.digudang.index', compact('stockGudang', 'stockDevice'));
     }
@@ -133,13 +139,14 @@ class StockController extends Controller
     public function service(Request $request)
     {
         if ($request->ajax()) {
-            $stockService = Stock::where('status', 'service')->orderBy('created_at', 'desc')->get();
+            $stockService = Stock::where('status', 'service')->orderBy('created_at', 'desc');
 
             return DataTables::of($stockService)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
                     $actionHtml = '<div class="d-flex align-items-center gap-3">';
-                    $actionHtml .= '<a href="#" class="text-decoration-none" data-toggle="modal" data-target="#viewModal' . $row->id . '"><i class="fa-solid fa-eye"></i>View</a>';
+                    $actionHtml .= '<a href="' . route('stock.showDiservice', ['id' => $row->id]) . '"
+                    class="text-decoration-none"><i class="fa-solid fa-eye"></i> View</a>';
                     if (auth()->check()) {
                         $user = auth()->user();
 
@@ -152,7 +159,11 @@ class StockController extends Controller
 
                             if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('sylvi') || $user->hasRole('coni') || $user->hasRole('vivi')) {
                                 $actionHtml .= '<a class="dropdown-item" href="' . route('stock.editDiservice', ['id' => $row->id]) . '"><i class="fa-solid fa-pen-to-square"></i> Edit</a>'.
-                                               '<a class="dropdown-item" href="#" data-bs-toggle="modal" data-target="#deleteModal' . $row->id . '"><i class="fa-solid fa-trash"></i> Delete</a>';
+                                                '<form action="' . route('stock.destroy', ['id' => $row->id]) . '" method="POST" onsubmit="return confirm(\'Yakin mau hapus data ini?\');">
+                                                ' . csrf_field() . '
+                                                <input type="hidden" name="_method" value="DELETE">
+                                                <button type="submit" class="dropdown-item"><i class="fa-solid fa-trash"></i> Delete</button>
+                                                </form>';
                             }
 
                             $actionHtml .= '</div>
@@ -166,8 +177,7 @@ class StockController extends Controller
                 ->make(true);
         }
 
-        // If it's not an AJAX request, return the view with paginated data
-        $stockService = Stock::where('status', 'service')->orderBy('created_at', 'desc')->get();
+        $stockService = Stock::where('status', 'service')->orderBy('created_at', 'desc');
         $stockDevice = DB::table('stocks_device')->select('name')->get();
 
         return view('stock.diservice.index', compact('stockService', 'stockDevice'));
@@ -196,7 +206,11 @@ class StockController extends Controller
 
                             if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('sylvi') || $user->hasRole('coni') || $user->hasRole('vivi')) {
                                 $actionHtml .= '<a class="dropdown-item" href="' . route('stock.editPinjam', ['id' => $row->id]) . '"><i class="fa-solid fa-pen-to-square"></i> Edit</a>'.
-                                               '<a class="dropdown-item" href="#" data-bs-toggle="modal" data-target="#deleteModal' . $row->id . '"><i class="fa-solid fa-trash"></i> Delete</a>';
+                                                '<form action="' . route('stock.destroy', ['id' => $row->id]) . '" method="POST" onsubmit="return confirm(\'Yakin mau hapus data ini?\');">
+                                                ' . csrf_field() . '
+                                                <input type="hidden" name="_method" value="DELETE">
+                                                <button type="submit" class="dropdown-item"><i class="fa-solid fa-trash"></i> Delete</button>
+                                                </form>';
                             }
 
                             $actionHtml .= '</div>
@@ -210,7 +224,6 @@ class StockController extends Controller
                 ->make(true);
         }
 
-        // If it's not an AJAX request, return the view with paginated data
         $stockDipinjam = Stock::where('status', 'dipinjam')->orderBy('created_at', 'desc');
         $stockDevice = DB::table('stocks_device')->select('name')->get();
 
@@ -240,9 +253,11 @@ class StockController extends Controller
 
                             if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('sylvi') || $user->hasRole('coni') || $user->hasRole('vivi')) {
                                 $actionHtml .= '<a class="dropdown-item" href="' . route('stock.editTerjual', ['id' => $row->id]) . '"><i class="fa-solid fa-pen-to-square"></i> Edit</a>'.
-                                '<a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                data-bs-target="#deleteModal' . $row->id . '"><i
-                                class="fa-solid fa-trash"></i> Delete</a>';
+                                                '<form action="' . route('stock.destroy', ['id' => $row->id]) . '" method="POST" onsubmit="return confirm(\'Yakin mau hapus data ini?\');">
+                                                ' . csrf_field() . '
+                                                <input type="hidden" name="_method" value="DELETE">
+                                                <button type="submit" class="dropdown-item"><i class="fa-solid fa-trash"></i> Delete</button>
+                                                </form>';
                             }
 
                             $actionHtml .= '</div>
@@ -294,6 +309,7 @@ class StockController extends Controller
                 'tanggalmasuk' => $tanggalmasuk,
                 'tanggalkeluar' => $tanggalkeluar,
                 'pelanggan' => $row['pelanggan'],
+                'lokasi' => $row['lokasi'],
                 'keterangan' => $row['keterangan'],
                 'status' => $row['status'],
             ];
@@ -346,6 +362,7 @@ class StockController extends Controller
             'tanggalmasuk' => 'required|max:255',
             'tanggalkeluar' => 'max:255',
             'pelanggan' => 'max:255',
+            'lokasi' => 'max:255',
             'keterangan' => 'max:255',
             'status' => 'required|array',
         ]);
@@ -358,6 +375,7 @@ class StockController extends Controller
             $stock->tanggalmasuk = $request->input('tanggalmasuk');
             $stock->tanggalkeluar = $request->input('tanggalkeluar');
             $stock->pelanggan = $request->input('pelanggan');
+            $stock->lokasi = $request->input('lokasi');
             $stock->keterangan = $request->input('keterangan');
             $statusValues = $request->input('status');
             $statusString = implode(',', $statusValues);
@@ -402,48 +420,46 @@ class StockController extends Controller
         return view('stock.terjual.view', compact('stock'));
     }
 
-    // public function show($id)
-    // {
-    //     $stock = Stock::findOrFail($id);
-    //     return view('stock.terjual.index', compact('stock'));
-    // }
-
     /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Stock  $stock
      * @return \Illuminate\Http\Response
      */
-    public function editGudang(Stock $stock, $id)
+    public function editGudang($id)
     {
         $stock = Stock::findOrFail($id);
         $stockDevice = DB::table('stocks_device')->select('name')->get();
+        $stockLokasi = DB::table('device_location')->select('name')->get();
 
-        return view('stock.digudang.edit', compact('stock', 'stockDevice'));
+        return view('stock.digudang.edit', compact('stock', 'stockDevice', 'stockLokasi'));
     }
 
-    public function editPinjam(Stock $stock, $id)
+    public function editPinjam($id)
     {
         $stock = Stock::findOrFail($id);
         $stockDevice =DB::table('stocks_device')->select('name')->get();
+        $stockLokasi = DB::table('device_location')->select('name')->get();
 
-        return view('stock.dipinjam.edit', compact('stock', 'stockDevice'));
+        return view('stock.dipinjam.edit', compact('stock', 'stockDevice', 'stockLokasi'));
     }
 
-    public function editDiservice(Stock $stock, $id)
+    public function editDiservice($id)
     {
         $stock = Stock::findOrFail($id);
         $stockDevice =DB::table('stocks_device')->select('name')->get();
+        $stockLokasi = DB::table('device_location')->select('name')->get();
 
-        return view('stock.diservice.edit', compact('stock', 'stockDevice'));
+        return view('stock.diservice.edit', compact('stock', 'stockDevice', 'stockLokasi'));
     }
 
-    public function editTerjual(Stock $stock, $id)
+    public function editTerjual($id)
     {
         $stock = Stock::findOrFail($id);
         $stockDevice =DB::table('stocks_device')->select('name')->get();
+        $stockLokasi = DB::table('device_location')->select('name')->get();
 
-        return view('stock.terjual.edit', compact('stock', 'stockDevice'));
+        return view('stock.terjual.edit', compact('stock', 'stockDevice', 'stockLokasi'));
     }
 
     /**
@@ -462,6 +478,8 @@ class StockController extends Controller
                 'tanggalmasuk' => 'required|max:255',
                 'tanggalkeluar' => 'max:255',
                 'pelanggan' => 'max:255',
+                'lokasi' => 'required|max:255',
+                'keterangan' => 'max:255',
                 'status' => 'required|max:255',
             ]);
 
@@ -472,6 +490,8 @@ class StockController extends Controller
             $stock->tanggalmasuk = $request->input('tanggalmasuk');
             $stock->tanggalkeluar = $request->input('tanggalkeluar');
             $stock->pelanggan = $request->input('pelanggan');
+            $stock->lokasi = $request->input('lokasi');
+            $stock->keterangan = $request->input('keterangan');
             $stock->status = $request->input('status');
 
             $stock->update();
@@ -487,6 +507,8 @@ class StockController extends Controller
                 'tanggalmasuk' => 'required|max:255',
                 'tanggalkeluar' => 'max:255',
                 'pelanggan' => 'max:255',
+                'lokasi' => 'required|max:255',
+                'keterangan' => 'max:255',
                 'status' => 'required|max:255',
             ]);
 
@@ -497,6 +519,8 @@ class StockController extends Controller
             $stock->tanggalmasuk = $request->input('tanggalmasuk');
             $stock->tanggalkeluar = $request->input('tanggalkeluar');
             $stock->pelanggan = $request->input('pelanggan');
+            $stock->lokasi = $request->input('lokasi');
+            $stock->keterangan = $request->input('keterangan');
             $stock->status = $request->input('status');
 
             $stock->update();
@@ -512,6 +536,8 @@ class StockController extends Controller
                 'tanggalmasuk' => 'required|max:255',
                 'tanggalkeluar' => 'max:255',
                 'pelanggan' => 'max:255',
+                'lokasi' => 'required|max:255',
+                'keterangan' => 'max:255',
                 'status' => 'required|max:255',
             ]);
 
@@ -522,6 +548,8 @@ class StockController extends Controller
             $stock->tanggalmasuk = $request->input('tanggalmasuk');
             $stock->tanggalkeluar = $request->input('tanggalkeluar');
             $stock->pelanggan = $request->input('pelanggan');
+            $stock->lokasi = $request->input('lokasi');
+            $stock->keterangan = $request->input('keterangan');
             $stock->status = $request->input('status');
 
             $stock->update();
@@ -537,6 +565,8 @@ class StockController extends Controller
                 'tanggalmasuk' => 'required|max:255',
                 'tanggalkeluar' => 'max:255',
                 'pelanggan' => 'max:255',
+                'lokasi' => 'required|max:255',
+                'keterangan' => 'max:255',
                 'status' => 'required|max:255',
             ]);
 
@@ -547,6 +577,8 @@ class StockController extends Controller
             $stock->tanggalmasuk = $request->input('tanggalmasuk');
             $stock->tanggalkeluar = $request->input('tanggalkeluar');
             $stock->pelanggan = $request->input('pelanggan');
+            $stock->lokasi = $request->input('lokasi');
+            $stock->keterangan = $request->input('keterangan');
             $stock->status = $request->input('status');
 
             $stock->update();
@@ -559,11 +591,11 @@ class StockController extends Controller
      * @param  \App\Models\Stock  $stock
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Stock $stock, $id)
+    public function destroy($id): RedirectResponse
     {
         $stock = Stock::findOrFail($id);
         $stock->delete();
 
-        return redirect()->back()->with('success', 'Data berhasil dihapus');
+        return redirect()->back()->with(['success' => 'Data Berhasil Dihapus!']);
     }
 }

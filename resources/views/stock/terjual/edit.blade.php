@@ -52,6 +52,22 @@
                     <input type="text" class="form-control shadow-none" id="pelanggan" name="pelanggan"
                         value="{{ $stock->pelanggan }}">
                 </div>
+                <div class="form-group mb-3">
+                    <label class="font-weight-bold" for="lokasi">Lokasi</label><br />
+                    <select id="lokasi" class="form-control form-control-chosen shadow-none" name="lokasi" required>
+                        <option value="Null">Pilih Lokasi</option>
+                        @foreach ($stockLokasi as $lok)
+                            <option value="{{ $lok->name }}" {{ $stock->lokasi == $lok->name ? 'selected' : '' }}>
+                                {{ $lok->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="keterangan" class="form-label font-weight-bold">Keterangan</label>
+                    <input type="text" class="form-control shadow-none" id="keterangan" name="keterangan"
+                        value="{{ $stock->keterangan }}">
+                </div>
                 <div class="form-group">
                     <label class="font-weight-bold">Status</label><br />
                     <div class="form-check form-check-inline">
@@ -70,8 +86,8 @@
                         <label class="form-check-label" for="dipinjam">Dipinjam</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input mt-1" type="radio" id="terjual" name="status" value="Terjual"
-                            {{ in_array('Terjual', explode(',', $stock->status)) ? 'checked' : '' }}>
+                        <input class="form-check-input mt-1" type="radio" id="terjual" name="status"
+                            value="Terjual" {{ in_array('Terjual', explode(',', $stock->status)) ? 'checked' : '' }}>
                         <label class="form-check-label" for="terjual">Terjual</label>
                     </div>
                 </div>

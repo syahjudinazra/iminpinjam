@@ -132,10 +132,12 @@
                             <input type="file" name="inputStocks" id="inputStocks" class="form-control"
                                 style="width: auto">
                         </div>
-                        <a href="{{ route('template.stocks', ['filename' => 'templatestocks.xlsx']) }}"
+                        <a href="{{ route('template.stocks', ['filename' => 'TemplateImportStock.xlsx']) }}"
                             class="d-flex justify-content-center text-decoration-none">Download
                             template</a>
                         <div class="table table-bordered mt-2" id="preview"></div>
+                        <h5>Note</h5>
+                        <p>Pada template, Mohon isi kolom status dengan Gudang, Service, Dipinjam atau Terjual</p>
                     </div>
                     <div class="modal-footer justify-content-center">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -350,6 +352,23 @@
                             <label class="font-weight-bold" for="pelanggan">Pelanggan</label>
                             <input type="text" class="form-control shadow-none" id="pelanggan" name="pelanggan"
                                 placeholder="Masukan Pelanggan" value="{{ old('pelanggan') }}">
+                        </div>
+                        <div class="form-group">
+                            <label class="font-weight-bold" for="lokasi">Lokasi</label><br />
+                            <select id="lokasi" class="form-control form-control-chosen shadow-none" name="lokasi"
+                                data-placeholder="Pilih Lokasi" required>
+                                <option value="Null">Pilih Lokasi</option>
+                                <option value="A01">A01</option>
+                                <option value="A02">A02</option>
+                                <option value="B01">B01</option>
+                                <option value="B02">B02</option>
+                                <option value="C01">C01</option>
+                                <option value="C02">C02</option>
+                                <option value="D01">D01</option>
+                                <option value="D02">D02</option>
+                                <option value="E01">E01</option>
+                                <option value="E02">E02</option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label class="font-weight-bold" for="keterangan">Keterangan</label>
