@@ -62,6 +62,10 @@
                             <span> </span>
                             <span>*Kerusakan :* <br /> {{ $item->kerusakan }}</span>
                             <span> </span>
+                            <span>*Perbaikan :* <br /> {{ $item->perbaikan }}</span>
+                            <span> </span>
+                            <span>*Teknisi :* <br /> {{ $item->teknisi }}</span>
+                            <span> </span>
                             <span>*Catatan :* <br /> {{ $item->catatan }}</span>
                         </pre>
                     </div>

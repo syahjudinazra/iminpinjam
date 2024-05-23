@@ -90,27 +90,21 @@
                         },
                     ],
                     initComplete: function() {
-                        var r = $("#dipinjam-table tfoot tr");
-                        r.find("th").each(function() {
-                            $(this).css("padding", 8);
-                        });
-                        $("#dipinjam-table thead").append(r);
+                    var api = this.api();
+                    var footer = $('#dipinjam-table tfoot tr');
+                    $(footer).appendTo('#dipinjam-table thead');
 
-                        this.api().columns().every(function() {
-                            let column = this;
-                            let title = column.header().textContent;
-
-                            // Create input element
-                            let input = document.createElement("input");
-                            input.placeholder = title;
-                            $(input).appendTo($(column.footer()).empty())
-                                .on('keyup change', function() {
-                                    if (column.search() !== this.value) {
-                                        column.search(this.value).draw();
-                                    }
-                                });
-                        });
-                    }
+                    api.columns().every(function() {
+                        var column = this;
+                        var input = $('<input type="text" placeholder="' + $(column.header()).text() + '" style="width: 100%;" />')
+                            .appendTo($(column.footer()).empty())
+                            .on('keyup change clear', function() {
+                                if (column.search() !== this.value) {
+                                    column.search(this.value).draw();
+                                }
+                            });
+                    });
+                }
                 });
             });
         </script>

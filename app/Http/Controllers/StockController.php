@@ -51,11 +51,12 @@ class StockController extends Controller
                 // If the stock with the given serial number exists, fetch customer data and type
                 $customer = $stock->pelanggan;
                 $type = $stock->tipe;
+                $stats = $stock->status;
 
-                $message = "Serial number exists in the database";
+                $message = "Exist";
                 $exists = true;
             } else {
-                $message = 'Serial number does not exist in the database.';
+                $message = 'Not Exist';
                 $exists = false;
             }
 
@@ -64,7 +65,8 @@ class StockController extends Controller
                 'exists' => $exists,
                 'message' => $message,
                 'pelanggan' => $customer ?? null,
-                'tipe' => $type ?? null
+                'tipe' => $type ?? null,
+                'status' => $stats ?? null,
             ];
         }
 
@@ -76,11 +78,11 @@ class StockController extends Controller
     {
         foreach ($request->serialnumbers as $serialnumber) {
             Stock::where('serialnumber', $serialnumber)
-                     ->update([
-                         'status' => $request->status,
-                         'tanggalkeluar' => $request->tanggalkeluar,
-                         'pelanggan' => $request->pelanggan
-                     ]);
+                ->update([
+                    'status' => $request->status,
+                    'tanggalkeluar' => $request->tanggalkeluar,
+                    'pelanggan' => $request->pelanggan
+                ]);
         }
 
         return response()->json(['message' => 'Data updated successfully']);
@@ -109,8 +111,8 @@ class StockController extends Controller
                                                 <div class="dropdown-menu">';
 
                             if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('sylvi') || $user->hasRole('coni') || $user->hasRole('vivi')) {
-                                $actionHtml .= '<a class="dropdown-item" href="' . route('stock.editGudang', ['id' => $row->id]) . '"><i class="fa-solid fa-pen-to-square"></i> Edit</a>'.
-                                                '<form action="' . route('stock.destroy', ['id' => $row->id]) . '" method="POST" onsubmit="return confirm(\'Yakin mau hapus data ini?\');">
+                                $actionHtml .= '<a class="dropdown-item" href="' . route('stock.editGudang', ['id' => $row->id]) . '"><i class="fa-solid fa-pen-to-square"></i> Edit</a>' .
+                                    '<form action="' . route('stock.destroy', ['id' => $row->id]) . '" method="POST" onsubmit="return confirm(\'Yakin mau hapus data ini?\');">
                                                 ' . csrf_field() . '
                                                 <input type="hidden" name="_method" value="DELETE">
                                                 <button type="submit" class="dropdown-item"><i class="fa-solid fa-trash"></i> Delete</button>
@@ -158,8 +160,8 @@ class StockController extends Controller
                                                 <div class="dropdown-menu">';
 
                             if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('sylvi') || $user->hasRole('coni') || $user->hasRole('vivi')) {
-                                $actionHtml .= '<a class="dropdown-item" href="' . route('stock.editDiservice', ['id' => $row->id]) . '"><i class="fa-solid fa-pen-to-square"></i> Edit</a>'.
-                                                '<form action="' . route('stock.destroy', ['id' => $row->id]) . '" method="POST" onsubmit="return confirm(\'Yakin mau hapus data ini?\');">
+                                $actionHtml .= '<a class="dropdown-item" href="' . route('stock.editDiservice', ['id' => $row->id]) . '"><i class="fa-solid fa-pen-to-square"></i> Edit</a>' .
+                                    '<form action="' . route('stock.destroy', ['id' => $row->id]) . '" method="POST" onsubmit="return confirm(\'Yakin mau hapus data ini?\');">
                                                 ' . csrf_field() . '
                                                 <input type="hidden" name="_method" value="DELETE">
                                                 <button type="submit" class="dropdown-item"><i class="fa-solid fa-trash"></i> Delete</button>
@@ -205,8 +207,8 @@ class StockController extends Controller
                                                 <div class="dropdown-menu">';
 
                             if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('sylvi') || $user->hasRole('coni') || $user->hasRole('vivi')) {
-                                $actionHtml .= '<a class="dropdown-item" href="' . route('stock.editPinjam', ['id' => $row->id]) . '"><i class="fa-solid fa-pen-to-square"></i> Edit</a>'.
-                                                '<form action="' . route('stock.destroy', ['id' => $row->id]) . '" method="POST" onsubmit="return confirm(\'Yakin mau hapus data ini?\');">
+                                $actionHtml .= '<a class="dropdown-item" href="' . route('stock.editPinjam', ['id' => $row->id]) . '"><i class="fa-solid fa-pen-to-square"></i> Edit</a>' .
+                                    '<form action="' . route('stock.destroy', ['id' => $row->id]) . '" method="POST" onsubmit="return confirm(\'Yakin mau hapus data ini?\');">
                                                 ' . csrf_field() . '
                                                 <input type="hidden" name="_method" value="DELETE">
                                                 <button type="submit" class="dropdown-item"><i class="fa-solid fa-trash"></i> Delete</button>
@@ -252,8 +254,8 @@ class StockController extends Controller
                                                 <div class="dropdown-menu">';
 
                             if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('sylvi') || $user->hasRole('coni') || $user->hasRole('vivi')) {
-                                $actionHtml .= '<a class="dropdown-item" href="' . route('stock.editTerjual', ['id' => $row->id]) . '"><i class="fa-solid fa-pen-to-square"></i> Edit</a>'.
-                                                '<form action="' . route('stock.destroy', ['id' => $row->id]) . '" method="POST" onsubmit="return confirm(\'Yakin mau hapus data ini?\');">
+                                $actionHtml .= '<a class="dropdown-item" href="' . route('stock.editTerjual', ['id' => $row->id]) . '"><i class="fa-solid fa-pen-to-square"></i> Edit</a>' .
+                                    '<form action="' . route('stock.destroy', ['id' => $row->id]) . '" method="POST" onsubmit="return confirm(\'Yakin mau hapus data ini?\');">
                                                 ' . csrf_field() . '
                                                 <input type="hidden" name="_method" value="DELETE">
                                                 <button type="submit" class="dropdown-item"><i class="fa-solid fa-trash"></i> Delete</button>
@@ -438,7 +440,7 @@ class StockController extends Controller
     public function editPinjam($id)
     {
         $stock = Stock::findOrFail($id);
-        $stockDevice =DB::table('stocks_device')->select('name')->get();
+        $stockDevice = DB::table('stocks_device')->select('name')->get();
         $stockLokasi = DB::table('device_location')->select('name')->get();
 
         return view('stock.dipinjam.edit', compact('stock', 'stockDevice', 'stockLokasi'));
@@ -447,7 +449,7 @@ class StockController extends Controller
     public function editDiservice($id)
     {
         $stock = Stock::findOrFail($id);
-        $stockDevice =DB::table('stocks_device')->select('name')->get();
+        $stockDevice = DB::table('stocks_device')->select('name')->get();
         $stockLokasi = DB::table('device_location')->select('name')->get();
 
         return view('stock.diservice.edit', compact('stock', 'stockDevice', 'stockLokasi'));
@@ -456,7 +458,7 @@ class StockController extends Controller
     public function editTerjual($id)
     {
         $stock = Stock::findOrFail($id);
-        $stockDevice =DB::table('stocks_device')->select('name')->get();
+        $stockDevice = DB::table('stocks_device')->select('name')->get();
         $stockLokasi = DB::table('device_location')->select('name')->get();
 
         return view('stock.terjual.edit', compact('stock', 'stockDevice', 'stockLokasi'));
@@ -471,118 +473,118 @@ class StockController extends Controller
      */
     public function updateGudang(Request $request, Stock $stock, $id)
     {
-            $request->validate([
-                'serialnumber' => 'required|max:255',
-                'tipe' => 'required|max:255',
-                'noinvoice' => 'required|max:255',
-                'tanggalmasuk' => 'required|max:255',
-                'tanggalkeluar' => 'max:255',
-                'pelanggan' => 'max:255',
-                'lokasi' => 'required|max:255',
-                'keterangan' => 'max:255',
-                'status' => 'required|max:255',
-            ]);
+        $request->validate([
+            'serialnumber' => 'required|max:255',
+            'tipe' => 'required|max:255',
+            'noinvoice' => 'required|max:255',
+            'tanggalmasuk' => 'required|max:255',
+            'tanggalkeluar' => 'max:255',
+            'pelanggan' => 'max:255',
+            'lokasi' => 'required|max:255',
+            'keterangan' => 'max:255',
+            'status' => 'required|max:255',
+        ]);
 
-            $stock = Stock::find($id);
-            $stock->serialnumber = $request->input('serialnumber');
-            $stock->tipe = $request->input('tipe');
-            $stock->noinvoice = $request->input('noinvoice');
-            $stock->tanggalmasuk = $request->input('tanggalmasuk');
-            $stock->tanggalkeluar = $request->input('tanggalkeluar');
-            $stock->pelanggan = $request->input('pelanggan');
-            $stock->lokasi = $request->input('lokasi');
-            $stock->keterangan = $request->input('keterangan');
-            $stock->status = $request->input('status');
+        $stock = Stock::find($id);
+        $stock->serialnumber = $request->input('serialnumber');
+        $stock->tipe = $request->input('tipe');
+        $stock->noinvoice = $request->input('noinvoice');
+        $stock->tanggalmasuk = $request->input('tanggalmasuk');
+        $stock->tanggalkeluar = $request->input('tanggalkeluar');
+        $stock->pelanggan = $request->input('pelanggan');
+        $stock->lokasi = $request->input('lokasi');
+        $stock->keterangan = $request->input('keterangan');
+        $stock->status = $request->input('status');
 
-            $stock->update();
-            return redirect('stock/gudang')->with('success', 'Data berhasil diubah');
+        $stock->update();
+        return redirect('stock/gudang')->with('success', 'Data berhasil diubah');
     }
 
     public function updateDipinjam(Request $request, Stock $stock, $id)
     {
-            $request->validate([
-                'serialnumber' => 'required|max:255',
-                'tipe' => 'required|max:255',
-                'noinvoice' => 'required|max:255',
-                'tanggalmasuk' => 'required|max:255',
-                'tanggalkeluar' => 'max:255',
-                'pelanggan' => 'max:255',
-                'lokasi' => 'required|max:255',
-                'keterangan' => 'max:255',
-                'status' => 'required|max:255',
-            ]);
+        $request->validate([
+            'serialnumber' => 'required|max:255',
+            'tipe' => 'required|max:255',
+            'noinvoice' => 'required|max:255',
+            'tanggalmasuk' => 'required|max:255',
+            'tanggalkeluar' => 'max:255',
+            'pelanggan' => 'max:255',
+            'lokasi' => 'required|max:255',
+            'keterangan' => 'max:255',
+            'status' => 'required|max:255',
+        ]);
 
-            $stock = Stock::find($id);
-            $stock->serialnumber = $request->input('serialnumber');
-            $stock->tipe = $request->input('tipe');
-            $stock->noinvoice = $request->input('noinvoice');
-            $stock->tanggalmasuk = $request->input('tanggalmasuk');
-            $stock->tanggalkeluar = $request->input('tanggalkeluar');
-            $stock->pelanggan = $request->input('pelanggan');
-            $stock->lokasi = $request->input('lokasi');
-            $stock->keterangan = $request->input('keterangan');
-            $stock->status = $request->input('status');
+        $stock = Stock::find($id);
+        $stock->serialnumber = $request->input('serialnumber');
+        $stock->tipe = $request->input('tipe');
+        $stock->noinvoice = $request->input('noinvoice');
+        $stock->tanggalmasuk = $request->input('tanggalmasuk');
+        $stock->tanggalkeluar = $request->input('tanggalkeluar');
+        $stock->pelanggan = $request->input('pelanggan');
+        $stock->lokasi = $request->input('lokasi');
+        $stock->keterangan = $request->input('keterangan');
+        $stock->status = $request->input('status');
 
-            $stock->update();
-            return redirect('stock/dipinjam')->with('success', 'Data berhasil diubah');
+        $stock->update();
+        return redirect('stock/dipinjam')->with('success', 'Data berhasil diubah');
     }
 
     public function updateDiservice(Request $request, Stock $stock, $id)
     {
-            $request->validate([
-                'serialnumber' => 'required|max:255',
-                'tipe' => 'required|max:255',
-                'noinvoice' => 'required|max:255',
-                'tanggalmasuk' => 'required|max:255',
-                'tanggalkeluar' => 'max:255',
-                'pelanggan' => 'max:255',
-                'lokasi' => 'required|max:255',
-                'keterangan' => 'max:255',
-                'status' => 'required|max:255',
-            ]);
+        $request->validate([
+            'serialnumber' => 'required|max:255',
+            'tipe' => 'required|max:255',
+            'noinvoice' => 'required|max:255',
+            'tanggalmasuk' => 'required|max:255',
+            'tanggalkeluar' => 'max:255',
+            'pelanggan' => 'max:255',
+            'lokasi' => 'required|max:255',
+            'keterangan' => 'max:255',
+            'status' => 'required|max:255',
+        ]);
 
-            $stock = Stock::find($id);
-            $stock->serialnumber = $request->input('serialnumber');
-            $stock->tipe = $request->input('tipe');
-            $stock->noinvoice = $request->input('noinvoice');
-            $stock->tanggalmasuk = $request->input('tanggalmasuk');
-            $stock->tanggalkeluar = $request->input('tanggalkeluar');
-            $stock->pelanggan = $request->input('pelanggan');
-            $stock->lokasi = $request->input('lokasi');
-            $stock->keterangan = $request->input('keterangan');
-            $stock->status = $request->input('status');
+        $stock = Stock::find($id);
+        $stock->serialnumber = $request->input('serialnumber');
+        $stock->tipe = $request->input('tipe');
+        $stock->noinvoice = $request->input('noinvoice');
+        $stock->tanggalmasuk = $request->input('tanggalmasuk');
+        $stock->tanggalkeluar = $request->input('tanggalkeluar');
+        $stock->pelanggan = $request->input('pelanggan');
+        $stock->lokasi = $request->input('lokasi');
+        $stock->keterangan = $request->input('keterangan');
+        $stock->status = $request->input('status');
 
-            $stock->update();
-            return redirect('stock/service')->with('success', 'Data berhasil diubah');
+        $stock->update();
+        return redirect('stock/service')->with('success', 'Data berhasil diubah');
     }
 
     public function updateTerjual(Request $request, Stock $stock, $id)
     {
-            $request->validate([
-                'serialnumber' => 'required|max:255',
-                'tipe' => 'required|max:255',
-                'noinvoice' => 'required|max:255',
-                'tanggalmasuk' => 'required|max:255',
-                'tanggalkeluar' => 'max:255',
-                'pelanggan' => 'max:255',
-                'lokasi' => 'required|max:255',
-                'keterangan' => 'max:255',
-                'status' => 'required|max:255',
-            ]);
+        $request->validate([
+            'serialnumber' => 'required|max:255',
+            'tipe' => 'required|max:255',
+            'noinvoice' => 'required|max:255',
+            'tanggalmasuk' => 'required|max:255',
+            'tanggalkeluar' => 'max:255',
+            'pelanggan' => 'max:255',
+            'lokasi' => 'required|max:255',
+            'keterangan' => 'max:255',
+            'status' => 'required|max:255',
+        ]);
 
-            $stock = Stock::find($id);
-            $stock->serialnumber = $request->input('serialnumber');
-            $stock->tipe = $request->input('tipe');
-            $stock->noinvoice = $request->input('noinvoice');
-            $stock->tanggalmasuk = $request->input('tanggalmasuk');
-            $stock->tanggalkeluar = $request->input('tanggalkeluar');
-            $stock->pelanggan = $request->input('pelanggan');
-            $stock->lokasi = $request->input('lokasi');
-            $stock->keterangan = $request->input('keterangan');
-            $stock->status = $request->input('status');
+        $stock = Stock::find($id);
+        $stock->serialnumber = $request->input('serialnumber');
+        $stock->tipe = $request->input('tipe');
+        $stock->noinvoice = $request->input('noinvoice');
+        $stock->tanggalmasuk = $request->input('tanggalmasuk');
+        $stock->tanggalkeluar = $request->input('tanggalkeluar');
+        $stock->pelanggan = $request->input('pelanggan');
+        $stock->lokasi = $request->input('lokasi');
+        $stock->keterangan = $request->input('keterangan');
+        $stock->status = $request->input('status');
 
-            $stock->update();
-            return redirect('stock/terjual')->with('success', 'Data berhasil diubah');
+        $stock->update();
+        return redirect('stock/terjual')->with('success', 'Data berhasil diubah');
     }
 
     /**

@@ -114,4 +114,34 @@
             </form>
         </div>
     </div>
+
+        <!-- Copy Text -->
+        <div class="container w-50 p-3">
+            <div class="row addDataForms">
+                <div class="d-flex justify-content-between mb-2">
+                    <h2 class="h3 mb-3 text-gray-800">Copy Text</h2>
+                    <div class="d-flex align-items-center gap-3">
+                        <button type="button" class="copyClipboard btn btn-secondary btn-sm font-weight-bold text-white"
+                                    data-clipboard-target="#copyData{{ $service->id }}">
+                                    <i class="fa-solid fa-clone mr-2"></i>Copy
+                        </button>
+                    </div>
+                </div>
+                <hr style="width: -webkit-fill-available;">
+                <pre id="copyData{{ $service->id }}" class="highlight mt-4 d-flex flex-column">
+                    <span>{{ $service->pelanggan }}</span>
+                    <span>{{ $service->device }}</span>
+                    <span>{{ $service->serialnumber }}</span>
+                    <span>*Status :* {{ $service->status }}</span>
+                    <span> </span>
+                    <span>*Kerusakan :* <br /> {{ $service->kerusakan }}</span>
+                    <span> </span>
+                    <span>*Perbaikan :* <br /> {{ $service->perbaikan }}</span>
+                    <span> </span>
+                    <span>*Teknisi :* <br /> {{ $service->teknisi }}</span>
+                    <span> </span>
+                    <span>*Catatan :* <br /> {{ $service->catatan }}</span>
+                </pre>
+            </div>
+        </div>
 @endsection

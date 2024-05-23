@@ -39,79 +39,48 @@
     @endsection
 
     @push('scripts')
-        <script>
-            $(document).ready(function() {
-                $('#gudang-table').DataTable({
-                    processing: true,
-                    serverSide: true,
-                    pagingType: 'simple_numbers',
-                    paging: true,
-                    pageLength: 10,
-                    ajax: '{!! route('stock.gudang') !!}',
-                    columns: [{
-                            data: 'serialnumber',
-                            name: 'serialnumber'
-                        },
-                        {
-                            data: 'tipe',
-                            name: 'tipe'
-                        },
-                        {
-                            data: 'noinvoice',
-                            name: 'noinvoice'
-                        },
-                        {
-                            data: 'tanggalmasuk',
-                            name: 'tanggalmasuk',
-                            render: function(data) {
-                                return moment(data).format('DD-MM-YYYY');
-                            }
-                        },
-                        {
-                            data: 'tanggalkeluar',
-                            name: 'tanggalkeluar',
-                            render: function(data) {
-                                return moment(data).format('DD-MM-YYYY');
-                            }
-                        },
-                        {
-                            data: 'pelanggan',
-                            name: 'pelanggan'
-                        },
-                        {
-                            data: 'lokasi',
-                            name: 'lokasi'
-                        },
-                        {
-                            data: 'action',
-                            name: 'action',
-                            orderable: false,
-                            searchable: false
-                        },
-                    ],
-                    initComplete: function() {
-                        var r = $("#gudang-table tfoot tr");
-                        r.find("th").each(function() {
-                            $(this).css("padding", 8);
-                        });
-                        $("#gudang-table thead").append(r);
+    <script>
+        $(document).ready(function() {
+            var table = $('#gudang-table').DataTable({
+                processing: true,
+                serverSide: true,
+                pagingType: 'simple_numbers',
+                paging: true,
+                pageLength: 10,
+                ajax: '{!! route('stock.gudang') !!}',
+                columns: [
+                    { data: 'serialnumber', name: 'serialnumber' },
+                    { data: 'tipe', name: 'tipe' },
+                    { data: 'noinvoice', name: 'noinvoice' },
+                    { data: 'tanggalmasuk', name: 'tanggalmasuk', render: function(data) {
+                        return moment(data).format('DD-MM-YYYY');
+                    }},
+                    { data: 'tanggalkeluar', name: 'tanggalkeluar', render: function(data) {
+                        return moment(data).format('DD-MM-YYYY');
+                    }},
+                    { data: 'pelanggan', name: 'pelanggan' },
+                    { data: 'lokasi', name: 'lokasi' },
+                    { data: 'action', name: 'action', orderable: false, searchable: false }
+                ],
+                initComplete: function() {
+                    var api = this.api();
+                    var footer = $('#gudang-table tfoot tr');
+                    $(footer).appendTo('#gudang-table thead');
 
-                        this.api().columns().every(function() {
-                            let column = this;
-                            let title = column.header().textContent;
+                    api.columns().every(function() {
+                        var column = this;
+                        var input = $('<input type="text" placeholder="' + $(column.header()).text() + '" style="width: 100%;" />')
+                            .appendTo($(column.footer()).empty())
+                            .on('keyup change clear', function() {
+                                if (column.search() !== this.value) {
+                                    column.search(this.value).draw();
+                                }
+                            });
+                    });
+                }
 
-                            // Create input element
-                            let input = document.createElement("input");
-                            input.placeholder = title;
-                            $(input).appendTo($(column.footer()).empty())
-                                .on('keyup change', function() {
-                                    if (column.search() !== this.value) {
-                                        column.search(this.value).draw();
-                                    }
-                                });
-                        });
-                    }
-                });
             });
+        });
         </script>
+
     @endpush

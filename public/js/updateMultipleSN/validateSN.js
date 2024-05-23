@@ -22,22 +22,37 @@ document
 
                     data.validationResults.forEach((result) => {
                         var row = document.createElement("tr");
+
                         var serialNumberCell = document.createElement("td");
                         serialNumberCell.textContent = result.serialNumber;
+
                         var customerCell = document.createElement("td");
                         customerCell.textContent = result.exists
                             ? result.pelanggan
                             : "N/A";
+
                         var typeCell = document.createElement("td");
                         typeCell.textContent = result.exists
                             ? result.tipe
                             : "N/A";
+
+                        var statsCell = document.createElement("td");
+                        statsCell.textContent = result.exists
+                            ? result.status
+                            : "N/A";
+
                         var messageCell = document.createElement("td");
                         messageCell.textContent = result.message;
+                        if (result.message === "Not Exist") {
+                            messageCell.className = "text-danger";
+                        }
+
                         row.appendChild(serialNumberCell);
                         row.appendChild(customerCell);
                         row.appendChild(typeCell);
+                        row.appendChild(statsCell);
                         row.appendChild(messageCell);
+
                         tableBody.appendChild(row);
                     });
                 }

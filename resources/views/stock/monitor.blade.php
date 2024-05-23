@@ -57,6 +57,7 @@
                                         <th>SN</th>
                                         <th>Pelanggan</th>
                                         <th>Tipe</th>
+                                        <th>Status</th>
                                         <th>Message</th>
                                     </tr>
                                 </thead>
