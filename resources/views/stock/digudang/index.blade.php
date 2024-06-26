@@ -15,7 +15,7 @@
                 <thead class="headfix">
                     <th>Serial Number</th>
                     <th>Tipe</th>
-                    <th>No Invoice</th>
+                    <th>SKU</th>
                     <th>Tanggal Masuk</th>
                     <th>Tanggal Keluar</th>
                     <th>Pelanggan</th>
@@ -26,7 +26,7 @@
                     <tr>
                         <th>Serial Number</th>
                         <th>Tipe</th>
-                        <th>No Invoice</th>
+                        <th>SKU</th>
                         <th>Tanggal Masuk</th>
                         <th>Tanggal Keluar</th>
                         <th>Pelanggan</th>
@@ -51,7 +51,7 @@
                 columns: [
                     { data: 'serialnumber', name: 'serialnumber' },
                     { data: 'tipe', name: 'tipe' },
-                    { data: 'noinvoice', name: 'noinvoice' },
+                    { data: 'sku', name: 'sku' },
                     { data: 'tanggalmasuk', name: 'tanggalmasuk', render: function(data) {
                         return moment(data).format('DD-MM-YYYY');
                     }},

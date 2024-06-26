@@ -4,7 +4,7 @@
 @section('content')
     <div class="container-fluid">
         <div class="head-title">
-            <h3>Firmware Content</h3>
+            <h3>All Data Firmware</h3>
         </div>
         @if (Auth::check())
             <div class="head-area">

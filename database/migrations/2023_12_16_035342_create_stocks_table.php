@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('serialnumber');
             $table->string('tipe');
+            $table->string('sku');
             $table->string('noinvoice');
             $table->date('tanggalmasuk');
             $table->date('tanggalkeluar')->nullable();

@@ -15,7 +15,7 @@
                 <thead class="headfix">
                     <th>Serial Number</th>
                     <th>Tipe</th>
-                    <th>No Invoice</th>
+                    <th>SKU</th>
                     <th>Tanggal Masuk</th>
                     <th>Tanggal Keluar</th>
                     <th>Pelanggan</th>
@@ -26,7 +26,7 @@
                     <tr>
                         <th>Serial Number</th>
                         <th>Tipe</th>
-                        <th>No Invoice</th>
+                        <th>SKU</th>
                         <th>Tanggal Masuk</th>
                         <th>Tanggal Keluar</th>
                         <th>Pelanggan</th>
@@ -57,8 +57,8 @@
                             name: 'tipe'
                         },
                         {
-                            data: 'noinvoice',
-                            name: 'noinvoice'
+                            data: 'sku',
+                            name: 'sku'
                         },
                         {
                             data: 'tanggalmasuk',

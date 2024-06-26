@@ -10,19 +10,21 @@ use Maatwebsite\Excel\Concerns\WithHeadingRow;
 class StockImport implements ToModel, WithHeadingRow
 {
     /**
-    * @param array $row
-    *
-    * @return \Illuminate\Database\Eloquent\Model|null
-    */
+     * @param array $row
+     *
+     * @return \Illuminate\Database\Eloquent\Model|null
+     */
     public function model(array $row)
     {
         return new Stock([
             'serialnumber' => $row['serialnumber'],
             'tipe' => $row['tipe'],
+            'sku' => $row['sku'],
             'noinvoice' => $row['noinvoice'],
             'tanggalmasuk' => $row['tanggalmasuk'],
             'tanggalkeluar' => $row['tanggalkeluar'],
             'pelanggan' => $row['pelanggan'],
+            'lokasi' => $row['lokasi'],
             'keterangan' => $row['keterangan'],
             'status' => $row['status'],
         ]);

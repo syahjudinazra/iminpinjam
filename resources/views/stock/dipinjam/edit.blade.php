@@ -32,6 +32,17 @@
                         @endforeach
                     </select>
                 </div>
+                <div class="form-group mb-3">
+                    <label class="font-weight-bold" for="sku">SKU</label><br />
+                    <select id="sku" class="form-control form-control-chosen shadow-none" name="sku" required>
+                        <option value="Null">Pilih SKU</option>
+                        @foreach ($stockDevice as $device)
+                            <option value="{{ $device->name }}" {{ $stock->sku == $device->name ? 'selected' : '' }}>
+                                {{ $device->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
                 <div class="mb-3">
                     <label for="noinvoice" class="form-label font-weight-bold">No Invoice</label>
                     <input type="text" class="form-control shadow-none" id="noinvoice" name="noinvoice"

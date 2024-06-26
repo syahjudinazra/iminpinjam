@@ -35,7 +35,10 @@ class StockController extends Controller
         }
 
         $stock = Stock::all();
-        return view('stock.monitor', compact('stock', 'countByStatus'));
+        $stockDevices = DB::table('stocks_device')->select('name')->get();
+        $stockSku = DB::table('stocks_sku')->select('name')->get();
+
+        return view('stock.monitor', compact('stock', 'countByStatus', 'stockDevices', 'stockSku'));
     }
 
     public function checkSerialNumbers(Request $request)
@@ -81,11 +84,13 @@ class StockController extends Controller
                 ->update([
                     'status' => $request->status,
                     'tanggalkeluar' => $request->tanggalkeluar,
-                    'pelanggan' => $request->pelanggan
+                    'pelanggan' => $request->pelanggan,
+                    'lokasi' => $request->lokasi,
+                    'keterangan' => $request->keterangan,
                 ]);
         }
 
-        return response()->json(['message' => 'Data updated successfully']);
+        return response()->json(['message' => 'Move SN Berhasil']);
     }
 
     public function gudang(Request $request)
@@ -132,10 +137,8 @@ class StockController extends Controller
 
         // If it's not an AJAX request, return the view with paginated data
         $stockGudang = Stock::where('status', 'gudang')->orderBy('created_at', 'desc');
-        $stockDevice = DB::table('stocks_device')->select('name')->get();
-        $stockLokasi = DB::table('device_location')->select('name')->get();
 
-        return view('stock.digudang.index', compact('stockGudang', 'stockDevice'));
+        return view('stock.digudang.index', compact('stockGudang'));
     }
 
     public function service(Request $request)
@@ -180,9 +183,8 @@ class StockController extends Controller
         }
 
         $stockService = Stock::where('status', 'service')->orderBy('created_at', 'desc');
-        $stockDevice = DB::table('stocks_device')->select('name')->get();
 
-        return view('stock.diservice.index', compact('stockService', 'stockDevice'));
+        return view('stock.diservice.index', compact('stockService'));
     }
 
     public function dipinjam(Request $request)
@@ -227,9 +229,8 @@ class StockController extends Controller
         }
 
         $stockDipinjam = Stock::where('status', 'dipinjam')->orderBy('created_at', 'desc');
-        $stockDevice = DB::table('stocks_device')->select('name')->get();
 
-        return view('stock.dipinjam.index', compact('stockDipinjam', 'stockDevice'));
+        return view('stock.dipinjam.index', compact('stockDipinjam'));
     }
 
     public function terjual(Request $request)
@@ -276,9 +277,8 @@ class StockController extends Controller
         $stockTerjual = Stock::where('status', 'terjual')->orderBy('created_at', 'desc');
         $stockDevice = DB::table('stocks_device')->select('name')->get();
 
-        return view('stock.terjual.index', compact('stockTerjual', 'stockDevice'));
+        return view('stock.terjual.index', compact('stockTerjual'));
     }
-
 
     public function exportStocks()
     {
@@ -307,6 +307,7 @@ class StockController extends Controller
             return [
                 'serialnumber' => $row['serialnumber'],
                 'tipe' => $row['tipe'],
+                'sku' => $row['sku'],
                 'noinvoice' => $row['noinvoice'],
                 'tanggalmasuk' => $tanggalmasuk,
                 'tanggalkeluar' => $tanggalkeluar,
@@ -360,6 +361,7 @@ class StockController extends Controller
         $request->validate([
             'serialnumber' => 'required|regex:/^\S*$/|max:255',
             'tipe' => 'required|max:255',
+            'sku' => 'required|max:255',
             'noinvoice' => 'required|max:255',
             'tanggalmasuk' => 'required|max:255',
             'tanggalkeluar' => 'max:255',
@@ -373,6 +375,7 @@ class StockController extends Controller
             $stock = new Stock();
             $stock->serialnumber = $request->input('serialnumber');
             $stock->tipe = $request->input('tipe');
+            $stock->sku = $request->input('sku');
             $stock->noinvoice = $request->input('noinvoice');
             $stock->tanggalmasuk = $request->input('tanggalmasuk');
             $stock->tanggalkeluar = $request->input('tanggalkeluar');
@@ -432,7 +435,8 @@ class StockController extends Controller
     {
         $stock = Stock::findOrFail($id);
         $stockDevice = DB::table('stocks_device')->select('name')->get();
-        $stockLokasi = DB::table('device_location')->select('name')->get();
+        $stockLokasi = DB::table('stocks_location')->select('name')->get();
+        $stockSku = DB::table('stocks_sku')->select('name')->get();
 
         return view('stock.digudang.edit', compact('stock', 'stockDevice', 'stockLokasi'));
     }
@@ -441,7 +445,8 @@ class StockController extends Controller
     {
         $stock = Stock::findOrFail($id);
         $stockDevice = DB::table('stocks_device')->select('name')->get();
-        $stockLokasi = DB::table('device_location')->select('name')->get();
+        $stockLokasi = DB::table('stocks_location')->select('name')->get();
+        $stockSku = DB::table('stocks_sku')->select('name')->get();
 
         return view('stock.dipinjam.edit', compact('stock', 'stockDevice', 'stockLokasi'));
     }
@@ -450,7 +455,8 @@ class StockController extends Controller
     {
         $stock = Stock::findOrFail($id);
         $stockDevice = DB::table('stocks_device')->select('name')->get();
-        $stockLokasi = DB::table('device_location')->select('name')->get();
+        $stockLokasi = DB::table('stocks_location')->select('name')->get();
+        $stockSku = DB::table('stocks_sku')->select('name')->get();
 
         return view('stock.diservice.edit', compact('stock', 'stockDevice', 'stockLokasi'));
     }
@@ -459,7 +465,8 @@ class StockController extends Controller
     {
         $stock = Stock::findOrFail($id);
         $stockDevice = DB::table('stocks_device')->select('name')->get();
-        $stockLokasi = DB::table('device_location')->select('name')->get();
+        $stockLokasi = DB::table('stocks_location')->select('name')->get();
+        $stockSku = DB::table('stocks_sku')->select('name')->get();
 
         return view('stock.terjual.edit', compact('stock', 'stockDevice', 'stockLokasi'));
     }
@@ -476,6 +483,7 @@ class StockController extends Controller
         $request->validate([
             'serialnumber' => 'required|max:255',
             'tipe' => 'required|max:255',
+            'sku' => 'required|max:255',
             'noinvoice' => 'required|max:255',
             'tanggalmasuk' => 'required|max:255',
             'tanggalkeluar' => 'max:255',
@@ -488,6 +496,7 @@ class StockController extends Controller
         $stock = Stock::find($id);
         $stock->serialnumber = $request->input('serialnumber');
         $stock->tipe = $request->input('tipe');
+        $stock->sku = $request->input('sku');
         $stock->noinvoice = $request->input('noinvoice');
         $stock->tanggalmasuk = $request->input('tanggalmasuk');
         $stock->tanggalkeluar = $request->input('tanggalkeluar');
@@ -505,6 +514,7 @@ class StockController extends Controller
         $request->validate([
             'serialnumber' => 'required|max:255',
             'tipe' => 'required|max:255',
+            'sku' => 'required|max:255',
             'noinvoice' => 'required|max:255',
             'tanggalmasuk' => 'required|max:255',
             'tanggalkeluar' => 'max:255',
@@ -517,6 +527,7 @@ class StockController extends Controller
         $stock = Stock::find($id);
         $stock->serialnumber = $request->input('serialnumber');
         $stock->tipe = $request->input('tipe');
+        $stock->sku = $request->input('sku');
         $stock->noinvoice = $request->input('noinvoice');
         $stock->tanggalmasuk = $request->input('tanggalmasuk');
         $stock->tanggalkeluar = $request->input('tanggalkeluar');
@@ -534,6 +545,7 @@ class StockController extends Controller
         $request->validate([
             'serialnumber' => 'required|max:255',
             'tipe' => 'required|max:255',
+            'sku' => 'required|max:255',
             'noinvoice' => 'required|max:255',
             'tanggalmasuk' => 'required|max:255',
             'tanggalkeluar' => 'max:255',
@@ -546,6 +558,7 @@ class StockController extends Controller
         $stock = Stock::find($id);
         $stock->serialnumber = $request->input('serialnumber');
         $stock->tipe = $request->input('tipe');
+        $stock->sku = $request->input('sku');
         $stock->noinvoice = $request->input('noinvoice');
         $stock->tanggalmasuk = $request->input('tanggalmasuk');
         $stock->tanggalkeluar = $request->input('tanggalkeluar');
@@ -563,6 +576,7 @@ class StockController extends Controller
         $request->validate([
             'serialnumber' => 'required|max:255',
             'tipe' => 'required|max:255',
+            'sku' => 'required|max:255',
             'noinvoice' => 'required|max:255',
             'tanggalmasuk' => 'required|max:255',
             'tanggalkeluar' => 'max:255',
@@ -575,6 +589,7 @@ class StockController extends Controller
         $stock = Stock::find($id);
         $stock->serialnumber = $request->input('serialnumber');
         $stock->tipe = $request->input('tipe');
+        $stock->sku = $request->input('sku');
         $stock->noinvoice = $request->input('noinvoice');
         $stock->tanggalmasuk = $request->input('tanggalmasuk');
         $stock->tanggalkeluar = $request->input('tanggalkeluar');

@@ -22,7 +22,7 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $serviceDevice =DB::table('services_device')->select('name')->get();
+        $serviceDevice = DB::table('services_device')->select('name')->get();
         return view('service.index', compact('serviceDevice'));
     }
 
@@ -31,22 +31,22 @@ class ServiceController extends Controller
     {
         if ($request->ajax()) {
             $antrianPelanggan = Service::where('status', 'antrian')
-                                        ->where('pemilik', 'customer')
-                                        ->orderByDesc('tanggalmasuk')
-                                        ->get();
+                ->where('pemilik', 'customer')
+                ->orderByDesc('tanggalmasuk')
+                ->get();
 
             return Datatables::of($antrianPelanggan)
-                    ->addIndexColumn()
-                    ->addColumn('action', function ($antrianPelanggan) {
-                        $actionHtml = '<div class="d-flex align-items-center gap-3">';
-                        $actionHtml .= '<a href="' . route('service.showAntrianPelanggan', ['id' => $antrianPelanggan->id]) . '"
+                ->addIndexColumn()
+                ->addColumn('action', function ($antrianPelanggan) {
+                    $actionHtml = '<div class="d-flex align-items-center gap-3">';
+                    $actionHtml .= '<a href="' . route('service.showAntrianPelanggan', ['id' => $antrianPelanggan->id]) . '"
                         target="_blank" class="text-decoration-none"><i class="fa-solid fa-eye"></i> View</a>';
 
-                        if (auth()->check()) {
-                            $user = auth()->user();
+                    if (auth()->check()) {
+                        $user = auth()->user();
 
-                            if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
-                                $actionHtml .= '
+                        if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
+                            $actionHtml .= '
                                 <div class="dropdown dropright">
                                     <a href="#" class="text-decoration-none dropdown-toggle"
                                         data-toggle="dropdown" aria-expanded="false">
@@ -54,37 +54,36 @@ class ServiceController extends Controller
                                     </a>
                                     <div class="dropdown-menu">';
 
-                                if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
-                                    $actionHtml .= '<a class="dropdown-item" href="#" data-bs-toggle="modal"
+                            if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
+                                $actionHtml .= '<a class="dropdown-item" href="#" data-bs-toggle="modal"
                                                     data-target="#copyText' . $antrianPelanggan->id . '"><i
                                                         class="fa-solid fa-clone"></i> Copy</a>';
-                                }
-                                if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
-                                    $actionHtml .= '<a class="dropdown-item" href="' . route('service.moveAntrianPelanggan', ['id' => $antrianPelanggan->id]) . '
+                            }
+                            if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
+                                $actionHtml .= '<a class="dropdown-item" href="' . route('service.moveAntrianPelanggan', ['id' => $antrianPelanggan->id]) . '
                                     " target="_blank" ><i class="fa-solid fa-paper-plane"></i> Move</a>
                                                     <a class="dropdown-item" href="' . route('service.editAntrianPelanggan', ['id' => $antrianPelanggan->id]) . '
                                                     " target="_blank" ><i class="fa-solid fa-pen-to-square"></i> Edit</a>
                                                     <a class="dropdown-item" href="#" data-bs-toggle="modal"
                                                         data-target="#deleteModal' . $antrianPelanggan->id . '"><i
                                                         class="fa-solid fa-trash"></i> Delete</a>';
-                                }
-
-                                $actionHtml .= '</div>
-                                </div>';
                             }
-                        }
-                        $actionHtml .= '</div>';
-                        return $actionHtml;
 
-                    })
-                    ->rawColumns(['action'])
-                    ->make(true);
+                            $actionHtml .= '</div>
+                                </div>';
+                        }
+                    }
+                    $actionHtml .= '</div>';
+                    return $actionHtml;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
         }
 
         $antrianPelanggan = Service::where('status', 'antrian')
-                                    ->where('pemilik', 'customer')
-                                    ->orderByDesc('tanggalmasuk')
-                                    ->get();
+            ->where('pemilik', 'customer')
+            ->orderByDesc('tanggalmasuk')
+            ->get();
 
         return view('service.antrianPelanggan.index', compact('antrianPelanggan'));
     }
@@ -93,22 +92,22 @@ class ServiceController extends Controller
     {
         if ($request->ajax()) {
             $validasiPelanggan = Service::where('status', 'validasi')
-                                        ->where('pemilik', 'customer')
-                                        ->orderByDesc('tanggalmasuk')
-                                        ->get();
+                ->where('pemilik', 'customer')
+                ->orderByDesc('tanggalmasuk')
+                ->get();
 
             return Datatables::of($validasiPelanggan)
-                    ->addIndexColumn()
-                    ->addColumn('action', function ($validasiPelanggan) {
-                        $actionHtml = '<div class="d-flex align-items-center gap-3">';
-                        $actionHtml .= '<a href="' . route('service.showValidasiPelanggan', ['id' => $validasiPelanggan->id]) . '"
+                ->addIndexColumn()
+                ->addColumn('action', function ($validasiPelanggan) {
+                    $actionHtml = '<div class="d-flex align-items-center gap-3">';
+                    $actionHtml .= '<a href="' . route('service.showValidasiPelanggan', ['id' => $validasiPelanggan->id]) . '"
                         target="_blank" class="text-decoration-none"><i class="fa-solid fa-eye"></i> View</a>';
 
-                        if (auth()->check()) {
-                            $user = auth()->user();
+                    if (auth()->check()) {
+                        $user = auth()->user();
 
-                            if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
-                                $actionHtml .= '
+                        if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
+                            $actionHtml .= '
                                 <div class="dropdown dropright">
                                     <a href="#" class="text-decoration-none dropdown-toggle"
                                         data-toggle="dropdown" aria-expanded="false">
@@ -116,37 +115,36 @@ class ServiceController extends Controller
                                     </a>
                                     <div class="dropdown-menu">';
 
-                                if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
-                                    $actionHtml .= '<a class="dropdown-item" href="#" data-bs-toggle="modal"
+                            if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
+                                $actionHtml .= '<a class="dropdown-item" href="#" data-bs-toggle="modal"
                                                     data-target="#copyText' . $validasiPelanggan->id . '"><i
                                                         class="fa-solid fa-clone"></i> Copy</a>';
-                                }
-                                if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
-                                    $actionHtml .= '  <a class="dropdown-item" href="' . route('service.moveValidasiPelanggan', ['id' => $validasiPelanggan->id]) . '
+                            }
+                            if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
+                                $actionHtml .= '  <a class="dropdown-item" href="' . route('service.moveValidasiPelanggan', ['id' => $validasiPelanggan->id]) . '
                                     " target="_blank" ><i class="fa-solid fa-paper-plane"></i> Move</a>
                                                     <a class="dropdown-item" href="' . route('service.editValidasiPelanggan', ['id' => $validasiPelanggan->id]) . '
                                                     " target="_blank" ><i class="fa-solid fa-pen-to-square"></i> Edit</a>
                                                     <a class="dropdown-item" href="#" data-bs-toggle="modal"
                                                         data-target="#deleteModal' . $validasiPelanggan->id . '"><i
                                                         class="fa-solid fa-trash"></i> Delete</a>';
-                                }
-
-                                $actionHtml .= '</div>
-                                </div>';
                             }
-                        }
-                        $actionHtml .= '</div>';
-                        return $actionHtml;
 
-                    })
-                    ->rawColumns(['action'])
-                    ->make(true);
+                            $actionHtml .= '</div>
+                                </div>';
+                        }
+                    }
+                    $actionHtml .= '</div>';
+                    return $actionHtml;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
         }
 
         $validasiPelanggan = Service::where('status', 'validasi')
-                                    ->where('pemilik', 'customer')
-                                    ->orderByDesc('tanggalmasuk')
-                                    ->get();
+            ->where('pemilik', 'customer')
+            ->orderByDesc('tanggalmasuk')
+            ->get();
 
         return view('service.validasiPelanggan.index', compact('validasiPelanggan'));
     }
@@ -155,23 +153,23 @@ class ServiceController extends Controller
     {
         if ($request->ajax()) {
             $selesaiPelanggan = Service::where('status', 'selesai')
-                                        ->where('pemilik', 'customer')
-                                        ->orderByDesc('tanggalkeluar')
-                                        ->get();
+                ->where('pemilik', 'customer')
+                ->orderByDesc('tanggalkeluar')
+                ->get();
 
             $serviceDevice = DB::table('services_device')->select('name')->get();
 
             return Datatables::of($selesaiPelanggan)
-                    ->addIndexColumn()
-                    ->addColumn('action', function ($service) {
-                        $actionHtml = '<div class="d-flex align-items-center gap-3">';
-                        $actionHtml .= '<a href="' . route('service.showSelesaiPelanggan', ['id' => $service->id]) . '"
+                ->addIndexColumn()
+                ->addColumn('action', function ($service) {
+                    $actionHtml = '<div class="d-flex align-items-center gap-3">';
+                    $actionHtml .= '<a href="' . route('service.showSelesaiPelanggan', ['id' => $service->id]) . '"
                         target="_blank" class="text-decoration-none"><i class="fa-solid fa-eye"></i> View</a>';
-                        if (auth()->check()) {
-                            $user = auth()->user();
+                    if (auth()->check()) {
+                        $user = auth()->user();
 
-                            if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
-                                $actionHtml .= '
+                        if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
+                            $actionHtml .= '
                                 <div class="dropdown dropright">
                                     <a href="#" class="text-decoration-none dropdown-toggle"
                                         data-toggle="dropdown" aria-expanded="false">
@@ -179,34 +177,34 @@ class ServiceController extends Controller
                                     </a>
                                     <div class="dropdown-menu">';
 
-                                if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
-                                    $actionHtml .= '<a class="dropdown-item" href="#" data-bs-toggle="modal"
+                            if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
+                                $actionHtml .= '<a class="dropdown-item" href="#" data-bs-toggle="modal"
                                                     data-target="#copyText' . $service->id . '"><i
                                                         class="fa-solid fa-clone"></i> Copy</a>';
-                                }
-                                if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
-                                    $actionHtml .= '<a class="dropdown-item" href="' . route('service.editSelesaiPelanggan', ['id' => $service->id]) . '
+                            }
+                            if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
+                                $actionHtml .= '<a class="dropdown-item" href="' . route('service.editSelesaiPelanggan', ['id' => $service->id]) . '
                                                     " target="_blank" ><i class="fa-solid fa-pen-to-square"></i> Edit</a>
                                                     <a class="dropdown-item" href="#" data-bs-toggle="modal"
                                                         data-target="#deleteModal' . $service->id . '"><i
                                                         class="fa-solid fa-trash"></i> Delete</a>';
-                                }
-
-                                $actionHtml .= '</div>
-                                </div>';
                             }
+
+                            $actionHtml .= '</div>
+                                </div>';
                         }
-                        $actionHtml .= '</div>';
-                        return $actionHtml;
-                    })
-                    ->rawColumns(['action'])
-                    ->make(true);
+                    }
+                    $actionHtml .= '</div>';
+                    return $actionHtml;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
         }
 
         $selesaiPelanggan = Service::where('status', 'selesai')
-                                    ->where('pemilik', 'customer')
-                                    ->orderByDesc('tanggalkeluar')
-                                    ->get();
+            ->where('pemilik', 'customer')
+            ->orderByDesc('tanggalkeluar')
+            ->get();
 
         $serviceDevice = DB::table('services_device')->select('name')->get();
 
@@ -218,22 +216,22 @@ class ServiceController extends Controller
     {
         if ($request->ajax()) {
             $antrianStock = Service::where('status', 'antrian')
-                                        ->where('pemilik', 'stock')
-                                        ->orderByDesc('tanggalmasuk')
-                                        ->get();
+                ->where('pemilik', 'stock')
+                ->orderByDesc('tanggalmasuk')
+                ->get();
 
             return Datatables::of($antrianStock)
-                    ->addIndexColumn()
-                    ->addColumn('action', function ($antrianStock) {
-                        $actionHtml = '<div class="d-flex align-items-center gap-3">';
-                        $actionHtml .= '<a href="' . route('service.showAntrianStock', ['id' => $antrianStock->id]) . '"
+                ->addIndexColumn()
+                ->addColumn('action', function ($antrianStock) {
+                    $actionHtml = '<div class="d-flex align-items-center gap-3">';
+                    $actionHtml .= '<a href="' . route('service.showAntrianStock', ['id' => $antrianStock->id]) . '"
                         target="_blank" class="text-decoration-none"><i class="fa-solid fa-eye"></i> View</a>';
 
-                        if (auth()->check()) {
-                            $user = auth()->user();
+                    if (auth()->check()) {
+                        $user = auth()->user();
 
-                            if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
-                                $actionHtml .= '
+                        if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
+                            $actionHtml .= '
                                 <div class="dropdown dropright">
                                     <a href="#" class="text-decoration-none dropdown-toggle"
                                         data-toggle="dropdown" aria-expanded="false">
@@ -241,37 +239,36 @@ class ServiceController extends Controller
                                     </a>
                                     <div class="dropdown-menu">';
 
-                                if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
-                                    $actionHtml .= '<a class="dropdown-item" href="#" data-bs-toggle="modal"
+                            if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
+                                $actionHtml .= '<a class="dropdown-item" href="#" data-bs-toggle="modal"
                                                     data-target="#copyText' . $antrianStock->id . '"><i
                                                         class="fa-solid fa-clone"></i> Copy</a>';
-                                }
-                                if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
-                                    $actionHtml .= '  <a class="dropdown-item" href="' . route('service.moveAntrianStock', ['id' => $antrianStock->id]) . '
+                            }
+                            if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
+                                $actionHtml .= '  <a class="dropdown-item" href="' . route('service.moveAntrianStock', ['id' => $antrianStock->id]) . '
                                     " target="_blank" ><i class="fa-solid fa-paper-plane"></i> Move</a>
                                                     <a class="dropdown-item" href="' . route('service.editAntrianStock', ['id' => $antrianStock->id]) . '
                                                     " target="_blank" ><i class="fa-solid fa-pen-to-square"></i> Edit</a>
                                                     <a class="dropdown-item" href="#" data-bs-toggle="modal"
                                                         data-target="#deleteModal' . $antrianStock->id . '"><i
                                                         class="fa-solid fa-trash"></i> Delete</a>';
-                                }
-
-                                $actionHtml .= '</div>
-                                </div>';
                             }
-                        }
-                        $actionHtml .= '</div>';
-                        return $actionHtml;
 
-                    })
-                    ->rawColumns(['action'])
-                    ->make(true);
+                            $actionHtml .= '</div>
+                                </div>';
+                        }
+                    }
+                    $actionHtml .= '</div>';
+                    return $actionHtml;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
         }
 
         $antrianStock = Service::where('status', 'antrian')
-                                    ->where('pemilik', 'stock')
-                                    ->orderByDesc('tanggalmasuk')
-                                    ->get();
+            ->where('pemilik', 'stock')
+            ->orderByDesc('tanggalmasuk')
+            ->get();
 
         return view('service.antrianStock.index', compact('antrianStock'));
     }
@@ -279,22 +276,22 @@ class ServiceController extends Controller
     {
         if ($request->ajax()) {
             $validasiStock = Service::where('status', 'validasi')
-                                        ->where('pemilik', 'stock')
-                                        ->orderByDesc('tanggalmasuk')
-                                        ->get();
+                ->where('pemilik', 'stock')
+                ->orderByDesc('tanggalmasuk')
+                ->get();
 
             return Datatables::of($validasiStock)
-                    ->addIndexColumn()
-                    ->addColumn('action', function ($validasiStock) {
-                        $actionHtml = '<div class="d-flex align-items-center gap-3">';
-                        $actionHtml .= '<a href="' . route('service.showValidasiStock', ['id' => $validasiStock->id]) . '"
+                ->addIndexColumn()
+                ->addColumn('action', function ($validasiStock) {
+                    $actionHtml = '<div class="d-flex align-items-center gap-3">';
+                    $actionHtml .= '<a href="' . route('service.showValidasiStock', ['id' => $validasiStock->id]) . '"
                         target="_blank" class="text-decoration-none"><i class="fa-solid fa-eye"></i> View</a>';
 
-                        if (auth()->check()) {
-                            $user = auth()->user();
+                    if (auth()->check()) {
+                        $user = auth()->user();
 
-                            if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
-                                $actionHtml .= '
+                        if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
+                            $actionHtml .= '
                                 <div class="dropdown dropright">
                                     <a href="#" class="text-decoration-none dropdown-toggle"
                                         data-toggle="dropdown" aria-expanded="false">
@@ -302,37 +299,36 @@ class ServiceController extends Controller
                                     </a>
                                     <div class="dropdown-menu">';
 
-                                if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
-                                    $actionHtml .= '<a class="dropdown-item" href="#" data-bs-toggle="modal"
+                            if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
+                                $actionHtml .= '<a class="dropdown-item" href="#" data-bs-toggle="modal"
                                                     data-target="#copyText' . $validasiStock->id . '"><i
                                                         class="fa-solid fa-clone"></i> Copy</a>';
-                                }
-                                if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
-                                    $actionHtml .= '  <a class="dropdown-item" href="' . route('service.moveValidasiStock', ['id' => $validasiStock->id]) . '
+                            }
+                            if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
+                                $actionHtml .= '  <a class="dropdown-item" href="' . route('service.moveValidasiStock', ['id' => $validasiStock->id]) . '
                                     " target="_blank" ><i class="fa-solid fa-paper-plane"></i> Move</a>
                                                     <a class="dropdown-item" href="' . route('service.editValidasiStock', ['id' => $validasiStock->id]) . '
                                                     " target="_blank" ><i class="fa-solid fa-pen-to-square"></i> Edit</a>
                                                     <a class="dropdown-item" href="#" data-bs-toggle="modal"
                                                         data-target="#deleteModal' . $validasiStock->id . '"><i
                                                         class="fa-solid fa-trash"></i> Delete</a>';
-                                }
-
-                                $actionHtml .= '</div>
-                                </div>';
                             }
-                        }
-                        $actionHtml .= '</div>';
-                        return $actionHtml;
 
-                    })
-                    ->rawColumns(['action'])
-                    ->make(true);
+                            $actionHtml .= '</div>
+                                </div>';
+                        }
+                    }
+                    $actionHtml .= '</div>';
+                    return $actionHtml;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
         }
 
         $validasiStock = Service::where('status', 'validasi')
-                                    ->where('pemilik', 'stock')
-                                    ->orderByDesc('tanggalmasuk')
-                                    ->get();
+            ->where('pemilik', 'stock')
+            ->orderByDesc('tanggalmasuk')
+            ->get();
 
         return view('service.validasiStock.index', compact('validasiStock'));
     }
@@ -340,23 +336,23 @@ class ServiceController extends Controller
     {
         if ($request->ajax()) {
             $selesaiStock = Service::where('status', 'selesai')
-                                        ->where('pemilik', 'stock')
-                                        ->orderByDesc('tanggalkeluar')
-                                        ->get();
+                ->where('pemilik', 'stock')
+                ->orderByDesc('tanggalkeluar')
+                ->get();
 
             $serviceDevice = DB::table('services_device')->select('name')->get();
 
             return Datatables::of($selesaiStock)
-                    ->addIndexColumn()
-                    ->addColumn('action', function ($service) {
-                        $actionHtml = '<div class="d-flex align-items-center gap-3">';
-                        $actionHtml .= '<a href="' . route('service.showSelesaiStock', ['id' => $service->id]) . '"
+                ->addIndexColumn()
+                ->addColumn('action', function ($service) {
+                    $actionHtml = '<div class="d-flex align-items-center gap-3">';
+                    $actionHtml .= '<a href="' . route('service.showSelesaiStock', ['id' => $service->id]) . '"
                         target="_blank" class="text-decoration-none"><i class="fa-solid fa-eye"></i> View</a>';
-                        if (auth()->check()) {
-                            $user = auth()->user();
+                    if (auth()->check()) {
+                        $user = auth()->user();
 
-                            if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
-                                $actionHtml .= '
+                        if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
+                            $actionHtml .= '
                                 <div class="dropdown dropright">
                                     <a href="#" class="text-decoration-none dropdown-toggle"
                                         data-toggle="dropdown" aria-expanded="false">
@@ -364,34 +360,34 @@ class ServiceController extends Controller
                                     </a>
                                     <div class="dropdown-menu">';
 
-                                if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
-                                    $actionHtml .= '<a class="dropdown-item" href="#" data-bs-toggle="modal"
+                            if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
+                                $actionHtml .= '<a class="dropdown-item" href="#" data-bs-toggle="modal"
                                                     data-target="#copyText' . $service->id . '"><i
                                                         class="fa-solid fa-clone"></i> Copy</a>';
-                                }
-                                if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
-                                    $actionHtml .= '<a class="dropdown-item" href="' . route('service.editSelesaiStock', ['id' => $service->id]) . '
+                            }
+                            if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
+                                $actionHtml .= '<a class="dropdown-item" href="' . route('service.editSelesaiStock', ['id' => $service->id]) . '
                                                     " target="_blank" ><i class="fa-solid fa-pen-to-square"></i> Edit</a>
                                                     <a class="dropdown-item" href="#" data-bs-toggle="modal"
                                                         data-target="#deleteModal' . $service->id . '"><i
                                                         class="fa-solid fa-trash"></i> Delete</a>';
-                                }
-
-                                $actionHtml .= '</div>
-                                </div>';
                             }
+
+                            $actionHtml .= '</div>
+                                </div>';
                         }
-                        $actionHtml .= '</div>';
-                        return $actionHtml;
-                    })
-                    ->rawColumns(['action'])
-                    ->make(true);
+                    }
+                    $actionHtml .= '</div>';
+                    return $actionHtml;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
         }
 
         $selesaiStock = Service::where('status', 'selesai')
-                                    ->where('pemilik', 'stock')
-                                    ->orderByDesc('tanggalkeluar')
-                                    ->get();
+            ->where('pemilik', 'stock')
+            ->orderByDesc('tanggalkeluar')
+            ->get();
 
         $serviceDevice = DB::table('services_device')->select('name')->get();
 
@@ -543,70 +539,70 @@ class ServiceController extends Controller
     public function editAntrianPelanggan($id)
     {
         $service = Service::findOrFail($id);
-        $serviceDevice =DB::table('services_device')->select('name')->get();
+        $serviceDevice = DB::table('services_device')->select('name')->get();
         return view('service.antrianPelanggan.edit', compact('service', 'serviceDevice'));
     }
 
     public function editValidasiPelanggan($id)
     {
         $service = Service::findOrFail($id);
-        $serviceDevice =DB::table('services_device')->select('name')->get();
+        $serviceDevice = DB::table('services_device')->select('name')->get();
         return view('service.validasiPelanggan.edit', compact('service', 'serviceDevice'));
     }
 
     public function editSelesaiPelanggan($id)
     {
         $service = Service::findOrFail($id);
-        $serviceDevice =DB::table('services_device')->select('name')->get();
+        $serviceDevice = DB::table('services_device')->select('name')->get();
         return view('service.selesaiPelanggan.edit', compact('service', 'serviceDevice'));
     }
 
     public function editAntrianStock($id)
     {
         $service = Service::findOrFail($id);
-        $serviceDevice =DB::table('services_device')->select('name')->get();
+        $serviceDevice = DB::table('services_device')->select('name')->get();
         return view('service.antrianStock.edit', compact('service', 'serviceDevice'));
     }
 
     public function editValidasiStock($id)
     {
         $service = Service::findOrFail($id);
-        $serviceDevice =DB::table('services_device')->select('name')->get();
+        $serviceDevice = DB::table('services_device')->select('name')->get();
         return view('service.validasiStock.edit', compact('service', 'serviceDevice'));
     }
 
     public function editSelesaiStock($id)
     {
         $service = Service::findOrFail($id);
-        $serviceDevice =DB::table('services_device')->select('name')->get();
+        $serviceDevice = DB::table('services_device')->select('name')->get();
         return view('service.selesaiStock.edit', compact('service', 'serviceDevice'));
     }
 
     public function moveAntrianPelanggan($id)
     {
         $service = Service::findOrFail($id);
-        $serviceDevice =DB::table('services_device')->select('name')->get();
+        $serviceDevice = DB::table('services_device')->select('name')->get();
         return view('service.antrianPelanggan.move', compact('service', 'serviceDevice'));
     }
 
     public function moveValidasiPelanggan($id)
     {
         $service = Service::findOrFail($id);
-        $serviceDevice =DB::table('services_device')->select('name')->get();
+        $serviceDevice = DB::table('services_device')->select('name')->get();
         return view('service.validasiPelanggan.move', compact('service', 'serviceDevice'));
     }
 
     public function moveAntrianStock($id)
     {
         $service = Service::findOrFail($id);
-        $serviceDevice =DB::table('services_device')->select('name')->get();
+        $serviceDevice = DB::table('services_device')->select('name')->get();
         return view('service.antrianStock.move', compact('service', 'serviceDevice'));
     }
 
     public function moveValidasiStock($id)
     {
         $service = Service::findOrFail($id);
-        $serviceDevice =DB::table('services_device')->select('name')->get();
+        $serviceDevice = DB::table('services_device')->select('name')->get();
         return view('service.validasiStock.move', compact('service', 'serviceDevice'));
     }
     /**

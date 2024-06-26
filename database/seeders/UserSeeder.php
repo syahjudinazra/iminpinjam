@@ -73,5 +73,12 @@ class UserSeeder extends Seeder
             'password' => bcrypt('iMin2020')
         ]);
         $sales->assignRole('sales');
+
+        $teknisi = User::create([
+            'name' => 'teknisi',
+            'email' => 'teknisi@imin.co.id',
+            'password' => bcrypt('1enamX')
+        ]);
+        $teknisi->assignRole('teknisi');
     }
 }

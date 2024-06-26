@@ -3,6 +3,8 @@ $("#submitBtn").click(function () {
     var status = $('input[name="status[]"]:checked').val();
     var tanggalkeluar = $("#tanggalkeluar").val();
     var pelanggan = $("#pelanggan").val();
+    var lokasi = $("#lokasi").val();
+    var keterangan = $("#keterangan").val();
     var route = $(this).data("route");
     var csrfToken = $(this).data("csrf");
 
@@ -15,6 +17,8 @@ $("#submitBtn").click(function () {
             status: status,
             tanggalkeluar: tanggalkeluar,
             pelanggan: pelanggan,
+            lokasi: lokasi,
+            keterangan: keterangan,
         },
         success: function (response) {
             Swal.fire({

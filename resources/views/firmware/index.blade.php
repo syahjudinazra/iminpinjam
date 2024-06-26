@@ -2,7 +2,7 @@
 @extends('layouts.navbar')
 
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="d-flex justify-content-between align-items-center">
                 <div class="head-title">
@@ -12,116 +12,54 @@
                     @if (auth()->user()->hasRole('superadmin') ||
                             auth()->user()->hasRole('jeffri'))
                         <div class="edit-firmware">
-                            <a href="/firmware/table" class="btn btn-success">
-                                <h5>Firmware Data</h5>
+                            <a href="/firmware/table" class="btn btn-primary"><i class="fas fa-table"></i>
+                                Add
                             </a>
+
+                            <a href="#" class="btn btn-success" data-toggle="modal" data-target="#importModal"><i class="fas fa-file-import"></i> Import</a>
                         </div>
                     @endif
                 @endauth
             </div>
-
-            <main>
-                <div class="container-fluid bg-trasparent my-4 p-3" style="position: relative;">
-                    <div class="row g-3">
-                        <div class="all-firmware">
-                            <div class="desktop-firmware">
-                                <h2>Desktop Firmware</h2>
-                                <div class="d-flex flex-wrap">
-                                    @foreach ($desktopFirmware as $item)
-                                        <div class="col-12 col-md-6 col-lg-4 p-3">
-                                            <div class="card h-100 shadow-sm">
-                                                <img src="{{ asset('/storage/gambar/' . $item->gambar) }}"
-                                                    class="card-img-top" height="280">
-                                                <div class="card-body">
-                                                    <div class="clearfix mb-3 d-flex justify-content-center fs-3">
-                                                        <span
-                                                            class="float-start badge rounded-pill bg-primary">{{ $item->tipe }}</span>
-                                                    </div>
-                                                    <h5 class="card-title">Firmware : {{ $item->version }}</h5>
-                                                    <h5 class="card-title">Android : {{ $item->android }}</h5>
-                                                    <h5 class="card-title">Flash : <a href="{{ $item->flash }}"
-                                                            class="btn btn-warning btn-sm" target="__blank">Download</a>
-                                                    </h5>
-                                                    <h5 class="card-title">OTA : <a href="{{ $item->ota }}"
-                                                            class="btn btn-danger btn-sm" target="__blank">Download</a>
-                                                    </h5>
-                                                    <div class="text-center my-4">
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                </div>
-                            </div>
-
-
-                            <div class="mobile-firmware mt-4">
-                                <h2>Mobile Firmware</h2>
-                                <div class="d-flex flex-wrap">
-                                    @foreach ($mobileFirmware as $item)
-                                        <div class="col-12 col-md-6 col-lg-4 p-3
-                                        ">
-                                            <div class="card h-100 shadow-sm">
-                                                <img src="{{ asset('/storage/gambar/' . $item->gambar) }}"
-                                                    class="card-img-top" height="280">
-                                                <div class="card-body">
-                                                    <div class="clearfix mb-3 d-flex justify-content-center fs-3">
-                                                        <span
-                                                            class="float-start badge rounded-pill bg-primary">{{ $item->tipe }}</span>
-                                                    </div>
-                                                    <h5 class="card-title">Firmware : {{ $item->version }}</h5>
-                                                    <h5 class="card-title">Android : {{ $item->android }}</h5>
-                                                    <h5 class="card-title">Flash : <a href="{{ $item->flash }}"
-                                                            class="btn btn-warning btn-sm" target="__blank">Download</a>
-                                                    </h5>
-                                                    <h5 class="card-title">OTA : <a href="{{ $item->ota }}"
-                                                            class="btn btn-danger btn-sm" target="__blank">Download</a>
-                                                    </h5>
-                                                    <div class="text-center my-4">
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                </div>
-                            </div>
-
-                            <div class="kiosk-firmware mt-4">
-                                <h2>KIOSK Firmware</h2>
-                                <div class="d-flex flex-wrap">
-                                    @foreach ($kioskFirmware as $item)
-                                        <div class="col-12 col-md-6 col-lg-4 p-3">
-                                            <div class="card h-100 shadow-sm">
-                                                <img src="{{ asset('/storage/gambar/' . $item->gambar) }}"
-                                                    class="card-img-top" height="280">
-                                                <div class="card-body">
-                                                    <div class="clearfix mb-3 d-flex justify-content-center fs-3">
-                                                        <span
-                                                            class="float-start badge rounded-pill bg-primary">{{ $item->tipe }}</span>
-                                                    </div>
-                                                    <h5 class="card-title">Firmware : {{ $item->version }}</h5>
-                                                    <h5 class="card-title">Android : {{ $item->android }}</h5>
-                                                    <h5 class="card-title">Flash : <a href="{{ $item->flash }}"
-                                                            class="btn btn-warning btn-sm" target="__blank">Download</a>
-                                                    </h5>
-                                                    <h5 class="card-title">OTA : <a href="{{ $item->ota }}"
-                                                            class="btn btn-danger btn-sm" target="__blank">Download</a>
-                                                    </h5>
-                                                    <div class="text-center my-4">
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                </div>
-                            </div>
+            <!-- Import Firmware Modal -->
+            <div class="modal fade" id="importModal" tabindex="-1" aria-labelledby="importModal" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Import Excel</h5>
+                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                         </div>
+                        <form action="{{ route('firmware.import') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="modal-body">
+                                <div class="d-flex justify-content-center">
+                                    <input type="file" name="inputFirmware" id="inputFirmware" class="form-control shadow-none"
+                                        style="width: auto">
+                                </div>
+                                <a href="{{ route('template.firmware', ['filename' => 'TemplateImportFirmware.xlsx']) }}"
+                                    class="d-flex justify-content-center text-decoration-none">Download
+                                    template</a>
+                                <div class="table table-bordered mt-2" id="preview"></div>
+                            </div>
+                            <div class="modal-footer justify-content-center">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button id="importButton" class="btn btn-success">Submit</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
-            </main>
+            </div>
+            <div class="d-flex mb-4 mt-4" id="wrapper">
+                <div class="bg-light border-right" id="sidebar-wrapper">
+                    @include('firmware.sidebar')
+                </div>
+                <div id="firmwares-content">
+                    <div class="container-fluid">
+                        @yield('content')
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
 @endsection

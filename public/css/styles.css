@@ -336,4 +336,27 @@
     justify-content: center;
 }
 
-/*Move SN*/
+/*Sidebar Firmware*/
+#sidebar-wrapper {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+/* Optional: Style for scrollbar */
+#sidebar-wrapper::-webkit-scrollbar {
+    width: 10px;
+}
+
+#sidebar-wrapper::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 5px;
+}
+
+#sidebar-wrapper::-webkit-scrollbar-thumb:hover {
+    background: #aaa;
+}
+
+.list-group-item.active {
+    color: #fff !im;
+    background-color: #cc0000 !important;
+}

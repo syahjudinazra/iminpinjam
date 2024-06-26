@@ -16,24 +16,25 @@ class RolePermissionSeeder extends Seeder
      */
     public function run()
     {
-        Permission::create(['name'=>'tambah-user']);
-        Permission::create(['name'=>'edit-user']);
-        Permission::create(['name'=>'lihat-user']);
-        Permission::create(['name'=>'hapus-user']);
+        Permission::create(['name' => 'tambah-user']);
+        Permission::create(['name' => 'edit-user']);
+        Permission::create(['name' => 'lihat-user']);
+        Permission::create(['name' => 'hapus-user']);
 
-        Permission::create(['name'=>'tambah-data']);
-        Permission::create(['name'=>'edit-data']);
-        Permission::create(['name'=>'lihat-data']);
-        Permission::create(['name'=>'hapus-data']);
+        Permission::create(['name' => 'tambah-data']);
+        Permission::create(['name' => 'edit-data']);
+        Permission::create(['name' => 'lihat-data']);
+        Permission::create(['name' => 'hapus-data']);
 
-        Role::create(['name'=>'superadmin']);
-        Role::create(['name'=>'jeffri']);
-        Role::create(['name'=>'maulana']);
-        Role::create(['name'=>'vivi']);
-        Role::create(['name'=>'sylvi']);
-        Role::create(['name'=>'coni']);
-        Role::create(['name'=>'david']);
-        Role::create(['name'=>'sales']);
+        Role::create(['name' => 'superadmin']);
+        Role::create(['name' => 'jeffri']);
+        Role::create(['name' => 'maulana']);
+        Role::create(['name' => 'vivi']);
+        Role::create(['name' => 'sylvi']);
+        Role::create(['name' => 'coni']);
+        Role::create(['name' => 'david']);
+        Role::create(['name' => 'sales']);
+        Role::create(['name' => 'teknisi']);
 
         $roleSuperAdmin = Role::findByName('superadmin');
         $roleSuperAdmin->givePermissionTo('tambah-user');
@@ -79,5 +80,8 @@ class RolePermissionSeeder extends Seeder
 
         $roleSales = Role::findByName('sales');
         $roleSales->givePermissionTo('lihat-data');
+
+        $roleTeknisi = Role::findByName('teknisi');
+        $roleTeknisi->givePermissionTo('lihat-data');
     }
 }

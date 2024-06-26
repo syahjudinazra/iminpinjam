@@ -26,6 +26,11 @@
                     value="{{ $stock->tipe }}" readonly>
             </div>
             <div class="form-group">
+                <label for="sku" class="form-label font-weight-bold">SKU</label>
+                <input type="text" class="form-control shadow-none" id="sku" name="sku"
+                    value="{{ $stock->sku }}" readonly>
+            </div>
+            <div class="form-group">
                 <label for="noinvoice" class="form-label font-weight-bold">No
                     Invoice</label>
                 <input type="text" class="form-control shadow-none" id="noinvoice" name="noinvoice"
