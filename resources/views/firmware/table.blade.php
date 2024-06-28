@@ -31,27 +31,27 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="tipe"><b>Tipe</b></label>
-                            <input type="text" class="form-control" id="tipe" name="tipe"
+                            <input type="text" class="form-control shadow-none" id="tipe" name="tipe"
                                 placeholder="Masukan Tipe" required value="{{ old('tipe') }}">
                         </div>
                         <div class="form-group">
                             <label for="version"><b>Firmware Version</b></label>
-                            <input type="text" class="form-control" id="version" name="version"
+                            <input type="text" class="form-control shadow-none" id="version" name="version"
                                 placeholder="Masukan Firmware Version" value="{{ old('version') }}">
                         </div>
                         <div class="form-group">
                             <label for="android"><b>Android</b></label>
-                            <input type="text" class="form-control" id="android" name="android"
+                            <input type="text" class="form-control shadow-none" id="android" name="android"
                                 placeholder="Masukan Android" value="{{ old('android') }}">
                         </div>
                         <div class="form-group">
                             <label for="flash"><b>URL Flash</b></label>
-                            <input type="text" class="form-control" id="flash" name="flash"
+                            <input type="text" class="form-control shadow-none" id="flash" name="flash"
                                 placeholder="Masukan URL Flash" value="{{ old('flash') }}">
                         </div>
                         <div class="form-group">
                             <label for="ota"><b>URL OTA</b></label>
-                            <input type="text" class="form-control" id="ota" name="ota"
+                            <input type="text" class="form-control shadow-none" id="ota" name="ota"
                                 placeholder="Masukan URL OTA" value="{{ old('ota') }}">
                         </div>
                         <div class="form-group">
@@ -75,7 +75,7 @@
 
                         <div class="form-group">
                             <label for="gambar" class="form-label"><b>Gambar</b></label>
-                            <input class="form-control" type="file" id="gambar" name="gambar">
+                            <input class="form-control shadow-none" type="file" id="gambar" name="gambar">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -200,50 +200,45 @@
 
     <!-- Table Firmware -->
     <div class="container-fluid mt-3">
-        <table id="secondTable" class="table table-striped table-bordered nowrap" style="width:100%">
-            <thead>
-                <th>No</th>
-                <th>Tipe</th>
-                <th>Firmware Version</th>
-                <th>Android</th>
-                <th>Flash</th>
-                <th>OTA</th>
-                <th>Kategori</th>
-                <th>Gambar</th>
-                <th>Action</th>
-            </thead>
-            <tbody>
-                @empty($firmware)
-                    <tr>
-                        <td colspan="6">No data found</td>
-                    </tr>
-                @else
-                    @foreach ($firmware as $item)
+            <table id="firmwareTable" class="table table-striped table-bordered nowrap">
+                <thead>
+                    <th>No</th>
+                    <th>Tipe</th>
+                    <th>Firmware Version</th>
+                    <th>Android</th>
+                    <th>Flash</th>
+                    <th>OTA</th>
+                    <th>Kategori</th>
+                    <th>Action</th>
+                </thead>
+                <tbody>
+                    @empty($firmware)
                         <tr>
-                            <td>{{ $loop->index + 1 }}</td>
-                            <td>{{ $item->tipe }}</td>
-                            <td>{{ $item->version }}</td>
-                            <td>{{ $item->android }}</td>
-                            <td style="white-space: normal;">{{ $item->flash }}</td>
-                            <td style="white-space: normal;">{{ $item->ota }}</td>
-                            <td>{{ $item->kategori }}</td>
-                            <td>
-                                <img src="{{ url('/storage/gambar/' . $item->gambar) }}" width= '60' height='60'
-                                    class="img img-responsive" />
-                            </td>
-                            <td>
-                                <a href="#" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                                    data-target="#editModal{{ $item->id }}" data-bs-toggle="tooltip"
-                                    data-bs-placement="top" title="Edit"><i class="fa-solid fa-pen-to-square"></i></a>
-
-                                <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                    data-target="#deleteModal{{ $item->id }}" data-bs-toggle="tooltip"
-                                    data-bs-placement="top" title="Delete"><i class="fa-solid fa-trash"></i></a>
-                            </td>
+                            <td colspan="6">No data found</td>
                         </tr>
-                    @endforeach
-                @endempty
-            </tbody>
-        </table>
+                    @else
+                        @foreach ($firmware as $item)
+                            <tr>
+                                <td>{{ $loop->index + 1 }}</td>
+                                <td>{{ $item->tipe }}</td>
+                                <td>{{ $item->version }}</td>
+                                <td>{{ $item->android }}</td>
+                                <td>{{ Str::limit($item->flash, 50) }}</td>
+                                <td>{{ Str::limit($item->ota, 50) }}</td>
+                                <td>{{ $item->kategori }}</td>
+                                <td>
+                                    <a href="#" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                                        data-target="#editModal{{ $item->id }}" data-bs-toggle="tooltip"
+                                        data-bs-placement="top" title="Edit"><i class="fa-solid fa-pen-to-square"></i></a>
+
+                                    <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                        data-target="#deleteModal{{ $item->id }}" data-bs-toggle="tooltip"
+                                        data-bs-placement="top" title="Delete"><i class="fa-solid fa-trash"></i></a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    @endempty
+                </tbody>
+            </table>
     </div>
 @endsection

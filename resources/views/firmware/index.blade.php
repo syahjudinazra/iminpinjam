@@ -13,7 +13,7 @@
                             auth()->user()->hasRole('jeffri'))
                         <div class="edit-firmware">
                             <a href="/firmware/table" class="btn btn-primary"><i class="fas fa-table"></i>
-                                Add
+                                Edit
                             </a>
 
                             <a href="#" class="btn btn-success" data-toggle="modal" data-target="#importModal"><i class="fas fa-file-import"></i> Import</a>

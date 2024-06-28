@@ -13,7 +13,7 @@
                         auth()->user()->hasRole('jeffri'))
                     <div class="edit-firmware">
                         <a href="/firmware/table" class="btn btn-primary"><i class="fas fa-table"></i>
-                            Add
+                            Edit
                         </a>
 
                         <a href="#" class="btn btn-success" data-toggle="modal" data-target="#importModal"><i class="fas fa-file-import"></i> Import</a>
@@ -164,7 +164,7 @@
                 @include('firmware.sidebar')
             </div>
             <div id="firmwares-content" class="container-fluid">
-                <table id="secondTable" class="table table-striped table-bordered nowrap" style="width:100%">
+                <table id="firmwareTable" class="table table-striped table-bordered nowrap" style="width:100%">
                             <thead>
                                 <th>Model</th>
                                 <th>Android</th>
@@ -184,10 +184,20 @@
                                             <td>{{ $item->tipe }}</td>
                                             <td>{{ $item->android }}</td>
                                             <td>{{ $item->version }}</td>
+                                            @if ($item->flash)
                                             <td> <a href="{{ $item->flash }}"
-                                                class="btn btn-secondary btn-sm" target="__blank">Download</a></td>
-                                            <td> <a href="{{ $item->ota }}"
-                                                    class="btn btn-secondary btn-sm" target="__blank">Download</a></td>
+                                                class="btn btn-success btn-sm" target="__blank">Download</a></td>
+                                            @else
+                                                <td></td>
+                                            @endif
+
+                                            @if($item->ota)
+                                                <td>
+                                                    <a href="{{ $item->ota }}" class="btn btn-secondary btn-sm" target="__blank">Download</a>
+                                                </td>
+                                            @else
+                                                <td></td>
+                                            @endif
                                             <td>
                                                 <a href="#" class="btn btn-primary btn-sm" data-bs-toggle="modal"
                                                     data-target="#editModal{{ $item->id }}" data-bs-toggle="tooltip"

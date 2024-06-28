@@ -38,29 +38,24 @@ class FirmwareController extends Controller
 
         $data = Excel::toArray(new FirmwareImport, $request->file('inputFirmware'));
 
-        $sparePartsData = collect(head($data))->map(function ($row) {
+        $firmwareData = collect(head($data))->map(function ($row) {
             return [
                 'tipe'     => $row[0],
-                'version'    => $row[1],
-                'android'    => $row[2],
-                'flash'    => $row[3],
-                'ota'    => $row[4],
-                'kategori'    => $row[5],
-                'gambar'    => $row[6],
+                'version'  => $row[1],
+                'android'  => $row[2],
+                'flash'    => $row[3] !== null ? $row[3] : '',
+                'ota'      => $row[4] !== null ? $row[4] : '',
+                'kategori' => $row[5],
+                'gambar'   => $row[6],
             ];
-        })->filter(function ($sparePart) {
-            return $sparePart['tipe'] !== null;
-        })->keyBy('tipe')->toArray();
+        });
 
-        foreach ($sparePartsData as $noSparePart => $sparePart) {
-            DB::table('firmwares')->updateOrInsert(
-                ['tipe' => $noSparePart],
-                $sparePart
-            );
-        }
+        // Insert the firmware data into the database
+        Firmware::insert($firmwareData->toArray());
 
         return redirect()->back()->with('success', 'Data Berhasil Diimport');
     }
+
 
     public function templateImportFirmware($filename)
     {
@@ -274,8 +269,8 @@ class FirmwareController extends Controller
             'tipe' => 'max:255',
             'version' => 'max:255',
             'android' => 'max:255',
-            'flash' => 'max:255',
-            'ota' => 'max:255',
+            'flash' => 'max:255|nullable',
+            'ota' => 'max:255|nullable',
             'kategori' => 'required|array',
             'gambar' => 'image|mimes:jpeg,png,jpg|max:2048',
         ]);
@@ -292,8 +287,8 @@ class FirmwareController extends Controller
         $firmware->tipe = $request->input('tipe');
         $firmware->version = $request->input('version');
         $firmware->android = $request->input('android');
-        $firmware->flash = $request->input('flash');
-        $firmware->ota = $request->input('ota');
+        $firmware->flash = $request->input('flash') ?? '';
+        $firmware->ota = $request->input('ota') ?? '';
 
         $kategoriValues = $request->input('kategori');
         $kategoriString = implode(',', $kategoriValues);
@@ -339,8 +334,8 @@ class FirmwareController extends Controller
             'tipe' => 'max:255',
             'version' => 'max:255',
             'android' => 'max:255',
-            'flash' => 'max:255',
-            'ota' => 'max:255',
+            'flash' => 'max:255|nullable',
+            'ota' => 'max:255|nullable',
             'kategori' => 'required|max:255',
             'gambar' => 'image|mimes:jpeg,png,jpg|max:2048',
         ]);
@@ -361,8 +356,8 @@ class FirmwareController extends Controller
         $firmware->tipe = $request->input('tipe');
         $firmware->version = $request->input('version');
         $firmware->android = $request->input('android');
-        $firmware->flash = $request->input('flash');
-        $firmware->ota = $request->input('ota');
+        $firmware->flash = $request->input('flash') ?? '';
+        $firmware->ota = $request->input('ota') ?? '';
         $firmware->kategori = $request->input('kategori');
 
         $firmware->update();
