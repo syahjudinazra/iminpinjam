@@ -208,11 +208,11 @@
                     });
                 },
                 initComplete: function() {
-                    var r = $("#secondTable tfoot tr");
+                    var r = $("#firmwareTable tfoot tr");
                     r.find("th").each(function() {
-                        $(this).css("padding", 8);
+                        $(this).css("padding", 1);
                     });
-                    $("#secondTable thead").append(r);
+                    $("#firmwareTable thead").append(r);
                     $("#search_0").css("text-align", "center");
                     this.api()
                         .columns()
@@ -223,6 +223,7 @@
                             // Create input element
                             let input = document.createElement("input");
                             input.placeholder = title;
+                            input.style.width = "100%";
                             column.footer().replaceChildren(input);
 
                             // Event listener for user input

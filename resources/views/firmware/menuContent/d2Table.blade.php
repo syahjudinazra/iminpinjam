@@ -198,19 +198,32 @@
                                             @else
                                                 <td></td>
                                             @endif
-                                            <td>
-                                                <a href="#" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                                                    data-target="#editModal{{ $item->id }}" data-bs-toggle="tooltip"
-                                                    data-bs-placement="top" title="Edit"><i class="fa-solid fa-pen-to-square"></i></a>
+                                            @auth
+                                                @if (auth()->user()->hasRole('superadmin') || auth()->user()->hasRole('jeffri'))
+                                                    <td>
+                                                        <a href="#" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                                                           data-target="#editModal{{ $item->id }}" data-bs-toggle="tooltip"
+                                                           data-bs-placement="top" title="Edit"><i class="fa-solid fa-pen-to-square"></i></a>
 
-                                                <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                                    data-target="#deleteModal{{ $item->id }}" data-bs-toggle="tooltip"
-                                                    data-bs-placement="top" title="Delete"><i class="fa-solid fa-trash"></i></a>
-                                            </td>
+                                                        <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                                           data-target="#deleteModal{{ $item->id }}" data-bs-toggle="tooltip"
+                                                           data-bs-placement="top" title="Delete"><i class="fa-solid fa-trash"></i></a>
+                                                    </td>
+                                                @else
+                                                    <td></td>
+                                                @endif
+                                            @endauth
                                         </tr>
                                     @endforeach
                                 @endempty
                             </tbody>
+                            <tfoot>
+                                <th>Model</th>
+                                <th>Android</th>
+                                <th>Version</th>
+                                <th>Flash</th>
+                                <th>OTA</th>
+                            </tfoot>
                         </table>
                     </div>
                 </div>
