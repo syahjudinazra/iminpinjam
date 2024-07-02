@@ -211,6 +211,13 @@
                                     @endforeach
                                 @endempty
                             </tbody>
+                            <tfoot>
+                                <th>Model</th>
+                                <th>Android</th>
+                                <th>Version</th>
+                                <th>Flash</th>
+                                <th>OTA</th>
+                            </tfoot>
                         </table>
                     </div>
                 </div>

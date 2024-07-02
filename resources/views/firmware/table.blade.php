@@ -203,7 +203,7 @@
             <table id="firmwareTable" class="table table-striped table-bordered nowrap">
                 <thead>
                     <th>No</th>
-                    <th>Tipe</th>
+                    <th>Model</th>
                     <th>Firmware Version</th>
                     <th>Android</th>
                     <th>Flash</th>
@@ -239,6 +239,15 @@
                         @endforeach
                     @endempty
                 </tbody>
+                <tfoot>
+                        <th>No</th>
+                        <th>Model</th>
+                        <th>Firmware Version</th>
+                        <th>Android</th>
+                        <th>Flash</th>
+                        <th>OTA</th>
+                        <th>Kategori</th>
+                </tfoot>
             </table>
     </div>
 @endsection

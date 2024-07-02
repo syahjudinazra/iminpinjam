@@ -159,6 +159,7 @@
         </div>
         @endforeach
         <!-- end delete data -->
+
         <div class="d-flex mb-4 mt-4" id="wrapper">
             <div class="bg-light border-right" id="sidebar-wrapper">
                 @include('firmware.sidebar')
@@ -211,6 +212,13 @@
                                     @endforeach
                                 @endempty
                             </tbody>
+                            <tfoot>
+                                <th>Model</th>
+                                <th>Android</th>
+                                <th>Version</th>
+                                <th>Flash</th>
+                                <th>OTA</th>
+                            </tfoot>
                         </table>
                     </div>
                 </div>

@@ -308,12 +308,12 @@ class StockController extends Controller
                 'serialnumber' => $row['serialnumber'],
                 'tipe' => $row['tipe'],
                 'sku' => $row['sku'],
-                'noinvoice' => $row['noinvoice'],
+                'noinvoice' => $row['noinvoice'] !== null ? $row['noinvoice'] : '',
                 'tanggalmasuk' => $tanggalmasuk,
                 'tanggalkeluar' => $tanggalkeluar,
                 'pelanggan' => $row['pelanggan'],
                 'lokasi' => $row['lokasi'],
-                'keterangan' => $row['keterangan'],
+                'keterangan' => $row['keterangan'] !== null ? $row['keterangan'] : '',
                 'status' => $row['status'],
             ];
         })->filter(function ($stockImin) {
@@ -362,12 +362,12 @@ class StockController extends Controller
             'serialnumber' => 'required|regex:/^\S*$/|max:255',
             'tipe' => 'required|max:255',
             'sku' => 'required|max:255',
-            'noinvoice' => 'required|max:255',
+            'noinvoice' => 'max:255|nullable',
             'tanggalmasuk' => 'required|max:255',
-            'tanggalkeluar' => 'max:255',
+            'tanggalkeluar' => 'max:255|nullable',
             'pelanggan' => 'max:255',
             'lokasi' => 'max:255',
-            'keterangan' => 'max:255',
+            'keterangan' => 'max:255|nullable',
             'status' => 'required|array',
         ]);
 
@@ -376,12 +376,12 @@ class StockController extends Controller
             $stock->serialnumber = $request->input('serialnumber');
             $stock->tipe = $request->input('tipe');
             $stock->sku = $request->input('sku');
-            $stock->noinvoice = $request->input('noinvoice');
+            $stock->noinvoice = $request->input('noinvoice') ?? '';
             $stock->tanggalmasuk = $request->input('tanggalmasuk');
-            $stock->tanggalkeluar = $request->input('tanggalkeluar');
+            $stock->tanggalkeluar = $request->input('tanggalkeluar') ?? '';
             $stock->pelanggan = $request->input('pelanggan');
             $stock->lokasi = $request->input('lokasi');
-            $stock->keterangan = $request->input('keterangan');
+            $stock->keterangan = $request->input('keterangan') ?? '';
             $statusValues = $request->input('status');
             $statusString = implode(',', $statusValues);
             $stock->status = $statusString;
@@ -484,12 +484,12 @@ class StockController extends Controller
             'serialnumber' => 'required|max:255',
             'tipe' => 'required|max:255',
             'sku' => 'required|max:255',
-            'noinvoice' => 'required|max:255',
+            'noinvoice' => 'max:255|nullable',
             'tanggalmasuk' => 'required|max:255',
-            'tanggalkeluar' => 'max:255',
+            'tanggalkeluar' => 'max:255|nullable',
             'pelanggan' => 'max:255',
             'lokasi' => 'required|max:255',
-            'keterangan' => 'max:255',
+            'keterangan' => 'max:255|nullable',
             'status' => 'required|max:255',
         ]);
 
@@ -497,12 +497,12 @@ class StockController extends Controller
         $stock->serialnumber = $request->input('serialnumber');
         $stock->tipe = $request->input('tipe');
         $stock->sku = $request->input('sku');
-        $stock->noinvoice = $request->input('noinvoice');
+        $stock->noinvoice = $request->input('noinvoice') ?? '';
         $stock->tanggalmasuk = $request->input('tanggalmasuk');
-        $stock->tanggalkeluar = $request->input('tanggalkeluar');
+        $stock->tanggalkeluar = $request->input('tanggalkeluar') ?? '';
         $stock->pelanggan = $request->input('pelanggan');
         $stock->lokasi = $request->input('lokasi');
-        $stock->keterangan = $request->input('keterangan');
+        $stock->keterangan = $request->input('keterangan') ?? '';
         $stock->status = $request->input('status');
 
         $stock->update();
@@ -515,12 +515,12 @@ class StockController extends Controller
             'serialnumber' => 'required|max:255',
             'tipe' => 'required|max:255',
             'sku' => 'required|max:255',
-            'noinvoice' => 'required|max:255',
+            'noinvoice' => 'max:255|nullable',
             'tanggalmasuk' => 'required|max:255',
-            'tanggalkeluar' => 'max:255',
+            'tanggalkeluar' => 'max:255|nullable',
             'pelanggan' => 'max:255',
             'lokasi' => 'required|max:255',
-            'keterangan' => 'max:255',
+            'keterangan' => 'max:255|nullable',
             'status' => 'required|max:255',
         ]);
 
@@ -528,12 +528,12 @@ class StockController extends Controller
         $stock->serialnumber = $request->input('serialnumber');
         $stock->tipe = $request->input('tipe');
         $stock->sku = $request->input('sku');
-        $stock->noinvoice = $request->input('noinvoice');
+        $stock->noinvoice = $request->input('noinvoice') ?? '';
         $stock->tanggalmasuk = $request->input('tanggalmasuk');
-        $stock->tanggalkeluar = $request->input('tanggalkeluar');
+        $stock->tanggalkeluar = $request->input('tanggalkeluar') ?? '';
         $stock->pelanggan = $request->input('pelanggan');
         $stock->lokasi = $request->input('lokasi');
-        $stock->keterangan = $request->input('keterangan');
+        $stock->keterangan = $request->input('keterangan') ?? '';
         $stock->status = $request->input('status');
 
         $stock->update();
@@ -546,12 +546,12 @@ class StockController extends Controller
             'serialnumber' => 'required|max:255',
             'tipe' => 'required|max:255',
             'sku' => 'required|max:255',
-            'noinvoice' => 'required|max:255',
+            'noinvoice' => 'max:255|nullable',
             'tanggalmasuk' => 'required|max:255',
-            'tanggalkeluar' => 'max:255',
+            'tanggalkeluar' => 'max:255|nullable',
             'pelanggan' => 'max:255',
             'lokasi' => 'required|max:255',
-            'keterangan' => 'max:255',
+            'keterangan' => 'max:255|nullable',
             'status' => 'required|max:255',
         ]);
 
@@ -559,12 +559,12 @@ class StockController extends Controller
         $stock->serialnumber = $request->input('serialnumber');
         $stock->tipe = $request->input('tipe');
         $stock->sku = $request->input('sku');
-        $stock->noinvoice = $request->input('noinvoice');
+        $stock->noinvoice = $request->input('noinvoice') ?? '';
         $stock->tanggalmasuk = $request->input('tanggalmasuk');
-        $stock->tanggalkeluar = $request->input('tanggalkeluar');
+        $stock->tanggalkeluar = $request->input('tanggalkeluar') ?? '';
         $stock->pelanggan = $request->input('pelanggan');
         $stock->lokasi = $request->input('lokasi');
-        $stock->keterangan = $request->input('keterangan');
+        $stock->keterangan = $request->input('keterangan') ?? '';
         $stock->status = $request->input('status');
 
         $stock->update();
@@ -577,12 +577,12 @@ class StockController extends Controller
             'serialnumber' => 'required|max:255',
             'tipe' => 'required|max:255',
             'sku' => 'required|max:255',
-            'noinvoice' => 'required|max:255',
+            'noinvoice' => 'max:255|nullable',
             'tanggalmasuk' => 'required|max:255',
-            'tanggalkeluar' => 'max:255',
+            'tanggalkeluar' => 'max:255|nullable',
             'pelanggan' => 'max:255',
             'lokasi' => 'required|max:255',
-            'keterangan' => 'max:255',
+            'keterangan' => 'max:255|nullable',
             'status' => 'required|max:255',
         ]);
 
@@ -590,12 +590,12 @@ class StockController extends Controller
         $stock->serialnumber = $request->input('serialnumber');
         $stock->tipe = $request->input('tipe');
         $stock->sku = $request->input('sku');
-        $stock->noinvoice = $request->input('noinvoice');
+        $stock->noinvoice = $request->input('noinvoice') ?? '';
         $stock->tanggalmasuk = $request->input('tanggalmasuk');
-        $stock->tanggalkeluar = $request->input('tanggalkeluar');
+        $stock->tanggalkeluar = $request->input('tanggalkeluar') ?? '';
         $stock->pelanggan = $request->input('pelanggan');
         $stock->lokasi = $request->input('lokasi');
-        $stock->keterangan = $request->input('keterangan');
+        $stock->keterangan = $request->input('keterangan') ?? '';
         $stock->status = $request->input('status');
 
         $stock->update();
