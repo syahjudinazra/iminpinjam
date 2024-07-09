@@ -55,6 +55,7 @@
     <!-- Internal JS -->
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/stockMonitor/importViewStocks.js') }}" defer></script>
+    <script src="{{ asset('js/stockMonitor/loadingImport.js') }}" defer></script>
     <script src="{{ asset('js/copyText.js') }}" defer></script>
     <script src="{{ asset('js/importSpareparts.js') }}" defer></script>
     <script src="{{ asset('js/login/passwordView.js') }}" defer></script>
@@ -86,6 +87,7 @@
         integrity="sha512-rMGGF4wg1R73ehtnxXBt5mbUfN9JUJwbk21KMlnLZDJh7BkPmeovBuddZCENJddHYYMkCh9hPFnPmS9sspki8g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
     @include('sweetalert::alert')
     <script>
         new DataTable('#hometable', {
@@ -177,64 +179,64 @@
         });
     </script>
     <script>
-            new DataTable("#firmwareTable", {
-                info: true,
-                ordering: true,
-                paging: true,
-                responsive: true,
-                "fnServerData": function(sUrl, aoData, fnCallback, oSettings) {
-                    oSettings.jqXHR = $.ajax({
-                        "url": sUrl,
-                        "data": aoData,
-                        "success": function(json) {
-                            if (json.sError) {
-                                oSettings.oApi._fnLog(oSettings, 0, json.sError);
-                            }
-
-                            $(oSettings.oInstance).trigger('xhr', [oSettings, json]);
-                            fnCallback(json);
-                        },
-                        "dataType": "json",
-                        "cache": true, // Enable caching
-                        "type": oSettings.sServerMethod,
-                        "error": function(xhr, error, thrown) {
-                            if (error == "parsererror") {
-                                oSettings.oApi._fnLog(oSettings, 0,
-                                    "DataTables warning: JSON data from " +
-                                    "server could not be parsed. This is caused by a JSON formatting error."
-                                );
-                            }
+        new DataTable("#firmwareTable", {
+            info: true,
+            ordering: true,
+            paging: true,
+            responsive: true,
+            "fnServerData": function(sUrl, aoData, fnCallback, oSettings) {
+                oSettings.jqXHR = $.ajax({
+                    "url": sUrl,
+                    "data": aoData,
+                    "success": function(json) {
+                        if (json.sError) {
+                            oSettings.oApi._fnLog(oSettings, 0, json.sError);
                         }
-                    });
-                },
-                initComplete: function() {
-                    var r = $("#firmwareTable tfoot tr");
-                    r.find("th").each(function() {
-                        $(this).css("padding", 1);
-                    });
-                    $("#firmwareTable thead").append(r);
-                    $("#search_0").css("text-align", "center");
-                    this.api()
-                        .columns()
-                        .every(function() {
-                            let column = this;
-                            let title = column.footer().textContent;
 
-                            // Create input element
-                            let input = document.createElement("input");
-                            input.placeholder = title;
-                            input.style.width = "100%";
-                            column.footer().replaceChildren(input);
+                        $(oSettings.oInstance).trigger('xhr', [oSettings, json]);
+                        fnCallback(json);
+                    },
+                    "dataType": "json",
+                    "cache": true, // Enable caching
+                    "type": oSettings.sServerMethod,
+                    "error": function(xhr, error, thrown) {
+                        if (error == "parsererror") {
+                            oSettings.oApi._fnLog(oSettings, 0,
+                                "DataTables warning: JSON data from " +
+                                "server could not be parsed. This is caused by a JSON formatting error."
+                            );
+                        }
+                    }
+                });
+            },
+            initComplete: function() {
+                var r = $("#firmwareTable tfoot tr");
+                r.find("th").each(function() {
+                    $(this).css("padding", 1);
+                });
+                $("#firmwareTable thead").append(r);
+                $("#search_0").css("text-align", "center");
+                this.api()
+                    .columns()
+                    .every(function() {
+                        let column = this;
+                        let title = column.footer().textContent;
 
-                            // Event listener for user input
-                            input.addEventListener("keyup", () => {
-                                if (column.search() !== this.value) {
-                                    column.search(input.value).draw();
-                                }
-                            });
+                        // Create input element
+                        let input = document.createElement("input");
+                        input.placeholder = title;
+                        input.style.width = "100%";
+                        column.footer().replaceChildren(input);
+
+                        // Event listener for user input
+                        input.addEventListener("keyup", () => {
+                            if (column.search() !== this.value) {
+                                column.search(input.value).draw();
+                            }
                         });
-                },
-            });
+                    });
+            },
+        });
     </script>
     <script>
         $(".form-control-chosen").chosen();

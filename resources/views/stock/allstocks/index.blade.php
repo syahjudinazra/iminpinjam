@@ -7,28 +7,32 @@
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Gudang Stocks</h1>
+            <h1 class="h3 mb-0 text-gray-800">All Data Stocks</h1>
         </div>
 
         <div class="container-fluid mt-3">
-            <table id="gudang-table" class="table table-striped table-bordered">
+            <table id="allstocks-table" class="table table-striped table-bordered" style="width:100%">
                 <thead class="headfix">
-                    <th>ID</th>
+                    <th>No</th>
                     <th>Serial Number</th>
                     <th>Tipe</th>
                     <th>No Invoice</th>
                     <th>Tanggal Masuk</th>
+                    <th>Tanggal Keluar</th>
                     <th>Pelanggan</th>
+                    <th>Status</th>
                     <th>Action</th>
                 </thead>
                 <tfoot>
                     <tr>
-                        <th>ID</th>
+                        <th>No</th>
                         <th>Serial Number</th>
                         <th>Tipe</th>
                         <th>No Invoice</th>
                         <th>Tanggal Masuk</th>
+                        <th>Tanggal Keluar</th>
                         <th>Pelanggan</th>
+                        <th>Status</th>
                     </tr>
                 </tfoot>
             </table>
@@ -38,16 +42,16 @@
     @push('scripts')
         <script>
             $(document).ready(function() {
-                var table = $('#gudang-table').DataTable({
+                $('#allstocks-table').DataTable({
                     processing: true,
                     serverSide: true,
                     pagingType: 'simple_numbers',
                     paging: true,
                     pageLength: 10,
-                    ajax: '{!! route('stock.gudang') !!}',
+                    ajax: '{!! route('stock.allstocks') !!}',
                     columns: [{
                             data: 'id',
-                            name: 'id',
+                            name: 'id'
                         },
                         {
                             data: 'serialnumber',
@@ -69,20 +73,31 @@
                             }
                         },
                         {
+                            data: 'tanggalkeluar',
+                            name: 'tanggalkeluar',
+                            render: function(data) {
+                                return moment(data).format('DD-MM-YYYY');
+                            }
+                        },
+                        {
                             data: 'pelanggan',
                             name: 'pelanggan'
+                        },
+                        {
+                            data: 'status',
+                            name: 'status'
                         },
                         {
                             data: 'action',
                             name: 'action',
                             orderable: false,
                             searchable: false
-                        }
+                        },
                     ],
                     initComplete: function() {
                         var api = this.api();
-                        var footer = $('#gudang-table tfoot tr');
-                        $(footer).appendTo('#gudang-table thead');
+                        var footer = $('#allstocks-table tfoot tr');
+                        $(footer).appendTo('#allstocks-table thead');
 
                         api.columns().every(function() {
                             var column = this;
@@ -96,7 +111,6 @@
                                 });
                         });
                     }
-
                 });
             });
         </script>

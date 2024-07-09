@@ -157,6 +157,8 @@ Route::prefix('stock')->middleware('auth')->group(function () {
         'show', 'edit', 'update', 'destroy',
     ]);
 
+    Route::get('/allstocks', [StockController::class, 'allstocks'])
+        ->name('stock.allstocks');
     Route::get('/gudang', [StockController::class, 'gudang'])
         ->name('stock.gudang');
     Route::get('/service', [StockController::class, 'service'])
@@ -165,22 +167,34 @@ Route::prefix('stock')->middleware('auth')->group(function () {
         ->name('stock.dipinjam');
     Route::get('/terjual', [StockController::class, 'terjual'])
         ->name('stock.terjual');
+    Route::get('/rusak', [StockController::class, 'rusak'])
+        ->name('stock.rusak');
+    Route::get('/titip', [StockController::class, 'titip'])
+        ->name('stock.titip');
 
+    Route::get('/allstocks/{id}', [StockController::class, 'showAllStocks'])->name('stock.showAllStocks');
     Route::get('/gudang/{id}', [StockController::class, 'showGudang'])->name('stock.showGudang');
     Route::get('/dipinjam/{id}', [StockController::class, 'showPinjam'])->name('stock.showPinjam');
     Route::get('/diservice/{id}', [StockController::class, 'showDiservice'])->name('stock.showDiservice');
     Route::get('/terjual/{id}', [StockController::class, 'showTerjual'])->name('stock.showTerjual');
-    // Route::get('/{id}', [StockController::class, 'show'])->name('stock.show');
+    Route::get('/rusak/{id}', [StockController::class, 'showRusak'])->name('stock.showRusak');
+    Route::get('/titip/{id}', [StockController::class, 'showTitip'])->name('stock.showTitip');
 
+    Route::get('/allstocks/{id}/edit', [StockController::class, 'editAllStocks'])->name('stock.editAllStocks');
     Route::get('/gudang/{id}/edit', [StockController::class, 'editGudang'])->name('stock.editGudang');
     Route::get('/dipinjam/{id}/edit', [StockController::class, 'editPinjam'])->name('stock.editPinjam');
     Route::get('/diservice/{id}/edit', [StockController::class, 'editDiservice'])->name('stock.editDiservice');
     Route::get('/terjual/{id}/edit', [StockController::class, 'editTerjual'])->name('stock.editTerjual');
+    Route::get('/rusak/{id}/edit', [StockController::class, 'editRusak'])->name('stock.editRusak');
+    Route::get('/titip/{id}/edit', [StockController::class, 'editTitip'])->name('stock.editTitip');
 
+    Route::put('/allstocks/{id}', [StockController::class, 'updateAllStocks'])->name('stock.updateAllStocks');
     Route::put('/gudang/{id}', [StockController::class, 'updateGudang'])->name('stock.updateGudang');
     Route::put('/dipinjam/{id}', [StockController::class, 'updateDipinjam'])->name('stock.updateDipinjam');
     Route::put('/diservice/{id}', [StockController::class, 'updateDiservice'])->name('stock.updateDiservice');
     Route::put('/terjual/{id}', [StockController::class, 'updateTerjual'])->name('stock.updateTerjual');
+    Route::put('/rusak/{id}', [StockController::class, 'updateRusak'])->name('stock.updateRusak');
+    Route::put('/titip/{id}', [StockController::class, 'updateTitip'])->name('stock.updateTitip');
 
     Route::delete('/{id}', [StockController::class, 'destroy'])->name('stock.destroy');
     Route::post('/import-stocks', [StockController::class, 'importStocks'])->name('import.stocks');

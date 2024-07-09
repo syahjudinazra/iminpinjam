@@ -13,25 +13,24 @@
         <div class="container-fluid mt-3">
             <table id="diservice-table" class="table table-striped table-bordered" style="width:100%">
                 <thead class="headfix">
+                    <th>No</th>
                     <th>Serial Number</th>
                     <th>Tipe</th>
-                    <th>SKU</th>
+                    <th>No Invoice</th>
                     <th>Tanggal Masuk</th>
                     <th>Tanggal Keluar</th>
                     <th>Pelanggan</th>
-                    <th>Lokasi</th>
                     <th>Action</th>
                 </thead>
                 <tfoot>
                     <tr>
+                        <th>No</th>
                         <th>Serial Number</th>
                         <th>Tipe</th>
-                        <th>SKU</th>
+                        <th>No Invoice</th>
                         <th>Tanggal Masuk</th>
                         <th>Tanggal Keluar</th>
                         <th>Pelanggan</th>
-                        <th>Lokasi</th>
-                        <th>Action</th>
                     </tr>
                 </tfoot>
             </table>
@@ -49,6 +48,10 @@
                     pageLength: 10,
                     ajax: '{!! route('stock.service') !!}',
                     columns: [{
+                            data: 'id',
+                            name: 'id'
+                        },
+                        {
                             data: 'serialnumber',
                             name: 'serialnumber'
                         },
@@ -57,8 +60,8 @@
                             name: 'tipe'
                         },
                         {
-                            data: 'sku',
-                            name: 'sku'
+                            data: 'noinvoice',
+                            name: 'noinvoice'
                         },
                         {
                             data: 'tanggalmasuk',
@@ -79,10 +82,6 @@
                             name: 'pelanggan'
                         },
                         {
-                            data: 'lokasi',
-                            name: 'lokasi'
-                        },
-                        {
                             data: 'action',
                             name: 'action',
                             orderable: false,
@@ -90,21 +89,22 @@
                         },
                     ],
                     initComplete: function() {
-                    var api = this.api();
-                    var footer = $('#diservice-table tfoot tr');
-                    $(footer).appendTo('#diservice-table thead');
+                        var api = this.api();
+                        var footer = $('#diservice-table tfoot tr');
+                        $(footer).appendTo('#diservice-table thead');
 
-                    api.columns().every(function() {
-                        var column = this;
-                        var input = $('<input type="text" placeholder="' + $(column.header()).text() + '" style="width: 100%;" />')
-                            .appendTo($(column.footer()).empty())
-                            .on('keyup change clear', function() {
-                                if (column.search() !== this.value) {
-                                    column.search(this.value).draw();
-                                }
-                            });
-                    });
-                }
+                        api.columns().every(function() {
+                            var column = this;
+                            var input = $('<input type="text" placeholder="' + $(column.header())
+                                    .text() + '" style="width: 100%;" />')
+                                .appendTo($(column.footer()).empty())
+                                .on('keyup change clear', function() {
+                                    if (column.search() !== this.value) {
+                                        column.search(this.value).draw();
+                                    }
+                                });
+                        });
+                    }
                 });
             });
         </script>

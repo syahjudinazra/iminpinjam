@@ -40,6 +40,8 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">List Stock:</h6>
                         <a class="collapse-item {{ Request::is('stock') ? 'active' : '' }}" href="/stock">Monitor</a>
+                        <a class="collapse-item font-weight-bold {{ Request::is('stock/allstocks*') ? 'active' : '' }}"
+                            href="/stock/allstocks">All Stocks</a>
                         <a class="collapse-item {{ Request::is('stock/gudang*') ? 'active' : '' }}"
                             href="/stock/gudang">Gudang</a>
                         <a class="collapse-item {{ Request::is('stock/service*') ? 'active' : '' }}"
@@ -48,6 +50,10 @@
                             href="/stock/dipinjam">Dipinjam</a>
                         <a class="collapse-item {{ Request::is('stock/terjual*') ? 'active' : '' }}"
                             href="/stock/terjual">Terjual</a>
+                        <a class="collapse-item {{ Request::is('stock/rusak*') ? 'active' : '' }}"
+                            href="/stock/rusak">Rusak</a>
+                        <a class="collapse-item {{ Request::is('stock/titip*') ? 'active' : '' }}"
+                            href="/stock/titip">Titip</a>
                     </div>
                 </div>
 

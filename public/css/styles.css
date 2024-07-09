@@ -360,3 +360,17 @@
     color: #fff !im;
     background-color: #cc0000 !important;
 }
+
+/* preview import stock */
+#previewStockTable {
+    max-height: 400px; /* Adjust as needed */
+    overflow-y: auto;
+    position: relative;
+}
+
+#previewStockTable thead th {
+    position: sticky;
+    top: 0;
+    background: white; /* Background color to prevent overlap with other content */
+    z-index: 2; /* Ensure header is above other content */
+}

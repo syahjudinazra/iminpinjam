@@ -107,6 +107,7 @@ class FirmwareController extends Controller
     public function swift1()
     {
         $swift1 = Firmware::whereRaw('LOWER(tipe) LIKE ?', ['%swift 1%'])
+            ->whereRaw('LOWER(tipe) NOT LIKE ?', ['%swift 1 pro%'])
             ->orderBy('tipe', 'DESC')
             ->get();
 
@@ -125,6 +126,7 @@ class FirmwareController extends Controller
     public function swift2()
     {
         $swift2 = Firmware::whereRaw('LOWER(tipe) LIKE ?', ['%swift 2%'])
+            ->whereRaw('LOWER(tipe) NOT LIKE ?', ['%swift 2 pro%'])
             ->orderBy('tipe', 'DESC')
             ->get();
 
@@ -143,6 +145,7 @@ class FirmwareController extends Controller
     public function d1()
     {
         $d1 = Firmware::whereRaw('LOWER(tipe) LIKE ?', ['%d1%'])
+            ->whereRaw('LOWER(tipe) NOT LIKE ?', ['%d1 pro%'])
             ->orderBy('tipe', 'DESC')
             ->get();
 
@@ -188,6 +191,7 @@ class FirmwareController extends Controller
     public function d4()
     {
         $d4 = Firmware::whereRaw('LOWER(tipe) LIKE ?', ['%d4%'])
+            ->whereRaw('LOWER(tipe) NOT LIKE ?', ['%d4 pro%'])
             ->orderBy('tipe', 'DESC')
             ->get();
 
@@ -206,6 +210,7 @@ class FirmwareController extends Controller
     public function swan1()
     {
         $swan1 = Firmware::whereRaw('LOWER(tipe) LIKE ?', ['%swan 1%'])
+            ->whereRaw('LOWER(tipe) NOT LIKE ?', ['%swan 1 pro%'])
             ->orderBy('tipe', 'DESC')
             ->get();
 
