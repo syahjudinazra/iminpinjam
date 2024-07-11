@@ -424,44 +424,50 @@ class StockController extends Controller
 
     public function importStocks(Request $request)
     {
+        ini_set('max_execution_time', 600);
+
         $rules = [
             'inputStocks' => 'required|mimes:xls,xlsx,csv',
         ];
 
         $request->validate($rules);
 
-        $data = Excel::toArray(new StockImport, $request->file('inputStocks'));
-        $stocksData = collect(head($data))->map(function ($row) {
-            $tanggalmasuk = Carbon::createFromDate('1899-12-30')->addDays($row['tanggalmasuk'])->toDateString();
-            if ($row['tanggalkeluar'] !== null) {
-                $tanggalkeluar = Carbon::createFromDate('1899-12-30')->addDays($row['tanggalkeluar'])->toDateString();
-            } else {
-                $tanggalkeluar = null;
+        try {
+            $data = Excel::toArray(new StockImport, $request->file('inputStocks'));
+            $stocksData = collect(head($data))->map(function ($row) {
+                $tanggalmasuk = Carbon::createFromDate('1899-12-30')->addDays($row['tanggalmasuk'])->toDateString();
+                $tanggalkeluar = $row['tanggalkeluar'] !== null
+                    ? Carbon::createFromDate('1899-12-30')->addDays($row['tanggalkeluar'])->toDateString()
+                    : null;
+
+                return [
+                    'serialnumber' => $row['serialnumber'],
+                    'tipe' => $row['tipe'],
+                    'sku' => $row['sku'],
+                    'noinvoice' => $row['noinvoice'] ?? '',
+                    'tanggalmasuk' => $tanggalmasuk,
+                    'tanggalkeluar' => $tanggalkeluar,
+                    'pelanggan' => $row['pelanggan'] ?? '',
+                    'lokasi' => $row['lokasi'],
+                    'keterangan' => $row['keterangan'] ?? '',
+                    'status' => $row['status'],
+                ];
+            })->filter(function ($stock) {
+                return $stock['serialnumber'] !== null;
+            })->keyBy('serialnumber')->toArray();
+
+            foreach ($stocksData as $serialnumber => $stock) {
+                DB::table('stocks')->updateOrInsert(
+                    ['serialnumber' => $serialnumber],
+                    $stock
+                );
             }
-            return [
-                'serialnumber' => $row['serialnumber'],
-                'tipe' => $row['tipe'],
-                'sku' => $row['sku'],
-                'noinvoice' => $row['noinvoice'] !== null ? $row['noinvoice'] : '',
-                'tanggalmasuk' => $tanggalmasuk,
-                'tanggalkeluar' => $tanggalkeluar,
-                'pelanggan' => $row['pelanggan'],
-                'lokasi' => $row['lokasi'],
-                'keterangan' => $row['keterangan'] !== null ? $row['keterangan'] : '',
-                'status' => $row['status'],
-            ];
-        })->filter(function ($stockImin) {
-            return $stockImin['serialnumber'] !== null;
-        })->keyBy('serialnumber')->toArray();
 
-        foreach ($stocksData as $serialStocks => $stockImin) {
-            DB::table('stocks')->updateOrInsert(
-                ['serialnumber' => $serialStocks],
-                $stockImin
-            );
+            return redirect()->back()->with('success', 'Data berhasil diimport');
+        } catch (\Exception $e) {
+            // Log error
+            return redirect()->back()->with('error', 'Data gagal diimport' . $e->getMessage());
         }
-
-        return redirect()->back()->with('success', 'Data Berhasil Diimport');
     }
 
     public function templateImportStock($filename)

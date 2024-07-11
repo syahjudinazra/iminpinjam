@@ -1,32 +1,64 @@
 document.getElementById("inputStocks").addEventListener("change", function (e) {
     const file = e.target.files[0];
+    const loader = document.getElementById("loader");
+    const errorMessageElem = document.getElementById("errorMessage");
+    const importButton = document.getElementById("importStocks");
+
     if (file) {
         const reader = new FileReader();
 
+        reader.onloadstart = function () {
+            loader.style.display = "block";
+            errorMessageElem.innerText = "";
+            importButton.style.display = "none";
+        };
+
         reader.onload = function (e) {
-            const data = new Uint8Array(e.target.result);
-            const workbook = XLSX.read(data, {
-                type: "array",
-            });
+            try {
+                const data = new Uint8Array(e.target.result);
+                const workbook = XLSX.read(data, { type: "array" });
 
-            const sheet = workbook.Sheets[workbook.SheetNames[0]];
-            const sheetData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+                const sheet = workbook.Sheets[workbook.SheetNames[0]];
+                const sheetData = XLSX.utils.sheet_to_json(sheet, {
+                    header: 1,
+                });
 
-            const errorMessage = validateSheetData(sheetData);
-            document.getElementById("errorMessage").innerText = errorMessage;
+                // Debug log the sheet data
+                console.log("Sheet Data:", sheetData);
 
-            if (!errorMessage) {
-                const serialnumberDuplicates =
-                    checkSerialnumberDuplicates(sheet);
-                const importButton = document.getElementById("importStocks");
-                importButton.style.display = serialnumberDuplicates
-                    ? "none"
-                    : "block";
+                // Validate sheet data
+                const errorMessage = validateSheetData(sheetData);
+                errorMessageElem.innerText = errorMessage;
 
-                renderScrollableTable(sheetData);
-            } else {
-                document.getElementById("importStocks").style.display = "none";
+                if (!errorMessage) {
+                    // Check for serial number duplicates
+                    const serialnumberDuplicates =
+                        checkSerialnumberDuplicates(sheet);
+                    importButton.style.display = serialnumberDuplicates
+                        ? "none"
+                        : "block";
+
+                    // Render the table with sheet data
+                    renderScrollableTable(sheetData);
+                } else {
+                    // Hide import button if there's an error
+                    importButton.style.display = "none";
+                }
+            } catch (error) {
+                console.error("Error processing file:", error);
+                errorMessageElem.innerText =
+                    "Error processing file. Please check the file format.";
+                importButton.style.display = "none";
+            } finally {
+                // Hide loader when file processing completes
+                loader.style.display = "none";
             }
+        };
+
+        reader.onerror = function (error) {
+            console.error("Error reading file:", error);
+            errorMessageElem.innerText = "Error reading file.";
+            loader.style.display = "none"; // Hide loader on error
         };
 
         reader.readAsArrayBuffer(file);
@@ -36,7 +68,6 @@ document.getElementById("inputStocks").addEventListener("change", function (e) {
 function renderScrollableTable(data) {
     const htmlTable = convertSheetToHtmlWithDuplicateHighlight(data, true);
     document.getElementById("previewStockTable").innerHTML = htmlTable;
-    document.getElementById("paginationControls").innerHTML = ""; // Remove pagination controls
 }
 
 function convertSheetToHtmlWithDuplicateHighlight(data, isScrollable) {

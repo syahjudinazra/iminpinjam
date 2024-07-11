@@ -175,6 +175,7 @@
                         </div>
                         <a href="{{ route('template.stocks', ['filename' => 'TemplateImportStock.xlsx']) }}"
                             class="d-flex justify-content-center text-decoration-none">Download template</a>
+                        <div id="loader" style="display: none;">Loading...</div>
                         <div id="previewStockTableContainer">
                             <div class="table table-bordered mt-2" id="previewStockTable"></div>
                             <div id="errorMessage" class="text-danger mt-2"></div>
@@ -445,6 +446,5 @@
 
 @push('js')
     <script src="{{ asset('js/stockMonitor/importViewStocks.js') }}"></script>
-    <script src="{{ asset('js/stockMonitor/loadingImport.js') }}"></script>
     <script src="{{ asset('js/updateMultipleSN/MoveSN.js') }}"></script>
 @endpush
