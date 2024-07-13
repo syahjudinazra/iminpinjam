@@ -24,22 +24,18 @@ $("#submitBtn").click(function () {
             Swal.fire({
                 icon: "success",
                 title: "Success!",
-                text: response.message,
-                toast: true,
-                position: "top-end",
-                showConfirmButton: false,
-                timer: 3000,
+                text: "Data berhasil diubah",
+                showConfirmButton: true,
+                timer: 2000,
             });
         },
         error: function (xhr, status, error) {
             Swal.fire({
                 icon: "error",
                 title: "Error!",
-                text: xhr.responseText,
-                toast: true,
-                position: "top-end",
-                showConfirmButton: false,
-                timer: 3000,
+                text: "Data gagal diubah",
+                showConfirmButton: true,
+                timer: 2000,
             });
         },
     });

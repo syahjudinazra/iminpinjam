@@ -20,8 +20,6 @@ class FirmwareImport implements ToModel
             'android'    => $row[2],
             'flash'    => $row[3],
             'ota'    => $row[4],
-            'kategori'    => $row[5],
-            'gambar'    => $row[6],
         ]);
     }
 }

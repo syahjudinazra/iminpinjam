@@ -79,18 +79,22 @@ class StockController extends Controller
 
     public function updateData(Request $request)
     {
-        foreach ($request->serialnumbers as $serialnumber) {
-            Stock::where('serialnumber', $serialnumber)
-                ->update([
-                    'status' => $request->status,
-                    'tanggalkeluar' => $request->tanggalkeluar,
-                    'pelanggan' => $request->pelanggan,
-                    'lokasi' => $request->lokasi,
-                    'keterangan' => $request->keterangan,
-                ]);
-        }
+        try {
+            foreach ($request->serialnumbers as $serialnumber) {
+                Stock::where('serialnumber', $serialnumber)
+                    ->update([
+                        'status' => $request->status,
+                        'tanggalkeluar' => $request->tanggalkeluar,
+                        'pelanggan' => $request->pelanggan,
+                        'lokasi' => $request->lokasi,
+                        'keterangan' => $request->keterangan,
+                    ]);
+            }
 
-        return response()->json(['message' => 'Move SN Berhasil']);
+            return redirect()->back()->with(['success' => 'Move SN Berhasil']);
+        } catch (\Exception $e) {
+            return redirect()->back()->with(['error' => 'Move SN Gagal']);
+        }
     }
 
     public function allstocks(Request $request)

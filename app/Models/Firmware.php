@@ -17,7 +17,5 @@ class Firmware extends Model
         'android',
         'flash',
         'ota',
-        'kategori',
-        'gambar'
     ];
 }

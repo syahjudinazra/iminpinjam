@@ -36,24 +36,27 @@ class FirmwareController extends Controller
 
         $request->validate($rules);
 
-        $data = Excel::toArray(new FirmwareImport, $request->file('inputFirmware'));
+        try {
+            $data = Excel::toArray(new FirmwareImport, $request->file('inputFirmware'));
 
-        $firmwareData = collect(head($data))->map(function ($row) {
-            return [
-                'tipe'     => $row[0],
-                'version'  => $row[1],
-                'android'  => $row[2],
-                'flash'    => $row[3] !== null ? $row[3] : '',
-                'ota'      => $row[4] !== null ? $row[4] : '',
-                'kategori' => $row[5],
-                'gambar'   => $row[6],
-            ];
-        });
+            $firmwareData = collect(head($data))->map(function ($row) {
+                return [
+                    'tipe'     => $row[0],
+                    'version'  => $row[1],
+                    'android'  => $row[2],
+                    'flash'    => $row[3] !== null ? $row[3] : '',
+                    'ota'      => $row[4] !== null ? $row[4] : '',
+                ];
+            });
 
-        // Insert the firmware data into the database
-        Firmware::insert($firmwareData->toArray());
+            // Insert the firmware data into the database
+            Firmware::insert($firmwareData->toArray());
 
-        return redirect()->back()->with('success', 'Data Berhasil Diimport');
+            return redirect()->back()->with('success', 'Data Berhasil Diimport');
+
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Data gagal diimport' . $e->getMessage());
+        }
     }
 
 
@@ -276,31 +279,23 @@ class FirmwareController extends Controller
             'android' => 'max:255',
             'flash' => 'max:255|nullable',
             'ota' => 'max:255|nullable',
-            'kategori' => 'required|array',
-            'gambar' => 'image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
-        $firmware = new Firmware();
-        if ($request->hasFile('gambar')) {
-            $file = $request->file('gambar');
-            $extention = $file->getClientOriginalExtension();
-            $filename = time() . '.' . $extention;
-            $file->move('storage/gambar/', $filename);
-            $firmware->gambar = $filename;
+        try {
+            $firmware = new Firmware();
+
+            $firmware->tipe = $request->input('tipe');
+            $firmware->version = $request->input('version');
+            $firmware->android = $request->input('android');
+            $firmware->flash = $request->input('flash') ?? '';
+            $firmware->ota = $request->input('ota') ?? '';
+
+            $firmware->save();
+            return redirect()->back()->with('success', 'Data berhasil ditambahkan');
+        } catch (\Exception $e) {
+            // Log error
+            return redirect()->back()->with('error', 'Data gagal ditambahkan' . $e->getMessage());
         }
-
-        $firmware->tipe = $request->input('tipe');
-        $firmware->version = $request->input('version');
-        $firmware->android = $request->input('android');
-        $firmware->flash = $request->input('flash') ?? '';
-        $firmware->ota = $request->input('ota') ?? '';
-
-        $kategoriValues = $request->input('kategori');
-        $kategoriString = implode(',', $kategoriValues);
-        $firmware->kategori = $kategoriString;
-
-        $firmware->save();
-        return redirect()->back()->with('success', 'Data Berhasil Ditambahkan');
     }
 
     /**
@@ -341,32 +336,23 @@ class FirmwareController extends Controller
             'android' => 'max:255',
             'flash' => 'max:255|nullable',
             'ota' => 'max:255|nullable',
-            'kategori' => 'required|max:255',
-            'gambar' => 'image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
-        $firmware = Firmware::find($id);
-        if ($request->hasFile('gambar')) {
-            $destination = 'storage/gambar/' . $firmware->gambar;
-            if (File::exists($destination)) {
-                File::delete($destination);
-            }
+        try {
+            $firmware = Firmware::find($id);
 
-            $file = $request->file('gambar');
-            $extention = $file->getClientOriginalExtension();
-            $filename = time() . '.' . $extention;
-            $file->move('storage/gambar/', $filename);
-            $firmware->gambar = $filename;
+            $firmware->tipe = $request->input('tipe');
+            $firmware->version = $request->input('version');
+            $firmware->android = $request->input('android');
+            $firmware->flash = $request->input('flash') ?? '';
+            $firmware->ota = $request->input('ota') ?? '';
+
+            $firmware->update();
+            return response()->json('message', 'Data berhasil diubah');
+        } catch (\Exception $e) {
+            // Log error
+            return response()->json('error', 'Data gagal diubah');
         }
-        $firmware->tipe = $request->input('tipe');
-        $firmware->version = $request->input('version');
-        $firmware->android = $request->input('android');
-        $firmware->flash = $request->input('flash') ?? '';
-        $firmware->ota = $request->input('ota') ?? '';
-        $firmware->kategori = $request->input('kategori');
-
-        $firmware->update();
-        return redirect()->back()->with('success', 'Data berhasil diubah');
     }
 
     /**

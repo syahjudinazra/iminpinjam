@@ -54,29 +54,6 @@
                             <input type="text" class="form-control shadow-none" id="ota" name="ota"
                                 placeholder="Masukan URL OTA" value="{{ old('ota') }}">
                         </div>
-                        <div class="form-group">
-                            <label for="kategori"><b>Kategori</b></label><br />
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input mt-1" type="radio" id="desktop" name="kategori[]"
-                                    value="Desktop">
-                                <label class="form-check-label" for="desktop">Desktop</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input mt-1" type="radio" id="mobile" name="kategori[]"
-                                    value="Mobile">
-                                <label class="form-check-label" for="mobile">Mobile</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input mt-1" type="radio" id="kiosk" name="kategori[]"
-                                    value="KIOSK">
-                                <label class="form-check-label" for="kiosk">KIOSK</label>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="gambar" class="form-label"><b>Gambar</b></label>
-                            <input class="form-control shadow-none" type="file" id="gambar" name="gambar">
-                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -94,8 +71,7 @@
             aria-labelledby="editModalLabel{{ $item->id }}" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form method="POST" action="{{ route('firmware.update', $item->id) }}"
-                        enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('firmware.update', $item->id) }}" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
 
@@ -108,55 +84,28 @@
                         <div class="modal-body">
                             <div class="mb-3">
                                 <label for="tipe" class="form-label"><b>Tipe</b></label>
-                                <input type="text" class="form-control" id="tipe" name="tipe"
+                                <input type="text" class="form-control shadow-none" id="tipe" name="tipe"
                                     value="{{ $item->tipe }}">
                             </div>
                             <div class="mb-3">
                                 <label for="version" class="form-label"><b>Firmware Version</b></label>
-                                <input type="text" class="form-control" id="version" name="version"
+                                <input type="text" class="form-control shadow-none" id="version" name="version"
                                     value="{{ $item->version }}">
                             </div>
                             <div class="mb-3">
                                 <label for="android" class="form-label"><b>Android</b></label>
-                                <input type="text" class="form-control" id="android" name="android"
+                                <input type="text" class="form-control shadow-none" id="android" name="android"
                                     value="{{ $item->android }}">
                             </div>
                             <div class="mb-3">
                                 <label for="flash" class="form-label"><b>URL Flash</b></label>
-                                <input type="text" class="form-control" id="flash" name="flash"
+                                <input type="text" class="form-control shadow-none" id="flash" name="flash"
                                     value="{{ $item->flash }}">
                             </div>
                             <div class="mb-3">
                                 <label for="ota" class="form-label"><b>OTA</b></label>
-                                <input type="text" class="form-control" id="ota" name="ota"
+                                <input type="text" class="form-control shadow-none" id="ota" name="ota"
                                     value="{{ $item->ota }}">
-                            </div>
-                            <div class="form-group">
-                                <label><b>Kategori</b></label><br />
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input mt-1" type="radio" id="desktop" name="kategori"
-                                        value="Desktop"
-                                        {{ in_array('Desktop', explode(',', $item->kategori)) ? 'checked' : '' }}>
-                                    <label class="form-check-label" for="desktop">Desktop</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input mt-1" type="radio" id="mobile" name="kategori"
-                                        value="Mobile"
-                                        {{ in_array('Mobile', explode(',', $item->kategori)) ? 'checked' : '' }}>
-                                    <label class="form-check-label" for="mobile">Mobile</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input mt-1" type="radio" id="kiosk" name="kategori"
-                                        value="KIOSK"
-                                        {{ in_array('KIOSK', explode(',', $item->kategori)) ? 'checked' : '' }}>
-                                    <label class="form-check-label" for="kiosk">KIOSK</label>
-                                </div>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="gambar" class="form-label"><b>Gambar</b></label><br>
-                                <input class="form-control" type="file" id="gambar" name="gambar">
-                                {{-- <img src="{{ asset('storage/gambar/'.$item->gambar) }}" width= '60' height='60' class="img img-responsive"> --}}
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -200,54 +149,51 @@
 
     <!-- Table Firmware -->
     <div class="container-fluid mt-3">
-            <table id="firmwareTable" class="table table-striped table-bordered nowrap">
-                <thead>
-                    <th>No</th>
-                    <th>Model</th>
-                    <th>Firmware Version</th>
-                    <th>Android</th>
-                    <th>Flash</th>
-                    <th>OTA</th>
-                    <th>Kategori</th>
-                    <th>Action</th>
-                </thead>
-                <tbody>
-                    @empty($firmware)
+        <table id="firmwareTable" class="table table-striped table-bordered nowrap">
+            <thead>
+                <th>No</th>
+                <th>Model</th>
+                <th>Firmware Version</th>
+                <th>Android</th>
+                <th>Flash</th>
+                <th>OTA</th>
+                <th>Action</th>
+            </thead>
+            <tbody>
+                @empty($firmware)
+                    <tr>
+                        <td colspan="6">No data found</td>
+                    </tr>
+                @else
+                    @foreach ($firmware as $item)
                         <tr>
-                            <td colspan="6">No data found</td>
-                        </tr>
-                    @else
-                        @foreach ($firmware as $item)
-                            <tr>
-                                <td>{{ $loop->index + 1 }}</td>
-                                <td>{{ $item->tipe }}</td>
-                                <td>{{ $item->version }}</td>
-                                <td>{{ $item->android }}</td>
-                                <td>{{ Str::limit($item->flash, 50) }}</td>
-                                <td>{{ Str::limit($item->ota, 50) }}</td>
-                                <td>{{ $item->kategori }}</td>
-                                <td>
-                                    <a href="#" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                                        data-target="#editModal{{ $item->id }}" data-bs-toggle="tooltip"
-                                        data-bs-placement="top" title="Edit"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <td>{{ $loop->index + 1 }}</td>
+                            <td>{{ $item->tipe }}</td>
+                            <td>{{ $item->version }}</td>
+                            <td>{{ $item->android }}</td>
+                            <td>{{ Str::limit($item->flash, 50) }}</td>
+                            <td>{{ Str::limit($item->ota, 50) }}</td>
+                            <td>
+                                <a href="#" class="text-decoration-none" data-bs-toggle="modal"
+                                    data-target="#editModal{{ $item->id }}" data-bs-toggle="tooltip"
+                                    data-bs-placement="top" title="Edit"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
 
-                                    <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                        data-target="#deleteModal{{ $item->id }}" data-bs-toggle="tooltip"
-                                        data-bs-placement="top" title="Delete"><i class="fa-solid fa-trash"></i></a>
-                                </td>
-                            </tr>
-                        @endforeach
-                    @endempty
-                </tbody>
-                <tfoot>
-                        <th>No</th>
-                        <th>Model</th>
-                        <th>Firmware Version</th>
-                        <th>Android</th>
-                        <th>Flash</th>
-                        <th>OTA</th>
-                        <th>Kategori</th>
-                </tfoot>
-            </table>
+                                <a href="#" class="text-decoration-none" data-bs-toggle="modal"
+                                    data-target="#deleteModal{{ $item->id }}" data-bs-toggle="tooltip"
+                                    data-bs-placement="top" title="Delete"><i class="fa-solid fa-trash"></i> Delete</a>
+                            </td>
+                        </tr>
+                    @endforeach
+                @endempty
+            </tbody>
+            <tfoot>
+                <th>No</th>
+                <th>Model</th>
+                <th>Firmware Version</th>
+                <th>Android</th>
+                <th>Flash</th>
+                <th>OTA</th>
+            </tfoot>
+        </table>
     </div>
 @endsection
