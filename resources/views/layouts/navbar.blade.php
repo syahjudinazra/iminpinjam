@@ -39,7 +39,8 @@
                 <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">List Stock:</h6>
-                        <a class="collapse-item {{ Request::is('stock') ? 'active' : '' }}" href="/stock">Monitor</a>
+                        <a class="collapse-item font-weight-bold {{ Request::is('stock') ? 'active' : '' }}"
+                            href="/stock">Monitor</a>
                         <a class="collapse-item font-weight-bold {{ Request::is('stock/allstocks*') ? 'active' : '' }}"
                             href="/stock/allstocks">All Stocks</a>
                         <a class="collapse-item {{ Request::is('stock/gudang*') ? 'active' : '' }}"
@@ -54,6 +55,10 @@
                             href="/stock/rusak">Rusak</a>
                         <a class="collapse-item {{ Request::is('stock/titip*') ? 'active' : '' }}"
                             href="/stock/titip">Titip</a>
+                        <h5 class="collapse-header font-weight-bold text-white bg-secondary">History</h5>
+                        <a class="collapse-item {{ Request::is('stock/history*') ? 'active' : '' }}"
+                            href="/stock/history">Log
+                            Activity</a>
                     </div>
                 </div>
 

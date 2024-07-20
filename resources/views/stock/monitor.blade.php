@@ -105,6 +105,16 @@
                                     value="Terjual">
                                 <label class="form-check-label" for="terjual">Terjual</label>
                             </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input mt-1" type="radio" id="rusak" name="status[]"
+                                    value="Rusak">
+                                <label class="form-check-label" for="rusak">Rusak</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input mt-1" type="radio" id="titip" name="status[]"
+                                    value="Titip">
+                                <label class="form-check-label" for="titip">Titip</label>
+                            </div>
                             <div class="form-group mt-3">
                                 <label class="font-weight-bold" for="pelanggan">Pelanggan</label>
                                 <input type="text" class="form-control shadow-none" id="pelanggan" name="pelanggan"
@@ -128,7 +138,7 @@
                                     <option value="Bali">Bali</option>
                                     <option value="Jogja">Jogja</option>
                                     <option value="BSD">BSD</option>
-                                    <option value="Jakarta warehouse">Jakarta warehouse</option>
+                                    <option value="Jakarta Warehouse">Jakarta Warehouse</option>
                                     <option value="Service Room">Service Room</option>
                                     <option value="Sales Room">Sales Room</option>
                                     <option value="TSE Room">TSE Room</option>
@@ -285,8 +295,8 @@
                                 <option value="Bali" {{ old('lokasi') == 'Bali' ? 'selected' : '' }}>Bali</option>
                                 <option value="Jogja" {{ old('lokasi') == 'Jogja' ? 'selected' : '' }}>Jogja</option>
                                 <option value="BSD" {{ old('lokasi') == 'BSD' ? 'selected' : '' }}>BSD</option>
-                                <option value="Jakarta warehouse"
-                                    {{ old('lokasi') == 'Jakarta warehouse' ? 'selected' : '' }}>Jakarta warehouse</option>
+                                <option value="Jakarta Warehouse"
+                                    {{ old('lokasi') == 'Jakarta Warehouse' ? 'selected' : '' }}>Jakarta Warehouse</option>
                                 <option value="Service Room" {{ old('lokasi') == 'Service Room' ? 'selected' : '' }}>
                                     Service Room</option>
                                 <option value="Sales Room" {{ old('lokasi') == 'Sales Room' ? 'selected' : '' }}>Sales
@@ -367,7 +377,7 @@
 
     <div class="container-fluid mt-3">
         <div style="overflow: auto">
-            <table id="secondTable" class="table table-striped table-bordered" style="width:100%">
+            <table id="stockMonitor" class="table table-striped table-bordered" style="width:100%">
                 <thead>
                     <th>Tipe</th>
                     <th>Gudang</th>
@@ -400,7 +410,7 @@
                                 <td>{{ $countByStatus['Terjual'][$item->tipe] ?? 0 }}</td>
                                 <td>{{ $countByStatus['Rusak'][$item->tipe] ?? 0 }}</td>
                                 <td>{{ $countByStatus['Titip'][$item->tipe] ?? 0 }}</td>
-                                <td>
+                                <td class="font-weight-bold">
                                     @php
                                         $totalCount =
                                             ($countByStatus['Gudang'][$item->tipe] ?? 0) +

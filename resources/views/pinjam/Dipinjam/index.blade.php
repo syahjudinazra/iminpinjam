@@ -169,6 +169,7 @@
             <thead class="headfix">
                 <th>No</th>
                 <th>Tanggal</th>
+                <th>Days</th>
                 <th>Serial Number</th>
                 <th>Tipe Device</th>
                 <th>Customer</th>
@@ -182,6 +183,17 @@
 @push('scripts')
     <script>
         $(document).ready(function() {
+            function highlightIfOverdue(date) {
+                const startDate = moment(date);
+                const endDate = moment();
+                const diffInDays = endDate.diff(startDate, 'days');
+                let className = diffInDays > 14 ? "text-danger" : "";
+                return {
+                    diffInDays,
+                    className
+                };
+            }
+
             $('#pinjams-table').DataTable({
                 processing: true,
                 serverSide: true,
@@ -191,40 +203,77 @@
                 ajax: '{!! route('pinjam.Dipinjam') !!}',
                 columns: [{
                         data: 'id',
-                        name: 'id'
+                        name: 'id',
+                        render: function(data, type, row) {
+                            const {
+                                className
+                            } = highlightIfOverdue(row.tanggal);
+                            return `<span class="${className}">${data}</span>`;
+                        }
                     },
                     {
                         data: 'tanggal',
                         name: 'tanggal',
                         render: function(data) {
-                            return moment(data).format('DD-MM-YYYY');
+                            const {
+                                className
+                            } = highlightIfOverdue(data);
+                            return `<span class="${className}">${moment(data).format('DD-MM-YYYY')}</span>`;
+                        }
+                    },
+                    {
+                        data: null,
+                        name: 'days',
+                        render: function(data, type, row) {
+                            const {
+                                diffInDays,
+                                className
+                            } = highlightIfOverdue(row.tanggal);
+                            return `<span class="${className}">${diffInDays}</span>`;
                         }
                     },
                     {
                         data: 'serialnumber',
-                        name: 'serialnumber'
+                        name: 'serialnumber',
+                        render: function(data, type, row) {
+                            const {
+                                className
+                            } = highlightIfOverdue(row.tanggal);
+                            return `<span class="${className}">${data}</span>`;
+                        }
                     },
                     {
                         data: 'device',
-                        name: 'device'
+                        name: 'device',
+                        render: function(data, type, row) {
+                            const {
+                                className
+                            } = highlightIfOverdue(row.tanggal);
+                            return `<span class="${className}">${data}</span>`;
+                        }
                     },
                     {
                         data: 'customer',
-                        name: 'customer'
+                        name: 'customer',
+                        render: function(data, type, row) {
+                            const {
+                                className
+                            } = highlightIfOverdue(row.tanggal);
+                            return `<span class="${className}">${data}</span>`;
+                        }
                     },
                     {
                         data: 'action',
                         name: 'action',
                         orderable: false,
-                        searchable: false
+                        searchable: false,
                     },
                 ]
             });
-            $(document).ready(function() {
-                $('.deleteModal').on('click', function() {
-                    var id = $(this).data('id');
-                    $('#deleteModal' + id).modal('show');
-                });
+
+            $('.deleteModal').on('click', function() {
+                var id = $(this).data('id');
+                $('#deleteModal' + id).modal('show');
             });
         });
     </script>

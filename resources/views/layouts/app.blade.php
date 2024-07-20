@@ -89,6 +89,65 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
     @include('sweetalert::alert')
     <script>
+        new DataTable("#stockMonitor", {
+            info: true,
+            ordering: true,
+            responsive: true,
+            paging: false,
+            "fnServerData": function(sUrl, aoData, fnCallback, oSettings) {
+                oSettings.jqXHR = $.ajax({
+                    "url": sUrl,
+                    "data": aoData,
+                    "success": function(json) {
+                        if (json.sError) {
+                            oSettings.oApi._fnLog(oSettings, 0, json.sError);
+                        }
+
+                        $(oSettings.oInstance).trigger('xhr', [oSettings, json]);
+                        fnCallback(json);
+                    },
+                    "dataType": "json",
+                    "cache": true, // Enable caching
+                    "type": oSettings.sServerMethod,
+                    "error": function(xhr, error, thrown) {
+                        if (error == "parsererror") {
+                            oSettings.oApi._fnLog(oSettings, 0,
+                                "DataTables warning: JSON data from " +
+                                "server could not be parsed. This is caused by a JSON formatting error."
+                            );
+                        }
+                    }
+                });
+            },
+            initComplete: function() {
+                var r = $("#stockMonitor tfoot tr");
+                r.find("th").each(function() {
+                    $(this).css("padding", 8);
+                });
+                $("#stockMonitor thead").append(r);
+                $("#search_0").css("text-align", "center");
+                this.api()
+                    .columns()
+                    .every(function() {
+                        let column = this;
+                        let title = column.footer().textContent;
+
+                        // Create input element
+                        let input = document.createElement("input");
+                        input.placeholder = title;
+                        column.footer().replaceChildren(input);
+
+                        // Event listener for user input
+                        input.addEventListener("keyup", () => {
+                            if (column.search() !== this.value) {
+                                column.search(input.value).draw();
+                            }
+                        });
+                    });
+            },
+        });
+    </script>
+    <script>
         new DataTable('#hometable', {
             initComplete: function() {
                 var r = $('#hometable tfoot tr');

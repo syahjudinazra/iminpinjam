@@ -11,7 +11,12 @@ class HistoryController extends Controller
 {
     public function index(Request $request)
     {
-        $historyLog = Activity::latest()->get();
+        $modelType = $request->get('model_type', 'App\Models\Spareparts');
+
+        $historyLog = Activity::latest()
+            ->when($modelType, function ($query, $modelType) {
+                $query->where('subject_type', $modelType);
+            })->get();
 
         return view('history.index', compact('historyLog'));
     }

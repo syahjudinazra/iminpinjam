@@ -171,6 +171,8 @@ Route::prefix('stock')->middleware('auth')->group(function () {
         ->name('stock.rusak');
     Route::get('/titip', [StockController::class, 'titip'])
         ->name('stock.titip');
+    Route::get('/history', [StockController::class, 'history'])
+        ->name('stock.history');
 
     Route::get('/allstocks/{id}', [StockController::class, 'showAllStocks'])->name('stock.showAllStocks');
     Route::get('/gudang/{id}', [StockController::class, 'showGudang'])->name('stock.showGudang');

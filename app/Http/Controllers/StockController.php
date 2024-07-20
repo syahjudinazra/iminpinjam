@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\DataTables;
 use Illuminate\Http\RedirectResponse;
+use Spatie\Activitylog\Models\Activity;
 
 class StockController extends Controller
 {
@@ -81,20 +82,33 @@ class StockController extends Controller
     {
         try {
             foreach ($request->serialnumbers as $serialnumber) {
-                Stock::where('serialnumber', $serialnumber)
-                    ->update([
-                        'status' => $request->status,
-                        'tanggalkeluar' => $request->tanggalkeluar,
-                        'pelanggan' => $request->pelanggan,
-                        'lokasi' => $request->lokasi,
-                        'keterangan' => $request->keterangan,
-                    ]);
+                $stock = Stock::where('serialnumber', $serialnumber)->first();
+
+                $stock->update([
+                    'status' => $request->status,
+                    'tanggalkeluar' => $request->tanggalkeluar,
+                    'pelanggan' => $request->pelanggan,
+                    'lokasi' => $request->lokasi,
+                    'keterangan' => $request->keterangan,
+                ]);
             }
 
             return redirect()->back()->with(['success' => 'Move SN Berhasil']);
         } catch (\Exception $e) {
             return redirect()->back()->with(['error' => 'Move SN Gagal']);
         }
+    }
+
+    public function history(Request $request)
+    {
+        $modelType = $request->get('model_type', 'App\Models\Stock');
+
+        $stockHistory = Activity::latest()
+            ->when($modelType, function ($query, $modelType) {
+                $query->where('subject_type', $modelType);
+            })->get();
+
+        return view('stock.history.index', compact('stockHistory'));
     }
 
     public function allstocks(Request $request)
@@ -537,7 +551,6 @@ class StockController extends Controller
             return redirect()->back()->with('error', 'Gagal Menambahkan Data ' . $e->getMessage());
         }
     }
-
 
     /**
      * Display the specified resource.
