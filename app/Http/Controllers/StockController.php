@@ -99,17 +99,45 @@ class StockController extends Controller
         }
     }
 
-    public function history(Request $request)
-    {
-        $modelType = $request->get('model_type', 'App\Models\Stock');
+public function history(Request $request)
+{
+    if ($request->ajax()) {
+        $modelType = $request->get('model_type', Stock::class);
 
-        $stockHistory = Activity::latest()
-            ->when($modelType, function ($query, $modelType) {
-                $query->where('subject_type', $modelType);
-            })->get();
+        $stockHistory = $modelType::with(['activity.causer', 'activity.subject'])
+                                   ->whereHas('activity', function ($query) use ($modelType) {
+                                       $query->where('subject_type', $modelType);
+                                   })
+                                   ->latest()
+                                   ->get(); // Make sure to get the collection
 
-        return view('stock.history.index', compact('stockHistory'));
+        $data = $stockHistory->flatMap(function($stock) {
+            return $stock->activity->map(function($activity) use ($stock) {
+                return [
+                    'causer.name' => optional($activity->causer)->name,
+                    'subject.serialnumber' => optional($activity->subject)->serialnumber,
+                    'subject.tipe' => optional($activity->subject)->tipe,
+                    'properties.old' => $this->formatProperties(optional($activity->properties)['old']),
+                    'properties.attributes' => $this->formatProperties(optional($activity->properties)['attributes']),
+                    'description' => $activity->description,
+                    'created_at' => Carbon::parse($activity->created_at)->timezone('Asia/Jakarta')->format('d-m-Y h:i:s'),
+                ];
+            });
+        });
+
+        return DataTables::of($data)->make(true);
     }
+
+    return view('stock.history.index');
+}
+
+private function formatProperties($property)
+{
+    if (is_array($property)) {
+        return str_replace(['{', '}', '"'], ' ', json_encode($property));
+    }
+    return $property;
+}
 
     public function allstocks(Request $request)
     {

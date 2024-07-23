@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\Activitylog\Models\Activity;
 
 class Stock extends Model
 {
@@ -46,5 +47,10 @@ class Stock extends Model
         'status'])
         ->logOnlyDirty()
         ->setDescriptionForEvent(fn(string $eventName) => "You have {$eventName} data");
+    }
+
+    public function activity()
+    {
+        return $this->morphMany('Spatie\Activitylog\Models\Activity', 'subject');
     }
 }
