@@ -14,7 +14,6 @@ class Pinjam extends Model
 
     protected $fillable = [
         'tanggal',
-        'gambar',
         'serialnumber',
         'device',
         'ram',

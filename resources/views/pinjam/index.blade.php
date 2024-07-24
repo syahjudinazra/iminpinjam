@@ -118,10 +118,6 @@
                                 <textarea class="form-control shadow-none" id="kelengkapankirim" name="kelengkapankirim" rows="3"
                                     placeholder="Contoh:Adaptor,Dus,Docking"></textarea>
                             </div>
-                            <div class="mb-3">
-                                <label for="gambar" class="form-label font-weight-bold">Gambar</label>
-                                <input class="form-control shadow-none" type="file" id="gambar" name="gambar">
-                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -217,11 +213,6 @@
                                 <input type="text" class="form-control shadow-none" id="status" name="status"
                                     value="{{ $item->status }}" readonly>
                             </div>
-                            <div class="mb-3">
-                                <label for="gambar" class="form-label font-weight-bold">Gambar</label><br>
-                                <input class="form-control shadow-none" type="file" id="gambar" name="gambar">
-                                {{-- <img src="{{ asset('storage/gambar/'.$item->gambar) }}" width= '60' height='60' class="img img-responsive"> --}}
-                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
@@ -297,11 +288,6 @@
                         <div class="mb-3">
                             <label for="kelengkapankirim" class="form-label font-weight-bold">Kelengkapan Kirim</label>
                             <textarea class="form-control shadow-none" id="kelengkapankirim" name="kelengkapankirim" rows="3" readonly>{{ $item->kelengkapankirim }}</textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label for="gambar" class="form-label font-weight-bold">Gambar</label><br>
-                            <img src="{{ asset('storage/gambar/' . $item->gambar) }}" width='60' height='60'
-                                class="img img-responsive" id="gambar" name="gambar">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -428,11 +414,6 @@
                                 <label for="status" class="form-label font-weight-bold">Status</label>
                                 <input type="text" class="form-control shadow-none" id="status" name="status"
                                     value="1" readonly>
-                            </div>
-                            <div class="mb-3">
-                                <label for="gambar" class="form-label font-weight-bold">Gambar</label><br>
-                                <img src="{{ asset('storage/gambar/' . $item->gambar) }}" width='60' height='60'
-                                    class="img img-responsive" id="gambar" name="gambar">
                             </div>
                         </div>
                         <div class="modal-footer">

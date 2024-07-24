@@ -66,11 +66,6 @@
                 <label for="kelengkapankirim" class="form-label font-weight-bold">Kelengkapan Kirim</label>
                 <textarea class="form-control shadow-none" id="kelengkapankirim" name="kelengkapankirim" rows="3" readonly>{{ $pinjam->kelengkapankirim }}</textarea>
             </div>
-            <div class="form-group">
-                <label for="gambar" class="form-label font-weight-bold">Gambar</label><br>
-                <img src="{{ asset('storage/gambar/' . $pinjam->gambar) }}" width='60' height='60'
-                    class="img img-responsive" id="gambar" name="gambar">
-            </div>
         </div>
     </div>
     </div>

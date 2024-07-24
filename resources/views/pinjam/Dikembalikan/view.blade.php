@@ -82,11 +82,6 @@
                 <textarea class="form-control shadow-none" id="kelengkapankembali" name="kelengkapankembali" rows="3"
                     readonly>{{ $pinjam->kelengkapankembali }}</textarea>
             </div>
-            <div class="form-group">
-                <label for="gambar" class="form-label font-weight-bold">Gambar</label><br>
-                <img src="{{ asset('storage/gambar/' . $pinjam->gambar) }}" width='60' height='60'
-                    class="img img-responsive" id="gambar" name="gambar">
-            </div>
         </div>
     </div>
     </div>

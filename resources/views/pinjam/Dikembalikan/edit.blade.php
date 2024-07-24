@@ -147,10 +147,6 @@
                         <input type="text" class="form-control shadow-none" id="status" name="status"
                             value="{{ $pinjam->status }}" readonly>
                     </div>
-                    <div class="mb-3">
-                        <label for="gambar" class="form-label font-weight-bold">Gambar</label><br>
-                        <input class="form-control shadow-none" type="file" id="gambar" name="gambar">
-                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Save Changes</button>

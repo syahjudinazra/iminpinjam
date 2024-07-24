@@ -166,49 +166,46 @@ class PinjamController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'tanggal' => 'required|max:255',
-            'gambar' => 'image|mimes:jpeg,png,jpg|max:2048',
             'serialnumber' => 'required|max:255',
             'device' => 'required|max:255',
             'customer' => 'required|max:255',
             'telp' => 'required|max:255',
             'pengirim' => 'required|max:255',
             'kelengkapankirim' => 'required|max:255',
-            'tanggalkembali' => 'max:255',
-            'penerima' => 'max:255',
-            'kelengkapankembali' => 'max:255',
+            'tanggalkembali' => 'max:255|nullable',
+            'penerima' => 'max:255|nullable',
+            'kelengkapankembali' => 'max:255|nullable',
             'status' => 'max:255',
         ]);
 
-        $pinjam = new Pinjam;
+        try {
+            $pinjam = new Pinjam;
 
-        if ($request->hasFile('gambar')) {
-            $file = $request->file('gambar');
-            $extention = $file->getClientOriginalExtension();
-            $filename = time() . '.' . $extention;
-            $file->move('storage/gambar/', $filename);
-            $pinjam->gambar = $filename;
+            $pinjam->tanggal = $validatedData['tanggal'];
+            $pinjam->serialnumber = $validatedData['serialnumber'];
+            $pinjam->device = $validatedData['device'];
+            $pinjam->ram = $request->input('ram');
+            $pinjam->android = $request->input('android');
+            $pinjam->customer = $validatedData['customer'];
+            $pinjam->alamat = $request->input('alamat');
+            $pinjam->sales = $request->input('sales');
+            $pinjam->telp = $validatedData['telp'];
+            $pinjam->pengirim = $validatedData['pengirim'];
+            $pinjam->kelengkapankirim = $validatedData['kelengkapankirim'];
+            $pinjam->tanggalkembali = $request->input('tanggalkembali');
+            $pinjam->penerima = $request->input('penerima');
+            $pinjam->kelengkapankembali = $request->input('kelengkapankembali');
+
+            $pinjam->save();
+
+            return redirect()->back()->with('success', 'Data berhasil ditambahkan');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
-
-        $pinjam->tanggal = $request->input('tanggal');
-        $pinjam->serialnumber = $request->input('serialnumber');
-        $pinjam->device = $request->input('device');
-        $pinjam->ram = $request->input('ram');
-        $pinjam->android = $request->input('android');
-        $pinjam->customer = $request->input('customer');
-        $pinjam->alamat = $request->input('alamat');
-        $pinjam->sales = $request->input('sales');
-        $pinjam->telp = $request->input('telp');
-        $pinjam->pengirim = $request->input('pengirim');
-        $pinjam->kelengkapankirim = $request->input('kelengkapankirim');
-        $pinjam->tanggalkembali = $request->input('tanggalkembali');
-        $pinjam->penerima = $request->input('penerima');
-        $pinjam->kelengkapankembali = $request->input('kelengkapankembali');
-
-        $pinjam->save();
-        return redirect()->back()->with('success', 'Data berhasil ditambahkan');
     }
+
     /**
      * Display the specified resource.
      *
@@ -265,7 +262,6 @@ class PinjamController extends Controller
     {
         $request->validate([
             'tanggal' => 'required|max:255',
-            'gambar' => 'image|mimes:jpeg,png,jpg|max:2048',
             'serialnumber' => 'required|max:255',
             'device' => 'required|max:255',
             'customer' => 'required|max:255',
@@ -279,19 +275,6 @@ class PinjamController extends Controller
         ]);
 
         $pinjam = Pinjam::find($id);
-
-        if ($request->hasFile('gambar')) {
-            $destination = 'storage/gambar/' . $pinjam->gambar;
-            if (File::exists($destination)) {
-                File::delete($destination);
-            }
-
-            $file = $request->file('gambar');
-            $extention = $file->getClientOriginalExtension();
-            $filename = time() . '.' . $extention;
-            $file->move('storage/gambar/', $filename);
-            $pinjam->gambar = $filename;
-        }
 
         $pinjam->tanggal = $request->input('tanggal');
         $pinjam->serialnumber = $request->input('serialnumber');
@@ -317,7 +300,6 @@ class PinjamController extends Controller
     {
         $request->validate([
             'tanggal' => 'required|max:255',
-            'gambar' => 'image|mimes:jpeg,png,jpg|max:2048',
             'serialnumber' => 'required|max:255',
             'device' => 'required|max:255',
             'customer' => 'required|max:255',
@@ -331,19 +313,6 @@ class PinjamController extends Controller
         ]);
 
         $pinjam = Pinjam::find($id);
-
-        if ($request->hasFile('gambar')) {
-            $destination = 'storage/gambar/' . $pinjam->gambar;
-            if (File::exists($destination)) {
-                File::delete($destination);
-            }
-
-            $file = $request->file('gambar');
-            $extention = $file->getClientOriginalExtension();
-            $filename = time() . '.' . $extention;
-            $file->move('storage/gambar/', $filename);
-            $pinjam->gambar = $filename;
-        }
 
         $pinjam->tanggal = $request->input('tanggal');
         $pinjam->serialnumber = $request->input('serialnumber');

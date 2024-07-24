@@ -90,11 +90,6 @@
                     <input type="text" class="form-control shadow-none" id="status" name="status" value="1"
                         readonly>
                 </div>
-                <div class="mb-3">
-                    <label for="gambar" class="form-label font-weight-bold">Gambar</label><br>
-                    <img src="{{ asset('storage/gambar/' . $pinjam->gambar) }}" width='60' height='60'
-                        class="img img-responsive" id="gambar" name="gambar">
-                </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-success">Pindah Data</button>
                 </div>

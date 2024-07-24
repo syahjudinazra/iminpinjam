@@ -119,10 +119,6 @@
                                 <textarea class="form-control shadow-none" id="kelengkapankirim" name="kelengkapankirim" rows="3"
                                     placeholder="Contoh:Adaptor,Dus,Docking"></textarea>
                             </div>
-                            <div class="mb-3">
-                                <label for="gambar" class="form-label font-weight-bold">Gambar</label>
-                                <input class="form-control shadow-none" type="file" id="gambar" name="gambar">
-                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
