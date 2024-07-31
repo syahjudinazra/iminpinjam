@@ -28,7 +28,7 @@
                 @if (auth()->user()->hasAnyRole(['superadmin', 'jeffri', 'sylvi', 'coni', 'juli']))
                     <div class="d-flex w-auto">
                         <button type="button" class="btn btn-danger text-white" data-bs-toggle="modal" data-target="#moveSN">
-                            <i class="fa-solid fa-truck-fast" style="color: #ffffff;"></i> Move SN
+                            <i class="fa-solid fa-share-from-square" style="color: #ffffff;"></i> Move SN
                         </button>
                     </div>
                 @endif
@@ -116,6 +116,12 @@
                                 <label class="form-check-label" for="titip">Titip</label>
                             </div>
                             <div class="form-group mt-3">
+                                <label class="font-weight-bold" for="kode_pengiriman">Kode Pengiriman</label>
+                                <input type="text" class="form-control shadow-none" id="kode_pengiriman"
+                                    name="kode_pengiriman" placeholder="Masukan Kode Pengiriman"
+                                    value="{{ old('kode_pengiriman') }}" required>
+                            </div>
+                            <div class="form-group mt-3">
                                 <label class="font-weight-bold" for="pelanggan">Pelanggan</label>
                                 <input type="text" class="form-control shadow-none" id="pelanggan" name="pelanggan"
                                     placeholder="Masukan Pelanggan" value="{{ old('pelanggan') }}" required>
@@ -159,7 +165,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
                     <button type="button" id="submitBtn" class="btn btn-danger" data-bs-toggle="modal"
-                        data-route="{{ route('update.data') }}" data-csrf="{{ csrf_token() }}">Submit</button>
+                        data-route="{{ route('move.sn') }}" data-csrf="{{ csrf_token() }}">Submit</button>
                 </div>
             </div>
         </div>

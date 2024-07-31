@@ -5,6 +5,7 @@ $("#submitBtn").click(function () {
     var pelanggan = $("#pelanggan").val();
     var lokasi = $("#lokasi").val();
     var keterangan = $("#keterangan").val();
+    var kode_pengiriman = $("#kode_pengiriman").val();
     var route = $(this).data("route");
     var csrfToken = $(this).data("csrf");
 
@@ -19,12 +20,13 @@ $("#submitBtn").click(function () {
             pelanggan: pelanggan,
             lokasi: lokasi,
             keterangan: keterangan,
+            kode_pengiriman: kode_pengiriman,
         },
         success: function (response) {
             Swal.fire({
                 icon: "success",
                 title: "Success!",
-                text: "Data berhasil diubah",
+                text: "Move SN Berhasil",
                 showConfirmButton: true,
                 timer: 2000,
             });
@@ -33,7 +35,7 @@ $("#submitBtn").click(function () {
             Swal.fire({
                 icon: "error",
                 title: "Error!",
-                text: "Data gagal diubah",
+                text: "Move SN Gagal",
                 showConfirmButton: true,
                 timer: 2000,
             });

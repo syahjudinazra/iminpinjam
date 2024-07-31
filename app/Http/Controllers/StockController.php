@@ -4,14 +4,15 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Stock;
+use App\Models\Pengiriman;
 use App\Exports\StockExport;
 use App\Imports\StockImport;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
-use Yajra\DataTables\DataTables;
 use Illuminate\Http\RedirectResponse;
-use Spatie\Activitylog\Models\Activity;
+use Illuminate\Support\Facades\Schema;
 
 class StockController extends Controller
 {
@@ -78,7 +79,7 @@ class StockController extends Controller
         return response()->json(['validationResults' => $validationResults]);
     }
 
-    public function updateData(Request $request)
+    public function moveSN(Request $request)
     {
         try {
             foreach ($request->serialnumbers as $serialnumber) {
@@ -90,6 +91,7 @@ class StockController extends Controller
                     'pelanggan' => $request->pelanggan,
                     'lokasi' => $request->lokasi,
                     'keterangan' => $request->keterangan,
+                    'kode_pengiriman' => $request->kode_pengiriman,
                 ]);
             }
 
@@ -99,45 +101,140 @@ class StockController extends Controller
         }
     }
 
-public function history(Request $request)
-{
-    if ($request->ajax()) {
-        $modelType = $request->get('model_type', Stock::class);
 
-        $stockHistory = $modelType::with(['activity.causer', 'activity.subject'])
-                                   ->whereHas('activity', function ($query) use ($modelType) {
-                                       $query->where('subject_type', $modelType);
-                                   })
-                                   ->latest()
-                                   ->get(); // Make sure to get the collection
+    public function history(Request $request)
+    {
+        if ($request->ajax()) {
+            $modelType = $request->get('model_type', Stock::class);
 
-        $data = $stockHistory->flatMap(function($stock) {
-            return $stock->activity->map(function($activity) use ($stock) {
+            $stockHistory = $modelType::with(['activity.causer', 'activity.subject'])
+                                    ->whereHas('activity', function ($query) use ($modelType) {
+                                        $query->where('subject_type', $modelType);
+                                    })
+                                    ->latest()
+                                    ->get(); // Make sure to get the collection
+
+            $data = $stockHistory->flatMap(function($stock) {
+                return $stock->activity->map(function($activity) use ($stock) {
+                    return [
+                        'causer.name' => optional($activity->causer)->name,
+                        'subject.serialnumber' => optional($activity->subject)->serialnumber,
+                        'subject.tipe' => optional($activity->subject)->tipe,
+                        'properties.old' => $this->formatProperties(optional($activity->properties)['old']),
+                        'properties.attributes' => $this->formatProperties(optional($activity->properties)['attributes']),
+                        'description' => $activity->description,
+                        'created_at' => Carbon::parse($activity->created_at)->timezone('Asia/Jakarta')->format('d-m-Y h:i:s'),
+                    ];
+                });
+            });
+
+            return DataTables::of($data)->make(true);
+        }
+
+        return view('stock.history.index');
+    }
+
+    private function formatProperties($property)
+    {
+        if (is_array($property)) {
+            return str_replace(['{', '}', '"'], ' ', json_encode($property));
+        }
+        return $property;
+    }
+
+    public function pengirimanPelanggan(Request $request)
+    {
+        if (!Schema::hasColumn('stocks', 'kode_pengiriman')) {
+            return response()->json(['error' => 'Column does not exist'], 404);
+        }
+
+        $pengirimans = Stock::whereNotNull('kode_pengiriman')
+            ->orderBy('created_at', 'desc')
+            ->get()
+            ->groupBy('kode_pengiriman')
+            ->map(function ($group) {
                 return [
-                    'causer.name' => optional($activity->causer)->name,
-                    'subject.serialnumber' => optional($activity->subject)->serialnumber,
-                    'subject.tipe' => optional($activity->subject)->tipe,
-                    'properties.old' => $this->formatProperties(optional($activity->properties)['old']),
-                    'properties.attributes' => $this->formatProperties(optional($activity->properties)['attributes']),
-                    'description' => $activity->description,
-                    'created_at' => Carbon::parse($activity->created_at)->timezone('Asia/Jakarta')->format('d-m-Y h:i:s'),
+                    'kode_pengiriman' => $group->first()->kode_pengiriman,
+                    'serialnumber' => $group->pluck('serialnumber')->all(),
+                    'tipe' => $group->first()->tipe,
+                    'serial_count' => $group->count(),
+                    'id' => md5($group->first()->kode_pengiriman)
                 ];
             });
-        });
 
-        return DataTables::of($data)->make(true);
+        if ($request->ajax()) {
+            return DataTables::of($pengirimans)
+                ->addColumn('action', function ($row) {
+                    $actionHtml = '<div class="d-flex align-items-center gap-3">';
+                    $actionHtml .= '<a href="#" class="text-decoration-none" data-toggle="modal" data-target="#cekSN' . $row['id'] . '"><i class="fa-solid fa-eye"></i> Cek SN</a>';
+                    $actionHtml .= '</div>';
+                    $actionHtml .= $this->cekSnModal($row);
+                    return $actionHtml;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+
+        return view('stock.pengiriman.pelanggan.index', compact('pengirimans'));
     }
 
-    return view('stock.history.index');
-}
 
-private function formatProperties($property)
-{
-    if (is_array($property)) {
-        return str_replace(['{', '}', '"'], ' ', json_encode($property));
+    private function cekSnModal($row)
+    {
+        return '
+            <div class="modal fade" id="cekSN' . $row['id'] . '" tabindex="-1" aria-labelledby="cekSNLabel' . $row['id'] . '" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="cekSNLabel' . $row['id'] . '">Validasi Serial Number</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="validateForm' . $row['id'] . '" method="POST" action="' . route('validate.serialnumber') . '">
+                                ' . csrf_field() . '
+                                <input type="hidden" name="id" value="' . $row['id'] . '">
+                                <label for="cekOldSN">Serial Numbers</label>
+                                <textarea id="cekOldSN" class="bg-light" name="cekOldSN" rows="4" cols="50" readonly>' . implode("\n", $row['serialnumber']) . '</textarea>
+                                <label for="cekInputSN">Input Serial Numbers</label>
+                                <textarea id="cekInputSN" name="cekInputSN" rows="4" cols="50"></textarea>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-danger" onclick="document.getElementById(\'validateForm' . $row['id'] . '\').submit();">Validasi</button>
+                        </div>
+                    </div>
+                </div>
+            </div>';
     }
-    return $property;
-}
+
+    public function validateSerialNumber(Request $request)
+    {
+        $request->validate([
+            'cekOldSN' => 'required',
+            'cekInputSN' => 'required',
+        ]);
+
+        $oldSN = explode("\n", trim($request->input('cekOldSN')));
+        $inputSN = explode("\n", trim($request->input('cekInputSN')));
+
+        $oldSN = array_map('trim', $oldSN);
+        $inputSN = array_map('trim', $inputSN);
+
+        if ($oldSN == $inputSN) {
+            $pengiriman = Stock::find($request->input('id'));
+            if ($pengiriman) {
+                $pengiriman->kode_pengiriman = null;
+                $pengiriman->save();
+            }
+            return redirect()->back()->with('success', 'Validasi Berhasil');
+        } else {
+            return redirect()->back()->with('error', 'Validasi Gagal! SN yang dimasukan tidak sesuai');
+        }
+    }
+
 
     public function allstocks(Request $request)
     {
@@ -152,22 +249,21 @@ private function formatProperties($property)
 
                     if (auth()->check()) {
                         $user = auth()->user();
+                        $roles = ['superadmin', 'jeffri', 'sylvi', 'coni', 'vivi'];
 
-                        if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('sylvi') || $user->hasRole('coni') || $user->hasRole('vivi')) {
+                        if ($user->hasAnyRole($roles)) {
                             $actionHtml .= '<div class="dropdown dropright">
                                                 <a href="#" class="text-decoration-none dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                                                     More
                                                 </a>
                                                 <div class="dropdown-menu">';
 
-                            if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('sylvi') || $user->hasRole('coni') || $user->hasRole('vivi')) {
                                 $actionHtml .= '<a class="dropdown-item" href="' . route('stock.editAllStocks', ['id' => $row->id]) . '"><i class="fa-solid fa-pen-to-square"></i> Edit</a>' .
                                     '<form action="' . route('stock.destroy', ['id' => $row->id]) . '" method="POST" onsubmit="return confirm(\'Yakin mau hapus data ini?\');">
                                                 ' . csrf_field() . '
                                                 <input type="hidden" name="_method" value="DELETE">
                                                 <button type="submit" class="dropdown-item"><i class="fa-solid fa-trash"></i> Delete</button>
                                                 </form>';
-                            }
 
                             $actionHtml .= '</div>
                                             </div>';
@@ -198,9 +294,10 @@ private function formatProperties($property)
 
                     if (auth()->check()) {
                         $user = auth()->user();
+                        $roles = ['superadmin', 'jeffri', 'sylvi', 'coni', 'vivi'];
 
                         // Check for roles that can perform edit and delete actions
-                        if ($user->hasAnyRole(['superadmin', 'jeffri', 'sylvi', 'coni', 'vivi'])) {
+                        if ($user->hasAnyRole($roles)) {
                             $actionHtml .= '<div class="dropdown dropright">
                                                 <a href="#" class="text-decoration-none dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                                                     More
@@ -244,22 +341,21 @@ private function formatProperties($property)
                     class="text-decoration-none"><i class="fa-solid fa-eye"></i> View</a>';
                     if (auth()->check()) {
                         $user = auth()->user();
+                        $roles = ['superadmin', 'jeffri', 'sylvi', 'coni', 'vivi'];
 
-                        if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('sylvi') || $user->hasRole('coni') || $user->hasRole('vivi')) {
+                        if ($user->hasAnyRole($roles)) {
                             $actionHtml .= '<div class="dropdown dropright">
                                                 <a href="#" class="text-decoration-none dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                                                     More
                                                 </a>
                                                 <div class="dropdown-menu">';
 
-                            if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('sylvi') || $user->hasRole('coni') || $user->hasRole('vivi')) {
                                 $actionHtml .= '<a class="dropdown-item" href="' . route('stock.editDiservice', ['id' => $row->id]) . '"><i class="fa-solid fa-pen-to-square"></i> Edit</a>' .
                                     '<form action="' . route('stock.destroy', ['id' => $row->id]) . '" method="POST" onsubmit="return confirm(\'Yakin mau hapus data ini?\');">
                                                 ' . csrf_field() . '
                                                 <input type="hidden" name="_method" value="DELETE">
                                                 <button type="submit" class="dropdown-item"><i class="fa-solid fa-trash"></i> Delete</button>
                                                 </form>';
-                            }
 
                             $actionHtml .= '</div>
                                             </div>';
@@ -289,22 +385,21 @@ private function formatProperties($property)
                     class="text-decoration-none"><i class="fa-solid fa-eye"></i> View</a>';
                     if (auth()->check()) {
                         $user = auth()->user();
+                        $roles = ['superadmin', 'jeffri', 'sylvi', 'coni', 'vivi'];
 
-                        if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('sylvi') || $user->hasRole('coni') || $user->hasRole('vivi')) {
+                        if ($user->hasAnyRole($roles)) {
                             $actionHtml .= '<div class="dropdown dropright">
                                                 <a href="#" class="text-decoration-none dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                                                     More
                                                 </a>
                                                 <div class="dropdown-menu">';
 
-                            if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('sylvi') || $user->hasRole('coni') || $user->hasRole('vivi')) {
                                 $actionHtml .= '<a class="dropdown-item" href="' . route('stock.editPinjam', ['id' => $row->id]) . '"><i class="fa-solid fa-pen-to-square"></i> Edit</a>' .
                                     '<form action="' . route('stock.destroy', ['id' => $row->id]) . '" method="POST" onsubmit="return confirm(\'Yakin mau hapus data ini?\');">
                                                 ' . csrf_field() . '
                                                 <input type="hidden" name="_method" value="DELETE">
                                                 <button type="submit" class="dropdown-item"><i class="fa-solid fa-trash"></i> Delete</button>
                                                 </form>';
-                            }
 
                             $actionHtml .= '</div>
                                             </div>';
@@ -334,22 +429,21 @@ private function formatProperties($property)
                     class="text-decoration-none"><i class="fa-solid fa-eye"></i> View</a>';
                     if (auth()->check()) {
                         $user = auth()->user();
+                        $roles = ['superadmin', 'jeffri', 'sylvi', 'coni', 'vivi'];
 
-                        if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('sylvi') || $user->hasRole('coni') || $user->hasRole('vivi')) {
+                        if ($user->hasAnyRole($roles)) {
                             $actionHtml .= '<div class="dropdown dropright">
                                                 <a href="#" class="text-decoration-none dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                                                     More
                                                 </a>
                                                 <div class="dropdown-menu">';
 
-                            if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('sylvi') || $user->hasRole('coni') || $user->hasRole('vivi')) {
                                 $actionHtml .= '<a class="dropdown-item" href="' . route('stock.editTerjual', ['id' => $row->id]) . '"><i class="fa-solid fa-pen-to-square"></i> Edit</a>' .
                                     '<form action="' . route('stock.destroy', ['id' => $row->id]) . '" method="POST" onsubmit="return confirm(\'Yakin mau hapus data ini?\');">
                                                 ' . csrf_field() . '
                                                 <input type="hidden" name="_method" value="DELETE">
                                                 <button type="submit" class="dropdown-item"><i class="fa-solid fa-trash"></i> Delete</button>
                                                 </form>';
-                            }
 
                             $actionHtml .= '</div>
                                             </div>';
@@ -380,22 +474,21 @@ private function formatProperties($property)
                     class="text-decoration-none"><i class="fa-solid fa-eye"></i> View</a>';
                     if (auth()->check()) {
                         $user = auth()->user();
+                        $roles = ['superadmin', 'jeffri', 'sylvi', 'coni', 'vivi'];
 
-                        if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('sylvi') || $user->hasRole('coni') || $user->hasRole('vivi')) {
+                        if ($user->hasAnyRole($roles)) {
                             $actionHtml .= '<div class="dropdown dropright">
                                                 <a href="#" class="text-decoration-none dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                                                     More
                                                 </a>
                                                 <div class="dropdown-menu">';
 
-                            if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('sylvi') || $user->hasRole('coni') || $user->hasRole('vivi')) {
                                 $actionHtml .= '<a class="dropdown-item" href="' . route('stock.editRusak', ['id' => $row->id]) . '"><i class="fa-solid fa-pen-to-square"></i> Edit</a>' .
                                     '<form action="' . route('stock.destroy', ['id' => $row->id]) . '" method="POST" onsubmit="return confirm(\'Yakin mau hapus data ini?\');">
                                                 ' . csrf_field() . '
                                                 <input type="hidden" name="_method" value="DELETE">
                                                 <button type="submit" class="dropdown-item"><i class="fa-solid fa-trash"></i> Delete</button>
                                                 </form>';
-                            }
 
                             $actionHtml .= '</div>
                                             </div>';
@@ -426,22 +519,21 @@ private function formatProperties($property)
                     class="text-decoration-none"><i class="fa-solid fa-eye"></i> View</a>';
                     if (auth()->check()) {
                         $user = auth()->user();
+                        $roles = ['superadmin', 'jeffri', 'sylvi', 'coni', 'vivi'];
 
-                        if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('sylvi') || $user->hasRole('coni') || $user->hasRole('vivi')) {
+                        if ($user->hasAnyRole($roles)) {
                             $actionHtml .= '<div class="dropdown dropright">
                                                 <a href="#" class="text-decoration-none dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                                                     More
                                                 </a>
                                                 <div class="dropdown-menu">';
 
-                            if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('sylvi') || $user->hasRole('coni') || $user->hasRole('vivi')) {
                                 $actionHtml .= '<a class="dropdown-item" href="' . route('stock.editTitip', ['id' => $row->id]) . '"><i class="fa-solid fa-pen-to-square"></i> Edit</a>' .
                                     '<form action="' . route('stock.destroy', ['id' => $row->id]) . '" method="POST" onsubmit="return confirm(\'Yakin mau hapus data ini?\');">
                                                 ' . csrf_field() . '
                                                 <input type="hidden" name="_method" value="DELETE">
                                                 <button type="submit" class="dropdown-item"><i class="fa-solid fa-trash"></i> Delete</button>
                                                 </form>';
-                            }
 
                             $actionHtml .= '</div>
                                             </div>';
@@ -554,6 +646,7 @@ private function formatProperties($property)
             'pelanggan' => 'max:255|nullable',
             'lokasi' => 'required|not_in:Null',
             'keterangan' => 'max:255|nullable',
+            'kode_pengiriman' => 'max:255|nullable',
             'status' => 'required|array|min:1',
         ]);
 
@@ -568,6 +661,7 @@ private function formatProperties($property)
             $stock->pelanggan = $request->input('pelanggan');
             $stock->lokasi = $request->input('lokasi');
             $stock->keterangan = $request->input('keterangan') ?? '';
+            $stock->kode_pengiriman = $request->input('kode_pengiriman') ?? '';
             $statusValues = $request->input('status');
             $statusString = implode(',', $statusValues);
             $stock->status = $statusString;
@@ -723,6 +817,7 @@ private function formatProperties($property)
             'pelanggan' => 'max:255',
             'lokasi' => 'required|max:255',
             'keterangan' => 'max:255|nullable',
+            'kode_pengiriman' => 'max:255|nullable',
             'status' => 'required|max:255',
         ]);
 
@@ -736,6 +831,7 @@ private function formatProperties($property)
         $stock->pelanggan = $request->input('pelanggan');
         $stock->lokasi = $request->input('lokasi');
         $stock->keterangan = $request->input('keterangan') ?? '';
+        $stock->kode_pengiriman = $request->input('kode_pengiriman') ?? '';
         $stock->status = $request->input('status');
 
         $stock->update();
@@ -754,6 +850,7 @@ private function formatProperties($property)
             'pelanggan' => 'max:255',
             'lokasi' => 'required|max:255',
             'keterangan' => 'max:255|nullable',
+            'kode_pengiriman' => 'max:255|nullable',
             'status' => 'required|max:255',
         ]);
 
@@ -767,6 +864,7 @@ private function formatProperties($property)
         $stock->pelanggan = $request->input('pelanggan');
         $stock->lokasi = $request->input('lokasi');
         $stock->keterangan = $request->input('keterangan') ?? '';
+        $stock->kode_pengiriman = $request->input('kode_pengiriman') ?? '';
         $stock->status = $request->input('status');
 
         $stock->update();
@@ -785,6 +883,7 @@ private function formatProperties($property)
             'pelanggan' => 'max:255',
             'lokasi' => 'required|max:255',
             'keterangan' => 'max:255|nullable',
+            'kode_pengiriman' => 'max:255|nullable',
             'status' => 'required|max:255',
         ]);
 
@@ -798,6 +897,7 @@ private function formatProperties($property)
         $stock->pelanggan = $request->input('pelanggan');
         $stock->lokasi = $request->input('lokasi');
         $stock->keterangan = $request->input('keterangan') ?? '';
+        $stock->kode_pengiriman = $request->input('kode_pengiriman') ?? '';
         $stock->status = $request->input('status');
 
         $stock->update();
@@ -816,6 +916,7 @@ private function formatProperties($property)
             'pelanggan' => 'max:255',
             'lokasi' => 'required|max:255',
             'keterangan' => 'max:255|nullable',
+            'kode_pengiriman' => 'max:255|nullable',
             'status' => 'required|max:255',
         ]);
 
@@ -829,6 +930,7 @@ private function formatProperties($property)
         $stock->pelanggan = $request->input('pelanggan');
         $stock->lokasi = $request->input('lokasi');
         $stock->keterangan = $request->input('keterangan') ?? '';
+        $stock->kode_pengiriman = $request->input('kode_pengiriman') ?? '';
         $stock->status = $request->input('status');
 
         $stock->update();
@@ -847,6 +949,7 @@ private function formatProperties($property)
             'pelanggan' => 'max:255',
             'lokasi' => 'required|max:255',
             'keterangan' => 'max:255|nullable',
+            'kode_pengiriman' => 'max:255|nullable',
             'status' => 'required|max:255',
         ]);
 
@@ -860,6 +963,7 @@ private function formatProperties($property)
         $stock->pelanggan = $request->input('pelanggan');
         $stock->lokasi = $request->input('lokasi');
         $stock->keterangan = $request->input('keterangan') ?? '';
+        $stock->kode_pengiriman = $request->input('kode_pengiriman') ?? '';
         $stock->status = $request->input('status');
 
         $stock->update();
@@ -878,6 +982,7 @@ private function formatProperties($property)
             'pelanggan' => 'max:255',
             'lokasi' => 'required|max:255',
             'keterangan' => 'max:255|nullable',
+            'kode_pengiriman' => 'max:255|nullable',
             'status' => 'required|max:255',
         ]);
 
@@ -891,6 +996,7 @@ private function formatProperties($property)
         $stock->pelanggan = $request->input('pelanggan');
         $stock->lokasi = $request->input('lokasi');
         $stock->keterangan = $request->input('keterangan') ?? '';
+        $stock->kode_pengiriman = $request->input('kode_pengiriman') ?? '';
         $stock->status = $request->input('status');
 
         $stock->update();
@@ -909,6 +1015,7 @@ private function formatProperties($property)
             'pelanggan' => 'max:255',
             'lokasi' => 'required|max:255',
             'keterangan' => 'max:255|nullable',
+            'kode_pengiriman' => 'max:255|nullable',
             'status' => 'required|max:255',
         ]);
 
@@ -922,6 +1029,7 @@ private function formatProperties($property)
         $stock->pelanggan = $request->input('pelanggan');
         $stock->lokasi = $request->input('lokasi');
         $stock->keterangan = $request->input('keterangan') ?? '';
+        $stock->kode_pengiriman = $request->input('kode_pengiriman') ?? '';
         $stock->status = $request->input('status');
 
         $stock->update();

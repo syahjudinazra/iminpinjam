@@ -374,3 +374,7 @@
     background: white; /* Background color to prevent overlap with other content */
     z-index: 2; /* Ensure header is above other content */
 }
+
+.table-responsive {
+    overflow-x: auto;
+}

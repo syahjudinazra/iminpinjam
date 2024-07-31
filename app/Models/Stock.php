@@ -2,13 +2,11 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
 use Spatie\Activitylog\LogOptions;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Spatie\Activitylog\Models\Activity;
 
 class Stock extends Model
 {
@@ -29,6 +27,7 @@ class Stock extends Model
         'pelanggan',
         'lokasi',
         'keterangan',
+        'kode_pengiriman',
         'status'
     ];
 
@@ -44,6 +43,7 @@ class Stock extends Model
         'pelanggan',
         'lokasi',
         'keterangan',
+        'kode_pengiriman',
         'status'])
         ->logOnlyDirty()
         ->setDescriptionForEvent(fn(string $eventName) => "You have {$eventName} data");

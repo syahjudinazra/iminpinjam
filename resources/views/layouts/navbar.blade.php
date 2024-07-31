@@ -64,6 +64,32 @@
 
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-target="#collapsePengiriman"
+                    aria-expanded="true" aria-controls="collapsePengiriman">
+                    <i class="fas fa-fw fa-truck-fast"></i>
+                    <span>Pengiriman</span>
+                </a>
+                <div id="collapsePengiriman" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">List Pengiriman:</h6>
+                        <a class="collapse-item {{ Request::is('stock/pengiriman-service*') ? 'active' : '' }}"
+                            href="/stock/pengiriman-service">Service</a>
+                        <a class="collapse-item {{ Request::is('stock/pengiriman-pelanggan*') ? 'active' : '' }}"
+                            href="/stock/pengiriman-pelanggan">Pelanggan</a>
+                        <a class="collapse-item {{ Request::is('stock/pengiriman-dipinjam*') ? 'active' : '' }}"
+                            href="/stock/pengiriman-dipinjam">Dipinjam</a>
+                        <a class="collapse-item {{ Request::is('stock/pengiriman-terjual*') ? 'active' : '' }}"
+                            href="/stock/pengiriman-terjual">Terjual</a>
+                        <a class="collapse-item {{ Request::is('stock/pengiriman-rusak*') ? 'active' : '' }}"
+                            href="/stock/pengiriman-rusak">Rusak</a>
+                        <a class="collapse-item {{ Request::is('stock/pengiriman-titip*') ? 'active' : '' }}"
+                            href="/stock/pengiriman-titip">Titip</a>
+                    </div>
+                </div>
+
+            </li>
+
             <hr class="sidebar-divider">
 
             <!-- Heading -->

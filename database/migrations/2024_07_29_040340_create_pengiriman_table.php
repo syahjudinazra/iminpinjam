@@ -8,12 +8,10 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('stocks', function (Blueprint $table) {
+        Schema::create('pengiriman', function (Blueprint $table) {
             $table->id();
             $table->string('serialnumber');
             $table->string('tipe');
@@ -24,7 +22,6 @@ return new class extends Migration
             $table->string('pelanggan')->nullable();
             $table->string('lokasi');
             $table->string('keterangan')->nullable();
-            $table->string('kode_pengiriman')->nullable();
             $table->string('status');
             $table->timestamps();
             $table->softDeletes();
@@ -33,11 +30,9 @@ return new class extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
-        Schema::dropIfExists('stocks');
+        Schema::dropIfExists('pengiriman');
     }
 };

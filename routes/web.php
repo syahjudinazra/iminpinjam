@@ -12,6 +12,7 @@ use App\Http\Controllers\SparePartsController;
 use App\Http\Controllers\UserSettingsController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\PengirimanController;
 
 // Route::get('/', function () {
 //     // return view('auth.login');
@@ -156,7 +157,7 @@ Route::prefix('stock')->middleware('auth')->group(function () {
     Route::resource('/', StockController::class)->except([
         'show', 'edit', 'update', 'destroy',
     ]);
-
+//Stock Gudang
     Route::get('/allstocks', [StockController::class, 'allstocks'])
         ->name('stock.allstocks');
     Route::get('/gudang', [StockController::class, 'gudang'])
@@ -173,6 +174,20 @@ Route::prefix('stock')->middleware('auth')->group(function () {
         ->name('stock.titip');
     Route::get('/history', [StockController::class, 'history'])
         ->name('stock.history');
+
+//Stock Pengiriman
+    Route::get('/pengiriman-service', [PengirimanController::class, 'pengirimanService'])
+    ->name('stock.pengirimanService');
+    Route::get('/pengiriman-pelanggan', [StockController::class, 'pengirimanPelanggan'])
+    ->name('stock.pengirimanPelanggan');
+    Route::get('/pengiriman-dipinjam', [PengirimanController::class, 'pengirimanDipinjam'])
+    ->name('stock.pengirimanDipinjam');
+    Route::get('/pengiriman-terjual', [PengirimanController::class, 'pengirimanTerjual'])
+    ->name('stock.pengirimanTerjual');
+    Route::get('/pengiriman-rusak', [PengirimanController::class, 'pengirimanRusak'])
+    ->name('stock.pengirimanRusak');
+    Route::get('/pengiriman-titip', [PengirimanController::class, 'pengirimanTitip'])
+    ->name('stock.pengirimanTitip');
 
     Route::get('/allstocks/{id}', [StockController::class, 'showAllStocks'])->name('stock.showAllStocks');
     Route::get('/gudang/{id}', [StockController::class, 'showGudang'])->name('stock.showGudang');
@@ -203,7 +218,8 @@ Route::prefix('stock')->middleware('auth')->group(function () {
     Route::get('/export-stocks', [StockController::class, 'exportStocks'])->name('export.stocks');
     Route::get('download/{filename}', [StockController::class, 'templateImportStock'])->name('template.stocks');
     Route::post('/check-serial-numbers', [StockController::class, 'checkSerialNumbers'])->name('stock.checkSerialnumbers');
-    Route::post('/update-data', [StockController::class, 'updateData'])->name('update.data');
+    Route::post('/move-sn', [StockController::class, 'moveSN'])->name('move.sn');
+    Route::post('/validate-serialnumber', [StockController::class, 'validateSerialNumber'])->name('validate.serialnumber');
 });
 
 //Service
