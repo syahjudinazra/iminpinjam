@@ -176,17 +176,17 @@ Route::prefix('stock')->middleware('auth')->group(function () {
         ->name('stock.history');
 
 //Stock Pengiriman
-    Route::get('/pengiriman-service', [PengirimanController::class, 'pengirimanService'])
+    Route::get('/pengiriman-service', [StockController::class, 'pengirimanService'])
     ->name('stock.pengirimanService');
     Route::get('/pengiriman-pelanggan', [StockController::class, 'pengirimanPelanggan'])
     ->name('stock.pengirimanPelanggan');
-    Route::get('/pengiriman-dipinjam', [PengirimanController::class, 'pengirimanDipinjam'])
+    Route::get('/pengiriman-dipinjam', [StockController::class, 'pengirimanDipinjam'])
     ->name('stock.pengirimanDipinjam');
-    Route::get('/pengiriman-terjual', [PengirimanController::class, 'pengirimanTerjual'])
+    Route::get('/pengiriman-terjual', [StockController::class, 'pengirimanTerjual'])
     ->name('stock.pengirimanTerjual');
-    Route::get('/pengiriman-rusak', [PengirimanController::class, 'pengirimanRusak'])
+    Route::get('/pengiriman-rusak', [StockController::class, 'pengirimanRusak'])
     ->name('stock.pengirimanRusak');
-    Route::get('/pengiriman-titip', [PengirimanController::class, 'pengirimanTitip'])
+    Route::get('/pengiriman-titip', [StockController::class, 'pengirimanTitip'])
     ->name('stock.pengirimanTitip');
 
     Route::get('/allstocks/{id}', [StockController::class, 'showAllStocks'])->name('stock.showAllStocks');

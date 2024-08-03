@@ -73,10 +73,10 @@
                 <div id="collapsePengiriman" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">List Pengiriman:</h6>
-                        <a class="collapse-item {{ Request::is('stock/pengiriman-service*') ? 'active' : '' }}"
-                            href="/stock/pengiriman-service">Service</a>
                         <a class="collapse-item {{ Request::is('stock/pengiriman-pelanggan*') ? 'active' : '' }}"
                             href="/stock/pengiriman-pelanggan">Pelanggan</a>
+                        <a class="collapse-item {{ Request::is('stock/pengiriman-service*') ? 'active' : '' }}"
+                            href="/stock/pengiriman-service">Service</a>
                         <a class="collapse-item {{ Request::is('stock/pengiriman-dipinjam*') ? 'active' : '' }}"
                             href="/stock/pengiriman-dipinjam">Dipinjam</a>
                         <a class="collapse-item {{ Request::is('stock/pengiriman-terjual*') ? 'active' : '' }}"

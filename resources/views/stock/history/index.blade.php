@@ -9,30 +9,32 @@
     </div>
 
     <div class="container-fluid">
-        <table id="stockHistory-table" class="table table-striped table-bordered" style="width:100%">
-            <thead>
-                <tr>
-                    <th>User</th>
-                    <th>Serial Numbers</th>
-                    <th>Tipe</th>
-                    <th>Before</th>
-                    <th>After</th>
-                    <th>Description</th>
-                    <th>Date</th>
-                </tr>
-            </thead>
-            <tfoot>
-                <tr>
-                    <th>User</th>
-                    <th>Serial Numbers</th>
-                    <th>Tipe</th>
-                    <th>Before</th>
-                    <th>After</th>
-                    <th>Description</th>
-                    <th>Date</th>
-                </tr>
-            </tfoot>
-        </table>
+        <div class="overflow-auto">
+            <table id="stockHistory-table" class="table table-striped table-bordered" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Serial Numbers</th>
+                        <th>Tipe</th>
+                        <th>Before</th>
+                        <th>After</th>
+                        <th>Description</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>User</th>
+                        <th>Serial Numbers</th>
+                        <th>Tipe</th>
+                        <th>Before</th>
+                        <th>After</th>
+                        <th>Description</th>
+                        <th>Date</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
     </div>
 @endsection
 
@@ -42,6 +44,7 @@
             var table = $('#stockHistory-table').DataTable({
                 processing: true,
                 serverSide: true,
+                responsive: true,
                 pagingType: 'simple_numbers',
                 paging: true,
                 pageLength: 10,

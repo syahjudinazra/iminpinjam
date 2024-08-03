@@ -11,20 +11,9 @@
         </div>
 
         <div class="container-fluid mt-3">
-            <table id="allstocks-table" class="table table-striped table-bordered" style="width:100%">
-                <thead class="headfix">
-                    <th>No</th>
-                    <th>Serial Number</th>
-                    <th>Tipe</th>
-                    <th>No Invoice</th>
-                    <th>Tanggal Masuk</th>
-                    <th>Tanggal Keluar</th>
-                    <th>Pelanggan</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                </thead>
-                <tfoot>
-                    <tr>
+            <div class="overflow-auto">
+                <table id="allstocks-table" class="table table-striped table-bordered" style="width:100%">
+                    <thead>
                         <th>No</th>
                         <th>Serial Number</th>
                         <th>Tipe</th>
@@ -33,9 +22,22 @@
                         <th>Tanggal Keluar</th>
                         <th>Pelanggan</th>
                         <th>Status</th>
-                    </tr>
-                </tfoot>
-            </table>
+                        <th>Action</th>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>No</th>
+                            <th>Serial Number</th>
+                            <th>Tipe</th>
+                            <th>No Invoice</th>
+                            <th>Tanggal Masuk</th>
+                            <th>Tanggal Keluar</th>
+                            <th>Pelanggan</th>
+                            <th>Status</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
         </div>
     @endsection
 
@@ -45,6 +47,7 @@
                 $('#allstocks-table').DataTable({
                     processing: true,
                     serverSide: true,
+                    responsive: true,
                     pagingType: 'simple_numbers',
                     paging: true,
                     pageLength: 10,

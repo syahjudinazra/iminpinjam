@@ -11,27 +11,29 @@
         </div>
 
         <div class="container-fluid mt-3">
-            <table id="terjual-table" class="table table-striped table-bordered" style="width:100%">
-                <thead class="headfix">
-                    <th>No</th>
-                    <th>Serial Number</th>
-                    <th>Tipe</th>
-                    <th>No Invoice</th>
-                    <th>Tanggal Keluar</th>
-                    <th>Pelanggan</th>
-                    <th>Action</th>
-                </thead>
-                <tfoot>
-                    <tr>
+            <div class="overflow-auto">
+                <table id="terjual-table" class="table table-striped table-bordered" style="width:100%">
+                    <thead class="headfix">
                         <th>No</th>
                         <th>Serial Number</th>
                         <th>Tipe</th>
                         <th>No Invoice</th>
                         <th>Tanggal Keluar</th>
                         <th>Pelanggan</th>
-                    </tr>
-                </tfoot>
-            </table>
+                        <th>Action</th>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>No</th>
+                            <th>Serial Number</th>
+                            <th>Tipe</th>
+                            <th>No Invoice</th>
+                            <th>Tanggal Keluar</th>
+                            <th>Pelanggan</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
         </div>
     @endsection
 
@@ -41,6 +43,7 @@
                 $('#terjual-table').DataTable({
                     processing: true,
                     serverSide: true,
+                    responsive: true,
                     pagingType: 'simple_numbers',
                     paging: true,
                     pageLength: 10,

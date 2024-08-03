@@ -11,24 +11,26 @@
         </div>
 
         <div class="container-fluid mt-3">
-            <table id="pengirimanService-table" class="table table-striped table-bordered" style="width:100%">
-                <thead class="headfix">
-                    <tr>
-                        <th>No</th>
-                        <th>Serial Number</th>
-                        <th>Tipe</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tfoot>
-                    <tr>
-                        <th>No</th>
-                        <th>Serial Number</th>
-                        <th>Tipe</th>
-                        <th>Action</th>
-                    </tr>
-                </tfoot>
-            </table>
+            <div class="overflow-auto">
+                <table id="pengirimanService-table" class="table table-striped table-bordered" style="width:100%">
+                    <thead class="headfix">
+                        <tr>
+                            <th>Kode Pengiriman</th>
+                            <th>Serial Number</th>
+                            <th>Tipe</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Kode Pengiriman</th>
+                            <th>Serial Number</th>
+                            <th>Tipe</th>
+                            <th>Action</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
         </div>
     @endsection
 
@@ -38,17 +40,32 @@
                 $('#pengirimanService-table').DataTable({
                     processing: true,
                     serverSide: true,
+                    responsive: true,
                     pagingType: 'simple_numbers',
                     paging: true,
                     pageLength: 10,
                     ajax: '{!! route('stock.pengirimanService') !!}',
                     columns: [{
-                            data: 'id',
-                            name: 'id'
+                            data: 'kode_pengiriman',
+                            name: 'kode_pengiriman'
                         },
                         {
                             data: 'serialnumber',
-                            name: 'serialnumber'
+                            name: 'serialnumber',
+                            render: function(data, type, row) {
+                                if (Array.isArray(data)) {
+                                    var count = data.length;
+                                    var displayedSerials = data.slice(0, 3);
+                                    var serialText = displayedSerials.join(', ');
+
+                                    if (count > 3) {
+                                        return serialText + ', + more';
+                                    } else {
+                                        return serialText;
+                                    }
+                                }
+                                return data;
+                            }
                         },
                         {
                             data: 'tipe',

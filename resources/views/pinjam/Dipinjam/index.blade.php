@@ -161,18 +161,19 @@
     @endforeach
 
     <div class="container-fluid mt-3">
-        <table id="pinjams-table" class="table table-striped table-bordered" style="width:100%">
-            <thead class="headfix">
-                <th>No</th>
-                <th>Tanggal</th>
-                <th>Days</th>
-                <th>Serial Number</th>
-                <th>Tipe Device</th>
-                <th>Customer</th>
-                <th>Action</th>
-            </thead>
-
-        </table>
+        <div class="overflow-auto">
+            <table id="pinjams-table" class="table table-striped table-bordered" style="width:100%">
+                <thead class="headfix">
+                    <th>No</th>
+                    <th>Tanggal</th>
+                    <th>Days</th>
+                    <th>Serial Number</th>
+                    <th>Tipe Device</th>
+                    <th>Customer</th>
+                    <th>Action</th>
+                </thead>
+            </table>
+        </div>
     </div>
 @endsection
 
@@ -193,6 +194,7 @@
             $('#pinjams-table').DataTable({
                 processing: true,
                 serverSide: true,
+                responsive: true,
                 pagingType: 'simple_numbers',
                 paging: true,
                 pageLength: 10,

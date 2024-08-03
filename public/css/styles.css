@@ -47,11 +47,10 @@
 
 .ag-courses_box {
     display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
     -webkit-box-align: start;
-    -ms-flex-align: start;
     align-items: flex-start;
+    flex-flow: wrap;
 }
 .ag-courses_item {
     -ms-flex-preferred-size: calc(33.33333% - 30px);
@@ -373,8 +372,4 @@
     top: 0;
     background: white; /* Background color to prevent overlap with other content */
     z-index: 2; /* Ensure header is above other content */
-}
-
-.table-responsive {
-    overflow-x: auto;
 }

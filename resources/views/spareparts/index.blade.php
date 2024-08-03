@@ -242,59 +242,63 @@
     <!-- end delete data -->
 
     <div class="container-fluid mt-3">
-        <table id="hometable" class="table table-striped table-bordered" style="width:100%">
-            <thead>
-                <tr>
-                    <th>No Spare Parts</th>
-                    <th>Tipe</th>
-                    <th>Nama</th>
-                    <th>Quantity</th>
-                    <th>Harga ($)</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($spareParts as $item)
+        <div class="overflow-auto">
+            <table id="hometable" class="table table-striped table-bordered" style="width:100%">
+                <thead>
                     <tr>
-                        <td>{{ $item->nospareparts }}</td>
-                        <td>{{ $item->tipe }}</td>
-                        <td>{{ $item->nama }}</td>
-                        <td>{{ $item->quantity }}</td>
-                        <td>{{ $item->harga }}</td>
-                        <td>
-                            @auth
-                                @if (auth()->user()->hasRole('superadmin') || auth()->user()->hasRole('jeffri'))
-                                    <a href="#" class="btn btn-warning btn-sm" data-bs-toggle="modal"
-                                        data-target="#editModalQuantityReduce{{ $item->id }}" data-bs-toggle="tooltip"
-                                        data-bs-placement="top" title="Quantity"><i class="fa-solid fa-minus"></i></a>
-
-                                    <a href="#" class="btn btn-success btn-sm" data-bs-toggle="modal"
-                                        data-target="#editModalQuantity{{ $item->id }}" data-bs-toggle="tooltip"
-                                        data-bs-placement="top" title="Quantity"><i class="fa-solid fa-plus"></i></a>
-
-                                    <a href="#" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                                        data-target="#editModal{{ $item->id }}" data-bs-toggle="tooltip"
-                                        data-bs-placement="top" title="Edit"><i class="fa-solid fa-pen-to-square"></i></a>
-
-                                    <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                        data-target="#deleteModal{{ $item->id }}" data-bs-toggle="tooltip"
-                                        data-bs-placement="top" title="Delete"><i class="fa-solid fa-trash"></i></a>
-                                @endif
-                            @endauth
-                        </td>
+                        <th>No Spare Parts</th>
+                        <th>Tipe</th>
+                        <th>Nama</th>
+                        <th>Quantity</th>
+                        <th>Harga ($)</th>
+                        <th>Action</th>
                     </tr>
-                @endforeach
-            </tbody>
-            <tfoot>
-                <tr>
-                    <th>No Spare Parts</th>
-                    <th>Tipe</th>
-                    <th>Nama</th>
-                    <th>Quantity</th>
-                    <th>Harga ($)</th>
-                </tr>
-            </tfoot>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach ($spareParts as $item)
+                        <tr>
+                            <td>{{ $item->nospareparts }}</td>
+                            <td>{{ $item->tipe }}</td>
+                            <td>{{ $item->nama }}</td>
+                            <td>{{ $item->quantity }}</td>
+                            <td>{{ $item->harga }}</td>
+                            <td>
+                                @auth
+                                    @if (auth()->user()->hasRole('superadmin') || auth()->user()->hasRole('jeffri'))
+                                        <a href="#" class="btn btn-warning btn-sm" data-bs-toggle="modal"
+                                            data-target="#editModalQuantityReduce{{ $item->id }}"
+                                            data-bs-toggle="tooltip" data-bs-placement="top" title="Quantity"><i
+                                                class="fa-solid fa-minus"></i></a>
+
+                                        <a href="#" class="btn btn-success btn-sm" data-bs-toggle="modal"
+                                            data-target="#editModalQuantity{{ $item->id }}" data-bs-toggle="tooltip"
+                                            data-bs-placement="top" title="Quantity"><i class="fa-solid fa-plus"></i></a>
+
+                                        <a href="#" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                                            data-target="#editModal{{ $item->id }}" data-bs-toggle="tooltip"
+                                            data-bs-placement="top" title="Edit"><i
+                                                class="fa-solid fa-pen-to-square"></i></a>
+
+                                        <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                            data-target="#deleteModal{{ $item->id }}" data-bs-toggle="tooltip"
+                                            data-bs-placement="top" title="Delete"><i class="fa-solid fa-trash"></i></a>
+                                    @endif
+                                @endauth
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>No Spare Parts</th>
+                        <th>Tipe</th>
+                        <th>Nama</th>
+                        <th>Quantity</th>
+                        <th>Harga ($)</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
     </div>
 @endsection
 

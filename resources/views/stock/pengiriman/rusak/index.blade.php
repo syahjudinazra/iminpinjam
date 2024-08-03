@@ -7,31 +7,26 @@
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Titip Stocks</h1>
+            <h2 class="h3 mb-0 text-gray-800">Cek Pengiriman Rusak Stocks</h2>
         </div>
 
         <div class="container-fluid mt-3">
             <div class="overflow-auto">
-                <table id="titip-table" class="table table-striped table-bordered" style="width:100%">
+                <table id="pengirimanRusak-table" class="table table-striped table-bordered" style="width:100%">
                     <thead class="headfix">
-                        <th>No</th>
-                        <th>Serial Number</th>
-                        <th>Tipe</th>
-                        <th>No Invoice</th>
-                        <th>Tanggal Masuk</th>
-                        <th>Tanggal Keluar</th>
-                        <th>Pelanggan</th>
-                        <th>Action</th>
+                        <tr>
+                            <th>Kode Pengiriman</th>
+                            <th>Serial Number</th>
+                            <th>Tipe</th>
+                            <th>Action</th>
+                        </tr>
                     </thead>
                     <tfoot>
                         <tr>
-                            <th>No</th>
+                            <th>Kode Pengiriman</th>
                             <th>Serial Number</th>
                             <th>Tipe</th>
-                            <th>No Invoice</th>
-                            <th>Tanggal Masuk</th>
-                            <th>Tanggal Keluar</th>
-                            <th>Pelanggan</th>
+                            <th>Action</th>
                         </tr>
                     </tfoot>
                 </table>
@@ -42,47 +37,39 @@
     @push('scripts')
         <script>
             $(document).ready(function() {
-                $('#titip-table').DataTable({
+                $('#pengirimanRusak-table').DataTable({
                     processing: true,
                     serverSide: true,
                     responsive: true,
                     pagingType: 'simple_numbers',
                     paging: true,
                     pageLength: 10,
-                    ajax: '{!! route('stock.titip') !!}',
+                    ajax: '{!! route('stock.pengirimanRusak') !!}',
                     columns: [{
-                            data: 'id',
-                            name: 'id'
+                            data: 'kode_pengiriman',
+                            name: 'kode_pengiriman'
                         },
                         {
                             data: 'serialnumber',
-                            name: 'serialnumber'
+                            name: 'serialnumber',
+                            render: function(data, type, row) {
+                                if (Array.isArray(data)) {
+                                    var count = data.length;
+                                    var displayedSerials = data.slice(0, 3);
+                                    var serialText = displayedSerials.join(', ');
+
+                                    if (count > 3) {
+                                        return serialText + ', + more';
+                                    } else {
+                                        return serialText;
+                                    }
+                                }
+                                return data;
+                            }
                         },
                         {
                             data: 'tipe',
                             name: 'tipe'
-                        },
-                        {
-                            data: 'noinvoice',
-                            name: 'noinvoice'
-                        },
-                        {
-                            data: 'tanggalmasuk',
-                            name: 'tanggalmasuk',
-                            render: function(data) {
-                                return moment(data).format('DD-MM-YYYY');
-                            }
-                        },
-                        {
-                            data: 'tanggalkeluar',
-                            name: 'tanggalkeluar',
-                            render: function(data) {
-                                return moment(data).format('DD-MM-YYYY');
-                            }
-                        },
-                        {
-                            data: 'pelanggan',
-                            name: 'pelanggan'
                         },
                         {
                             data: 'action',
@@ -93,8 +80,8 @@
                     ],
                     initComplete: function() {
                         var api = this.api();
-                        var footer = $('#titip-table tfoot tr');
-                        $(footer).appendTo('#titip-table thead');
+                        var footer = $('#pengirimanRusak-table tfoot tr');
+                        $(footer).appendTo('#pengirimanRusak-table thead');
 
                         api.columns().every(function() {
                             var column = this;

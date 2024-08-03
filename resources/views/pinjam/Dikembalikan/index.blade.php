@@ -41,17 +41,18 @@
     @endforeach
 
     <div class="container-fluid mt-3">
-        <table id="kembali-table" class="table table-striped table-bordered" style="width:100%">
-            <thead class="headfix">
-                <th>No</th>
-                <th>Tanggal</th>
-                <th>Serial Number</th>
-                <th>Tipe Device</th>
-                <th>Customer</th>
-                <th>Action</th>
-            </thead>
-
-        </table>
+        <div class="overflow-auto">
+            <table id="kembali-table" class="table table-striped table-bordered" style="width:100%">
+                <thead class="headfix">
+                    <th>No</th>
+                    <th>Tanggal</th>
+                    <th>Serial Number</th>
+                    <th>Tipe Device</th>
+                    <th>Customer</th>
+                    <th>Action</th>
+                </thead>
+            </table>
+        </div>
     </div>
 @endsection
 
@@ -61,6 +62,7 @@
             $('#kembali-table').DataTable({
                 processing: true,
                 serverSide: true,
+                responsive: true,
                 pagingType: 'simple_numbers',
                 paging: true,
                 pageLength: 10,

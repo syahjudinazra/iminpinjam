@@ -11,7 +11,7 @@
         </div>
 
         <div class="container-fluid mt-3">
-            <div class="table-responsive" style="overflow-x: auto">
+            <div class="overflow-auto">
                 <table id="pengirimanPelanggan-table" class="table table-striped table-bordered" style="width:100%">
                     <thead class="headfix">
                         <tr>
@@ -98,8 +98,4 @@
                 });
             });
         </script>
-    @endpush
-
-    @push('js')
-        <script src="{{ asset('js/stockMonitor/ValidateOldSn.js') }}"></script>
     @endpush

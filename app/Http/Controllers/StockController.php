@@ -149,6 +149,7 @@ class StockController extends Controller
         }
 
         $pengirimans = Stock::whereNotNull('kode_pengiriman')
+            ->where('kode_pengiriman', 'LIKE', 'PEL%')
             ->orderBy('created_at', 'desc')
             ->get()
             ->groupBy('kode_pengiriman')
@@ -178,6 +179,190 @@ class StockController extends Controller
         return view('stock.pengiriman.pelanggan.index', compact('pengirimans'));
     }
 
+    public function pengirimanService(Request $request)
+    {
+        if (!Schema::hasColumn('stocks', 'kode_pengiriman')) {
+            return response()->json(['error' => 'Column does not exist'], 404);
+        }
+
+        $pengirimans = Stock::whereNotNull('kode_pengiriman')
+            ->where('kode_pengiriman', 'LIKE', 'SER%')
+            ->orderBy('created_at', 'desc')
+            ->get()
+            ->groupBy('kode_pengiriman')
+            ->map(function ($group) {
+                return [
+                    'kode_pengiriman' => $group->first()->kode_pengiriman,
+                    'serialnumber' => $group->pluck('serialnumber')->all(),
+                    'tipe' => $group->first()->tipe,
+                    'serial_count' => $group->count(),
+                    'id' => md5($group->first()->kode_pengiriman)
+                ];
+            });
+
+        if ($request->ajax()) {
+            return DataTables::of($pengirimans)
+                ->addColumn('action', function ($row) {
+                    $actionHtml = '<div class="d-flex align-items-center gap-3">';
+                    $actionHtml .= '<a href="#" class="text-decoration-none" data-toggle="modal" data-target="#cekSN' . $row['id'] . '"><i class="fa-solid fa-eye"></i> Cek SN</a>';
+                    $actionHtml .= '</div>';
+                    $actionHtml .= $this->cekSnModal($row);
+                    return $actionHtml;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+
+        return view('stock.pengiriman.service.index', compact('pengirimans'));
+    }
+
+    public function pengirimanDipinjam(Request $request)
+    {
+        if (!Schema::hasColumn('stocks', 'kode_pengiriman')) {
+            return response()->json(['error' => 'Column does not exist'], 404);
+        }
+
+        $pengirimans = Stock::whereNotNull('kode_pengiriman')
+            ->where('kode_pengiriman', 'LIKE', 'DIP%')
+            ->orderBy('created_at', 'desc')
+            ->get()
+            ->groupBy('kode_pengiriman')
+            ->map(function ($group) {
+                return [
+                    'kode_pengiriman' => $group->first()->kode_pengiriman,
+                    'serialnumber' => $group->pluck('serialnumber')->all(),
+                    'tipe' => $group->first()->tipe,
+                    'serial_count' => $group->count(),
+                    'id' => md5($group->first()->kode_pengiriman)
+                ];
+            });
+
+        if ($request->ajax()) {
+            return DataTables::of($pengirimans)
+                ->addColumn('action', function ($row) {
+                    $actionHtml = '<div class="d-flex align-items-center gap-3">';
+                    $actionHtml .= '<a href="#" class="text-decoration-none" data-toggle="modal" data-target="#cekSN' . $row['id'] . '"><i class="fa-solid fa-eye"></i> Cek SN</a>';
+                    $actionHtml .= '</div>';
+                    $actionHtml .= $this->cekSnModal($row);
+                    return $actionHtml;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+
+        return view('stock.pengiriman.dipinjam.index', compact('pengirimans'));
+    }
+
+    public function pengirimanTerjual(Request $request)
+    {
+        if (!Schema::hasColumn('stocks', 'kode_pengiriman')) {
+            return response()->json(['error' => 'Column does not exist'], 404);
+        }
+
+        $pengirimans = Stock::whereNotNull('kode_pengiriman')
+            ->where('kode_pengiriman', 'LIKE', 'TER%')
+            ->orderBy('created_at', 'desc')
+            ->get()
+            ->groupBy('kode_pengiriman')
+            ->map(function ($group) {
+                return [
+                    'kode_pengiriman' => $group->first()->kode_pengiriman,
+                    'serialnumber' => $group->pluck('serialnumber')->all(),
+                    'tipe' => $group->first()->tipe,
+                    'serial_count' => $group->count(),
+                    'id' => md5($group->first()->kode_pengiriman)
+                ];
+            });
+
+        if ($request->ajax()) {
+            return DataTables::of($pengirimans)
+                ->addColumn('action', function ($row) {
+                    $actionHtml = '<div class="d-flex align-items-center gap-3">';
+                    $actionHtml .= '<a href="#" class="text-decoration-none" data-toggle="modal" data-target="#cekSN' . $row['id'] . '"><i class="fa-solid fa-eye"></i> Cek SN</a>';
+                    $actionHtml .= '</div>';
+                    $actionHtml .= $this->cekSnModal($row);
+                    return $actionHtml;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+
+        return view('stock.pengiriman.terjual.index', compact('pengirimans'));
+    }
+
+    public function pengirimanTitip(Request $request)
+    {
+        if (!Schema::hasColumn('stocks', 'kode_pengiriman')) {
+            return response()->json(['error' => 'Column does not exist'], 404);
+        }
+
+        $pengirimans = Stock::whereNotNull('kode_pengiriman')
+            ->where('kode_pengiriman', 'LIKE', 'TER%')
+            ->orderBy('created_at', 'desc')
+            ->get()
+            ->groupBy('kode_pengiriman')
+            ->map(function ($group) {
+                return [
+                    'kode_pengiriman' => $group->first()->kode_pengiriman,
+                    'serialnumber' => $group->pluck('serialnumber')->all(),
+                    'tipe' => $group->first()->tipe,
+                    'serial_count' => $group->count(),
+                    'id' => md5($group->first()->kode_pengiriman)
+                ];
+            });
+
+        if ($request->ajax()) {
+            return DataTables::of($pengirimans)
+                ->addColumn('action', function ($row) {
+                    $actionHtml = '<div class="d-flex align-items-center gap-3">';
+                    $actionHtml .= '<a href="#" class="text-decoration-none" data-toggle="modal" data-target="#cekSN' . $row['id'] . '"><i class="fa-solid fa-eye"></i> Cek SN</a>';
+                    $actionHtml .= '</div>';
+                    $actionHtml .= $this->cekSnModal($row);
+                    return $actionHtml;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+
+        return view('stock.pengiriman.titip.index', compact('pengirimans'));
+    }
+
+    public function pengirimanRusak(Request $request)
+    {
+        if (!Schema::hasColumn('stocks', 'kode_pengiriman')) {
+            return response()->json(['error' => 'Column does not exist'], 404);
+        }
+
+        $pengirimans = Stock::whereNotNull('kode_pengiriman')
+            ->where('kode_pengiriman', 'LIKE', 'RUS%')
+            ->orderBy('created_at', 'desc')
+            ->get()
+            ->groupBy('kode_pengiriman')
+            ->map(function ($group) {
+                return [
+                    'kode_pengiriman' => $group->first()->kode_pengiriman,
+                    'serialnumber' => $group->pluck('serialnumber')->all(),
+                    'tipe' => $group->first()->tipe,
+                    'serial_count' => $group->count(),
+                    'id' => md5($group->first()->kode_pengiriman)
+                ];
+            });
+
+        if ($request->ajax()) {
+            return DataTables::of($pengirimans)
+                ->addColumn('action', function ($row) {
+                    $actionHtml = '<div class="d-flex align-items-center gap-3">';
+                    $actionHtml .= '<a href="#" class="text-decoration-none" data-toggle="modal" data-target="#cekSN' . $row['id'] . '"><i class="fa-solid fa-eye"></i> Cek SN</a>';
+                    $actionHtml .= '</div>';
+                    $actionHtml .= $this->cekSnModal($row);
+                    return $actionHtml;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+
+        return view('stock.pengiriman.rusak.index', compact('pengirimans'));
+    }
 
     private function cekSnModal($row)
     {
@@ -195,10 +380,14 @@ class StockController extends Controller
                             <form id="validateForm' . $row['id'] . '" method="POST" action="' . route('validate.serialnumber') . '">
                                 ' . csrf_field() . '
                                 <input type="hidden" name="id" value="' . $row['id'] . '">
-                                <label for="cekOldSN">Serial Numbers</label>
-                                <textarea id="cekOldSN" class="bg-light" name="cekOldSN" rows="4" cols="50" readonly>' . implode("\n", $row['serialnumber']) . '</textarea>
-                                <label for="cekInputSN">Input Serial Numbers</label>
-                                <textarea id="cekInputSN" name="cekInputSN" rows="4" cols="50"></textarea>
+                                <div class="form-group">
+                                    <label for="cekOldSN">Serial Numbers</label>
+                                    <textarea id="cekOldSN" class="form-control shadow-none bg-light" name="cekOldSN" rows="4" readonly>' . implode("\n", $row['serialnumber']) . '</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cekInputSN">Input Serial Numbers</label>
+                                    <textarea id="cekInputSN" class="form-control shadow-none" name="cekInputSN" rows="4"></textarea>
+                                </div>
                             </form>
                         </div>
                         <div class="modal-footer">
@@ -224,17 +413,15 @@ class StockController extends Controller
         $inputSN = array_map('trim', $inputSN);
 
         if ($oldSN == $inputSN) {
-            $pengiriman = Stock::find($request->input('id'));
-            if ($pengiriman) {
-                $pengiriman->kode_pengiriman = null;
-                $pengiriman->save();
+            $record = Stock::where('serialnumber', $oldSN[0])->first();
+            if ($record) {
+                Stock::where('kode_pengiriman', $record->kode_pengiriman)->update(['kode_pengiriman' => null]);
             }
             return redirect()->back()->with('success', 'Validasi Berhasil');
         } else {
             return redirect()->back()->with('error', 'Validasi Gagal! SN yang dimasukan tidak sesuai');
         }
     }
-
 
     public function allstocks(Request $request)
     {

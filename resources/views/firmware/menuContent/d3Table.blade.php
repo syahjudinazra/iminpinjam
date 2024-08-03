@@ -139,70 +139,73 @@
                     @include('firmware.sidebar')
                 </div>
                 <div id="firmwares-content" class="container-fluid">
-                    <table id="firmwareTable" class="table table-striped table-bordered nowrap" style="width:100%">
-                        <thead>
-                            <th>Model</th>
-                            <th>Android</th>
-                            <th>Version</th>
-                            <th>Flash</th>
-                            <th>OTA</th>
-                            <th>Action</th>
-                        </thead>
-                        <tbody>
-                            @empty($d3)
-                                <tr>
-                                    <td colspan="6">No data found</td>
-                                </tr>
-                            @else
-                                @foreach ($d3 as $item)
+                    <div class="overflow-auto">
+                        <table id="firmwareTable" class="table table-striped table-bordered nowrap" style="width:100%">
+                            <thead>
+                                <th>Model</th>
+                                <th>Android</th>
+                                <th>Version</th>
+                                <th>Flash</th>
+                                <th>OTA</th>
+                                <th>Action</th>
+                            </thead>
+                            <tbody>
+                                @empty($d3)
                                     <tr>
-                                        <td>{{ $item->tipe }}</td>
-                                        <td>{{ $item->android }}</td>
-                                        <td>{{ $item->version }}</td>
-                                        @if ($item->flash)
-                                            <td> <a href="{{ $item->flash }}" class="btn btn-success btn-sm"
-                                                    target="__blank">Download</a></td>
-                                        @else
-                                            <td></td>
-                                        @endif
+                                        <td colspan="6">No data found</td>
+                                    </tr>
+                                @else
+                                    @foreach ($d3 as $item)
+                                        <tr>
+                                            <td>{{ $item->tipe }}</td>
+                                            <td>{{ $item->android }}</td>
+                                            <td>{{ $item->version }}</td>
+                                            @if ($item->flash)
+                                                <td> <a href="{{ $item->flash }}" class="btn btn-success btn-sm"
+                                                        target="__blank">Download</a></td>
+                                            @else
+                                                <td></td>
+                                            @endif
 
-                                        @if ($item->ota)
-                                            <td>
-                                                <a href="{{ $item->ota }}" class="btn btn-secondary btn-sm"
-                                                    target="__blank">Download</a>
-                                            </td>
-                                        @else
-                                            <td></td>
-                                        @endif
-                                        @auth
-                                            @if (auth()->user()->hasRole('superadmin') || auth()->user()->hasRole('jeffri'))
+                                            @if ($item->ota)
                                                 <td>
-                                                    <a href="#" class="text-decoration-none" data-bs-toggle="modal"
-                                                        data-target="#editModal{{ $item->id }}" data-bs-toggle="tooltip"
-                                                        data-bs-placement="top" title="Edit"><i
-                                                            class="fa-solid fa-pen-to-square"></i> Edit</a>
-
-                                                    <a href="#" class="text-decoration-none" data-bs-toggle="modal"
-                                                        data-target="#deleteModal{{ $item->id }}" data-bs-toggle="tooltip"
-                                                        data-bs-placement="top" title="Delete"><i class="fa-solid fa-trash"></i>
-                                                        Delete</a>
+                                                    <a href="{{ $item->ota }}" class="btn btn-secondary btn-sm"
+                                                        target="__blank">Download</a>
                                                 </td>
                                             @else
                                                 <td></td>
                                             @endif
-                                        @endauth
-                                    </tr>
-                                @endforeach
-                            @endempty
-                        </tbody>
-                        <tfoot>
-                            <th>Model</th>
-                            <th>Android</th>
-                            <th>Version</th>
-                            <th>Flash</th>
-                            <th>OTA</th>
-                        </tfoot>
-                    </table>
+                                            @auth
+                                                @if (auth()->user()->hasRole('superadmin') || auth()->user()->hasRole('jeffri'))
+                                                    <td>
+                                                        <a href="#" class="text-decoration-none" data-bs-toggle="modal"
+                                                            data-target="#editModal{{ $item->id }}" data-bs-toggle="tooltip"
+                                                            data-bs-placement="top" title="Edit"><i
+                                                                class="fa-solid fa-pen-to-square"></i> Edit</a>
+
+                                                        <a href="#" class="text-decoration-none" data-bs-toggle="modal"
+                                                            data-target="#deleteModal{{ $item->id }}"
+                                                            data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i
+                                                                class="fa-solid fa-trash"></i>
+                                                            Delete</a>
+                                                    </td>
+                                                @else
+                                                    <td></td>
+                                                @endif
+                                            @endauth
+                                        </tr>
+                                    @endforeach
+                                @endempty
+                            </tbody>
+                            <tfoot>
+                                <th>Model</th>
+                                <th>Android</th>
+                                <th>Version</th>
+                                <th>Flash</th>
+                                <th>OTA</th>
+                            </tfoot>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

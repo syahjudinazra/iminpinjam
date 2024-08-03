@@ -14,63 +14,65 @@
     </div>
 
     <div class="container-fluid">
-        <table id="hometable" class="table table-striped table-bordered" style="width:100%">
-            <thead>
-                <tr>
-                    <th>User</th>
-                    <th>No SpareParts</th>
-                    <th>Tipe</th>
-                    <th>Before</th>
-                    <th>After</th>
-                    <th>Description</th>
-                    <th>Date Changes</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($historyLog as $item)
+        <div class="overflow-auto">
+            <table id="hometable" class="table table-striped table-bordered" style="width:100%">
+                <thead>
                     <tr>
-                        <td>{{ $item->causer->name }}</td>
-                        <td>
-                            @if ($item->subject)
-                                {{ $item->subject->nospareparts }}
-                            @endif
-                        </td>
-                        <td>
-                            @if ($item->subject)
-                                {{ $item->subject->tipe }}
-                            @endif
-                        </td>
-                        <td>
-                            @if (@is_array($item->changes['old']))
-                                @foreach ($item->changes['old'] as $key => $itemChange)
-                                    {{ $key }} : {{ $itemChange }}
-                                @endforeach
-                            @endif
-                        </td>
-                        <td>
-                            @if (@is_array($item->changes['attributes']))
-                                @foreach ($item->changes['attributes'] as $key => $itemChange)
-                                    {{ $key }} : {{ $itemChange }}
-                                @endforeach
-                            @endif
-                        </td>
-                        <td>{{ $item->description }}</td>
-                        <td>{{ $item->created_at->setTimezone('Asia/Jakarta')->format('d/m/Y H:i:s') }}</td>
+                        <th>User</th>
+                        <th>No SpareParts</th>
+                        <th>Tipe</th>
+                        <th>Before</th>
+                        <th>After</th>
+                        <th>Description</th>
+                        <th>Date Changes</th>
                     </tr>
-                @endforeach
-            </tbody>
+                </thead>
+                <tbody>
+                    @foreach ($historyLog as $item)
+                        <tr>
+                            <td>{{ $item->causer->name }}</td>
+                            <td>
+                                @if ($item->subject)
+                                    {{ $item->subject->nospareparts }}
+                                @endif
+                            </td>
+                            <td>
+                                @if ($item->subject)
+                                    {{ $item->subject->tipe }}
+                                @endif
+                            </td>
+                            <td>
+                                @if (@is_array($item->changes['old']))
+                                    @foreach ($item->changes['old'] as $key => $itemChange)
+                                        {{ $key }} : {{ $itemChange }}
+                                    @endforeach
+                                @endif
+                            </td>
+                            <td>
+                                @if (@is_array($item->changes['attributes']))
+                                    @foreach ($item->changes['attributes'] as $key => $itemChange)
+                                        {{ $key }} : {{ $itemChange }}
+                                    @endforeach
+                                @endif
+                            </td>
+                            <td>{{ $item->description }}</td>
+                            <td>{{ $item->created_at->setTimezone('Asia/Jakarta')->format('d/m/Y H:i:s') }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
 
-            <tfoot>
-                <tr>
-                    <th>User</th>
-                    <th>No SpareParts</th>
-                    <th>Tipe</th>
-                    <th>Before</th>
-                    <th>After</th>
-                    <th>Description</th>
-                    <th>Date Changes</th>
-                </tr>
-            </tfoot>
-        </table>
+                <tfoot>
+                    <tr>
+                        <th>User</th>
+                        <th>No SpareParts</th>
+                        <th>Tipe</th>
+                        <th>Before</th>
+                        <th>After</th>
+                        <th>Description</th>
+                        <th>Date Changes</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
     </div>
 @endsection
