@@ -158,6 +158,7 @@ class StockController extends Controller
                     'kode_pengiriman' => $group->first()->kode_pengiriman,
                     'serialnumber' => $group->pluck('serialnumber')->all(),
                     'tipe' => $group->first()->tipe,
+                    'pelanggan' => $group->first()->pelanggan,
                     'serial_count' => $group->count(),
                     'id' => md5($group->first()->kode_pengiriman)
                 ];
@@ -195,6 +196,7 @@ class StockController extends Controller
                     'kode_pengiriman' => $group->first()->kode_pengiriman,
                     'serialnumber' => $group->pluck('serialnumber')->all(),
                     'tipe' => $group->first()->tipe,
+                    'pelanggan' => $group->first()->pelanggan,
                     'serial_count' => $group->count(),
                     'id' => md5($group->first()->kode_pengiriman)
                 ];
@@ -232,6 +234,7 @@ class StockController extends Controller
                     'kode_pengiriman' => $group->first()->kode_pengiriman,
                     'serialnumber' => $group->pluck('serialnumber')->all(),
                     'tipe' => $group->first()->tipe,
+                    'pelanggan' => $group->first()->pelanggan,
                     'serial_count' => $group->count(),
                     'id' => md5($group->first()->kode_pengiriman)
                 ];
@@ -269,6 +272,7 @@ class StockController extends Controller
                     'kode_pengiriman' => $group->first()->kode_pengiriman,
                     'serialnumber' => $group->pluck('serialnumber')->all(),
                     'tipe' => $group->first()->tipe,
+                    'pelanggan' => $group->first()->pelanggan,
                     'serial_count' => $group->count(),
                     'id' => md5($group->first()->kode_pengiriman)
                 ];
@@ -297,7 +301,7 @@ class StockController extends Controller
         }
 
         $pengirimans = Stock::whereNotNull('kode_pengiriman')
-            ->where('kode_pengiriman', 'LIKE', 'TER%')
+            ->where('kode_pengiriman', 'LIKE', 'TIT%')
             ->orderBy('created_at', 'desc')
             ->get()
             ->groupBy('kode_pengiriman')
@@ -306,6 +310,7 @@ class StockController extends Controller
                     'kode_pengiriman' => $group->first()->kode_pengiriman,
                     'serialnumber' => $group->pluck('serialnumber')->all(),
                     'tipe' => $group->first()->tipe,
+                    'pelanggan' => $group->first()->pelanggan,
                     'serial_count' => $group->count(),
                     'id' => md5($group->first()->kode_pengiriman)
                 ];
@@ -343,6 +348,7 @@ class StockController extends Controller
                     'kode_pengiriman' => $group->first()->kode_pengiriman,
                     'serialnumber' => $group->pluck('serialnumber')->all(),
                     'tipe' => $group->first()->tipe,
+                    'pelanggan' => $group->first()->pelanggan,
                     'serial_count' => $group->count(),
                     'id' => md5($group->first()->kode_pengiriman)
                 ];

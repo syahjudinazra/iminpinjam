@@ -18,6 +18,7 @@
                             <th>Kode Pengiriman</th>
                             <th>Serial Number</th>
                             <th>Tipe</th>
+                            <th>Pelanggan</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -26,6 +27,7 @@
                             <th>Kode Pengiriman</th>
                             <th>Serial Number</th>
                             <th>Tipe</th>
+                            <th>Pelanggan</th>
                             <th>Action</th>
                         </tr>
                     </tfoot>
@@ -70,6 +72,10 @@
                         {
                             data: 'tipe',
                             name: 'tipe'
+                        },
+                        {
+                            data: 'pelanggan',
+                            name: 'pelanggan'
                         },
                         {
                             data: 'action',
