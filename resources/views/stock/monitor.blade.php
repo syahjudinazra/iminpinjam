@@ -54,7 +54,7 @@
                         <div class="d-flex gap-4">
                             <textarea class="form-control w-auto shadow-none" id="serialnumber" name="serialnumber" rows="5" cols="30"
                                 placeholder="Enter the SN (Multiple Sns Separated by enter)." required></textarea>
-                            <div id="tableWrapper">
+                            <div id="tableWrapper" class="table-responsive">
                                 <table class="table table-bordered">
                                     <thead class="table-light">
                                         <tr>
