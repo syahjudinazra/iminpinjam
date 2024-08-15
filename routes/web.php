@@ -108,6 +108,7 @@ Route::prefix('firmware')->middleware('auth')->group(function () {
 
     Route::post('/firmware-import', [FirmwareController::class, 'import'])->name('firmware.import');
     Route::get('download/{filename}', [FirmwareController::class, 'templateImportFirmware'])->name('template.firmware');
+    Route::get('/export-firmwares', [FirmwareController::class, 'export'])->middleware('auth')->name('export.firmwares');
 
     Route::get('/m2-202', [FirmwareController::class, 'm202'])
         ->name('firmware.m202');

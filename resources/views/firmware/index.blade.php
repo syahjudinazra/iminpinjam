@@ -9,15 +9,8 @@
                     <h3>Firmware</h3>
                 </div>
                 @auth
-                    @if (auth()->user()->hasRole('superadmin') ||
-                            auth()->user()->hasRole('jeffri'))
-                        <div class="edit-firmware">
-                            <a href="/firmware/table" class="btn btn-primary"><i class="fas fa-table"></i>
-                                Edit
-                            </a>
-
-                            <a href="#" class="btn btn-success" data-toggle="modal" data-target="#importModal"><i class="fas fa-file-import"></i> Import</a>
-                        </div>
+                    @if (auth()->user()->hasAnyRole(['superadmin', 'jeffri']))
+                        @include('components.firmware.ReportAction')
                     @endif
                 @endauth
             </div>
@@ -33,8 +26,8 @@
                             @csrf
                             <div class="modal-body">
                                 <div class="d-flex justify-content-center">
-                                    <input type="file" name="inputFirmware" id="inputFirmware" class="form-control shadow-none"
-                                        style="width: auto">
+                                    <input type="file" name="inputFirmware" id="inputFirmware"
+                                        class="form-control shadow-none" style="width: auto">
                                 </div>
                                 <a href="{{ route('template.firmware', ['filename' => 'TemplateImportFirmware.xlsx']) }}"
                                     class="d-flex justify-content-center text-decoration-none">Download
@@ -61,5 +54,4 @@
             </div>
         </div>
     </div>
-
 @endsection

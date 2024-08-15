@@ -9,15 +9,8 @@
                     <h3>Firmware</h3>
                 </div>
                 @auth
-                    @if (auth()->user()->hasRole('superadmin') || auth()->user()->hasRole('jeffri'))
-                        <div class="edit-firmware">
-                            <a href="/firmware/table" class="btn btn-primary"><i class="fas fa-table"></i>
-                                Edit
-                            </a>
-
-                            <a href="#" class="btn btn-success" data-toggle="modal" data-target="#importModal"><i
-                                    class="fas fa-file-import"></i> Import</a>
-                        </div>
+                    @if (auth()->user()->hasAnyRole(['superadmin', 'jeffri']))
+                        @include('components.firmware.ReportAction')
                     @endif
                 @endauth
             </div>
@@ -95,8 +88,7 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">Cancel</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                                     <button type="submit" class="btn btn-primary">Save Changes</button>
                                 </div>
                             </form>

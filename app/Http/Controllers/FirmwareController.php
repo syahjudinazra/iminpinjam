@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\FirmwareExport;
 use App\Imports\FirmwareImport;
 use App\Models\Firmware;
 use Illuminate\Http\Request;
@@ -26,6 +27,14 @@ class FirmwareController extends Controller
     {
         $firmware = Firmware::all();
         return view('firmware.table', compact('firmware'));
+    }
+
+    public function export()
+    {
+        $timestamp = now()->format('d-m-Y');
+        $fileName = 'DataFirmwares_' . $timestamp . '.xlsx';
+
+        return Excel::download(new FirmwareExport, $fileName);
     }
 
     public function import(Request $request)
@@ -58,7 +67,6 @@ class FirmwareController extends Controller
             return redirect()->back()->with('error', 'Data gagal diimport' . $e->getMessage());
         }
     }
-
 
     public function templateImportFirmware($filename)
     {
@@ -348,12 +356,13 @@ class FirmwareController extends Controller
             $firmware->ota = $request->input('ota') ?? '';
 
             $firmware->update();
-            return response()->json('message', 'Data berhasil diubah');
+            return redirect()->back()->with('success', 'Data berhasil diubah');
         } catch (\Exception $e) {
             // Log error
-            return response()->json('error', 'Data gagal diubah');
+            return redirect()->back()->with('error', 'Data gagal diubah');
         }
     }
+
 
     /**
      * Remove the specified resource from storage.
