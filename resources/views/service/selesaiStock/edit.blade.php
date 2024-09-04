@@ -85,23 +85,14 @@
                     <select class="form-select shadow-none" id="teknisi" name="teknisi" value="{{ old('teknisi') }}"
                         required>
                         <option value="Null">Pilih Teknisi</option>
-                        <option value="Khaerul"{{ $service->teknisi == 'Khaerul' ? 'selected' : '' }}>
-                            Khaerul
-                        </option>
                         <option value="Ozi"{{ $service->teknisi == 'Ozi' ? 'selected' : '' }}>
                             Ozi
                         </option>
                         <option value="Alfian"{{ $service->teknisi == 'Alfian' ? 'selected' : '' }}>
                             Alfian
                         </option>
-                        <option value="Timo"{{ $service->teknisi == 'Timo' ? 'selected' : '' }}>
-                            Timo
-                        </option>
                         <option value="Andre"{{ $service->teknisi == 'Andre' ? 'selected' : '' }}>
                             Andre
-                        </option>
-                        <option value="Barul"{{ $service->teknisi == 'Barul' ? 'selected' : '' }}>
-                            Barul
                         </option>
                         <option value="Other"{{ $service->teknisi == 'Other' ? 'selected' : '' }}>
                             Other
