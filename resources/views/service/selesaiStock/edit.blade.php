@@ -94,6 +94,9 @@
                         <option value="Andre"{{ $service->teknisi == 'Andre' ? 'selected' : '' }}>
                             Andre
                         </option>
+                        <option value="Matthew"{{ $service->teknisi == 'Matthew' ? 'selected' : '' }}>
+                            Matthew
+                        </option>
                         <option value="Other"{{ $service->teknisi == 'Other' ? 'selected' : '' }}>
                             Other
                         </option>

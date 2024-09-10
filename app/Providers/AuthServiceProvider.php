@@ -26,7 +26,7 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         Gate::define('tambah-service', function ($user) {
-            return $user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana');
+            return $user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana') || $user->hasRole('matthew');
         });
     }
 

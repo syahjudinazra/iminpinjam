@@ -45,7 +45,7 @@ class ServiceController extends Controller
                     if (auth()->check()) {
                         $user = auth()->user();
 
-                        if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
+                        if ($user->hasAnyRole(['superadmin', 'jeffri', 'maulana', 'matthew'])) {
                             $actionHtml .= '
                                 <div class="dropdown dropright">
                                     <a href="#" class="text-decoration-none dropdown-toggle"
@@ -54,12 +54,12 @@ class ServiceController extends Controller
                                     </a>
                                     <div class="dropdown-menu">';
 
-                            if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
+                            if ($user->hasAnyRole(['superadmin', 'jeffri', 'maulana', 'matthew'])) {
                                 $actionHtml .= '<a class="dropdown-item" href="#" data-bs-toggle="modal"
                                                     data-target="#copyText' . $antrianPelanggan->id . '"><i
                                                         class="fa-solid fa-clone"></i> Copy</a>';
                             }
-                            if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
+                            if ($user->hasAnyRole(['superadmin', 'jeffri', 'maulana', 'matthew'])) {
                                 $actionHtml .= '<a class="dropdown-item" href="' . route('service.moveAntrianPelanggan', ['id' => $antrianPelanggan->id]) . '
                                     " target="_blank" ><i class="fa-solid fa-paper-plane"></i> Move</a>
                                                     <a class="dropdown-item" href="' . route('service.editAntrianPelanggan', ['id' => $antrianPelanggan->id]) . '
@@ -106,7 +106,7 @@ class ServiceController extends Controller
                     if (auth()->check()) {
                         $user = auth()->user();
 
-                        if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
+                        if($user->hasAnyRole(['superadmin', 'jeffri', 'maulana', 'matthew'])) {
                             $actionHtml .= '
                                 <div class="dropdown dropright">
                                     <a href="#" class="text-decoration-none dropdown-toggle"
@@ -115,12 +115,12 @@ class ServiceController extends Controller
                                     </a>
                                     <div class="dropdown-menu">';
 
-                            if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
+                            if($user->hasAnyRole(['superadmin', 'jeffri', 'maulana', 'matthew'])) {
                                 $actionHtml .= '<a class="dropdown-item" href="#" data-bs-toggle="modal"
                                                     data-target="#copyText' . $validasiPelanggan->id . '"><i
                                                         class="fa-solid fa-clone"></i> Copy</a>';
                             }
-                            if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
+                            if($user->hasAnyRole(['superadmin', 'jeffri', 'maulana', 'matthew'])) {
                                 $actionHtml .= '  <a class="dropdown-item" href="' . route('service.moveValidasiPelanggan', ['id' => $validasiPelanggan->id]) . '
                                     " target="_blank" ><i class="fa-solid fa-paper-plane"></i> Move</a>
                                                     <a class="dropdown-item" href="' . route('service.editValidasiPelanggan', ['id' => $validasiPelanggan->id]) . '
@@ -168,7 +168,7 @@ class ServiceController extends Controller
                     if (auth()->check()) {
                         $user = auth()->user();
 
-                        if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
+                        if($user->hasAnyRole(['superadmin', 'jeffri', 'maulana', 'matthew'])) {
                             $actionHtml .= '
                                 <div class="dropdown dropright">
                                     <a href="#" class="text-decoration-none dropdown-toggle"
@@ -177,12 +177,12 @@ class ServiceController extends Controller
                                     </a>
                                     <div class="dropdown-menu">';
 
-                            if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
+                            if($user->hasAnyRole(['superadmin', 'jeffri', 'maulana', 'matthew'])) {
                                 $actionHtml .= '<a class="dropdown-item" href="#" data-bs-toggle="modal"
                                                     data-target="#copyText' . $service->id . '"><i
                                                         class="fa-solid fa-clone"></i> Copy</a>';
                             }
-                            if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
+                            if($user->hasAnyRole(['superadmin', 'jeffri', 'maulana', 'matthew'])) {
                                 $actionHtml .= '<a class="dropdown-item" href="' . route('service.editSelesaiPelanggan', ['id' => $service->id]) . '
                                                     " target="_blank" ><i class="fa-solid fa-pen-to-square"></i> Edit</a>
                                                     <a class="dropdown-item" href="#" data-bs-toggle="modal"
@@ -230,7 +230,7 @@ class ServiceController extends Controller
                     if (auth()->check()) {
                         $user = auth()->user();
 
-                        if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
+                        if($user->hasAnyRole(['superadmin', 'jeffri', 'maulana', 'matthew'])) {
                             $actionHtml .= '
                                 <div class="dropdown dropright">
                                     <a href="#" class="text-decoration-none dropdown-toggle"
@@ -239,12 +239,12 @@ class ServiceController extends Controller
                                     </a>
                                     <div class="dropdown-menu">';
 
-                            if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
+                            if($user->hasAnyRole(['superadmin', 'jeffri', 'maulana', 'matthew'])) {
                                 $actionHtml .= '<a class="dropdown-item" href="#" data-bs-toggle="modal"
                                                     data-target="#copyText' . $antrianStock->id . '"><i
                                                         class="fa-solid fa-clone"></i> Copy</a>';
                             }
-                            if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
+                            if($user->hasAnyRole(['superadmin', 'jeffri', 'maulana', 'matthew'])) {
                                 $actionHtml .= '  <a class="dropdown-item" href="' . route('service.moveAntrianStock', ['id' => $antrianStock->id]) . '
                                     " target="_blank" ><i class="fa-solid fa-paper-plane"></i> Move</a>
                                                     <a class="dropdown-item" href="' . route('service.editAntrianStock', ['id' => $antrianStock->id]) . '
@@ -290,7 +290,7 @@ class ServiceController extends Controller
                     if (auth()->check()) {
                         $user = auth()->user();
 
-                        if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
+                        if($user->hasAnyRole(['superadmin', 'jeffri', 'maulana', 'matthew'])) {
                             $actionHtml .= '
                                 <div class="dropdown dropright">
                                     <a href="#" class="text-decoration-none dropdown-toggle"
@@ -299,12 +299,12 @@ class ServiceController extends Controller
                                     </a>
                                     <div class="dropdown-menu">';
 
-                            if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
+                            if($user->hasAnyRole(['superadmin', 'jeffri', 'maulana', 'matthew'])) {
                                 $actionHtml .= '<a class="dropdown-item" href="#" data-bs-toggle="modal"
                                                     data-target="#copyText' . $validasiStock->id . '"><i
                                                         class="fa-solid fa-clone"></i> Copy</a>';
                             }
-                            if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
+                            if($user->hasAnyRole(['superadmin', 'jeffri', 'maulana', 'matthew'])) {
                                 $actionHtml .= '  <a class="dropdown-item" href="' . route('service.moveValidasiStock', ['id' => $validasiStock->id]) . '
                                     " target="_blank" ><i class="fa-solid fa-paper-plane"></i> Move</a>
                                                     <a class="dropdown-item" href="' . route('service.editValidasiStock', ['id' => $validasiStock->id]) . '
@@ -351,7 +351,7 @@ class ServiceController extends Controller
                     if (auth()->check()) {
                         $user = auth()->user();
 
-                        if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
+                        if($user->hasAnyRole(['superadmin', 'jeffri', 'maulana', 'matthew'])) {
                             $actionHtml .= '
                                 <div class="dropdown dropright">
                                     <a href="#" class="text-decoration-none dropdown-toggle"
@@ -360,12 +360,12 @@ class ServiceController extends Controller
                                     </a>
                                     <div class="dropdown-menu">';
 
-                            if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
+                            if($user->hasAnyRole(['superadmin', 'jeffri', 'maulana', 'matthew'])) {
                                 $actionHtml .= '<a class="dropdown-item" href="#" data-bs-toggle="modal"
                                                     data-target="#copyText' . $service->id . '"><i
                                                         class="fa-solid fa-clone"></i> Copy</a>';
                             }
-                            if ($user->hasRole('superadmin') || $user->hasRole('jeffri') || $user->hasRole('maulana')) {
+                            if($user->hasAnyRole(['superadmin', 'jeffri', 'maulana', 'matthew'])) {
                                 $actionHtml .= '<a class="dropdown-item" href="' . route('service.editSelesaiStock', ['id' => $service->id]) . '
                                                     " target="_blank" ><i class="fa-solid fa-pen-to-square"></i> Edit</a>
                                                     <a class="dropdown-item" href="#" data-bs-toggle="modal"

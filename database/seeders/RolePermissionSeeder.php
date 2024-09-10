@@ -36,6 +36,7 @@ class RolePermissionSeeder extends Seeder
         Role::create(['name' => 'sales']);
         Role::create(['name' => 'teknisi']);
         Role::create(['name' => 'juli']);
+        Role::create(['name' => 'matthew']);
 
         $roleSuperAdmin = Role::findByName('superadmin');
         $roleSuperAdmin->givePermissionTo('tambah-user');
@@ -54,6 +55,12 @@ class RolePermissionSeeder extends Seeder
         $roleMaulana->givePermissionTo('edit-data');
         $roleMaulana->givePermissionTo('lihat-data');
         $roleMaulana->givePermissionTo('hapus-data');
+
+        $roleMatthew = Role::findByName('matthew');
+        $roleMatthew->givePermissionTo('tambah-data');
+        $roleMatthew->givePermissionTo('edit-data');
+        $roleMatthew->givePermissionTo('lihat-data');
+        $roleMatthew->givePermissionTo('hapus-data');
 
         $roleVivi = Role::findByName('vivi');
         $roleVivi->givePermissionTo('tambah-data');
