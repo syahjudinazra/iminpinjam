@@ -388,7 +388,7 @@ class StockController extends Controller
                                 <input type="hidden" name="id" value="' . $row['id'] . '">
                                 <div class="form-group">
                                     <label for="cekOldSN">Serial Numbers</label>
-                                    <textarea id="cekOldSN" class="form-control shadow-none bg-light" name="cekOldSN" rows="4" readonly>' . implode("\n", $row['serialnumber']) . '</textarea>
+                                    <textarea id="cekOldSN" class="form-control shadow-none bg-light" name="cekOldSN" rows="4" readonly oncopy="return false;">' . implode("\n", $row['serialnumber']) . '</textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="cekInputSN">Input Serial Numbers</label>
@@ -404,6 +404,7 @@ class StockController extends Controller
                 </div>
             </div>';
     }
+
 
     public function validateSerialNumber(Request $request)
     {
