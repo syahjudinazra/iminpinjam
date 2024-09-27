@@ -149,7 +149,7 @@ class StockController extends Controller
         }
 
         $pengirimans = Stock::whereNotNull('kode_pengiriman')
-            ->where('kode_pengiriman', 'LIKE', 'PEL%')
+            ->where('kode_pengiriman', 'LIKE', 'GDG%')
             ->orderBy('created_at', 'desc')
             ->get()
             ->groupBy('kode_pengiriman')
@@ -168,7 +168,7 @@ class StockController extends Controller
             return DataTables::of($pengirimans)
                 ->addColumn('action', function ($row) {
                     $actionHtml = '<div class="d-flex align-items-center gap-3">';
-                    $actionHtml .= '<a href="#" class="text-decoration-none" data-toggle="modal" data-target="#cekSN' . $row['id'] . '"><i class="fa-solid fa-eye"></i> Cek SN</a>';
+                    $actionHtml .= '<a href="#" class="text-decoration-none" data-toggle="modal" data-target="#cekSN' . $row['id'] . '"><i class="fa-solid fa-eye"></i></a>';
                     $actionHtml .= '</div>';
                     $actionHtml .= $this->cekSnModal($row);
                     return $actionHtml;
@@ -187,7 +187,7 @@ class StockController extends Controller
         }
 
         $pengirimans = Stock::whereNotNull('kode_pengiriman')
-            ->where('kode_pengiriman', 'LIKE', 'SER%')
+            ->where('kode_pengiriman', 'LIKE', 'RSV%')
             ->orderBy('created_at', 'desc')
             ->get()
             ->groupBy('kode_pengiriman')
@@ -225,7 +225,7 @@ class StockController extends Controller
         }
 
         $pengirimans = Stock::whereNotNull('kode_pengiriman')
-            ->where('kode_pengiriman', 'LIKE', 'DIP%')
+            ->where('kode_pengiriman', 'LIKE', 'LOA%')
             ->orderBy('created_at', 'desc')
             ->get()
             ->groupBy('kode_pengiriman')
@@ -263,7 +263,7 @@ class StockController extends Controller
         }
 
         $pengirimans = Stock::whereNotNull('kode_pengiriman')
-            ->where('kode_pengiriman', 'LIKE', 'TER%')
+            ->where('kode_pengiriman', 'LIKE', 'DO%')
             ->orderBy('created_at', 'desc')
             ->get()
             ->groupBy('kode_pengiriman')
@@ -301,7 +301,7 @@ class StockController extends Controller
         }
 
         $pengirimans = Stock::whereNotNull('kode_pengiriman')
-            ->where('kode_pengiriman', 'LIKE', 'TIT%')
+            ->where('kode_pengiriman', 'LIKE', 'TIP%')
             ->orderBy('created_at', 'desc')
             ->get()
             ->groupBy('kode_pengiriman')
@@ -339,7 +339,7 @@ class StockController extends Controller
         }
 
         $pengirimans = Stock::whereNotNull('kode_pengiriman')
-            ->where('kode_pengiriman', 'LIKE', 'RUS%')
+            ->where('kode_pengiriman', 'LIKE', 'EOL%')
             ->orderBy('created_at', 'desc')
             ->get()
             ->groupBy('kode_pengiriman')

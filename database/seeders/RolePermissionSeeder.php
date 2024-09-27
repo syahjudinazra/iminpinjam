@@ -32,11 +32,13 @@ class RolePermissionSeeder extends Seeder
         Role::create(['name' => 'vivi']);
         Role::create(['name' => 'sylvi']);
         Role::create(['name' => 'coni']);
+        Role::create(['name' => 'dinda']);
         Role::create(['name' => 'david']);
         Role::create(['name' => 'sales']);
         Role::create(['name' => 'teknisi']);
         Role::create(['name' => 'juli']);
         Role::create(['name' => 'matthew']);
+        Role::create(['name' => 'supir']);
 
         $roleSuperAdmin = Role::findByName('superadmin');
         $roleSuperAdmin->givePermissionTo('tambah-user');
@@ -80,6 +82,12 @@ class RolePermissionSeeder extends Seeder
         $roleConi->givePermissionTo('lihat-data');
         $roleConi->givePermissionTo('hapus-data');
 
+        $roleDinda = Role::findByName('dinda');
+        $roleDinda->givePermissionTo('tambah-data');
+        $roleDinda->givePermissionTo('edit-data');
+        $roleDinda->givePermissionTo('lihat-data');
+        $roleDinda->givePermissionTo('hapus-data');
+
         $roleDavid = Role::findByName('david');
         $roleDavid->givePermissionTo('tambah-data');
         $roleDavid->givePermissionTo('edit-data');
@@ -97,5 +105,8 @@ class RolePermissionSeeder extends Seeder
 
         $roleTeknisi = Role::findByName('teknisi');
         $roleTeknisi->givePermissionTo('lihat-data');
+
+        $roleSupir = Role::findByName('supir');
+        $roleSupir->givePermissionTo('lihat-data');
     }
 }

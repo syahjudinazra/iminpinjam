@@ -11,179 +11,222 @@
                     <sup>Tech</sup>
                 </div>
             </a>
+            @if (Auth::user()->hasAnyRole([
+                    'superadmin',
+                    'jeffri',
+                    'maulana',
+                    'vivi',
+                    'sylvi',
+                    'coni',
+                    'david',
+                    'sales',
+                    'teknisi',
+                    'juli',
+                    'matthew',
+                    'dinda',
+                ]))
+                <!-- Divider -->
+                <hr class="sidebar-divider my-0">
 
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
+                <!-- Nav Item - Dashboard -->
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::is('/') ? 'active' : '' }}" href="/">
+                        <i class="fas fa-fw fa-tachometer-alt"></i>
+                        <span>Dashboard</span></a>
+                </li>
 
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item">
-                <a class="nav-link {{ Request::is('/') ? 'active' : '' }}" href="/">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
-            </li>
+                <hr class="sidebar-divider">
 
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Stock Barang
-            </div>
-
-            <!-- Nav Item - Pinjam -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-target="#collapseOne"
-                    aria-expanded="true" aria-controls="collapseOne">
-                    <i class="fas fa-fw fa-box"></i>
-                    <span>Stock</span>
-                </a>
-                <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">List Stock:</h6>
-                        <a class="collapse-item font-weight-bold {{ Request::is('stock') ? 'active' : '' }}"
-                            href="/stock">Monitor</a>
-                        <a class="collapse-item font-weight-bold {{ Request::is('stock/allstocks*') ? 'active' : '' }}"
-                            href="/stock/allstocks">All Stocks</a>
-                        <a class="collapse-item {{ Request::is('stock/gudang*') ? 'active' : '' }}"
-                            href="/stock/gudang">Gudang</a>
-                        <a class="collapse-item {{ Request::is('stock/service*') ? 'active' : '' }}"
-                            href="/stock/service">Service</a>
-                        <a class="collapse-item {{ Request::is('stock/dipinjam*') ? 'active' : '' }}"
-                            href="/stock/dipinjam">Dipinjam</a>
-                        <a class="collapse-item {{ Request::is('stock/terjual*') ? 'active' : '' }}"
-                            href="/stock/terjual">Terjual</a>
-                        <a class="collapse-item {{ Request::is('stock/rusak*') ? 'active' : '' }}"
-                            href="/stock/rusak">Rusak</a>
-                        <a class="collapse-item {{ Request::is('stock/titip*') ? 'active' : '' }}"
-                            href="/stock/titip">Titip</a>
-                        <h5 class="collapse-header font-weight-bold text-white bg-secondary">History</h5>
-                        <a class="collapse-item {{ Request::is('stock/history*') ? 'active' : '' }}"
-                            href="/stock/history">Log
-                            Activity</a>
-                    </div>
+                <!-- Heading -->
+                <div class="sidebar-heading">
+                    Stock Barang
                 </div>
 
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-target="#collapsePengiriman"
-                    aria-expanded="true" aria-controls="collapsePengiriman">
-                    <i class="fas fa-fw fa-truck-fast"></i>
-                    <span>Pengiriman</span>
-                </a>
-                <div id="collapsePengiriman" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">List Pengiriman:</h6>
-                        <a class="collapse-item {{ Request::is('stock/pengiriman-pelanggan*') ? 'active' : '' }}"
-                            href="/stock/pengiriman-pelanggan">Pelanggan</a>
-                        <a class="collapse-item {{ Request::is('stock/pengiriman-service*') ? 'active' : '' }}"
-                            href="/stock/pengiriman-service">Service</a>
-                        <a class="collapse-item {{ Request::is('stock/pengiriman-dipinjam*') ? 'active' : '' }}"
-                            href="/stock/pengiriman-dipinjam">Dipinjam</a>
-                        <a class="collapse-item {{ Request::is('stock/pengiriman-terjual*') ? 'active' : '' }}"
-                            href="/stock/pengiriman-terjual">Terjual</a>
-                        <a class="collapse-item {{ Request::is('stock/pengiriman-rusak*') ? 'active' : '' }}"
-                            href="/stock/pengiriman-rusak">Rusak</a>
-                        <a class="collapse-item {{ Request::is('stock/pengiriman-titip*') ? 'active' : '' }}"
-                            href="/stock/pengiriman-titip">Titip</a>
+                <!-- Nav Item - Pinjam -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-target="#collapseOne"
+                        aria-expanded="true" aria-controls="collapseOne">
+                        <i class="fas fa-fw fa-box"></i>
+                        <span>Stock</span>
+                    </a>
+                    <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">List Stock:</h6>
+                            <a class="collapse-item font-weight-bold {{ Request::is('stock') ? 'active' : '' }}"
+                                href="/stock">Monitor</a>
+                            <a class="collapse-item font-weight-bold {{ Request::is('stock/allstocks*') ? 'active' : '' }}"
+                                href="/stock/allstocks">All Stocks</a>
+                            <a class="collapse-item {{ Request::is('stock/gudang*') ? 'active' : '' }}"
+                                href="/stock/gudang">Gudang</a>
+                            <a class="collapse-item {{ Request::is('stock/service*') ? 'active' : '' }}"
+                                href="/stock/service">Service</a>
+                            <a class="collapse-item {{ Request::is('stock/dipinjam*') ? 'active' : '' }}"
+                                href="/stock/dipinjam">Dipinjam</a>
+                            <a class="collapse-item {{ Request::is('stock/terjual*') ? 'active' : '' }}"
+                                href="/stock/terjual">Terjual</a>
+                            <a class="collapse-item {{ Request::is('stock/rusak*') ? 'active' : '' }}"
+                                href="/stock/rusak">Rusak</a>
+                            <a class="collapse-item {{ Request::is('stock/titip*') ? 'active' : '' }}"
+                                href="/stock/titip">Titip</a>
+                            <h5 class="collapse-header font-weight-bold text-white bg-secondary">History</h5>
+                            <a class="collapse-item {{ Request::is('stock/history*') ? 'active' : '' }}"
+                                href="/stock/history">Log
+                                Activity</a>
+                        </div>
                     </div>
+
+                </li>
+            @endif
+            @if (Auth::user()->hasAnyRole([
+                    'superadmin',
+                    'jeffri',
+                    'maulana',
+                    'vivi',
+                    'sylvi',
+                    'coni',
+                    'david',
+                    'sales',
+                    'teknisi',
+                    'juli',
+                    'matthew',
+                    'supir',
+                    'dinda',
+                ]))
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-target="#collapsePengiriman"
+                        aria-expanded="true" aria-controls="collapsePengiriman">
+                        <i class="fas fa-fw fa-truck-fast"></i>
+                        <span>Pengiriman</span>
+                    </a>
+                    <div id="collapsePengiriman" class="collapse" aria-labelledby="headingTwo"
+                        data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">List Pengiriman:</h6>
+                            <a class="collapse-item {{ Request::is('stock/pengiriman-pelanggan*') ? 'active' : '' }}"
+                                href="/stock/pengiriman-pelanggan">Pelanggan</a>
+                            <a class="collapse-item {{ Request::is('stock/pengiriman-service*') ? 'active' : '' }}"
+                                href="/stock/pengiriman-service">Service</a>
+                            <a class="collapse-item {{ Request::is('stock/pengiriman-dipinjam*') ? 'active' : '' }}"
+                                href="/stock/pengiriman-dipinjam">Dipinjam</a>
+                            <a class="collapse-item {{ Request::is('stock/pengiriman-terjual*') ? 'active' : '' }}"
+                                href="/stock/pengiriman-terjual">Terjual</a>
+                            <a class="collapse-item {{ Request::is('stock/pengiriman-rusak*') ? 'active' : '' }}"
+                                href="/stock/pengiriman-rusak">Rusak</a>
+                            <a class="collapse-item {{ Request::is('stock/pengiriman-titip*') ? 'active' : '' }}"
+                                href="/stock/pengiriman-titip">Titip</a>
+                        </div>
+                    </div>
+
+                </li>
+
+                <hr class="sidebar-divider">
+            @endif
+            @if (Auth::user()->hasAnyRole([
+                    'superadmin',
+                    'jeffri',
+                    'maulana',
+                    'vivi',
+                    'sylvi',
+                    'coni',
+                    'david',
+                    'sales',
+                    'teknisi',
+                    'juli',
+                    'matthew',
+                    'dinda',
+                ]))
+                <!-- Heading -->
+                <div class="sidebar-heading">
+                    Peminjaman Barang
                 </div>
 
-            </li>
-
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Peminjaman Barang
-            </div>
-
-            <!-- Nav Item - Pinjam -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-tag"></i>
-                    <span>Pinjam</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">List Pinjam:</h6>
-                        <a class="collapse-item {{ Request::is('pinjam/Dipinjam') ? 'active' : '' }}"
-                            href="/pinjam/Dipinjam">DiPinjam</a>
-                        <a class="collapse-item {{ Request::is('pinjam/kembali*') ? 'active' : '' }}"
-                            href="/pinjam/kembali">DiKembalikan</a>
+                <!-- Nav Item - Pinjam -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-target="#collapseTwo"
+                        aria-expanded="true" aria-controls="collapseTwo">
+                        <i class="fas fa-fw fa-tag"></i>
+                        <span>Pinjam</span>
+                    </a>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">List Pinjam:</h6>
+                            <a class="collapse-item {{ Request::is('pinjam/Dipinjam') ? 'active' : '' }}"
+                                href="/pinjam/Dipinjam">DiPinjam</a>
+                            <a class="collapse-item {{ Request::is('pinjam/kembali*') ? 'active' : '' }}"
+                                href="/pinjam/kembali">DiKembalikan</a>
+                        </div>
                     </div>
+                </li>
+
+                <div class="sidebar-heading">
+                    Service
                 </div>
-            </li>
+                <!-- Nav Item - Services -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                        data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+                        <i class="fas fa-fw fa-wrench"></i>
+                        <span>Services</span>
+                    </a>
+                    <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                        data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            @can('tambah-service')
+                                <a class="collapse-item {{ Request::is('service') ? 'active' : '' }}" href="/service">Tambah
+                                    Baru</a>
+                            @endcan
+                            <h5 class="collapse-header font-weight-bold text-white bg-secondary">Pelanggan</h5>
+                            <a class="collapse-item {{ Request::is('service/antrianPelanggan*') ? 'active' : '' }}"
+                                href="/service/antrianPelanggan">Antrian</a>
+                            <a class="collapse-item {{ Request::is('service/validasiPelanggan*') ? 'active' : '' }}"
+                                href="/service/validasiPelanggan">Validasi</a>
+                            <a class="collapse-item {{ Request::is('service/selesaiPelanggan*') ? 'active' : '' }}"
+                                href="/service/selesaiPelanggan">Selesai</a>
+                            <h5 class="collapse-header font-weight-bold text-white bg-secondary">Stock</h5>
+                            <a class="collapse-item {{ Request::is('service/antrianStock*') ? 'active' : '' }}"
+                                href="/service/antrianStock">Antrian</a>
+                            <a class="collapse-item {{ Request::is('service/validasiStock*') ? 'active' : '' }}"
+                                href="/service/validasiStock">Validasi</a>
+                            <a class="collapse-item {{ Request::is('service/selesaiStock*') ? 'active' : '' }}"
+                                href="/service/selesaiStock">Selesai</a>
 
-            <div class="sidebar-heading">
-                Service
-            </div>
-            <!-- Nav Item - Services -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-target="#collapseUtilities"
-                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Services</span>
-                </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        @can('tambah-service')
-                            <a class="collapse-item {{ Request::is('service') ? 'active' : '' }}" href="/service">Tambah
-                                Baru</a>
-                        @endcan
-                        <h5 class="collapse-header font-weight-bold text-white bg-secondary">Pelanggan</h5>
-                        <a class="collapse-item {{ Request::is('service/antrianPelanggan*') ? 'active' : '' }}"
-                            href="/service/antrianPelanggan">Antrian</a>
-                        <a class="collapse-item {{ Request::is('service/validasiPelanggan*') ? 'active' : '' }}"
-                            href="/service/validasiPelanggan">Validasi</a>
-                        <a class="collapse-item {{ Request::is('service/selesaiPelanggan*') ? 'active' : '' }}"
-                            href="/service/selesaiPelanggan">Selesai</a>
-                        <h5 class="collapse-header font-weight-bold text-white bg-secondary">Stock</h5>
-                        <a class="collapse-item {{ Request::is('service/antrianStock*') ? 'active' : '' }}"
-                            href="/service/antrianStock">Antrian</a>
-                        <a class="collapse-item {{ Request::is('service/validasiStock*') ? 'active' : '' }}"
-                            href="/service/validasiStock">Validasi</a>
-                        <a class="collapse-item {{ Request::is('service/selesaiStock*') ? 'active' : '' }}"
-                            href="/service/selesaiStock">Selesai</a>
-
+                        </div>
                     </div>
-                </div>
-            </li>
+                </li>
 
-            <div class="sidebar-heading">
-                Service Spare Parts
-            </div>
-            <!-- Nav Item - SpareParts -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-target="#collapseone"
-                    aria-expanded="true" aria-controls="collapseone">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>SpareParts</span>
-                </a>
-                <div id="collapseone" class="collapse" aria-labelledby="headingone" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">List SpareParts</h6>
-                        <a class="collapse-item {{ Request::is('spareparts*') ? 'active' : '' }}"
-                            href="/spareparts">Stock</a>
-                        <a class="collapse-item {{ Request::is('history*') ? 'active' : '' }}"
-                            href="/history">History</a>
+                <div class="sidebar-heading">
+                    Service Spare Parts
+                </div>
+                <!-- Nav Item - SpareParts -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-target="#collapseone"
+                        aria-expanded="true" aria-controls="collapseone">
+                        <i class="fas fa-fw fa-cog"></i>
+                        <span>SpareParts</span>
+                    </a>
+                    <div id="collapseone" class="collapse" aria-labelledby="headingone" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">List SpareParts</h6>
+                            <a class="collapse-item {{ Request::is('spareparts*') ? 'active' : '' }}"
+                                href="/spareparts">Stock</a>
+                            <a class="collapse-item {{ Request::is('history*') ? 'active' : '' }}"
+                                href="/history">History</a>
+                        </div>
                     </div>
+                </li>
+
+                <hr class="sidebar-divider">
+
+                <div class="sidebar-heading">
+                    Firmware
                 </div>
-            </li>
-
-            <hr class="sidebar-divider">
-
-            <div class="sidebar-heading">
-                Firmware
-            </div>
-            <!-- Nav Item - Firmware -->
-            <li class="nav-item">
-                <a class="nav-link {{ Request::is('firmware*') ? 'active' : '' }}" href="/firmware">
-                    <i class="fas fa-fw fa-microchip"></i>
-                    <span>Firmware</span></a>
-            </li>
-
+                <!-- Nav Item - Firmware -->
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::is('firmware*') ? 'active' : '' }}" href="/firmware">
+                        <i class="fas fa-fw fa-microchip"></i>
+                        <span>Firmware</span></a>
+                </li>
+            @endif
             {{-- <hr class="sidebar-divider">
 
             <li class="nav-item">
@@ -215,7 +258,6 @@
             </div>
         </ul>
         <!-- End of Sidebar -->
-
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 

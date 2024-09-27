@@ -250,7 +250,7 @@
                         <th>Tipe</th>
                         <th>Nama</th>
                         <th>Quantity</th>
-                        <th>Harga ($)</th>
+                        <th>Harga (Rp)</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -261,7 +261,7 @@
                             <td>{{ $item->tipe }}</td>
                             <td>{{ $item->nama }}</td>
                             <td>{{ $item->quantity }}</td>
-                            <td>{{ $item->harga }}</td>
+                            <td>{{ number_format((float) $item->harga, 0, ',', '.') }}</td>
                             <td>
                                 @auth
                                     @if (auth()->user()->hasRole('superadmin') || auth()->user()->hasRole('jeffri'))
@@ -294,7 +294,7 @@
                         <th>Tipe</th>
                         <th>Nama</th>
                         <th>Quantity</th>
-                        <th>Harga ($)</th>
+                        <th>Harga (Rp)</th>
                     </tr>
                 </tfoot>
             </table>

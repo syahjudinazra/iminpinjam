@@ -150,6 +150,8 @@ Route::prefix('firmware')->middleware('auth')->group(function () {
         ->name('firmware.s1');
     Route::get('/k1', [FirmwareController::class, 'k1'])
         ->name('firmware.k1');
+        Route::get('/k2', [FirmwareController::class, 'k2'])
+        ->name('firmware.k2');
 });
 
 

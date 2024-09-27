@@ -61,6 +61,7 @@
     <script src="{{ asset('js/service/tambahData.js') }}" defer></script>
     <script src="{{ asset('js/updateMultipleSN/validateSN.js') }}" defer></script>
     <script src="{{ asset('js/updateMultipleSN/updateSN.js') }}" defer></script>
+    <script src="{{ asset('js/updateMultipleSN/kodePengiriman.js') }}" defer></script>
 
     <!-- Jquery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"

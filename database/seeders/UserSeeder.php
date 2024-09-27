@@ -60,10 +60,17 @@ class UserSeeder extends Seeder
         ]);
         $coni->assignRole('coni');
 
+        $dinda = User::create([
+            'name' => 'dinda',
+            'email' => 'dinda@imin.co.id',
+            'password' => bcrypt('iMin2023')
+        ]);
+        $dinda->assignRole('dinda');
+
         $david = User::create([
             'name' => 'david',
             'email' => 'david@imin.co.id',
-            'password' => bcrypt('iMin2020')
+            'password' => bcrypt('iMin2024')
         ]);
         $david->assignRole('david');
 
@@ -94,5 +101,12 @@ class UserSeeder extends Seeder
             'password' => bcrypt('iMin2024')
         ]);
         $matthew->assignRole('matthew');
+
+        $supir = User::create([
+            'name' => 'supir',
+            'email' => 'supir@imin.co.id',
+            'password' => bcrypt('iMin2000')
+        ]);
+        $supir->assignRole('supir');
     }
 }

@@ -86,89 +86,92 @@
                         <div class="form-group mt-4">
                             <label class="font-weight-bold" for="status">Status</label><br />
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input mt-1" type="radio" id="gudang" name="status[]"
-                                    value="Gudang">
+                                <input class="form-check-input mt-1" type="radio" id="gudang" name="status"
+                                    value="Gudang" onchange="updateKodePengiriman()">
                                 <label class="form-check-label" for="gudang">Gudang</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input mt-1" type="radio" id="service" name="status[]"
-                                    value="Service">
+                                <input class="form-check-input mt-1" type="radio" id="service" name="status"
+                                    value="Service" onchange="updateKodePengiriman()">
                                 <label class="form-check-label" for="service">Service</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input mt-1" type="radio" id="dipinjam" name="status[]"
-                                    value="Dipinjam">
+                                <input class="form-check-input mt-1" type="radio" id="dipinjam" name="status"
+                                    value="Dipinjam" onchange="updateKodePengiriman()">
                                 <label class="form-check-label" for="dipinjam">Dipinjam</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input mt-1" type="radio" id="terjual" name="status[]"
-                                    value="Terjual">
+                                <input class="form-check-input mt-1" type="radio" id="terjual" name="status"
+                                    value="Terjual" onchange="updateKodePengiriman()">
                                 <label class="form-check-label" for="terjual">Terjual</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input mt-1" type="radio" id="rusak" name="status[]"
-                                    value="Rusak">
+                                <input class="form-check-input mt-1" type="radio" id="rusak" name="status"
+                                    value="Rusak" onchange="updateKodePengiriman()">
                                 <label class="form-check-label" for="rusak">Rusak</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input mt-1" type="radio" id="titip" name="status[]"
-                                    value="Titip">
+                                <input class="form-check-input mt-1" type="radio" id="titip" name="status"
+                                    value="Titip" onchange="updateKodePengiriman()">
                                 <label class="form-check-label" for="titip">Titip</label>
                             </div>
-                            <div class="form-group mt-3">
-                                <label class="font-weight-bold" for="kode_pengiriman">Kode Pengiriman</label>
-                                <input type="text" class="form-control shadow-none" id="kode_pengiriman"
-                                    name="kode_pengiriman" placeholder="Masukan Kode Pengiriman"
-                                    value="{{ old('kode_pengiriman') }}" required>
-                            </div>
-                            <div class="form-group mt-3">
-                                <label class="font-weight-bold" for="pelanggan">Pelanggan</label>
-                                <input type="text" class="form-control shadow-none" id="pelanggan" name="pelanggan"
-                                    placeholder="Masukan Pelanggan" value="{{ old('pelanggan') }}" required>
-                            </div>
-                            <div class="form-group">
-                                <label class="font-weight-bold" for="tanggalkeluar">Tanggal Keluar</label>
-                                <input type="date" class="form-control shadow-none" id="tanggalkeluar"
-                                    name="tanggalkeluar" placeholder="Masukan Tanggal Keluar"
-                                    value="{{ old('tanggalkeluar') }}" required>
-                            </div>
-                            <div class="form-group">
-                                <label class="font-weight-bold" for="lokasi">Lokasi</label><br />
-                                <select id="lokasi" class="form-control form-control-chosen shadow-none"
-                                    name="lokasi" data-placeholder="Pilih Lokasi" required>
-                                    <option value="Null">Pilih Lokasi</option>
-                                    <option value="Online">Online</option>
-                                    <option value="Pelanggan">Pelanggan</option>
-                                    <option value="Partner">Partner</option>
-                                    <option value="Surabaya">Surabaya</option>
-                                    <option value="Bali">Bali</option>
-                                    <option value="Jogja">Jogja</option>
-                                    <option value="BSD">BSD</option>
-                                    <option value="Jakarta Warehouse">Jakarta Warehouse</option>
-                                    <option value="Service Room">Service Room</option>
-                                    <option value="Sales Room">Sales Room</option>
-                                    <option value="TSE Room">TSE Room</option>
-                                    <option value="Meeting Room">Meeting Room</option>
-                                    <option value="Studio">Studio</option>
-                                </select>
-
-                            </div>
-                            <div class="form-group">
-                                <label class="font-weight-bold" for="keterangan">Keterangan</label>
-                                <textarea type="text" class="form-control shadow-none" id="keterangan" name="keterangan"
-                                    placeholder="Masukan Keterangan">{{ old('keterangan') }}</textarea>
-                            </div>
                         </div>
-                    </form>
-                </div>
 
+                        <div class="form-group mt-3">
+                            <label class="font-weight-bold" for="kode_pengiriman">Kode Pengiriman</label>
+                            <input type="text" class="form-control shadow-none" id="kode_pengiriman"
+                                name="kode_pengiriman" placeholder="Masukan Kode Pengiriman"
+                                value="{{ old('kode_pengiriman') }}" required>
+                        </div>
+
+                        <div class="form-group mt-3">
+                            <label class="font-weight-bold" for="pelanggan">Pelanggan</label>
+                            <input type="text" class="form-control shadow-none" id="pelanggan" name="pelanggan"
+                                placeholder="Masukan Pelanggan" value="{{ old('pelanggan') }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="font-weight-bold" for="tanggalkeluar">Tanggal Keluar</label>
+                            <input type="date" class="form-control shadow-none" id="tanggalkeluar"
+                                name="tanggalkeluar" placeholder="Masukan Tanggal Keluar"
+                                value="{{ old('tanggalkeluar') }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="font-weight-bold" for="lokasi">Lokasi</label><br />
+                            <select id="lokasi" class="form-control form-control-chosen shadow-none" name="lokasi"
+                                data-placeholder="Pilih Lokasi" required>
+                                <option value="Null">Pilih Lokasi</option>
+                                <option value="Online">Online</option>
+                                <option value="Pelanggan">Pelanggan</option>
+                                <option value="Partner">Partner</option>
+                                <option value="Surabaya">Surabaya</option>
+                                <option value="Bali">Bali</option>
+                                <option value="Jogja">Jogja</option>
+                                <option value="BSD">BSD</option>
+                                <option value="Jakarta Warehouse">Jakarta Warehouse</option>
+                                <option value="Service Room">Service Room</option>
+                                <option value="Sales Room">Sales Room</option>
+                                <option value="TSE Room">TSE Room</option>
+                                <option value="Meeting Room">Meeting Room</option>
+                                <option value="Studio">Studio</option>
+                            </select>
+
+                        </div>
+                        <div class="form-group">
+                            <label class="font-weight-bold" for="keterangan">Keterangan</label>
+                            <textarea type="text" class="form-control shadow-none" id="keterangan" name="keterangan"
+                                placeholder="Masukan Keterangan">{{ old('keterangan') }}</textarea>
+                        </div>
+                </div>
+                </form>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
                     <button type="button" id="submitBtn" class="btn btn-danger" data-bs-toggle="modal"
                         data-route="{{ route('move.sn') }}" data-csrf="{{ csrf_token() }}">Submit</button>
                 </div>
             </div>
+
         </div>
+    </div>
     </div>
     <!-- Move SN Modal -->
 
@@ -462,5 +465,5 @@
 
 @push('js')
     <script src="{{ asset('js/stockMonitor/importViewStocks.js') }}"></script>
-    <script src="{{ asset('js/updateMultipleSN/MoveSN.js') }}"></script>
+    <script src="{{ asset('js/updateMultipleSN/kodePengiriman.js') }}"></script>
 @endpush

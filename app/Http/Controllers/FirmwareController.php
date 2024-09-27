@@ -263,6 +263,15 @@ class FirmwareController extends Controller
 
         return view('firmware.menuContent.k1Table', compact('k1'));
     }
+
+    public function k2()
+    {
+        $k2 = Firmware::whereRaw('LOWER(tipe) LIKE ?', ['%k2%'])
+            ->orderBy('tipe', 'DESC')
+            ->get();
+
+        return view('firmware.menuContent.k2Table', compact('k2'));
+    }
     /**
      * Show the form for creating a new resource.
      *

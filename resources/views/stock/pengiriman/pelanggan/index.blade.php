@@ -17,7 +17,7 @@
                         <tr>
                             <th>Kode Pengiriman</th>
                             <th>Serial Number</th>
-                            <th>Tipe</th>
+                            <th class="mobile-hide">Tipe</th>
                             <th>Pelanggan</th>
                             <th>Action</th>
                         </tr>
@@ -26,7 +26,7 @@
                         <tr>
                             <th>Kode Pengiriman</th>
                             <th>Serial Number</th>
-                            <th>Tipe</th>
+                            <th class="mobile-hide">Tipe</th>
                             <th>Pelanggan</th>
                             <th>Action</th>
                         </tr>
@@ -55,23 +55,31 @@
                             data: 'serialnumber',
                             name: 'serialnumber',
                             render: function(data, type, row) {
-                                if (Array.isArray(data)) {
-                                    var count = data.length;
-                                    var displayedSerials = data.slice(0, 3);
-                                    var serialText = displayedSerials.join(', ');
-
-                                    if (count > 3) {
-                                        return serialText + ', + more';
-                                    } else {
-                                        return serialText;
+                                if (window.innerWidth <= 768) {
+                                    if (Array.isArray(data)) {
+                                        return data.length + ' SN';
                                     }
+                                    return 0 + ' SN';
+                                } else {
+                                    if (Array.isArray(data)) {
+                                        var count = data.length;
+                                        var displayedSerials = data.slice(0, 3);
+                                        var serialText = displayedSerials.join(', ');
+
+                                        if (count > 3) {
+                                            return serialText + ', + more';
+                                        } else {
+                                            return serialText;
+                                        }
+                                    }
+                                    return data;
                                 }
-                                return data;
                             }
                         },
                         {
                             data: 'tipe',
-                            name: 'tipe'
+                            name: 'tipe',
+                            visible: window.innerWidth > 768 // Hide the 'tipe' column on mobile
                         },
                         {
                             data: 'pelanggan',
