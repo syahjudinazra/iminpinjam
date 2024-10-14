@@ -60,7 +60,6 @@
     <script src="{{ asset('js/login/passwordView.js') }}" defer></script>
     <script src="{{ asset('js/service/tambahData.js') }}" defer></script>
     <script src="{{ asset('js/updateMultipleSN/validateSN.js') }}" defer></script>
-    <script src="{{ asset('js/updateMultipleSN/updateSN.js') }}" defer></script>
     <script src="{{ asset('js/updateMultipleSN/kodePengiriman.js') }}" defer></script>
 
     <!-- Jquery -->

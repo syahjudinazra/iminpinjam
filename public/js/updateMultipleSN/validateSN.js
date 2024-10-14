@@ -94,39 +94,51 @@ function displayErrors(errors) {
     }
 }
 
-$(document).ready(function () {
-    $("#submitBtn").prop("disabled", true);
-    function checkFields() {
-        var textareaValue = $("#serialnumber").val().trim();
-        var radioValue = $('input[name="status[]"]:checked').val();
-        var pelangganValue = $("#pelanggan").val().trim();
-        var tanggalKeluarValue = $("#tanggalkeluar").val().trim();
+$("#submitBtn").click(function (e) {
+    e.preventDefault(); // Prevent default form submission
 
-        if (
-            textareaValue !== "" &&
-            radioValue &&
-            pelangganValue !== "" &&
-            tanggalKeluarValue !== ""
-        ) {
-            $("#submitBtn").prop("disabled", false);
-        } else {
-            $("#submitBtn").prop("disabled", true);
-        }
+    if ($(this).prop("disabled")) {
+        alert("Please fill in all fields before submitting.");
+        return false;
     }
 
-    $('#serialnumber, input[name="status[]"], #pelanggan, #tanggalkeluar').on(
-        "keyup change",
-        function () {
-            checkFields();
-        }
-    );
+    // Collect serial numbers from the table
+    var serialNumbers = [];
+    $("#serialNumberTableBody tr").each(function () {
+        serialNumbers.push($(this).find("td:eq(1)").text());
+    });
 
-    $("#submitBtn").click(function () {
-        if ($(this).prop("disabled")) {
-            alert("Please fill in all fields before submitting.");
-            return false;
-        }
+    // Get form data
+    var formData = new FormData($("#serialNumberForm")[0]);
+    formData.append("serialnumbers", JSON.stringify(serialNumbers));
 
-        return true;
+    // Send AJAX request
+    $.ajax({
+        url: $(this).data("route"),
+        method: "POST",
+        data: formData,
+        processData: false,
+        contentType: false,
+        headers: {
+            "X-CSRF-TOKEN": $(this).data("csrf"),
+        },
+        success: function (response) {
+            Swal.fire({
+                icon: "success",
+                title: "Success!",
+                text: "Move SN Berhasil",
+                showConfirmButton: true,
+                timer: 2000,
+            });
+        },
+        error: function (xhr, status, error) {
+            Swal.fire({
+                icon: "error",
+                title: "Error!",
+                text: "Move SN Gagal",
+                showConfirmButton: true,
+                timer: 2000,
+            });
+        },
     });
 });

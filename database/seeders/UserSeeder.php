@@ -67,6 +67,13 @@ class UserSeeder extends Seeder
         ]);
         $dinda->assignRole('dinda');
 
+        $anggi = User::create([
+            'name' => 'anggi',
+            'email' => 'anggi@imin.co.id',
+            'password' => bcrypt('#StockiMin2024')
+        ]);
+        $anggi->assignRole('anggi');
+
         $david = User::create([
             'name' => 'david',
             'email' => 'david@imin.co.id',

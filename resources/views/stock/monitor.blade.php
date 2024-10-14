@@ -6,7 +6,7 @@
         <div class="row">
             <h1 class="h3 mb-3 text-gray-800">Monitor All Stocks</h1>
             @auth
-                @if (auth()->user()->hasAnyRole(['superadmin', 'jeffri', 'sylvi', 'coni']))
+                @if (auth()->user()->hasAnyRole(['superadmin', 'jeffri', 'sylvi', 'coni', 'dinda', 'anggi']))
                     <div class="head-area">
                         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#stockModal">
                             <i class="fa-solid fa-plus"></i> Tambah
@@ -25,7 +25,7 @@
                             </a>
                         </div>
                 @endif
-                @if (auth()->user()->hasAnyRole(['superadmin', 'jeffri', 'sylvi', 'coni', 'juli']))
+                @if (auth()->user()->hasAnyRole(['superadmin', 'jeffri', 'sylvi', 'coni', 'juli', 'dinda', 'anggi']))
                     <div class="d-flex w-auto">
                         <button type="button" class="btn btn-danger text-white" data-bs-toggle="modal" data-target="#moveSN">
                             <i class="fa-solid fa-share-from-square" style="color: #ffffff;"></i> Move SN
@@ -117,11 +117,11 @@
                             </div>
                         </div>
 
-                        <div class="form-group mt-3">
+                        <div class="form-group mt-3" hidden>
                             <label class="font-weight-bold" for="kode_pengiriman">Kode Pengiriman</label>
                             <input type="text" class="form-control shadow-none" id="kode_pengiriman"
                                 name="kode_pengiriman" placeholder="Masukan Kode Pengiriman"
-                                value="{{ old('kode_pengiriman') }}" required>
+                                value="{{ old('kode_pengiriman') }}">
                         </div>
 
                         <div class="form-group mt-3">

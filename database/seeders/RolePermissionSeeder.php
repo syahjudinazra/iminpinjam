@@ -33,6 +33,7 @@ class RolePermissionSeeder extends Seeder
         Role::create(['name' => 'sylvi']);
         Role::create(['name' => 'coni']);
         Role::create(['name' => 'dinda']);
+        Role::create(['name' => 'anggi']);
         Role::create(['name' => 'david']);
         Role::create(['name' => 'sales']);
         Role::create(['name' => 'teknisi']);
@@ -83,6 +84,12 @@ class RolePermissionSeeder extends Seeder
         $roleConi->givePermissionTo('hapus-data');
 
         $roleDinda = Role::findByName('dinda');
+        $roleDinda->givePermissionTo('tambah-data');
+        $roleDinda->givePermissionTo('edit-data');
+        $roleDinda->givePermissionTo('lihat-data');
+        $roleDinda->givePermissionTo('hapus-data');
+
+        $roleDinda = Role::findByName('anggi');
         $roleDinda->givePermissionTo('tambah-data');
         $roleDinda->givePermissionTo('edit-data');
         $roleDinda->givePermissionTo('lihat-data');

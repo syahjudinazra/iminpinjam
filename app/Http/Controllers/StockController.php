@@ -82,22 +82,28 @@ class StockController extends Controller
     public function moveSN(Request $request)
     {
         try {
-            foreach ($request->serialnumbers as $serialnumber) {
-                $stock = Stock::where('serialnumber', $serialnumber)->first();
-
-                $stock->update([
-                    'status' => $request->status,
-                    'tanggalkeluar' => $request->tanggalkeluar,
-                    'pelanggan' => $request->pelanggan,
-                    'lokasi' => $request->lokasi,
-                    'keterangan' => $request->keterangan,
-                    'kode_pengiriman' => $request->kode_pengiriman,
-                ]);
+            if (!$request->has('serialnumbers')) {
+                return redirect()->back()->with(['error' => 'No serial numbers provided']);
             }
 
-            return redirect()->back()->with(['success' => 'Move SN Berhasil']);
+            $serialNumbers = json_decode($request->serialnumbers, true);
+            foreach ($serialNumbers as $serialnumber) {
+                $stock = Stock::where('serialnumber', $serialnumber)->first();
+                if ($stock) {
+                    $stock->update([
+                        'status' => $request->status,
+                        'tanggalkeluar' => $request->tanggalkeluar,
+                        'pelanggan' => $request->pelanggan,
+                        'lokasi' => $request->lokasi,
+                        'keterangan' => $request->keterangan,
+                        'kode_pengiriman' => $request->kode_pengiriman,
+                    ]);
+                }
+            }
+
+            return response()->json(['success' => 'Move SN Berhasil']);
         } catch (\Exception $e) {
-            return redirect()->back()->with(['error' => 'Move SN Gagal']);
+            return response()->json(['error' => 'Move SN Gagal: ' . $e->getMessage()]);
         }
     }
 
@@ -443,7 +449,7 @@ class StockController extends Controller
 
                     if (auth()->check()) {
                         $user = auth()->user();
-                        $roles = ['superadmin', 'jeffri', 'sylvi', 'coni', 'vivi'];
+                        $roles = ['superadmin', 'jeffri', 'sylvi', 'coni', 'vivi', 'anggi'];
 
                         if ($user->hasAnyRole($roles)) {
                             $actionHtml .= '<div class="dropdown dropright">
@@ -488,7 +494,7 @@ class StockController extends Controller
 
                     if (auth()->check()) {
                         $user = auth()->user();
-                        $roles = ['superadmin', 'jeffri', 'sylvi', 'coni', 'vivi'];
+                        $roles = ['superadmin', 'jeffri', 'sylvi', 'coni', 'vivi', 'anggi'];
 
                         // Check for roles that can perform edit and delete actions
                         if ($user->hasAnyRole($roles)) {
@@ -535,7 +541,7 @@ class StockController extends Controller
                     class="text-decoration-none"><i class="fa-solid fa-eye"></i> View</a>';
                     if (auth()->check()) {
                         $user = auth()->user();
-                        $roles = ['superadmin', 'jeffri', 'sylvi', 'coni', 'vivi'];
+                        $roles = ['superadmin', 'jeffri', 'sylvi', 'coni', 'vivi', 'anggi'];
 
                         if ($user->hasAnyRole($roles)) {
                             $actionHtml .= '<div class="dropdown dropright">
@@ -579,7 +585,7 @@ class StockController extends Controller
                     class="text-decoration-none"><i class="fa-solid fa-eye"></i> View</a>';
                     if (auth()->check()) {
                         $user = auth()->user();
-                        $roles = ['superadmin', 'jeffri', 'sylvi', 'coni', 'vivi'];
+                        $roles = ['superadmin', 'jeffri', 'sylvi', 'coni', 'vivi', 'anggi'];
 
                         if ($user->hasAnyRole($roles)) {
                             $actionHtml .= '<div class="dropdown dropright">
@@ -623,7 +629,7 @@ class StockController extends Controller
                     class="text-decoration-none"><i class="fa-solid fa-eye"></i> View</a>';
                     if (auth()->check()) {
                         $user = auth()->user();
-                        $roles = ['superadmin', 'jeffri', 'sylvi', 'coni', 'vivi'];
+                        $roles = ['superadmin', 'jeffri', 'sylvi', 'coni', 'vivi', 'anggi'];
 
                         if ($user->hasAnyRole($roles)) {
                             $actionHtml .= '<div class="dropdown dropright">
@@ -668,7 +674,7 @@ class StockController extends Controller
                     class="text-decoration-none"><i class="fa-solid fa-eye"></i> View</a>';
                     if (auth()->check()) {
                         $user = auth()->user();
-                        $roles = ['superadmin', 'jeffri', 'sylvi', 'coni', 'vivi'];
+                        $roles = ['superadmin', 'jeffri', 'sylvi', 'coni', 'vivi', 'anggi'];
 
                         if ($user->hasAnyRole($roles)) {
                             $actionHtml .= '<div class="dropdown dropright">
@@ -713,7 +719,7 @@ class StockController extends Controller
                     class="text-decoration-none"><i class="fa-solid fa-eye"></i> View</a>';
                     if (auth()->check()) {
                         $user = auth()->user();
-                        $roles = ['superadmin', 'jeffri', 'sylvi', 'coni', 'vivi'];
+                        $roles = ['superadmin', 'jeffri', 'sylvi', 'coni', 'vivi', 'anggi'];
 
                         if ($user->hasAnyRole($roles)) {
                             $actionHtml .= '<div class="dropdown dropright">

@@ -18,12 +18,13 @@
                     'vivi',
                     'sylvi',
                     'coni',
+                    'anggi',
+                    'dinda',
                     'david',
                     'sales',
                     'teknisi',
                     'juli',
                     'matthew',
-                    'dinda',
                 ]))
                 <!-- Divider -->
                 <hr class="sidebar-divider my-0">
@@ -84,13 +85,14 @@
                     'vivi',
                     'sylvi',
                     'coni',
+                    'anggi',
+                    'dinda',
                     'david',
                     'sales',
                     'teknisi',
                     'juli',
                     'matthew',
                     'supir',
-                    'dinda',
                 ]))
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-target="#collapsePengiriman"
@@ -127,13 +129,14 @@
                     'maulana',
                     'vivi',
                     'sylvi',
+                    'anggi',
+                    'dinda',
                     'coni',
                     'david',
                     'sales',
                     'teknisi',
                     'juli',
                     'matthew',
-                    'dinda',
                 ]))
                 <!-- Heading -->
                 <div class="sidebar-heading">
