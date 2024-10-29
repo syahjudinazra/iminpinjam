@@ -88,11 +88,11 @@
                         <option value="Ozi"{{ $service->teknisi == 'Ozi' ? 'selected' : '' }}>
                             Ozi
                         </option>
-                        <option value="Alfian"{{ $service->teknisi == 'Alfian' ? 'selected' : '' }}>
-                            Alfian
+                        <option value="Habibi"{{ $service->teknisi == 'Habibi' ? 'selected' : '' }}>
+                            Habibi
                         </option>
-                        <option value="Andre"{{ $service->teknisi == 'Andre' ? 'selected' : '' }}>
-                            Andre
+                        <option value="Dandy"{{ $service->teknisi == 'Dandy' ? 'selected' : '' }}>
+                            Dandy
                         </option>
                         <option value="Matthew"{{ $service->teknisi == 'Matthew' ? 'selected' : '' }}>
                             Matthew
