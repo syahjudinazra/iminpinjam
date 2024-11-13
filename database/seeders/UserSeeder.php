@@ -88,6 +88,13 @@ class UserSeeder extends Seeder
         ]);
         $sales->assignRole('sales');
 
+        $chenghui = User::create([
+            'name' => 'chenghui',
+            'email' => 'chenghui@imin.co.id',
+            'password' => bcrypt('iMin@186kit')
+        ]);
+        $chenghui->assignRole('chenghui');
+
         $teknisi = User::create([
             'name' => 'teknisi',
             'email' => 'teknisi@imin.co.id',

@@ -25,6 +25,7 @@
                     'teknisi',
                     'juli',
                     'matthew',
+                    'chenghui',
                 ]))
                 <!-- Divider -->
                 <hr class="sidebar-divider my-0">
@@ -137,6 +138,7 @@
                     'teknisi',
                     'juli',
                     'matthew',
+                    'chenghui',
                 ]))
                 <!-- Heading -->
                 <div class="sidebar-heading">
@@ -212,25 +214,27 @@
                             <h6 class="collapse-header">List SpareParts</h6>
                             <a class="collapse-item {{ Request::is('spareparts*') ? 'active' : '' }}"
                                 href="/spareparts">Stock</a>
-                            <a class="collapse-item {{ Request::is('history*') ? 'active' : '' }}"
-                                href="/history">History</a>
-                        </div>
-                    </div>
-                </li>
-
-                <hr class="sidebar-divider">
-
-                <div class="sidebar-heading">
-                    Firmware
-                </div>
-                <!-- Nav Item - Firmware -->
-                <li class="nav-item">
-                    <a class="nav-link {{ Request::is('firmware*') ? 'active' : '' }}" href="/firmware">
-                        <i class="fas fa-fw fa-microchip"></i>
-                        <span>Firmware</span></a>
-                </li>
+                            @if (!auth()->user()->hasRole('chenghui'))
+                                <a class="collapse-item {{ request()->is('history*') ? 'active' : '' }}"
+                                    href="{{ route('history.index') }}">History</a>
+                            @endif
             @endif
-            {{-- <hr class="sidebar-divider">
+    </div>
+    </div>
+    </li>
+
+    <hr class="sidebar-divider">
+
+    <div class="sidebar-heading">
+        Firmware
+    </div>
+    <!-- Nav Item - Firmware -->
+    <li class="nav-item">
+        <a class="nav-link {{ Request::is('firmware*') ? 'active' : '' }}" href="/firmware">
+            <i class="fas fa-fw fa-microchip"></i>
+            <span>Firmware</span></a>
+    </li>
+    {{-- <hr class="sidebar-divider">
 
             <li class="nav-item">
                 <a class="nav-link {{ Request::is('serviceTest*') ? 'active' : '' }}" href="/serviceTest">
@@ -238,122 +242,121 @@
                     <span>Service Test</span></a>
             </li> --}}
 
-            <hr class="sidebar-divider">
+    <hr class="sidebar-divider">
 
-            @auth
-                @if (auth()->user()->hasRole('superadmin'))
-                    <div class="sidebar-heading">
-                        Users Management
-                    </div>
-                    <!-- Nav Item - User -->
-                    <li class="nav-item">
-                        <a class="nav-link {{ Request::is('user*') ? 'active' : '' }}" href="/user">
-                            <i class="fas fa-fw fa-user"></i>
-                            <span>User Management</span>
-                        </a>
-                    </li>
-                @endif
-            @endauth
-
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    @auth
+        @if (auth()->user()->hasRole('superadmin'))
+            <div class="sidebar-heading">
+                Users Management
             </div>
-        </ul>
-        <!-- End of Sidebar -->
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
+            <!-- Nav Item - User -->
+            <li class="nav-item">
+                <a class="nav-link {{ Request::is('user*') ? 'active' : '' }}" href="/user">
+                    <i class="fas fa-fw fa-user"></i>
+                    <span>User Management</span>
+                </a>
+            </li>
+        @endif
+    @endauth
 
-            <!-- Main Content -->
-            <div>
+    <!-- Sidebar Toggler (Sidebar) -->
+    <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
+    </ul>
+    <!-- End of Sidebar -->
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
 
-                <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+        <!-- Main Content -->
+        <div>
 
-                    <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                        <i class="fa fa-bars"></i>
-                    </button>
+            <!-- Topbar -->
+            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
-                    <div class="ml-2">
-                        <a href="https://oss-sg.imin.sg/docs/en/index.html" class="btn btn-outline-secondary"
-                            target="blank">SDK</a>
-                    </div>
-                    <!-- Topbar Navbar -->
-                    <ul class="navbar-nav ml-auto">
+                <!-- Sidebar Toggle (Topbar) -->
+                <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                    <i class="fa fa-bars"></i>
+                </button>
 
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                        <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-search fa-fw"></i>
-                            </a>
-                            <!-- Dropdown - Messages -->
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                                aria-labelledby="searchDropdown">
-                                <form class="form-inline mr-auto w-100 navbar-search">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small"
-                                            placeholder="Search for..." aria-label="Search"
-                                            aria-describedby="basic-addon2">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button">
-                                                <i class="fas fa-search fa-sm"></i>
-                                            </button>
-                                        </div>
+                <div class="ml-2">
+                    <a href="https://oss-sg.imin.sg/docs/en/index.html" class="btn btn-outline-secondary"
+                        target="blank">SDK</a>
+                </div>
+                <!-- Topbar Navbar -->
+                <ul class="navbar-nav ml-auto">
+
+                    <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                    <li class="nav-item dropdown no-arrow d-sm-none">
+                        <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <!-- Dropdown - Messages -->
+                        <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                            aria-labelledby="searchDropdown">
+                            <form class="form-inline mr-auto w-100 navbar-search">
+                                <div class="input-group">
+                                    <input type="text" class="form-control bg-light border-0 small"
+                                        placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="button">
+                                            <i class="fas fa-search fa-sm"></i>
+                                        </button>
                                     </div>
-                                </form>
-                            </div>
-                        </li>
-                    </ul>
+                                </div>
+                            </form>
+                        </div>
+                    </li>
+                </ul>
 
-                    <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav ms-auto">
 
-                        <!-- Authentication Links -->
-                        @guest
+                    <!-- Authentication Links -->
+                    @guest
 
-                            @if (Route::has('login'))
-                                <li class="nav-item mr-4 overflow-hidden font-weight-bold">
-                                    <a class="nav-link text-dark" href="{{ route('login') }}">Login</a>
-                                </li>
-                            @endif
+                        @if (Route::has('login'))
+                            <li class="nav-item mr-4 overflow-hidden font-weight-bold">
+                                <a class="nav-link text-dark" href="{{ route('login') }}">Login</a>
+                            </li>
+                        @endif
 
-                            {{-- @if (Route::has('register'))
+                        {{-- @if (Route::has('register'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif --}}
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
+                    @else
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{ Auth::user()->name }}
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                    <a class="dropdown-item" href="{{ route('logout') }}" data-bs-toggle="modal"
+                                        data-target="#logoutModal">
+                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                         {{ __('Logout') }}
                                     </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                        <a class="dropdown-item" href="{{ route('logout') }}" data-bs-toggle="modal"
-                                            data-target="#logoutModal">
-                                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                            {{ __('Logout') }}
-                                        </a>
-                                </div>
-                                </form>
-                </div>
-                </li>
-
-            @endguest
-            </ul>
-            </nav>
-            <div>
-                @yield('content')
+                            </div>
+                            </form>
             </div>
+            </li>
+
+        @endguest
+        </ul>
+        </nav>
+        <div>
+            @yield('content')
         </div>
-    @endsection
+    </div>
+@endsection

@@ -12,7 +12,8 @@
                             <i class="fa-solid fa-plus"></i> Tambah
                         </button>
                     </div>
-
+                @endif
+                @if (auth()->user()->hasAnyRole(['superadmin', 'jeffri', 'sylvi', 'coni', 'dinda', 'anggi', 'sales', 'chenghui']))
                     <div class="d-flex gap-3 justify-content-end mb-3">
                         <div class="buttonarea">
                             <button type="button" class="btn btn-success text-white mr-3" data-bs-toggle="modal"
