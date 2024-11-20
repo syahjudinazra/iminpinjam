@@ -180,6 +180,10 @@
                                 <a class="collapse-item {{ Request::is('service') ? 'active' : '' }}" href="/service">Tambah
                                     Baru</a>
                             @endcan
+                            <a class="collapse-item {{ Request::is('service') ? 'active' : '' }}"
+                                href="/invoices/create">Nota
+                                Sementara
+                            </a>
                             <h5 class="collapse-header font-weight-bold text-white bg-secondary">Pelanggan</h5>
                             <a class="collapse-item {{ Request::is('service/antrianPelanggan*') ? 'active' : '' }}"
                                 href="/service/antrianPelanggan">Antrian</a>

@@ -6,13 +6,14 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\PinjamController;
 use App\Http\Controllers\HistoryController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\FirmwareController;
+use App\Http\Controllers\PengirimanController;
 use App\Http\Controllers\SparePartsController;
 use App\Http\Controllers\UserSettingsController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
-use App\Http\Controllers\PengirimanController;
 
 // Route::get('/', function () {
 //     // return view('auth.login');
@@ -34,6 +35,10 @@ Route::get('/maintenance', function () {
 //Dashboard
 Route::get('/', [HomeController::class, 'index'])->middleware('auth');
 Route::get('/home/total', [HomeController::class, 'total'])->middleware('auth');
+
+//Invoice
+Route::get('/invoices/create', [InvoiceController::class, 'index'])->name('invoices.create');
+Route::post('/invoices/generate-pdf', [InvoiceController::class, 'generatePDF'])->name('invoices.generate-pdf');
 
 //Lupa Password
 Route::get('/forgot-password', [ForgotPasswordController::class, 'index'])->name('forgot.password');
